@@ -1,8 +1,8 @@
-
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ChevronDown, DollarSign, Clock, Users, PenTool } from "lucide-react";
+import { AIImageGenerator } from "@/components/AIImageGenerator";
 import {
   Accordion,
   AccordionContent,
@@ -26,6 +26,14 @@ const ChapterOne = () => {
     <DashboardLayout title="Chapter 1: Getting Started">
       <ScrollArea className="h-full pr-4">
         <div className="max-w-4xl mx-auto">
+          {/* AI Image Generator */}
+          <Card className="mb-6">
+            <CardContent className="pt-6">
+              <h2 className="text-xl font-bold mb-4">Generate AI Images for Chapter</h2>
+              <AIImageGenerator />
+            </CardContent>
+          </Card>
+          
           {/* Table of Contents */}
           <Card className="mb-6">
             <CardContent className="pt-6">
