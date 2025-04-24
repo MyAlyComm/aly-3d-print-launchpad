@@ -1,0 +1,39 @@
+
+import React from 'react';
+
+export const ArbitrageSection = () => {
+  return (
+    <section id="arbitrage" className="mb-12">
+      <h2 className="text-3xl font-bold mb-6 text-gray-800">The Arbitrage Window Explained</h2>
+      
+      <div className="space-y-4">
+        <p className="text-gray-700 leading-relaxed">
+          Arbitrage in 3D printing occurs when you can identify items that can be produced at a significantly 
+          lower cost than their market selling price. This creates a profitable opportunity window.
+        </p>
+
+        <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
+          <h3 className="text-xl font-semibold mb-4">Key Arbitrage Opportunities</h3>
+          <ul className="space-y-3">
+            <li className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+              Custom and personalized products with high margins
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+              Niche market items with limited competition
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+              Replacement parts for discontinued products
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+              Specialized tools and equipment components
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+};
