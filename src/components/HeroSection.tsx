@@ -47,7 +47,7 @@ const HeroSection = () => {
             <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur"></div>
             <div className="relative overflow-hidden rounded-xl">
               <img
-                src="public/lovable-uploads/80580729-6d4e-4bd0-a66c-dff6d0d890e1.png"
+                src="/lovable-uploads/80580729-6d4e-4bd0-a66c-dff6d0d890e1.png"
                 alt="Aly's 3D Printing Blueprint"
                 className="w-full h-auto"
               />

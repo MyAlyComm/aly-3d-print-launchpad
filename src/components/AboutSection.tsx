@@ -46,7 +46,7 @@ const AboutSection = () => {
               <div className="absolute -inset-4 rounded-xl bg-gradient-to-r from-primary/20 to-secondary/20 opacity-50 blur-xl"></div>
               <div className="relative overflow-hidden rounded-xl">
                 <img 
-                  src="public/lovable-uploads/e49ddb52-4568-42a4-9701-8bdb0ebd0833.png" 
+                  src="/lovable-uploads/e49ddb52-4568-42a4-9701-8bdb0ebd0833.png" 
                   alt="Aly with 3D printers" 
                   className="w-full h-auto rounded-xl"
                 />
