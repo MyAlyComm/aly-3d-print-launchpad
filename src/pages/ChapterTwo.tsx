@@ -1,3 +1,4 @@
+
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -5,6 +6,9 @@ import { ChapterHeader } from "@/components/chapter2/ChapterHeader";
 import { TableOfContents } from "@/components/chapter2/TableOfContents";
 import { TheoremSection } from "@/components/chapter2/TheoremSection";
 import { AwakeningSection } from "@/components/chapter2/AwakeningSection";
+import { RevelationSection } from "@/components/chapter2/RevelationSection";
+import { DecisionTreeSection } from "@/components/chapter2/DecisionTreeSection";
+import { WorksheetSection } from "@/components/chapter2/WorksheetSection";
 
 const ChapterTwo = () => {
   return (
@@ -18,7 +22,9 @@ const ChapterTwo = () => {
             <CardContent className="pt-6">
               <TheoremSection />
               <AwakeningSection />
-              {/* Additional sections will be implemented in subsequent updates */}
+              <RevelationSection />
+              <DecisionTreeSection />
+              <WorksheetSection />
             </CardContent>
           </Card>
         </div>
