@@ -10,6 +10,7 @@ export const AIImageGenerator = () => {
   const [apiKey, setApiKey] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [runwareService, setRunwareService] = useState<RunwareService | null>(null);
+  const [generatedImages, setGeneratedImages] = useState<string[]>([]);
 
   const generateImages = async () => {
     if (!apiKey) {
@@ -33,6 +34,7 @@ export const AIImageGenerator = () => {
     ];
 
     try {
+      const newGeneratedImages: string[] = [];
       for (const prompt of prompts) {
         const service = runwareService || new RunwareService(apiKey);
         const result = await service.generateImage({
@@ -40,10 +42,11 @@ export const AIImageGenerator = () => {
           model: "runware:100@1",
         });
         
-        // Here you would typically save or display the image
-        console.log("Generated image:", result);
+        newGeneratedImages.push(result.imageURL);
         toast.success("Image generated successfully!");
       }
+      
+      setGeneratedImages(prevImages => [...prevImages, ...newGeneratedImages]);
     } catch (error) {
       console.error("Error generating images:", error);
       toast.error("Failed to generate images. Please check your API key and try again.");
@@ -78,7 +81,21 @@ export const AIImageGenerator = () => {
         <p className="text-sm text-gray-500">
           Get your API key from <a href="https://runware.ai" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Runware.ai</a>
         </p>
+        
+        {generatedImages.length > 0 && (
+          <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-4">
+            {generatedImages.map((imageUrl, index) => (
+              <img 
+                key={index} 
+                src={imageUrl} 
+                alt={`Generated image ${index + 1}`} 
+                className="w-full h-auto rounded-lg shadow-md"
+              />
+            ))}
+          </div>
+        )}
       </div>
     </Card>
   );
 };
+
