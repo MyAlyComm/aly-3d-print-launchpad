@@ -1,11 +1,25 @@
-
 import React from 'react';
+import { Card } from "@/components/ui/card";
 
 export const TimelineSection = () => {
   return (
     <section id="timeline" className="mb-12">
       <h2 className="text-3xl font-bold mb-6 text-gray-800">The 3D Printing Timeline: Where We Are Now</h2>
       
+      <div className="mb-8">
+        <img
+          src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"
+          alt="Early 3D printing setup"
+          className="w-full h-[300px] object-cover rounded-lg mb-4"
+        />
+        <p className="text-sm text-gray-500 italic text-center">The evolution of 3D printing technology through the years</p>
+      </div>
+
+      <p className="text-gray-700 mb-8">
+        3D printing has existed since the 1980s, but it's only recently entered its true arbitrage window 
+        for entrepreneurs like you and me. Let me walk you through the evolution:
+      </p>
+
       <div className="space-y-8">
         <div className="bg-purple-50 p-6 rounded-lg border border-purple-100">
           <h3 className="text-xl font-semibold mb-4">Phase 1: The Tinkerer Era (2009-2019)</h3>

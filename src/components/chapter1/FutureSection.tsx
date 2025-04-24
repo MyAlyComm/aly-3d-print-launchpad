@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card } from "@/components/ui/card";
 
@@ -7,6 +6,15 @@ export const FutureSection = () => {
     <section id="future" className="mb-12">
       <h2 className="text-3xl font-bold mb-6 text-gray-800">Where We're Going: The New Horizon</h2>
       
+      <div className="mb-8">
+        <img
+          src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e"
+          alt="Future of 3D Printing"
+          className="w-full h-[300px] object-cover rounded-lg mb-4"
+        />
+        <p className="text-sm text-gray-500 italic text-center">The future of 3D printing technology and automation</p>
+      </div>
+
       <div className="space-y-6">
         <Card className="p-6">
           <h3 className="text-2xl font-semibold mb-4">The 2025 Shift: Integration & Automation</h3>
