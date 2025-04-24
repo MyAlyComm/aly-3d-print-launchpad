@@ -1,0 +1,74 @@
+
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Check } from "lucide-react";
+import LeadMagnetForm from "../LeadMagnetForm";
+
+interface BlueprintProps {
+  id: number;
+  title: string;
+  price: string;
+  popular: boolean;
+  isFree: boolean;
+  description: string;
+  features: string[];
+  onCheckout: (id: number) => void;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+}
+
+const BlueprintCard = ({ 
+  id, 
+  title, 
+  price, 
+  popular, 
+  isFree, 
+  description, 
+  features, 
+  onCheckout,
+  open,
+  setOpen 
+}: BlueprintProps) => {
+  return (
+    <div className={`blueprint-card ${popular ? 'blueprint-card-popular' : ''}`}>
+      <div className="mb-4">
+        <h3 className="text-xl font-bold mb-1">{title}</h3>
+        <p className="text-gray-600 text-sm mb-4">{description}</p>
+        <div className="mb-6">
+          <span className="text-3xl font-bold text-primary">{price}</span>
+        </div>
+      </div>
+      
+      <ul className="space-y-3 mb-8">
+        {features.map((feature, idx) => (
+          <li key={idx} className="flex items-start">
+            <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+            <span className="text-gray-700 text-sm">{feature}</span>
+          </li>
+        ))}
+      </ul>
+      
+      {isFree ? (
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger asChild>
+            <Button className="w-full bg-secondary hover:bg-secondary-dark">
+              Get Free Guide
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <LeadMagnetForm setDialogOpen={setOpen} />
+          </DialogContent>
+        </Dialog>
+      ) : (
+        <Button 
+          className="w-full bg-primary hover:bg-primary-dark"
+          onClick={() => onCheckout(id)}
+        >
+          Get Started
+        </Button>
+      )}
+    </div>
+  );
+};
+
+export default BlueprintCard;
