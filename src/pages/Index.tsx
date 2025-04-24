@@ -1,12 +1,43 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import NavBar from "@/components/NavBar";
+import HeroSection from "@/components/HeroSection";
+import AboutSection from "@/components/AboutSection";
+import OfferSection from "@/components/OfferSection";
+import HowItWorksSection from "@/components/HowItWorksSection";
+import TrustSection from "@/components/TrustSection";
+import FooterSection from "@/components/FooterSection";
+import Analytics from "@/components/Analytics";
+import ZapierIntegration from "@/components/ZapierIntegration";
+import { useEffect } from "react";
 
 const Index = () => {
+  useEffect(() => {
+    // Set the document title
+    document.title = "Aly's 3D Printing Blueprint | Launch Your 3D Printing Business";
+    
+    // Set meta description for SEO
+    const metaDescription = document.createElement('meta');
+    metaDescription.name = 'description';
+    metaDescription.content = 'Get instant access to guides, STL files, and strategies to start profiting from 3D printing, even with a $500 budget.';
+    document.head.appendChild(metaDescription);
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen flex flex-col">
+      {/* Analytics and Integration Components */}
+      <Analytics />
+      <ZapierIntegration />
+      
+      {/* Main Landing Page Content */}
+      <NavBar />
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <OfferSection />
+        <HowItWorksSection />
+        <TrustSection />
+        <FooterSection />
+      </main>
     </div>
   );
 };

@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -33,22 +36,6 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
@@ -79,14 +66,6 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -97,5 +76,37 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .gradient-blur {
+    background: radial-gradient(circle at center, rgba(14, 165, 233, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+  }
+  
+  .step-item {
+    @apply flex flex-col items-center justify-center relative;
+  }
+  
+  .step-number {
+    @apply w-10 h-10 flex items-center justify-center rounded-full bg-primary text-white font-bold text-lg;
+    z-index: 10;
+  }
+  
+  .testimonial-card {
+    @apply bg-white p-6 rounded-lg shadow-lg border border-gray-100;
+  }
+  
+  .hover-up {
+    @apply transition-transform duration-300 hover:-translate-y-1;
+  }
+
+  .blueprint-card {
+    @apply relative overflow-hidden rounded-xl border border-gray-200 bg-white p-6 shadow-md hover:shadow-lg transition-all duration-300;
+  }
+  
+  .blueprint-card-popular {
+    @apply before:absolute before:top-0 before:right-0 before:h-24 before:w-24;
+    @apply after:absolute after:top-[19px] after:right-[-29px] after:w-[140px] after:h-[30px] after:rotate-45 after:bg-secondary after:text-white after:text-center after:text-sm after:font-semibold after:leading-7 after:content-['MOST_POPULAR'];
   }
 }
