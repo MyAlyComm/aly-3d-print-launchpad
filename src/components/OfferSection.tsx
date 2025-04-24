@@ -198,7 +198,7 @@ const OfferSection = () => {
                 </h3>
                 <div className="flex justify-center mb-4">
                   <img 
-                    src="https://cdn.makerworld.com/uploads/model/2024/01/0e4e8d66-9a5a-4a08-9740-5ab86eed69c2/thumbnail_large.png" 
+                    src="https://cdn.makerworld.com/upload/model/2024/01/0e4e8d66-9a5a-4a08-9740-5ab86eed69c2/thumbnail_large.png" 
                     alt="5-in-1 Phone Stand" 
                     className="rounded-lg shadow-md max-h-64 object-cover"
                   />
