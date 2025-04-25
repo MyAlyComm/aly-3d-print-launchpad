@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "react-router-dom";
-import FreeGuideDialog from "./FreeGuideDialog";
+import LeadMagnetDialog from "./FreeGuideDialog";
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  // Track scroll position for navbar styling
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -25,7 +24,6 @@ const NavBar = () => {
   }, []);
 
   const handleTitleClick = (e: React.MouseEvent) => {
-    // If we're already on the homepage, scroll to top instead of navigating
     if (location.pathname === "/") {
       e.preventDefault();
       window.scrollTo({
@@ -33,7 +31,6 @@ const NavBar = () => {
         behavior: "smooth"
       });
     }
-    // If not on homepage, default link behavior will navigate to homepage
   };
 
   return (
@@ -52,7 +49,6 @@ const NavBar = () => {
             </a>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <a href="#" className="text-gray-700 hover:text-primary font-medium">
               Home
@@ -69,10 +65,9 @@ const NavBar = () => {
           </div>
 
           <div className="hidden md:block">
-            <FreeGuideDialog />
+            <LeadMagnetDialog />
           </div>
 
-          {/* Mobile menu button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden text-gray-700"
@@ -111,7 +106,6 @@ const NavBar = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 pt-4 pb-4 border-t border-gray-200">
             <div className="flex flex-col space-y-4">
@@ -127,11 +121,11 @@ const NavBar = () => {
               <a href="#" className="text-gray-700 hover:text-primary py-2">
                 Testimonials
               </a>
-              <FreeGuideDialog>
+              <LeadMagnetDialog>
                 <Button className="bg-secondary hover:bg-secondary-dark text-white w-full">
                   Free Guide
                 </Button>
-              </FreeGuideDialog>
+              </LeadMagnetDialog>
             </div>
           </div>
         )}

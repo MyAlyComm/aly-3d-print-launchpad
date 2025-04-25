@@ -4,12 +4,14 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import LeadMagnetForm from "./LeadMagnetForm";
 import { ReactNode } from "react";
 
-interface FreeGuideDialogProps {
+interface LeadMagnetDialogProps {
   children?: ReactNode;
   className?: string;
+  title?: string;
+  description?: string;
 }
 
-const FreeGuideDialog = ({ children, className }: FreeGuideDialogProps) => {
+const LeadMagnetDialog = ({ children, className, title = "Get Your Free 3D Printing Guide", description = "Enter your details below for instant access" }: LeadMagnetDialogProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -20,10 +22,15 @@ const FreeGuideDialog = ({ children, className }: FreeGuideDialogProps) => {
         )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
-        <LeadMagnetForm setDialogOpen={undefined} />
+        <LeadMagnetForm 
+          setDialogOpen={undefined}
+          title={title}
+          description={description}
+        />
       </DialogContent>
     </Dialog>
   );
 };
 
-export default FreeGuideDialog;
+export default LeadMagnetDialog;
+

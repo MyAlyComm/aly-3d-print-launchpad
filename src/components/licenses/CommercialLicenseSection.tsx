@@ -1,8 +1,6 @@
-
 import { Award, Check } from "lucide-react";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import LeadMagnetDialog from "../FreeGuideDialog";
 import { Button } from "@/components/ui/button";
-import LeadMagnetForm from "../LeadMagnetForm";
 
 interface CommercialLicenseSectionProps {
   open: boolean;
@@ -49,16 +47,14 @@ const CommercialLicenseSection = ({ open, setOpen }: CommercialLicenseSectionPro
                 Multi-functional design
               </li>
             </ul>
-            <Dialog open={open} onOpenChange={setOpen}>
-              <DialogTrigger asChild>
-                <Button className="w-full bg-secondary hover:bg-secondary-dark">
-                  Claim Free Commercial License
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
-                <LeadMagnetForm setDialogOpen={setOpen} />
-              </DialogContent>
-            </Dialog>
+            <LeadMagnetDialog 
+              title="Claim Your Free Commercial License"
+              description="Get instant access to commercial rights for the 5-in-1 Phone Stand"
+            >
+              <Button className="w-full bg-secondary hover:bg-secondary-dark">
+                Claim Free Commercial License
+              </Button>
+            </LeadMagnetDialog>
           </div>
 
           <div className="bg-gray-100 p-6 rounded-lg">
@@ -82,16 +78,14 @@ const CommercialLicenseSection = ({ open, setOpen }: CommercialLicenseSectionPro
             <p className="text-gray-600 mb-4 italic">
               Limited time offer - Commercial licenses for multiple models!
             </p>
-            <Dialog open={open} onOpenChange={setOpen}>
-              <DialogTrigger asChild>
-                <Button className="w-full bg-accent hover:bg-accent-dark">
-                  Get Bonus Models License
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
-                <LeadMagnetForm setDialogOpen={setOpen} />
-              </DialogContent>
-            </Dialog>
+            <LeadMagnetDialog 
+              title="Get Bonus Models Collection License"
+              description="Access commercial rights for multiple trending 3D models"
+            >
+              <Button className="w-full bg-accent hover:bg-accent-dark">
+                Get Bonus Models License
+              </Button>
+            </LeadMagnetDialog>
           </div>
         </div>
 

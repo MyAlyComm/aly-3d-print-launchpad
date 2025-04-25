@@ -8,9 +8,16 @@ import { Check } from "lucide-react";
 interface LeadMagnetFormProps {
   setDialogOpen?: (open: boolean) => void;
   inline?: boolean;
+  title?: string;
+  description?: string;
 }
 
-const LeadMagnetForm = ({ setDialogOpen, inline = false }: LeadMagnetFormProps) => {
+const LeadMagnetForm = ({ 
+  setDialogOpen, 
+  inline = false,
+  title = "Get Your Free 3D Printing Guide",
+  description = "Enter your details below for instant access"
+}: LeadMagnetFormProps) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
@@ -60,8 +67,8 @@ const LeadMagnetForm = ({ setDialogOpen, inline = false }: LeadMagnetFormProps) 
   return (
     <div className={inline ? "" : "px-6 py-8"}>
       <div className={inline ? "" : "text-center mb-6"}>
-        <h3 className="text-2xl font-bold text-gray-900">Get Your Free 3D Printing Guide</h3>
-        <p className="text-gray-600 mt-2">Enter your details below for instant access</p>
+        <h3 className="text-2xl font-bold text-gray-900">{title}</h3>
+        <p className="text-gray-600 mt-2">{description}</p>
       </div>
 
       {success ? (
@@ -115,3 +122,4 @@ const LeadMagnetForm = ({ setDialogOpen, inline = false }: LeadMagnetFormProps) 
 };
 
 export default LeadMagnetForm;
+
