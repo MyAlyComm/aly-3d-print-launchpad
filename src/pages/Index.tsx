@@ -5,6 +5,7 @@ import AboutSection from "@/components/AboutSection";
 import OfferSection from "@/components/OfferSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import TrustSection from "@/components/TrustSection";
+import FAQSection from "@/components/FAQSection";
 import FooterSection from "@/components/FooterSection";
 import Analytics from "@/components/Analytics";
 import ZapierIntegration from "@/components/ZapierIntegration";
@@ -36,6 +37,7 @@ const Index = () => {
         <OfferSection />
         <HowItWorksSection />
         <TrustSection />
+        <FAQSection />
         <FooterSection />
       </main>
     </div>
