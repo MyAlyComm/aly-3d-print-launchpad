@@ -19,34 +19,10 @@ export const DashboardNav = () => {
       <Button 
         variant="ghost" 
         className="w-full justify-start"
-        onClick={() => navigate("/dashboard/chapter-1")}
-      >
-        <Book className="mr-2 h-4 w-4" />
-        Chapter 1: Getting Started
-      </Button>
-      <Button 
-        variant="ghost" 
-        className="w-full justify-start"
         onClick={() => navigate("/dashboard/new-chapter")}
       >
         <Book className="mr-2 h-4 w-4" />
         New Ebook Chapter
-      </Button>
-      <Button 
-        variant="ghost" 
-        className="w-full justify-start"
-        onClick={() => navigate("/dashboard/chapter-2")}
-      >
-        <Book className="mr-2 h-4 w-4" />
-        Chapter 2: First Prints
-      </Button>
-      <Button 
-        variant="ghost" 
-        className="w-full justify-start"
-        onClick={() => navigate("/dashboard/chapter-3")}
-      >
-        <Book className="mr-2 h-4 w-4" />
-        Chapter 3: Advanced Techniques
       </Button>
       <Button 
         variant="ghost" 
