@@ -8,6 +8,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { ChapterNavigation } from "@/components/ebook/ChapterNavigation";
 import { ChapterProgressBar } from "@/components/ebook/ChapterProgress";
+import { ChapterHeader } from "@/components/chapter2/ChapterHeader";
 
 // Import chapter 2 sections
 import { TheoremSection } from "@/components/chapter2/TheoremSection";
@@ -15,7 +16,6 @@ import { AwakeningSection } from "@/components/chapter2/AwakeningSection";
 import { RevelationSection } from "@/components/chapter2/RevelationSection";
 import { DecisionTreeSection } from "@/components/chapter2/DecisionTreeSection";
 import { WorksheetSection } from "@/components/chapter2/WorksheetSection";
-import { ChapterHeader } from "@/components/chapter2/ChapterHeader";
 
 const Chapter2 = () => {
   const [currentSection, setCurrentSection] = useState(0);
@@ -24,7 +24,7 @@ const Chapter2 = () => {
   const queryClient = useQueryClient();
   const isMobile = useIsMobile();
 
-  // Define sections array using existing Chapter 2 components
+  // Define sections array
   const sections = [
     {
       id: "theorem",
