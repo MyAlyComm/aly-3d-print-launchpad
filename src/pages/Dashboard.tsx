@@ -3,9 +3,18 @@ import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { ChapterCard } from "@/components/dashboard/ChapterCard";
+import { useChapterProgress } from "@/hooks/useChapterProgress";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { chapterProgresses, isLoading } = useChapterProgress();
+
+  const isChapterCompleted = (chapterNumber: number) => {
+    return chapterProgresses?.some(
+      (progress) => progress.chapter_number === chapterNumber && progress.completed_at
+    );
+  };
 
   return (
     <DashboardLayout title="Dashboard">
@@ -19,38 +28,24 @@ const Dashboard = () => {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Getting Started</CardTitle>
-              <CardDescription>Chapter 1</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="mb-4">Learn the basics of 3D printing and set up your equipment.</p>
-              <Button onClick={() => navigate("/dashboard/chapter-1")}>Read Chapter</Button>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>First Prints</CardTitle>
-              <CardDescription>Chapter 2</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="mb-4">Create your first successful prints and calibrate your machine.</p>
-              <Button onClick={() => navigate("/dashboard/chapter-2")}>Read Chapter</Button>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Advanced Techniques</CardTitle>
-              <CardDescription>Chapter 3</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="mb-4">Master advanced printing techniques and material settings.</p>
-              <Button onClick={() => navigate("/dashboard/chapter-3")}>Read Chapter</Button>
-            </CardContent>
-          </Card>
+          <ChapterCard
+            number={1}
+            title="Getting Started"
+            description="Learn the basics of 3D printing and set up your equipment."
+            isCompleted={isChapterCompleted(1)}
+          />
+          <ChapterCard
+            number={2}
+            title="First Prints"
+            description="Create your first successful prints and calibrate your machine."
+            isCompleted={isChapterCompleted(2)}
+          />
+          <ChapterCard
+            number={3}
+            title="Advanced Techniques"
+            description="Master advanced printing techniques and material settings."
+            isCompleted={isChapterCompleted(3)}
+          />
         </div>
 
         <Card className="mt-6">
