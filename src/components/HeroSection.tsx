@@ -23,7 +23,7 @@ const HeroSection = () => {
           </div>
           
           <h1 className="mb-4 md:mb-6 font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900">
-            Launch Your <span className="text-primary">3D Printing</span> Business With My Proven Blueprint!
+            Launch Your <span className="text-primary">3D Printing</span> Business With The Ultimate Blueprint!
           </h1>
           
           <p className="mb-6 md:mb-8 max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-gray-600">
