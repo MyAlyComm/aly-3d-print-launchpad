@@ -58,9 +58,50 @@ export function useChapterProgress() {
     },
   });
 
+  // Helper function to check if a chapter is completed
+  const isChapterCompleted = (chapterNumber: number) => {
+    return chapterProgresses?.some(
+      (progress) => progress.chapter_number === chapterNumber && progress.completed_at
+    ) || false;
+  };
+
+  // Get the latest section worked on for a chapter
+  const getChapterLatestSection = (chapterNumber: number) => {
+    const chapterEntries = chapterProgresses?.filter(
+      (progress) => progress.chapter_number === chapterNumber
+    ) || [];
+    
+    if (chapterEntries.length === 0) return null;
+    
+    // Sort by completed_at date, most recent first
+    return chapterEntries
+      .sort((a, b) => {
+        if (!a.completed_at) return 1;
+        if (!b.completed_at) return -1;
+        return new Date(b.completed_at).getTime() - new Date(a.completed_at).getTime();
+      })[0];
+  };
+
+  // Calculate overall course progress
+  const calculateOverallProgress = () => {
+    // Count unique chapters that have any activity
+    const uniqueChapters = new Set();
+    chapterProgresses?.forEach(progress => {
+      if (progress.completed_at) {
+        uniqueChapters.add(progress.chapter_number);
+      }
+    });
+    
+    const totalChapters = 3; // Total number of chapters
+    return (uniqueChapters.size / totalChapters) * 100;
+  };
+
   return {
     chapterProgresses,
     isLoading,
     updateProgress,
+    isChapterCompleted,
+    getChapterLatestSection,
+    calculateOverallProgress
   };
 }

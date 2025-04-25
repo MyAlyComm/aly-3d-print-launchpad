@@ -2,12 +2,14 @@
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { MiniProgress } from "@/components/progress/MiniProgress";
 
 const ChapterThree = () => {
   return (
     <DashboardLayout title="Chapter 3: Advanced Techniques">
       <ScrollArea className="h-full pr-4">
         <div className="max-w-3xl mx-auto">
+          <MiniProgress currentChapter={3} />
           <Card>
             <CardContent className="pt-6">
               <div className="prose max-w-none">
