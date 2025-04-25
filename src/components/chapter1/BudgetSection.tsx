@@ -1,20 +1,34 @@
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export const BudgetSection = () => {
+  const isMobile = useIsMobile();
+  
   return (
     <section id="budget" className="mb-12">
       <h2 className="text-3xl font-bold mb-6 text-gray-800">Starting Budget Considerations</h2>
       
       <Tabs defaultValue="budget-1" className="w-full">
-        <TabsList className="grid grid-cols-5 mb-6">
+        <TabsList className={`grid ${isMobile ? 'grid-cols-3 mb-4' : 'grid-cols-5 mb-6'}`}>
           <TabsTrigger value="budget-1">$0</TabsTrigger>
           <TabsTrigger value="budget-2">$500-$1,000</TabsTrigger>
-          <TabsTrigger value="budget-3">$1,000-$2,000</TabsTrigger>
-          <TabsTrigger value="budget-4">$2,000-$5,000</TabsTrigger>
-          <TabsTrigger value="budget-5">$5,000+</TabsTrigger>
+          <TabsTrigger value="budget-3">{isMobile ? "$1K-2K" : "$1,000-$2,000"}</TabsTrigger>
+          {!isMobile && (
+            <>
+              <TabsTrigger value="budget-4">$2,000-$5,000</TabsTrigger>
+              <TabsTrigger value="budget-5">$5,000+</TabsTrigger>
+            </>
+          )}
+          {isMobile && (
+            <>
+              <TabsTrigger value="budget-4">$2K-5K</TabsTrigger>
+              <TabsTrigger value="budget-5">$5K+</TabsTrigger>
+            </>
+          )}
         </TabsList>
         
-        <TabsContent value="budget-1" className="p-6 bg-white rounded-lg border border-gray-200">
+        <TabsContent value="budget-1" className="p-4 sm:p-6 bg-white rounded-lg border border-gray-200">
           <h3 className="font-semibold text-lg mb-2">$0 Budget</h3>
           <p className="mb-4">Broker between clients and existing services, focus on partnerships</p>
           <ul className="list-disc pl-5 space-y-1 text-gray-700">
@@ -25,7 +39,7 @@ export const BudgetSection = () => {
           </ul>
         </TabsContent>
         
-        <TabsContent value="budget-2" className="p-6 bg-white rounded-lg border border-gray-200">
+        <TabsContent value="budget-2" className="p-4 sm:p-6 bg-white rounded-lg border border-gray-200">
           <h3 className="font-semibold text-lg mb-2">$500-$1,000 Budget</h3>
           <p className="mb-4">Single printer startup with high-margin products (where I started)</p>
           <ul className="list-disc pl-5 space-y-1 text-gray-700">
@@ -36,7 +50,7 @@ export const BudgetSection = () => {
           </ul>
         </TabsContent>
         
-        <TabsContent value="budget-3" className="p-6 bg-white rounded-lg border border-gray-200">
+        <TabsContent value="budget-3" className="p-4 sm:p-6 bg-white rounded-lg border border-gray-200">
           <h3 className="font-semibold text-lg mb-2">$1,000-$2,000 Budget</h3>
           <p className="mb-4">Quality printer or multiple budget units, more testing capacity</p>
           <ul className="list-disc pl-5 space-y-1 text-gray-700">
@@ -47,7 +61,7 @@ export const BudgetSection = () => {
           </ul>
         </TabsContent>
         
-        <TabsContent value="budget-4" className="p-6 bg-white rounded-lg border border-gray-200">
+        <TabsContent value="budget-4" className="p-4 sm:p-6 bg-white rounded-lg border border-gray-200">
           <h3 className="font-semibold text-lg mb-2">$2,000-$5,000 Budget</h3>
           <p className="mb-4">Multi-printer operation with diverse product lines</p>
           <ul className="list-disc pl-5 space-y-1 text-gray-700">
@@ -58,7 +72,7 @@ export const BudgetSection = () => {
           </ul>
         </TabsContent>
         
-        <TabsContent value="budget-5" className="p-6 bg-white rounded-lg border border-gray-200">
+        <TabsContent value="budget-5" className="p-4 sm:p-6 bg-white rounded-lg border border-gray-200">
           <h3 className="font-semibold text-lg mb-2">$5,000+ Budget</h3>
           <p className="mb-4">Professional setup with automation potential</p>
           <ul className="list-disc pl-5 space-y-1 text-gray-700">

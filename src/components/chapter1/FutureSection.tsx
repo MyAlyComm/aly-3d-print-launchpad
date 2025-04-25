@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card } from "@/components/ui/card";
 
@@ -10,14 +11,14 @@ export const FutureSection = () => {
         <img
           src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e"
           alt="Future of 3D Printing"
-          className="w-full h-[300px] object-cover rounded-lg mb-4"
+          className="w-full h-[200px] sm:h-[300px] object-cover rounded-lg mb-4"
         />
         <p className="text-sm text-gray-500 italic text-center">The future of 3D printing technology and automation</p>
       </div>
 
       <div className="space-y-6">
-        <Card className="p-6">
-          <h3 className="text-2xl font-semibold mb-4">The 2025 Shift: Integration & Automation</h3>
+        <Card className="p-4 sm:p-6">
+          <h3 className="text-xl sm:text-2xl font-semibold mb-4">The 2025 Shift: Integration & Automation</h3>
           <div className="space-y-4">
             <p>By 2025, we'll see several key developments that will reshape the competitive landscape:</p>
             <ol className="list-decimal pl-5 space-y-3">
@@ -30,8 +31,8 @@ export const FutureSection = () => {
           </div>
         </Card>
 
-        <Card className="p-6">
-          <h3 className="text-2xl font-semibold mb-4">The 2026 Evolution: Specialization & Ecosystem</h3>
+        <Card className="p-4 sm:p-6">
+          <h3 className="text-xl sm:text-2xl font-semibold mb-4">The 2026 Evolution: Specialization & Ecosystem</h3>
           <div className="space-y-4">
             <p>By 2026, the industry will further mature with more sophisticated business models:</p>
             <ol className="list-decimal pl-5 space-y-3">

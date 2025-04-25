@@ -10,7 +10,7 @@ export const MythsSection = () => {
         <img
           src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5"
           alt="Matrix-like digital visualization"
-          className="w-full h-[300px] object-cover rounded-lg mb-4"
+          className="w-full h-[200px] sm:h-[300px] object-cover rounded-lg mb-4"
         />
         <p className="text-sm text-gray-500 italic text-center">Breaking through common misconceptions in the 3D printing industry</p>
       </div>
@@ -29,7 +29,7 @@ export const MythsSection = () => {
       </p>
 
       <div className="grid gap-6 md:grid-cols-2">
-        <div className="p-6 bg-red-50 rounded-lg border border-red-100">
+        <div className="p-4 sm:p-6 bg-red-50 rounded-lg border border-red-100">
           <h3 className="text-xl font-semibold mb-4 text-red-800">Common Myths</h3>
           <div className="space-y-6">
             <div className="space-y-3">
@@ -67,7 +67,7 @@ export const MythsSection = () => {
           </div>
         </div>
 
-        <div className="p-6 bg-green-50 rounded-lg border border-green-100">
+        <div className="p-4 sm:p-6 bg-green-50 rounded-lg border border-green-100">
           <h3 className="text-xl font-semibold mb-4 text-green-800">The Reality</h3>
           <p className="mb-4 text-gray-700">Every time someone looks through these stained glass panes and walks away from the opportunity, they're creating more space for you. Their distorted perception becomes your market advantage.</p>
           <p className="text-gray-700">This is why I believe so strongly in sharing this blueprint now. The misconceptions are creating an even wider arbitrage window for those who can see clearly – those who have the correct perspective and are willing to act.</p>

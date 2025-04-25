@@ -9,6 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const formSchema = z.object({
   inspiration: z.string().min(1, "Please share what inspired you"),
@@ -19,6 +20,7 @@ export const OpportunitySection = ({ onSubmit }: { onSubmit?: () => void }) => {
   const { formState, saveResponse } = useChapterForm(1, 'opportunity');
   const sectionKey = 'opportunity-reflection';
   const textInputs = formState[sectionKey]?.textInputs || {};
+  const isMobile = useIsMobile();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,12 +48,12 @@ export const OpportunitySection = ({ onSubmit }: { onSubmit?: () => void }) => {
         <img
           src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80"
           alt="3D Printing Setup"
-          className="rounded-lg w-full h-64 object-cover mb-4"
+          className="rounded-lg w-full h-48 sm:h-64 object-cover mb-4"
         />
         <p className="text-sm text-gray-500 italic">Modern 3D printing setup for small businesses</p>
       </div>
       
-      <div className="bg-gradient-to-r from-purple-50 to-blue-50 p-6 rounded-lg mb-6 border border-purple-100">
+      <div className="bg-gradient-to-r from-purple-50 to-blue-50 p-4 sm:p-6 rounded-lg mb-6 border border-purple-100">
         <h3 className="text-xl font-semibold mb-2">My Story: From Zero to $20K in 60 Days</h3>
         <blockquote className="border-l-4 border-purple-400 pl-4 italic">
           "9 months ago I had never even touched a 3D printer. With just $500 in starting capital, 
@@ -60,17 +62,17 @@ export const OpportunitySection = ({ onSubmit }: { onSubmit?: () => void }) => {
         </blockquote>
         
         <ul className="mt-4 space-y-2">
-          <li className="flex items-center gap-2">
-            <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-            Now sold to 60+ countries with multiple viral products
+          <li className="flex items-start sm:items-center gap-2">
+            <span className="w-2 h-2 mt-2 sm:mt-0 bg-purple-500 rounded-full"></span>
+            <span>Now sold to 60+ countries with multiple viral products</span>
           </li>
-          <li className="flex items-center gap-2">
-            <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-            Billion-dollar brands seek my marketing and consulting help
+          <li className="flex items-start sm:items-center gap-2">
+            <span className="w-2 h-2 mt-2 sm:mt-0 bg-purple-500 rounded-full"></span>
+            <span>Billion-dollar brands seek my marketing and consulting help</span>
           </li>
-          <li className="flex items-center gap-2">
-            <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-            Zero previous experience or special connections
+          <li className="flex items-start sm:items-center gap-2">
+            <span className="w-2 h-2 mt-2 sm:mt-0 bg-purple-500 rounded-full"></span>
+            <span>Zero previous experience or special connections</span>
           </li>
         </ul>
       </div>
@@ -81,7 +83,7 @@ export const OpportunitySection = ({ onSubmit }: { onSubmit?: () => void }) => {
       </p>
       
       <Card className="mt-8">
-        <CardContent className="pt-6">
+        <CardContent className={`${isMobile ? 'pt-4 p-4' : 'pt-6 p-6'}`}>
           <h3 className="text-xl font-semibold mb-4">Reflect on Your Journey</h3>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(handleFormSubmit)} className="space-y-4">
