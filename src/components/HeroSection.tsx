@@ -4,10 +4,12 @@ import { useState } from "react";
 import LeadMagnetForm from "./LeadMagnetForm";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const HeroSection = () => {
   const [open, setOpen] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const isMobile = useIsMobile();
 
   return (
     <div className="relative overflow-hidden bg-gradient-to-b from-primary-light/10 via-white to-white">
@@ -53,7 +55,7 @@ const HeroSection = () => {
 
       {/* Ebook Cover Section */}
       <div className="container relative pb-16 md:pb-20 px-4 md:px-6">
-        <div className="max-w-md mx-auto"> {/* Reduced max-width */}
+        <div className={`mx-auto ${isMobile ? 'max-w-md' : 'max-w-2xl'}`}>
           <div className="relative">
             <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur"></div>
             <div className="relative overflow-hidden rounded-xl">
@@ -66,8 +68,8 @@ const HeroSection = () => {
                 className={`w-full h-auto transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                 onLoad={() => setImageLoaded(true)}
                 loading="eager"
-                width={500}
-                height={375}
+                width={isMobile ? 500 : 800}
+                height={isMobile ? 375 : 600}
               />
             </div>
           </div>
@@ -78,4 +80,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-
