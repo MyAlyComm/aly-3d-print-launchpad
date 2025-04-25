@@ -1,3 +1,4 @@
+
 import { Award, Check } from "lucide-react";
 import LeadMagnetDialog from "../FreeGuideDialog";
 import { Button } from "@/components/ui/button";
@@ -48,8 +49,8 @@ const CommercialLicenseSection = ({ open, setOpen }: CommercialLicenseSectionPro
               </li>
             </ul>
             <LeadMagnetDialog 
-              title="Claim Your Free Commercial License"
-              description="Get instant access to commercial rights for the 5-in-1 Phone Stand"
+              title="Claim 5-in-1 Phone Stand Commercial License"
+              description="Unlock full commercial rights to sell and distribute the 5-in-1 Phone Stand model on platforms like Etsy and MakerWorld"
             >
               <Button className="w-full bg-secondary hover:bg-secondary-dark">
                 Claim Free Commercial License
@@ -79,8 +80,8 @@ const CommercialLicenseSection = ({ open, setOpen }: CommercialLicenseSectionPro
               Limited time offer - Commercial licenses for multiple models!
             </p>
             <LeadMagnetDialog 
-              title="Get Bonus Models Collection License"
-              description="Access commercial rights for multiple trending 3D models"
+              title="Unlock Bonus 3D Models Commercial License"
+              description="Gain commercial rights for an exclusive collection of trending 3D models, including Cat Masks and Decorative Keychains"
             >
               <Button className="w-full bg-accent hover:bg-accent-dark">
                 Get Bonus Models License
