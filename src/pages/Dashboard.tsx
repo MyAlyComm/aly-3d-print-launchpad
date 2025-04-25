@@ -1,4 +1,3 @@
-
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,10 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { ChapterCard } from "@/components/dashboard/ChapterCard";
 import { useChapterProgress } from "@/hooks/useChapterProgress";
 import { ChapterProgress } from "@/components/progress/ChapterProgress";
+import { BookOpen, Rocket, Trophy } from "lucide-react";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { chapterProgresses, isLoading } = useChapterProgress();
+  const { chapterProgresses, calculateOverallProgress } = useChapterProgress();
+  const progress = calculateOverallProgress();
+
+  const completedChapters = chapterProgresses?.filter(p => p.completed_at).length || 0;
+  const totalChapters = 13;
 
   const isChapterCompleted = (chapterNumber: number) => {
     return chapterProgresses?.some(
@@ -17,7 +21,6 @@ const Dashboard = () => {
     );
   };
 
-  // Define chapter information based on the 3D Printing Blueprint ebook structure
   const chapters = [
     {
       number: 1,
@@ -88,22 +91,69 @@ const Dashboard = () => {
 
   return (
     <DashboardLayout title="Dashboard">
-      <div className="grid gap-6">
+      <div className="grid gap-8 pb-8">
+        <div className="grid gap-6">
+          <div className="grid gap-4 md:grid-cols-3">
+            <Card className="bg-gradient-to-br from-primary/10 to-primary/5">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Trophy className="h-5 w-5 text-primary" />
+                  Progress
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{Math.round(progress)}%</div>
+                <p className="text-sm text-muted-foreground">Overall completion</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-gradient-to-br from-secondary/10 to-secondary/5">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <BookOpen className="h-5 w-5 text-secondary" />
+                  Chapters
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{completedChapters}/{totalChapters}</div>
+                <p className="text-sm text-muted-foreground">Chapters completed</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-gradient-to-br from-accent/10 to-accent/5">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Rocket className="h-5 w-5 text-accent" />
+                  Next Step
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">Chapter {completedChapters + 1}</div>
+                <p className="text-sm text-muted-foreground">Continue your journey</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          <Card className="border-primary/20">
+            <CardContent className="pt-6">
+              <div className="max-w-2xl">
+                <h2 className="text-2xl font-bold mb-2">Welcome to Your 3D Printing Blueprint</h2>
+                <p className="text-gray-600 leading-relaxed">
+                  This comprehensive guide will take you from a $500 investment to $5K+ monthly revenue
+                  in 60 days with a systematic approach to building your 3D printing business.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
         <div className="max-w-3xl">
           <ChapterProgress />
         </div>
 
         <div>
-          <h2 className="text-xl font-bold mb-4">Welcome to Your 3D Printing Blueprint</h2>
-          <p className="text-gray-600 mb-6">
-            This comprehensive guide will take you from a $500 investment to $5K+ monthly revenue
-            in 60 days with a systematic approach to building your 3D printing business.
-          </p>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-bold mb-4">Chapters</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <h3 className="text-xl font-bold mb-6">Your Learning Journey</h3>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {chapters.map((chapter) => (
               <ChapterCard
                 key={chapter.number}
@@ -116,17 +166,24 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <Card className="mt-6">
+        <Card className="bg-gradient-to-br from-gray-50 to-white border-primary/20">
           <CardHeader>
             <CardTitle>Resources & Downloads</CardTitle>
-            <CardDescription>STL files, checklists, and more</CardDescription>
+            <CardDescription>Access all supporting materials for your business</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="mb-4">
-              Access all the supporting materials for your 3D printing business, including
-              STL files, checklists, templates, and more.
-            </p>
-            <Button onClick={() => navigate("/dashboard/resources")}>View Resources</Button>
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+              <p className="text-gray-600 max-w-lg">
+                Access all the supporting materials for your 3D printing business, including
+                STL files, checklists, templates, and more.
+              </p>
+              <Button 
+                onClick={() => navigate("/dashboard/resources")}
+                className="shrink-0"
+              >
+                View Resources
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>
