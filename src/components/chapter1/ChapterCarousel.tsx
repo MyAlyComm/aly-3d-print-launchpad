@@ -97,7 +97,7 @@ export const ChapterCarousel = () => {
         </div>
       </div>
       
-      <Progress value={progress} className="h-2" />
+      <Progress value={progress} className="h-2 mb-4" /> {/* Added mb-4 for consistent spacing */}
       
       <Carousel 
         className="w-full"
@@ -121,7 +121,7 @@ export const ChapterCarousel = () => {
           })}
         </CarouselContent>
         
-        <div className="flex items-center justify-between mt-6">
+        <div className="flex items-center justify-between mt-4"> {/* Reduced top margin from mt-6 to mt-4 */}
           <CarouselPrevious className="relative" />
           <div className="text-center text-sm text-muted-foreground">
             {currentSlide + 1} / {sections.length}
