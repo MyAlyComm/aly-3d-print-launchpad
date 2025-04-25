@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { Mail } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface LeadMagnetFormProps {
   setDialogOpen?: (open: boolean) => void;
@@ -35,13 +36,23 @@ const LeadMagnetForm = ({
     setLoading(true);
     
     try {
-      const response = await fetch('https://gnzudunkcgbnmipshadn.functions.supabase.co/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email }),
+      // Store the user's name in localStorage so we can use it after authentication
+      localStorage.setItem("lead_capture_name", name);
+      
+      // Using Supabase's magic link functionality behind the scenes
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          // Use port 5173 for local development
+          emailRedirectTo: window.location.origin,
+          data: {
+            name: name,
+            requestType: "guide",
+          }
+        }
       });
 
-      if (!response.ok) throw new Error('Failed to send email');
+      if (error) throw error;
 
       toast.success("Success! Please check your email for the guide.", {
         description: "If you don't see it, please check your spam folder.",
@@ -55,8 +66,10 @@ const LeadMagnetForm = ({
       // Clear form
       setEmail("");
       setName("");
-    } catch (error) {
-      toast.error("There was a problem sending the guide. Please try again.");
+    } catch (error: any) {
+      toast.error("There was a problem sending the guide. Please try again.", {
+        description: error.message,
+      });
     } finally {
       setLoading(false);
     }
