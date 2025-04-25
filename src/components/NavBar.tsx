@@ -1,14 +1,11 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import LeadMagnetForm from "./LeadMagnetForm";
 import { useLocation } from "react-router-dom";
+import FreeGuideDialog from "./FreeGuideDialog";
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [open, setOpen] = useState(false);
   const location = useLocation();
 
   // Track scroll position for navbar styling
@@ -72,16 +69,7 @@ const NavBar = () => {
           </div>
 
           <div className="hidden md:block">
-            <Dialog open={open} onOpenChange={setOpen}>
-              <DialogTrigger asChild>
-                <Button className="bg-secondary hover:bg-secondary-dark text-white">
-                  Free Guide
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
-                <LeadMagnetForm setDialogOpen={setOpen} />
-              </DialogContent>
-            </Dialog>
+            <FreeGuideDialog />
           </div>
 
           {/* Mobile menu button */}
@@ -139,16 +127,11 @@ const NavBar = () => {
               <a href="#" className="text-gray-700 hover:text-primary py-2">
                 Testimonials
               </a>
-              <Dialog open={open} onOpenChange={setOpen}>
-                <DialogTrigger asChild>
-                  <Button className="bg-secondary hover:bg-secondary-dark text-white w-full">
-                    Free Guide
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
-                  <LeadMagnetForm setDialogOpen={setOpen} />
-                </DialogContent>
-              </Dialog>
+              <FreeGuideDialog>
+                <Button className="bg-secondary hover:bg-secondary-dark text-white w-full">
+                  Free Guide
+                </Button>
+              </FreeGuideDialog>
             </div>
           </div>
         )}
