@@ -12,36 +12,38 @@ export const ChapterProgress = () => {
   const progressPercentage = calculateOverallProgress();
   
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Your Progress</CardTitle>
+    <Card className="bg-gradient-to-br from-primary/5 to-transparent">
+      <CardHeader className="pb-2">
+        <CardTitle className="text-lg font-medium">Your Progress</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm text-gray-600">
-              <span>Overall Progress</span>
+          <div>
+            <div className="flex justify-between text-sm text-muted-foreground mb-2">
+              <span>Overall Completion</span>
               <span>{Math.round(progressPercentage)}%</span>
             </div>
-            <Progress value={progressPercentage} />
+            <Progress value={progressPercentage} className="h-2" />
           </div>
 
-          <div className="mt-6">
-            <Tabs defaultValue="progress">
-              <TabsList className="mb-4">
-                <TabsTrigger value="progress">Chapter Progress</TabsTrigger>
-                <TabsTrigger value="responses">Your Responses</TabsTrigger>
-              </TabsList>
+          <Tabs defaultValue="progress" className="w-full">
+            <TabsList className="w-full">
+              <TabsTrigger value="progress" className="flex-1">Progress</TabsTrigger>
+              <TabsTrigger value="responses" className="flex-1">Responses</TabsTrigger>
+            </TabsList>
 
-              <TabsContent value="progress">
+            <TabsContent value="progress" className="mt-2">
+              <div className="max-h-[200px] overflow-y-auto">
                 <ChapterProgressList />
-              </TabsContent>
+              </div>
+            </TabsContent>
 
-              <TabsContent value="responses">
+            <TabsContent value="responses" className="mt-2">
+              <div className="max-h-[200px] overflow-y-auto">
                 <UserResponses />
-              </TabsContent>
-            </Tabs>
-          </div>
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </CardContent>
     </Card>

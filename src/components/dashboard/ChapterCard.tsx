@@ -10,7 +10,7 @@ interface ChapterCardProps {
   title: string;
   description: string;
   isCompleted?: boolean;
-  imageUrl?: string; // New prop for chapter image
+  imageUrl?: string;
 }
 
 export function ChapterCard({ 
@@ -54,13 +54,19 @@ export function ChapterCard({
           </Button>
         </CardContent>
       </div>
-      <div className="hidden md:block">
+      <div className="hidden md:block relative">
         {imageUrl ? (
-          <img 
-            src={imageUrl} 
-            alt={`Chapter ${number} illustration`} 
-            className="w-full h-full object-cover rounded-r-lg opacity-80 hover:opacity-100 transition-opacity"
-          />
+          <>
+            <div className="absolute inset-0 bg-gradient-to-l from-black/40 to-black/60 z-10" />
+            <img 
+              src={imageUrl} 
+              alt={`Chapter ${number} illustration`} 
+              className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity"
+            />
+            <div className="absolute inset-0 z-20 flex items-center justify-center text-white text-sm font-medium p-4">
+              {title}
+            </div>
+          </>
         ) : (
           <div className="w-full h-full bg-gray-100 flex items-center justify-center">
             <Image className="text-gray-400" size={48} />

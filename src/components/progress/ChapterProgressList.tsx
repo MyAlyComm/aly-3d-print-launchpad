@@ -25,34 +25,39 @@ export const ChapterProgressList = () => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-2">
       {Array.from({length: 13}, (_, i) => i + 1).map((chapter) => {
         const completed = isChapterCompleted(chapter);
         const latestSection = getChapterLatestSection(chapter);
         
         return (
-          <div key={chapter} className="flex items-center justify-between p-3 border rounded-md">
+          <div 
+            key={chapter} 
+            className="flex items-center justify-between p-2 border rounded-md bg-card hover:bg-accent/5 transition-colors"
+          >
             <div>
-              <h3 className="font-medium">Chapter {chapter}: {chapterTitles[chapter as keyof typeof chapterTitles]}</h3>
-              {latestSection && (
-                <p className="text-xs text-gray-500 mt-1">
-                  Last activity: {getSectionName(latestSection.section_id)}
-                </p>
-              )}
+              <p className="text-sm font-medium">
+                Chapter {chapter}
+                {latestSection && (
+                  <span className="text-xs text-muted-foreground ml-2">
+                    - {getSectionName(latestSection.section_id)}
+                  </span>
+                )}
+              </p>
             </div>
             <div className="flex items-center">
               {completed ? (
-                <span className="inline-flex items-center text-sm text-green-600">
-                  <BadgeCheck className="h-4 w-4 mr-1" />
-                  Completed
+                <span className="inline-flex items-center text-xs text-green-600">
+                  <BadgeCheck className="h-3 w-3 mr-1" />
+                  Done
                 </span>
               ) : latestSection ? (
-                <span className="inline-flex items-center text-sm text-amber-600">
-                  <Clock className="h-4 w-4 mr-1" />
+                <span className="inline-flex items-center text-xs text-amber-600">
+                  <Clock className="h-3 w-3 mr-1" />
                   In Progress
                 </span>
               ) : (
-                <span className="text-sm text-gray-400">Not Started</span>
+                <span className="text-xs text-muted-foreground">Not Started</span>
               )}
             </div>
           </div>
