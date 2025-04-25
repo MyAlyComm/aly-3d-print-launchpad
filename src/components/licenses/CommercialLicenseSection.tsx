@@ -51,6 +51,7 @@ const CommercialLicenseSection = ({ open, setOpen }: CommercialLicenseSectionPro
             <LeadMagnetDialog 
               title="Claim 5-in-1 Phone Stand Commercial License"
               description="Unlock full commercial rights to sell and distribute the 5-in-1 Phone Stand model on platforms like Etsy and MakerWorld"
+              buttonText="Claim Free Commercial License"
             >
               <Button className="w-full bg-secondary hover:bg-secondary-dark">
                 Claim Free Commercial License
@@ -82,6 +83,7 @@ const CommercialLicenseSection = ({ open, setOpen }: CommercialLicenseSectionPro
             <LeadMagnetDialog 
               title="Unlock Bonus 3D Models Commercial License"
               description="Gain commercial rights for an exclusive collection of trending 3D models, including Cat Masks and Decorative Keychains"
+              buttonText="Get Bonus Models License"
             >
               <Button className="w-full bg-accent hover:bg-accent-dark">
                 Get Bonus Models License

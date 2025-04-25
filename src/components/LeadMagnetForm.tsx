@@ -10,13 +10,15 @@ interface LeadMagnetFormProps {
   inline?: boolean;
   title?: string;
   description?: string;
+  buttonText?: string;
 }
 
 const LeadMagnetForm = ({ 
   setDialogOpen, 
   inline = false,
   title = "Get Your Free 3D Printing Guide",
-  description = "Enter your details below for instant access"
+  description = "Enter your details below for instant access",
+  buttonText = "Get Free Guide Now"
 }: LeadMagnetFormProps) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -110,7 +112,7 @@ const LeadMagnetForm = ({
             className="w-full bg-secondary hover:bg-secondary-dark text-white font-bold"
             disabled={loading}
           >
-            {loading ? "Sending..." : "Get Free Guide Now"}
+            {loading ? "Sending..." : buttonText}
           </Button>
           <p className="text-xs text-center text-gray-500 mt-4">
             We respect your privacy and will never share your information.
@@ -122,4 +124,3 @@ const LeadMagnetForm = ({
 };
 
 export default LeadMagnetForm;
-
