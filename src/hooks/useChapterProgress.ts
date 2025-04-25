@@ -8,6 +8,7 @@ export type ChapterProgress = {
   chapter_number: number;
   completed_at: string | null;
   section_id: string;
+  response_data?: Record<string, any>;
 };
 
 export function useChapterProgress() {
