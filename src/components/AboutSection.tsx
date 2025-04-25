@@ -1,11 +1,14 @@
-
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const AboutSection = () => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   return (
-    <div className="py-16 bg-white">
-      <div className="container">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+    <div className="py-12 md:py-16 bg-white">
+      <div className="container px-4 md:px-6">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="order-2 md:order-1">
             <div className="text-sm font-medium text-primary mb-2">ABOUT YOUR MENTOR</div>
             <h2 className="text-3xl md:text-4xl font-bold font-display mb-6">
@@ -45,10 +48,17 @@ const AboutSection = () => {
             <div className="relative">
               <div className="absolute -inset-4 rounded-xl bg-gradient-to-r from-primary/20 to-secondary/20 opacity-50 blur-xl"></div>
               <div className="relative overflow-hidden rounded-xl">
+                {!imageLoaded && (
+                  <Skeleton className="w-full aspect-[4/3]" />
+                )}
                 <img 
                   src="/lovable-uploads/e49ddb52-4568-42a4-9701-8bdb0ebd0833.png" 
                   alt="Aly with 3D printers" 
-                  className="w-full h-auto rounded-xl"
+                  className={`w-full h-auto rounded-xl transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                  onLoad={() => setImageLoaded(true)}
+                  loading="lazy"
+                  width={800}
+                  height={600}
                 />
               </div>
 
