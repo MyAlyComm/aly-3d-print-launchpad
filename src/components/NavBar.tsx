@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import LeadMagnetForm from "./LeadMagnetForm";
+import { useLocation } from "react-router-dom";
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [open, setOpen] = useState(false);
+  const location = useLocation();
 
   // Track scroll position for navbar styling
   useEffect(() => {
@@ -25,6 +27,17 @@ const NavBar = () => {
     };
   }, []);
 
+  const handleTitleClick = (e: React.MouseEvent) => {
+    // If we're already on the homepage, scroll to top instead of navigating
+    if (location.pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -36,7 +49,7 @@ const NavBar = () => {
       <div className="container">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <a href="/" className="text-xl font-bold text-primary">
+            <a href="/" onClick={handleTitleClick} className="text-xl font-bold text-primary">
               Aly's 3D Studio
             </a>
           </div>
