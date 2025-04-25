@@ -1,8 +1,13 @@
 
 import React from 'react';
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
-export const AwakeningSection = () => {
+interface AwakeningSectionProps {
+  onSubmit: () => void;
+}
+
+export const AwakeningSection: React.FC<AwakeningSectionProps> = ({ onSubmit }) => {
   return (
     <section id="awakening" className="mb-12">
       <h2 className="text-3xl font-bold mb-6">The Awakening</h2>
@@ -23,6 +28,12 @@ export const AwakeningSection = () => {
           <p>When my first reel went viral—I started getting 5 or 10 messages a day asking for help, then 20, then 100. Pretty soon I realized there was no possible way I could keep up helping people one at a time.</p>
           <p>So I opened a free Skool community to try and centralize my thoughts. I started building systems and pathways tailored to the unique situations of global entrepreneurs. I realized that to give truly valuable advice I needed to know a lot about each person—their skills, their geography, their dreams, and ambitions.</p>
           <p>I created worksheets, AI prompts, and content calendars to help them create sustainable, profitable businesses.</p>
+          
+          <div className="flex justify-end mt-4">
+            <Button onClick={onSubmit} className="bg-primary hover:bg-primary/90">
+              Continue
+            </Button>
+          </div>
         </div>
       </Card>
     </section>

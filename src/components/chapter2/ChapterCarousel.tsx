@@ -23,6 +23,11 @@ import { RevelationSection } from './RevelationSection';
 import { DecisionTreeSection } from './DecisionTreeSection';
 import { WorksheetSection } from './WorksheetSection';
 
+// Define interfaces for components with onSubmit prop
+interface SectionProps {
+  onSubmit: () => void;
+}
+
 export const ChapterCarousel = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -141,7 +146,7 @@ export const ChapterCarousel = () => {
       >
         <CarouselContent>
           {sections.map((section) => {
-            const SectionComponent = section.component;
+            const SectionComponent = section.component as React.ComponentType<SectionProps>;
             return (
               <CarouselItem key={section.id} className="min-w-full">
                 <SectionComponent 

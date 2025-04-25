@@ -3,9 +3,14 @@ import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 import { useChapterForm } from "@/hooks/useChapterForm";
 
-export const WorksheetSection = () => {
+interface WorksheetSectionProps {
+  onSubmit: () => void;
+}
+
+export const WorksheetSection: React.FC<WorksheetSectionProps> = ({ onSubmit }) => {
   const { formState, saveResponse, isLoading } = useChapterForm(2, 'worksheet');
   const sectionKey = 'business-path';
 
@@ -24,7 +29,7 @@ export const WorksheetSection = () => {
 
   const checkboxes = formState[sectionKey]?.checkboxes || {};
   const textInputs = formState[sectionKey]?.textInputs || {};
-
+  
   return (
     <section id="worksheet" className="mb-12">
       <h2 className="text-3xl font-bold mb-6">The 3D Printing Business Path Worksheet</h2>
@@ -275,6 +280,12 @@ export const WorksheetSection = () => {
           </div>
         </div>
       </Card>
+      
+      <div className="flex justify-end mt-8">
+        <Button onClick={onSubmit} className="bg-primary hover:bg-primary/90">
+          Complete Worksheet
+        </Button>
+      </div>
     </section>
   );
 };

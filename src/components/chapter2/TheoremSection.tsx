@@ -1,8 +1,13 @@
 
 import React from 'react';
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
-export const TheoremSection = () => {
+interface TheoremSectionProps {
+  onSubmit: () => void;
+}
+
+export const TheoremSection: React.FC<TheoremSectionProps> = ({ onSubmit }) => {
   return (
     <section id="theorem" className="mb-12">
       <h2 className="text-3xl font-bold mb-6">The Axiogenetic Theorem</h2>
@@ -25,6 +30,12 @@ export const TheoremSection = () => {
           <p>These two products of each other represent one half of an equation, where the other is Value, or the value created. Because time and innovation are outside the control of any one person, we cannot create more value without saving time or being more innovative.</p>
           <p>And thus, I set out to build tools, systems, and a team—to create an AI company that will solve the biggest problems in 3D printing, and the problems of tomorrow, today.</p>
           <p>But as with all good things, this too shall take time. And time waits for no man. And the people need help today.</p>
+          
+          <div className="flex justify-end mt-4">
+            <Button onClick={onSubmit} className="bg-primary hover:bg-primary/90">
+              Continue
+            </Button>
+          </div>
         </div>
       </Card>
     </section>

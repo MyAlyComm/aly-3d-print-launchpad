@@ -1,8 +1,13 @@
 
 import React from 'react';
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
-export const RevelationSection = () => {
+interface RevelationSectionProps {
+  onSubmit: () => void;
+}
+
+export const RevelationSection: React.FC<RevelationSectionProps> = ({ onSubmit }) => {
   return (
     <section id="revelation" className="mb-12">
       <h2 className="text-3xl font-bold mb-6">The Revelation</h2>
@@ -28,6 +33,12 @@ export const RevelationSection = () => {
           <p>But to make a plan for tomorrow, you must first look inward to understand who you are, today.</p>
           <p>The biggest mistake I see new entrepreneurs make isn't choosing the wrong printer or selecting the wrong products. It's failing to align their business with their natural strengths, interests, and circumstances.</p>
           <p>When I first started, I almost fell into this trap myself. I was ready to copy exactly what I saw other successful 3D printing businesses doing—without considering whether those models played to my strengths or fit my situation.</p>
+          
+          <div className="flex justify-end mt-4">
+            <Button onClick={onSubmit} className="bg-primary hover:bg-primary/90">
+              Continue
+            </Button>
+          </div>
         </div>
       </Card>
     </section>

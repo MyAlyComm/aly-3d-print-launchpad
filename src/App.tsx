@@ -11,6 +11,7 @@ import NotFound from "./pages/NotFound";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import Dashboard from "./pages/Dashboard";
 import ChapterOne from "./pages/ChapterOne";
+import ChapterTwo from "./pages/ChapterTwo"; // Add this import
 import Resources from "./pages/Resources";
 import ProtectedRoute from "./components/ProtectedRoute";
 
