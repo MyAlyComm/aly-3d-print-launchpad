@@ -12,6 +12,7 @@ interface LeadMagnetFormProps {
   title?: string;
   description?: string;
   buttonText?: string;
+  requestType?: "guide" | "commercial_license";
 }
 
 const LeadMagnetForm = ({ 
@@ -19,7 +20,8 @@ const LeadMagnetForm = ({
   inline = false,
   title = "Get Your Free 3D Printing Guide",
   description = "Enter your details below for instant access",
-  buttonText = "Get Free Guide Now"
+  buttonText = "Get Free Guide Now",
+  requestType = "guide"
 }: LeadMagnetFormProps) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -46,7 +48,7 @@ const LeadMagnetForm = ({
           emailRedirectTo: window.location.origin,
           data: {
             name: name,
-            requestType: "guide",
+            requestType: requestType,
           }
         }
       });

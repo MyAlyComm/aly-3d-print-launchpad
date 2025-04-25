@@ -1,15 +1,18 @@
 import { Award, Check } from "lucide-react";
 import LeadMagnetDialog from "../FreeGuideDialog";
 import { Button } from "@/components/ui/button";
+
 interface CommercialLicenseSectionProps {
   open: boolean;
   setOpen: (open: boolean) => void;
 }
+
 const CommercialLicenseSection = ({
   open,
   setOpen
 }: CommercialLicenseSectionProps) => {
-  return <div className="mt-16 bg-white rounded-xl shadow-lg overflow-hidden">
+  return (
+    <div className="mt-16 bg-white rounded-xl shadow-lg overflow-hidden">
       <div className="p-8 text-center">
         <div className="flex justify-center mb-4">
           <Award className="w-12 h-12 text-primary" />
@@ -43,7 +46,11 @@ const CommercialLicenseSection = ({
                 Multi-functional design
               </li>
             </ul>
-            <LeadMagnetDialog title="Claim 5-in-1 Phone Stand Commercial License" description="Unlock full commercial rights to sell and distribute the 5-in-1 Phone Stand model on platforms like Etsy and MakerWorld" buttonText="Claim Free Commercial License">
+            <LeadMagnetDialog 
+              title="Claim 5-in-1 Phone Stand Commercial License" 
+              description="Unlock full commercial rights to sell and distribute the 5-in-1 Phone Stand model on platforms like Etsy and MakerWorld" 
+              buttonText="Claim Free Commercial License"
+            >
               <Button className="w-full bg-secondary hover:bg-secondary-dark">
                 Claim Free Commercial License
               </Button>
@@ -71,7 +78,11 @@ const CommercialLicenseSection = ({
             <p className="text-gray-600 mb-4 italic">
               Limited time offer - Commercial licenses for multiple models!
             </p>
-            <LeadMagnetDialog title="Unlock Bonus 3D Models Commercial License" description="Gain commercial rights for an exclusive collection of trending 3D models, including Cat Masks and Decorative Keychains" buttonText="Get Bonus Models License">
+            <LeadMagnetDialog 
+              title="Unlock Bonus 3D Models Commercial License" 
+              description="Gain commercial rights for an exclusive collection of trending 3D models, including Cat Masks and Decorative Keychains" 
+              buttonText="Get Bonus Models License"
+            >
               <Button className="w-full bg-accent hover:bg-accent-dark">
                 Get Bonus Models License
               </Button>
@@ -83,6 +94,8 @@ const CommercialLicenseSection = ({
           <p className="text-sm text-gray-500">*Commercial license allows selling physical prints on platforms like Etsy, Shopify, and anywhere else you'd like! You keep 100% of each sale with no royalties or fees.</p>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default CommercialLicenseSection;

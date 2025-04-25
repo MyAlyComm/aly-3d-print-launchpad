@@ -28,6 +28,7 @@ const LeadMagnetDialog = ({ children, className, title = "Get Your Free 3D Print
           title={title}
           description={description}
           buttonText={buttonText}
+          requestType="guide"
         />
       </DialogContent>
     </Dialog>
