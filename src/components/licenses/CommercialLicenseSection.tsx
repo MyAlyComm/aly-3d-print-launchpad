@@ -1,6 +1,10 @@
+
 import { Award, Check } from "lucide-react";
 import LeadMagnetDialog from "../FreeGuideDialog";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import LeadMagnetForm from "../LeadMagnetForm";
+import { useState } from "react";
 
 interface CommercialLicenseSectionProps {
   open: boolean;
@@ -11,6 +15,9 @@ const CommercialLicenseSection = ({
   open,
   setOpen
 }: CommercialLicenseSectionProps) => {
+  const [phoneStandOpen, setPhoneStandOpen] = useState(false);
+  const [bonusModelsOpen, setBonusModelsOpen] = useState(false);
+  
   return (
     <div className="mt-16 bg-white rounded-xl shadow-lg overflow-hidden">
       <div className="p-8 text-center">
@@ -46,15 +53,22 @@ const CommercialLicenseSection = ({
                 Multi-functional design
               </li>
             </ul>
-            <LeadMagnetDialog 
-              title="Claim 5-in-1 Phone Stand Commercial License" 
-              description="Unlock full commercial rights to sell and distribute the 5-in-1 Phone Stand model on platforms like Etsy and MakerWorld" 
-              buttonText="Claim Free Commercial License"
-            >
-              <Button className="w-full bg-secondary hover:bg-secondary-dark">
-                Claim Free Commercial License
-              </Button>
-            </LeadMagnetDialog>
+            <Dialog open={phoneStandOpen} onOpenChange={setPhoneStandOpen}>
+              <DialogTrigger asChild>
+                <Button className="w-full bg-secondary hover:bg-secondary-dark">
+                  Claim Free Commercial License
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <LeadMagnetForm
+                  setDialogOpen={setPhoneStandOpen}
+                  title="Claim 5-in-1 Phone Stand Commercial License" 
+                  description="Unlock full commercial rights to sell and distribute the 5-in-1 Phone Stand model on platforms like Etsy and MakerWorld" 
+                  buttonText="Claim Free Commercial License"
+                  requestType="commercial_license"
+                />
+              </DialogContent>
+            </Dialog>
           </div>
 
           <div className="bg-gray-100 p-6 rounded-lg">
@@ -78,15 +92,22 @@ const CommercialLicenseSection = ({
             <p className="text-gray-600 mb-4 italic">
               Limited time offer - Commercial licenses for multiple models!
             </p>
-            <LeadMagnetDialog 
-              title="Unlock Bonus 3D Models Commercial License" 
-              description="Gain commercial rights for an exclusive collection of trending 3D models, including Cat Masks and Decorative Keychains" 
-              buttonText="Get Bonus Models License"
-            >
-              <Button className="w-full bg-accent hover:bg-accent-dark">
-                Get Bonus Models License
-              </Button>
-            </LeadMagnetDialog>
+            <Dialog open={bonusModelsOpen} onOpenChange={setBonusModelsOpen}>
+              <DialogTrigger asChild>
+                <Button className="w-full bg-accent hover:bg-accent-dark">
+                  Get Bonus Models License
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <LeadMagnetForm 
+                  setDialogOpen={setBonusModelsOpen}
+                  title="Unlock Bonus 3D Models Commercial License" 
+                  description="Gain commercial rights for an exclusive collection of trending 3D models, including Cat Masks and Decorative Keychains" 
+                  buttonText="Get Bonus Models License"
+                  requestType="commercial_license"
+                />
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
 

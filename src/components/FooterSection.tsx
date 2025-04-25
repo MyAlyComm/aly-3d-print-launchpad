@@ -29,7 +29,7 @@ const FooterSection = () => {
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
-                  <LeadMagnetForm setDialogOpen={setOpen} />
+                  <LeadMagnetForm setDialogOpen={setOpen} requestType="guide" />
                 </DialogContent>
               </Dialog>
               
