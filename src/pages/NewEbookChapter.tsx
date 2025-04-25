@@ -26,6 +26,30 @@ const NewEbookChapter = () => {
   const queryClient = useQueryClient();
   const isMobile = useIsMobile();
 
+  // Handle navigation between sections
+  const goToNextSection = () => {
+    if (currentSection < sections.length - 1) {
+      setCurrentSection(currentSection + 1);
+    }
+  };
+
+  const goToPrevSection = () => {
+    if (currentSection > 0) {
+      setCurrentSection(currentSection - 1);
+    }
+  };
+
+  // Handle chapter completion
+  const handleCompleteChapter = () => {
+    toast({
+      title: "Chapter Completed!",
+      description: "Your progress has been saved.",
+    });
+    
+    queryClient.invalidateQueries({ queryKey: ["chapter-progress"] });
+    navigate("/dashboard");
+  };
+
   // Define sections array using existing Chapter 1 components
   const sections = [
     {
@@ -64,30 +88,6 @@ const NewEbookChapter = () => {
       component: <SelfAssessmentSection onSubmit={handleCompleteChapter} />,
     }
   ];
-
-  // Handle navigation between sections
-  const goToNextSection = () => {
-    if (currentSection < sections.length - 1) {
-      setCurrentSection(currentSection + 1);
-    }
-  };
-
-  const goToPrevSection = () => {
-    if (currentSection > 0) {
-      setCurrentSection(currentSection - 1);
-    }
-  };
-
-  // Handle chapter completion
-  const handleCompleteChapter = () => {
-    toast({
-      title: "Chapter Completed!",
-      description: "Your progress has been saved.",
-    });
-    
-    queryClient.invalidateQueries({ queryKey: ["chapter-progress"] });
-    navigate("/dashboard");
-  };
 
   return (
     <DashboardLayout title="Chapter 1: 3D Printing Fundamentals">
