@@ -1,6 +1,6 @@
 
 import { useNavigate } from "react-router-dom";
-import { Book, Layout, BookOpen } from "lucide-react";
+import { Book, Layout, BookOpen, BookText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const DashboardNav = () => {
@@ -22,7 +22,15 @@ export const DashboardNav = () => {
         onClick={() => navigate("/dashboard/new-chapter")}
       >
         <Book className="mr-2 h-4 w-4" />
-        New Ebook Chapter
+        Chapter 1: Fundamentals
+      </Button>
+      <Button 
+        variant="ghost" 
+        className="w-full justify-start"
+        onClick={() => navigate("/dashboard/chapter-2")}
+      >
+        <BookText className="mr-2 h-4 w-4" />
+        Chapter 2: Know Yourself
       </Button>
       <Button 
         variant="ghost" 
