@@ -34,7 +34,9 @@ export function useChapterForm(chapterNumber: number, sectionId: string) {
 
       if (error) throw error;
       if (data) {
-        setFormState(data.response_data);
+        // Parse the response_data as ChapterFormState to ensure type safety
+        const responseData = data.response_data as ChapterFormState;
+        setFormState(responseData);
       }
     } catch (error) {
       console.error('Error loading responses:', error);
