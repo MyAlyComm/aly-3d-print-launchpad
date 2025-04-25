@@ -53,7 +53,7 @@ const HeroSection = () => {
 
       {/* Ebook Cover Section */}
       <div className="container relative pb-16 md:pb-20 px-4 md:px-6">
-        <div className="max-w-lg mx-auto">
+        <div className="max-w-md mx-auto"> {/* Reduced max-width */}
           <div className="relative">
             <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur"></div>
             <div className="relative overflow-hidden rounded-xl">
@@ -66,8 +66,8 @@ const HeroSection = () => {
                 className={`w-full h-auto transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                 onLoad={() => setImageLoaded(true)}
                 loading="eager"
-                width={600}
-                height={450}
+                width={500}
+                height={375}
               />
             </div>
           </div>
