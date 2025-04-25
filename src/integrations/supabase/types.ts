@@ -259,6 +259,30 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          full_name: string | null
+          id: string
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       stl_metadata: {
         Row: {
           categories: string[] | null
@@ -310,6 +334,39 @@ export type Database = {
           tags?: string[] | null
           title?: string | null
           url?: string
+        }
+        Relationships: []
+      }
+      user_chapter_responses: {
+        Row: {
+          chapter_number: number
+          completed_at: string | null
+          created_at: string | null
+          id: string
+          response_data: Json
+          section_id: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          chapter_number: number
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          response_data?: Json
+          section_id: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          chapter_number?: number
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          response_data?: Json
+          section_id?: string
+          updated_at?: string | null
+          user_id?: string
         }
         Relationships: []
       }
