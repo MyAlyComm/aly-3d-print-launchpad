@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
+import { useQueryClient } from '@tanstack/react-query';
 
 export interface ChapterFormState {
   [key: string]: {
@@ -16,6 +17,7 @@ export function useChapterForm(chapterNumber: number, sectionId: string) {
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useAuth();
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     loadSavedResponses();
@@ -78,55 +80,74 @@ export function useChapterForm(chapterNumber: number, sectionId: string) {
     // Update local state immediately
     setFormState(newState);
 
-    // Debounce the save to database operation
-    saveTimeoutRef.current = setTimeout(async () => {
-      try {
-        // First check if a record already exists
-        const { data: existingRecord, error: checkError } = await supabase
-          .from('user_chapter_responses')
-          .select('id')
-          .eq('user_id', user.id)
-          .eq('chapter_number', chapterNumber)
-          .eq('section_id', sectionId)
-          .maybeSingle();
-          
-        if (checkError) throw checkError;
-        
-        let error;
-        // If record exists, update it; otherwise insert new record
-        if (existingRecord) {
-          const { error: updateError } = await supabase
-            .from('user_chapter_responses')
-            .update({
-              response_data: newState,
-              updated_at: new Date().toISOString()
-            })
-            .eq('id', existingRecord.id);
-            
-          error = updateError;
-        } else {
-          const { error: insertError } = await supabase
-            .from('user_chapter_responses')
-            .insert({
-              user_id: user.id,
-              chapter_number: chapterNumber,
-              section_id: sectionId,
-              response_data: newState,
-              updated_at: new Date().toISOString()
-            });
-            
-          error = insertError;
-        }
+    // For immediate save when user clicks the save button
+    if (showToast) {
+      await saveToDatabase(newState, true);
+    } else {
+      // Debounce the save to database operation for typing
+      saveTimeoutRef.current = setTimeout(() => {
+        saveToDatabase(newState, false);
+      }, 2000); // Wait for 2 seconds of inactivity before saving
+    }
+  };
 
-        if (error) throw error;
-        if (showToast) {
-          toast.success('Progress saved');
-        }
-      } catch (error) {
-        console.error('Error saving response:', error);
+  const saveToDatabase = async (newState: ChapterFormState, showToast: boolean) => {
+    try {
+      // First check if a record already exists
+      const { data: existingRecord, error: checkError } = await supabase
+        .from('user_chapter_responses')
+        .select('id')
+        .eq('user_id', user!.id)
+        .eq('chapter_number', chapterNumber)
+        .eq('section_id', sectionId)
+        .maybeSingle();
+        
+      if (checkError) throw checkError;
+      
+      let error;
+      const currentTime = new Date().toISOString();
+
+      // If record exists, update it; otherwise insert new record
+      if (existingRecord) {
+        const { error: updateError } = await supabase
+          .from('user_chapter_responses')
+          .update({
+            response_data: newState,
+            updated_at: currentTime,
+            completed_at: currentTime // Mark as completed when saving
+          })
+          .eq('id', existingRecord.id);
+          
+        error = updateError;
+      } else {
+        const { error: insertError } = await supabase
+          .from('user_chapter_responses')
+          .insert({
+            user_id: user!.id,
+            chapter_number: chapterNumber,
+            section_id: sectionId,
+            response_data: newState,
+            updated_at: currentTime,
+            completed_at: currentTime // Mark as completed when saving
+          });
+          
+        error = insertError;
+      }
+
+      if (error) throw error;
+      
+      // After successful save, invalidate the chapter progress query to refresh data
+      queryClient.invalidateQueries({ queryKey: ["chapter-progress"] });
+      
+      if (showToast) {
+        toast.success('Progress saved');
+      }
+    } catch (error) {
+      console.error('Error saving response:', error);
+      if (showToast) {
         toast.error('Failed to save your response');
       }
-    }, 2000); // Wait for 2 seconds of inactivity before saving
+    }
   };
 
   // Clean up the timeout when the component unmounts

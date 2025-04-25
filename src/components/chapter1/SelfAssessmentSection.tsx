@@ -5,10 +5,12 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useChapterForm } from "@/hooks/useChapterForm";
 import { Button } from "@/components/ui/button";
+import { useQueryClient } from '@tanstack/react-query';
 
 export const SelfAssessmentSection = () => {
   const { formState, saveResponse, isLoading } = useChapterForm(1, 'self-assessment');
   const sectionKey = 'skills-assessment';
+  const queryClient = useQueryClient();
 
   const handleTextChange = (questionId: string, value: string) => {
     // Pass false to prevent showing toast on every keystroke
@@ -20,6 +22,8 @@ export const SelfAssessmentSection = () => {
   const handleSaveClick = () => {
     // Explicitly show toast when user clicks save button
     saveResponse(sectionKey, {}, true);
+    // Immediately refresh the progress data
+    queryClient.invalidateQueries({ queryKey: ["chapter-progress"] });
   };
 
   const textInputs = formState[sectionKey]?.textInputs || {};
