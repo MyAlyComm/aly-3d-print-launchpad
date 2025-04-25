@@ -2,10 +2,11 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
-import { Check, Mail } from "lucide-react";
+import { toast } from "sonner";
+import { Mail } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
-interface LeadMagnetFormProps {
+interface LeadMagnetFormProps { 
   setDialogOpen?: (open: boolean) => void;
   inline?: boolean;
   title?: string;
@@ -23,50 +24,51 @@ const LeadMagnetForm = ({
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [verificationSent, setVerificationSent] = useState(false);
-  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!email || !name) {
-      toast({
-        title: "Error",
-        description: "Please fill in all fields",
-        variant: "destructive",
-      });
+      toast.error("Please fill in all fields");
       return;
     }
     
     setLoading(true);
     
     try {
-      // Prepare for Supabase integration
-      // const { error } = await supabase.auth.signUp({
-      //   email,
-      //   options: {
-      //     data: {
-      //       full_name: name,
-      //     }
-      //   }
-      // });
+      // Store the user's name in localStorage so we can use it after authentication
+      localStorage.setItem("lead_capture_name", name);
       
-      // if (error) throw error;
-
-      // Simulating API call for now
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      setVerificationSent(true);
-      toast({
-        title: "Verification Email Sent!",
-        description: "Please check your inbox (and spam folder) to verify your email address.",
+      // Using Supabase's magic link functionality behind the scenes
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          // Use port 5173 for local development
+          emailRedirectTo: window.location.origin,
+          data: {
+            name: name,
+            requestType: "guide",
+          }
+        }
       });
 
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "There was a problem sending the verification email. Please try again.",
-        variant: "destructive",
+      if (error) throw error;
+
+      toast.success("Success! Please check your email for the guide.", {
+        description: "We've sent a verification link to your email. If you don't see it, please check your spam folder.",
+      });
+
+      // Close dialog if it exists
+      if (setDialogOpen) {
+        setDialogOpen(false);
+      }
+
+      // Clear form
+      setEmail("");
+      setName("");
+    } catch (error: any) {
+      toast.error("There was a problem sending the guide. Please try again.", {
+        description: error.message,
       });
     } finally {
       setLoading(false);
@@ -80,56 +82,43 @@ const LeadMagnetForm = ({
         <p className="text-gray-600 mt-2">{description}</p>
       </div>
 
-      {verificationSent ? (
-        <div className="flex flex-col items-center justify-center space-y-4 my-8 text-center">
-          <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center">
-            <Mail className="h-6 w-6 text-green-600" />
-          </div>
-          <h4 className="text-xl font-medium text-gray-900">Check Your Email</h4>
-          <div className="text-gray-600 space-y-2">
-            <p>We've sent a verification link to:</p>
-            <p className="font-medium">{email}</p>
-            <p className="text-sm">
-              Click the link in the email to verify your address and access the guide.
-              <br />
-              Can't find the email? Check your spam folder.
-            </p>
-          </div>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <Input
-              type="text"
-              placeholder="Your Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full"
-              disabled={loading}
-            />
-          </div>
-          <div>
-            <Input
-              type="email"
-              placeholder="Your Email Address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full"
-              disabled={loading}
-            />
-          </div>
-          <Button 
-            type="submit"
-            className="w-full bg-secondary hover:bg-secondary-dark text-white font-bold"
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <Input
+            type="text"
+            placeholder="Your Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full"
             disabled={loading}
-          >
-            {loading ? "Sending..." : buttonText}
-          </Button>
-          <p className="text-xs text-center text-gray-500 mt-4">
-            We respect your privacy and will never share your information.
-          </p>
-        </form>
-      )}
+          />
+        </div>
+        <div>
+          <Input
+            type="email"
+            placeholder="Your Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full"
+            disabled={loading}
+          />
+        </div>
+        <Button 
+          type="submit"
+          className="w-full bg-secondary hover:bg-secondary-dark text-white font-bold"
+          disabled={loading}
+        >
+          {loading ? (
+            <>
+              <Mail className="mr-2 h-4 w-4 animate-spin" />
+              Sending...
+            </>
+          ) : buttonText}
+        </Button>
+        <p className="text-xs text-center text-gray-500 mt-4">
+          We respect your privacy and will never share your information.
+        </p>
+      </form>
     </div>
   );
 };
