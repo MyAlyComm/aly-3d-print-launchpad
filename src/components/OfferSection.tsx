@@ -4,33 +4,29 @@ import { useNavigate } from "react-router-dom";
 import BlueprintsSection from "./blueprints/BlueprintsSection";
 import TestimonialsSection from "./testimonials/TestimonialsSection";
 import CommercialLicenseSection from "./licenses/CommercialLicenseSection";
-import { toast } from "@/components/ui/sonner";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const OfferSection = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleCheckout = (blueprintId: number) => {
-    console.log(`Checkout initiated for blueprint ${blueprintId}`);
-    
-    // Show loading toast
-    toast.promise(
-      // In a real implementation, this would call a Stripe checkout session
-      new Promise(resolve => {
-        setTimeout(resolve, 1500); // Simulate API call
-      }),
-      {
-        loading: "Processing payment...",
-        success: () => {
-          // Set flag in localStorage that user has purchased
-          localStorage.setItem("hasAccessToEbook", "true");
-          // Navigate to success page
-          navigate("/payment-success");
-          return "Payment successful! Redirecting...";
-        },
-        error: "Payment processing failed. Please try again.",
+  const handleCheckout = async (blueprintId: number) => {
+    try {
+      const { data, error } = await supabase.functions.invoke('create-checkout', {
+        body: { blueprintId }
+      });
+
+      if (error) throw error;
+
+      if (data?.url) {
+        // Redirect to Stripe Checkout
+        window.location.href = data.url;
       }
-    );
+    } catch (error) {
+      console.error('Error creating checkout session:', error);
+      toast.error('Failed to initiate checkout. Please try again.');
+    }
   };
 
   return (
