@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { Mail } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
-interface LeadMagnetFormProps {
+interface LeadMagnetFormProps { 
   setDialogOpen?: (open: boolean) => void;
   inline?: boolean;
   title?: string;
@@ -55,7 +55,7 @@ const LeadMagnetForm = ({
       if (error) throw error;
 
       toast.success("Success! Please check your email for the guide.", {
-        description: "If you don't see it, please check your spam folder.",
+        description: "We've sent a verification link to your email. If you don't see it, please check your spam folder.",
       });
 
       // Close dialog if it exists
