@@ -9,9 +9,10 @@ interface LeadMagnetDialogProps {
   className?: string;
   title?: string;
   description?: string;
+  buttonText?: string;
 }
 
-const LeadMagnetDialog = ({ children, className, title = "Get Your Free 3D Printing Guide", description = "Enter your details below for instant access" }: LeadMagnetDialogProps) => {
+const LeadMagnetDialog = ({ children, className, title = "Get Your Free 3D Printing Guide", description = "Enter your details below for instant access", buttonText = "Free Guide" }: LeadMagnetDialogProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -26,6 +27,7 @@ const LeadMagnetDialog = ({ children, className, title = "Get Your Free 3D Print
           setDialogOpen={undefined}
           title={title}
           description={description}
+          buttonText={buttonText}
         />
       </DialogContent>
     </Dialog>
@@ -33,4 +35,3 @@ const LeadMagnetDialog = ({ children, className, title = "Get Your Free 3D Print
 };
 
 export default LeadMagnetDialog;
-
