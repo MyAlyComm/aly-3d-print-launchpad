@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Check } from "lucide-react";
 import LeadMagnetForm from "../LeadMagnetForm";
+import FreeGuideDialog from "../FreeGuideDialog";
 
 interface BlueprintProps {
   id: number;
@@ -25,9 +26,7 @@ const BlueprintCard = ({
   isFree, 
   description, 
   features, 
-  onCheckout,
-  open,
-  setOpen 
+  onCheckout 
 }: BlueprintProps) => {
   return (
     <div className={`blueprint-card ${popular ? 'blueprint-card-popular' : ''}`}>
@@ -49,16 +48,11 @@ const BlueprintCard = ({
       </ul>
       
       {isFree ? (
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>
-            <Button className="w-full bg-secondary hover:bg-secondary-dark">
-              Get Free Guide
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <LeadMagnetForm setDialogOpen={setOpen} />
-          </DialogContent>
-        </Dialog>
+        <FreeGuideDialog>
+          <Button className="w-full bg-secondary hover:bg-secondary-dark">
+            Get Free Guide
+          </Button>
+        </FreeGuideDialog>
       ) : (
         <Button 
           className="w-full bg-primary hover:bg-primary-dark"
