@@ -10,17 +10,15 @@ import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 
-// Define the different sections we'll use in our carousel
-interface SectionType {
-  id: string;
-  title: string;
-  content: React.ReactNode;
-}
-
-// Mock submit handler that would typically handle form submission
-const mockSubmitHandler = (sectionId: string) => {
-  console.log(`Section ${sectionId} submitted`);
-};
+// Import chapter 1 sections
+import { OpportunitySection } from "@/components/chapter1/OpportunitySection";
+import { ArbitrageSection } from "@/components/chapter1/ArbitrageSection";
+import { BudgetSection } from "@/components/chapter1/BudgetSection";
+import { TimelineSection } from "@/components/chapter1/TimelineSection";
+import { MythsSection } from "@/components/chapter1/MythsSection";
+import { FutureSection } from "@/components/chapter1/FutureSection";
+import { SelfAssessmentSection } from "@/components/chapter1/SelfAssessmentSection";
+import { ChapterHeader } from "@/components/chapter1/ChapterHeader";
 
 const NewEbookChapter = () => {
   const [currentSection, setCurrentSection] = useState(0);
@@ -29,125 +27,43 @@ const NewEbookChapter = () => {
   const queryClient = useQueryClient();
   const isMobile = useIsMobile();
 
-  // Define our content sections
-  const sections: SectionType[] = [
+  // Define sections array using existing Chapter 1 components
+  const sections = [
     {
-      id: "intro",
-      title: "Introduction to 3D Printing",
-      content: (
-        <div className="space-y-4">
-          <h3 className="text-xl font-semibold mb-2">Welcome to Chapter 1</h3>
-          <p className="text-gray-700">
-            In this chapter, we'll explore the fundamentals of 3D printing and how to
-            leverage it as a business opportunity. 3D printing has created a new
-            frontier for entrepreneurs with minimal startup costs.
-          </p>
-          <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-            <p className="text-sm text-blue-800">
-              "The greatest opportunities often arise from emerging technologies 
-              that haven't yet been fully explored by the market."
-            </p>
-          </div>
-          <img 
-            src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"
-            alt="3D Printing Technology" 
-            className="w-full h-auto rounded-lg mt-4"
-          />
-        </div>
-      ),
+      id: "opportunity",
+      title: "The 3D Printing Opportunity",
+      content: <OpportunitySection />,
     },
     {
       id: "arbitrage",
-      title: "Arbitrage Opportunities",
-      content: (
-        <div className="space-y-4">
-          <h3 className="text-xl font-semibold mb-2">Finding Your Niche</h3>
-          <p className="text-gray-700">
-            Arbitrage in 3D printing means identifying products that can be produced
-            at a significantly lower cost than their market selling price. This
-            creates profitable opportunities with minimal investment.
-          </p>
-          <ul className="space-y-2 list-disc pl-5">
-            <li>Custom and personalized products with high margins</li>
-            <li>Niche market items with limited competition</li>
-            <li>Replacement parts for discontinued products</li>
-            <li>Specialized tools and functional components</li>
-          </ul>
-          <img 
-            src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6"
-            alt="Market Opportunity" 
-            className="w-full h-auto rounded-lg mt-4"
-          />
-        </div>
-      ),
+      title: "Understanding Arbitrage Windows",
+      content: <ArbitrageSection />,
     },
     {
       id: "budget",
       title: "Budget Planning",
-      content: (
-        <div className="space-y-4">
-          <h3 className="text-xl font-semibold mb-2">Starting Budget Considerations</h3>
-          <p className="text-gray-700">
-            You can start a 3D printing business with as little as $500-$1,000. Here's
-            how to allocate your resources depending on your budget:
-          </p>
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-              <h4 className="font-medium mb-2">$500-$1,000 Budget</h4>
-              <ul className="text-sm space-y-1">
-                <li>• One entry-level printer (Ender 3)</li>
-                <li>• 2-3 rolls of PLA filament</li>
-                <li>• Basic tools kit</li>
-              </ul>
-            </div>
-            <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-              <h4 className="font-medium mb-2">$1,000-$2,000 Budget</h4>
-              <ul className="text-sm space-y-1">
-                <li>• One mid-tier printer or two budget printers</li>
-                <li>• Multiple filament types</li>
-                <li>• Post-processing tools</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      ),
+      content: <BudgetSection />,
+    },
+    {
+      id: "timeline",
+      title: "Industry Timeline",
+      content: <TimelineSection />,
+    },
+    {
+      id: "myths",
+      title: "Breaking Through Misconceptions",
+      content: <MythsSection />,
+    },
+    {
+      id: "future",
+      title: "The Future of 3D Printing",
+      content: <FutureSection />,
     },
     {
       id: "assessment",
       title: "Self Assessment",
-      content: (
-        <div className="space-y-4">
-          <h3 className="text-xl font-semibold mb-2">Your 3D Printing Potential</h3>
-          <p className="text-gray-700">
-            Let's assess your readiness to start a 3D printing business. Answer these
-            questions to help identify your strengths and areas for growth.
-          </p>
-          <div className="space-y-4 mt-4">
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                What interests you most about 3D printing?
-              </label>
-              <textarea 
-                className="w-full p-2 border border-gray-300 rounded-md" 
-                rows={3}
-                placeholder="Your answer here..."
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                How much time can you dedicate to this business weekly?
-              </label>
-              <select className="w-full p-2 border border-gray-300 rounded-md">
-                <option>Less than 10 hours</option>
-                <option>10-20 hours</option>
-                <option>20-30 hours</option>
-                <option>Full-time (40+ hours)</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      ),
-    },
+      content: <SelfAssessmentSection />,
+    }
   ];
 
   // Handle navigation between sections
@@ -168,22 +84,21 @@ const NewEbookChapter = () => {
 
   // Handle chapter completion
   const handleCompleteChapter = () => {
-    // This would typically update progress in a database
     toast({
       title: "Chapter Completed!",
       description: "Your progress has been saved.",
     });
     
-    // Simulate invalidating queries to refresh progress data
     queryClient.invalidateQueries({ queryKey: ["chapter-progress"] });
-    
-    // Navigate back to dashboard
     navigate("/dashboard");
   };
 
   return (
     <DashboardLayout title="Chapter 1: 3D Printing Fundamentals">
       <div className="container max-w-4xl mx-auto px-4 py-6">
+        {/* Chapter Header */}
+        <ChapterHeader />
+        
         {/* Chapter Progress */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
@@ -200,22 +115,12 @@ const NewEbookChapter = () => {
         {/* Chapter Content Card */}
         <Card className="mb-6">
           <CardContent className={isMobile ? "p-4" : "p-6"}>
-            {/* Chapter Title */}
-            <div className="mb-6 pb-4 border-b border-gray-100">
-              <h2 className="text-2xl font-bold text-gray-900">
-                3D Printing Business Fundamentals
-              </h2>
-              <p className="text-gray-600 mt-1">
-                Learn how to identify profitable opportunities in the 3D printing space.
-              </p>
-            </div>
-            
             {/* Current Section Content */}
             <div className="min-h-[300px]">
               {sections[currentSection].content}
             </div>
             
-            {/* Navigation Controls - Positioned right after content without large gaps */}
+            {/* Navigation Controls */}
             <div className="flex items-center justify-between mt-8">
               <Button
                 variant="outline"
