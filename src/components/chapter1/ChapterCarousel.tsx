@@ -160,7 +160,7 @@ export const ChapterCarousel = () => {
           {sections.map((section, index) => {
             const SectionComponent = section.component;
             return (
-              <CarouselItem key={section.id}>
+              <CarouselItem key={section.id} className="min-w-full">
                 <div className="p-2 md:p-6">
                   <SectionComponent 
                     onSubmit={() => handleSubmitSection(section.id)} 
@@ -195,4 +195,3 @@ export const ChapterCarousel = () => {
     </div>
   );
 };
-

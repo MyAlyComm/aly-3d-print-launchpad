@@ -13,12 +13,12 @@ const ChapterOne = () => {
   return (
     <DashboardLayout title="Chapter 1: Arbitrage Windows">
       <ScrollArea className="h-full overflow-x-hidden">
-        <div className="w-full max-w-4xl mx-auto px-4 md:px-6">
+        <div className="w-full max-w-4xl mx-auto px-2 sm:px-4 md:px-6">
           <MiniProgress currentChapter={1} />
           <ChapterHeader />
           
-          <Card>
-            <CardContent className={`${isMobile ? 'pt-4 px-3' : 'pt-6 p-6'}`}>
+          <Card className="overflow-hidden">
+            <CardContent className={`${isMobile ? 'pt-4 px-3 pb-6' : 'pt-6 p-6'}`}>
               <ChapterCarousel />
             </CardContent>
           </Card>
