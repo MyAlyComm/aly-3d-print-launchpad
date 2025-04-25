@@ -8,29 +8,45 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
+import { ChevronRight } from 'lucide-react';
 import { ArbitrageSection } from './ArbitrageSection';
 import { TimelineSection } from './TimelineSection';
 import { MythsSection } from './MythsSection';
 import { FutureSection } from './FutureSection';
 import { SelfAssessmentSection } from './SelfAssessmentSection';
-import { ChevronRight } from 'lucide-react';
+import { OpportunitySection } from './OpportunitySection';
+import { BudgetSection } from './BudgetSection';
 
 export const ChapterCarousel = () => {
   const [currentSlide, setCurrentSlide] = React.useState(0);
-  const totalSlides = 5;
+  const totalSlides = 7;
+
+  const handleSlideChange = React.useCallback((index: number) => {
+    setCurrentSlide(index);
+  }, []);
 
   const isLastSlide = currentSlide === totalSlides - 1;
 
   return (
     <div className="relative">
-      <Carousel
+      <Carousel 
         className="w-full"
-        onSelect={(selectedIndex) => setCurrentSlide(selectedIndex)}
+        onSelect={handleSlideChange}
       >
         <CarouselContent>
           <CarouselItem>
             <div className="p-6">
+              <OpportunitySection />
+            </div>
+          </CarouselItem>
+          <CarouselItem>
+            <div className="p-6">
               <ArbitrageSection />
+            </div>
+          </CarouselItem>
+          <CarouselItem>
+            <div className="p-6">
+              <BudgetSection />
             </div>
           </CarouselItem>
           <CarouselItem>
