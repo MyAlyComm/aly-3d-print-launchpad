@@ -11,9 +11,15 @@ export const SelfAssessmentSection = () => {
   const sectionKey = 'skills-assessment';
 
   const handleTextChange = (questionId: string, value: string) => {
+    // Pass false to prevent showing toast on every keystroke
     saveResponse(sectionKey, {
       textInputs: { [questionId]: value }
-    });
+    }, false);
+  };
+  
+  const handleSaveClick = () => {
+    // Explicitly show toast when user clicks save button
+    saveResponse(sectionKey, {}, true);
   };
 
   const textInputs = formState[sectionKey]?.textInputs || {};
@@ -59,6 +65,10 @@ export const SelfAssessmentSection = () => {
               />
             </div>
           ))}
+          
+          <div className="flex justify-end mt-4">
+            <Button onClick={handleSaveClick}>Save Progress</Button>
+          </div>
         </div>
       </Card>
     </div>

@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
@@ -15,6 +15,7 @@ export function useChapterForm(chapterNumber: number, sectionId: string) {
   const [formState, setFormState] = useState<ChapterFormState>({});
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useAuth();
+  const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     loadSavedResponses();
@@ -49,10 +50,15 @@ export function useChapterForm(chapterNumber: number, sectionId: string) {
   const saveResponse = async (sectionKey: string, updates: {
     checkboxes?: { [key: string]: boolean },
     textInputs?: { [key: string]: string }
-  }) => {
+  }, showToast: boolean = false) => {
     if (!user) {
       toast.error('Please login to save your progress');
       return;
+    }
+
+    // Clear any existing timeout
+    if (saveTimeoutRef.current) {
+      clearTimeout(saveTimeoutRef.current);
     }
 
     const newState = {
@@ -69,52 +75,68 @@ export function useChapterForm(chapterNumber: number, sectionId: string) {
       }
     };
 
-    try {
-      // First check if a record already exists
-      const { data: existingRecord, error: checkError } = await supabase
-        .from('user_chapter_responses')
-        .select('id')
-        .eq('user_id', user.id)
-        .eq('chapter_number', chapterNumber)
-        .eq('section_id', sectionId)
-        .maybeSingle();
-        
-      if (checkError) throw checkError;
-      
-      let error;
-      // If record exists, update it; otherwise insert new record
-      if (existingRecord) {
-        const { error: updateError } = await supabase
-          .from('user_chapter_responses')
-          .update({
-            response_data: newState,
-            updated_at: new Date().toISOString()
-          })
-          .eq('id', existingRecord.id);
-          
-        error = updateError;
-      } else {
-        const { error: insertError } = await supabase
-          .from('user_chapter_responses')
-          .insert({
-            user_id: user.id,
-            chapter_number: chapterNumber,
-            section_id: sectionId,
-            response_data: newState,
-            updated_at: new Date().toISOString()
-          });
-          
-        error = insertError;
-      }
+    // Update local state immediately
+    setFormState(newState);
 
-      if (error) throw error;
-      setFormState(newState);
-      toast.success('Progress saved');
-    } catch (error) {
-      console.error('Error saving response:', error);
-      toast.error('Failed to save your response');
-    }
+    // Debounce the save to database operation
+    saveTimeoutRef.current = setTimeout(async () => {
+      try {
+        // First check if a record already exists
+        const { data: existingRecord, error: checkError } = await supabase
+          .from('user_chapter_responses')
+          .select('id')
+          .eq('user_id', user.id)
+          .eq('chapter_number', chapterNumber)
+          .eq('section_id', sectionId)
+          .maybeSingle();
+          
+        if (checkError) throw checkError;
+        
+        let error;
+        // If record exists, update it; otherwise insert new record
+        if (existingRecord) {
+          const { error: updateError } = await supabase
+            .from('user_chapter_responses')
+            .update({
+              response_data: newState,
+              updated_at: new Date().toISOString()
+            })
+            .eq('id', existingRecord.id);
+            
+          error = updateError;
+        } else {
+          const { error: insertError } = await supabase
+            .from('user_chapter_responses')
+            .insert({
+              user_id: user.id,
+              chapter_number: chapterNumber,
+              section_id: sectionId,
+              response_data: newState,
+              updated_at: new Date().toISOString()
+            });
+            
+          error = insertError;
+        }
+
+        if (error) throw error;
+        if (showToast) {
+          toast.success('Progress saved');
+        }
+      } catch (error) {
+        console.error('Error saving response:', error);
+        toast.error('Failed to save your response');
+      }
+    }, 2000); // Wait for 2 seconds of inactivity before saving
   };
+
+  // Clean up the timeout when the component unmounts
+  useEffect(() => {
+    return () => {
+      if (saveTimeoutRef.current) {
+        clearTimeout(saveTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return {
     formState,
