@@ -36,6 +36,7 @@ const NavBar = () => {
         behavior: "smooth"
       });
     }
+    // If not on homepage, default link behavior will navigate to homepage
   };
 
   return (
