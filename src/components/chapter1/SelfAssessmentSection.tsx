@@ -19,7 +19,7 @@ export const SelfAssessmentSection = () => {
   const textInputs = formState[sectionKey]?.textInputs || {};
 
   return (
-    <section id="self-assessment" className="mb-12">
+    <div id="self-assessment" className="mb-12">
       <h2 className="text-3xl font-bold mb-6 text-gray-800">Chapter 1 Self-Assessment: Your Arbitrage Advantage</h2>
       
       <Card className="p-6">
@@ -37,7 +37,7 @@ export const SelfAssessmentSection = () => {
             },
             {
               id: 'interesting-phase',
-              question: 'Which phase of the industry's evolution do you find most interesting, and why?'
+              question: 'Which phase of the industry\'s evolution do you find most interesting, and why?'
             },
             {
               id: 'specific-niche',
@@ -61,6 +61,6 @@ export const SelfAssessmentSection = () => {
           ))}
         </div>
       </Card>
-    </section>
+    </div>
   );
 };
