@@ -24,10 +24,15 @@ export const UserResponses = () => {
   return (
     <div className="space-y-6">
       {chapterProgresses.map((progress) => {
-        const responses = progress.response_data as Record<string, ResponseData>;
+        // Safely handle the case where response_data might be undefined
+        const responses = progress.response_data as Record<string, ResponseData> || {};
+        
+        // Only process if we have valid response data
+        if (Object.keys(responses).length === 0) return null;
         
         return Object.entries(responses).map(([sectionId, sectionData]) => {
-          if (!sectionData.textInputs && !sectionData.checkboxes) return null;
+          // Skip if section data or its properties are not available
+          if (!sectionData || (!sectionData.textInputs && !sectionData.checkboxes)) return null;
           
           return (
             <Card key={`${progress.chapter_number}-${sectionId}`}>
@@ -46,7 +51,7 @@ export const UserResponses = () => {
                   </span>
                 </div>
                 
-                {sectionData.textInputs && (
+                {sectionData.textInputs && Object.keys(sectionData.textInputs).length > 0 && (
                   <div className="mt-4">
                     <Table>
                       <TableBody>
