@@ -40,7 +40,7 @@ const HeroSection = () => {
               <DialogContent className="sm:max-w-[425px]">
                 <LeadMagnetForm 
                   setDialogOpen={setOpen} 
-                  requestType="guide" 
+                  requestType="guide"
                 />
               </DialogContent>
             </Dialog>
