@@ -1,6 +1,6 @@
 
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -13,6 +13,15 @@ export const AuthForm = () => {
   const [loading, setLoading] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Check if user has paid already
+  useEffect(() => {
+    const hasAccess = localStorage.getItem("hasAccessToEbook") === "true";
+    if (hasAccess) {
+      toast.info("You've already purchased access. Sign in to continue.");
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,8 +34,9 @@ export const AuthForm = () => {
           password,
           options: {
             data: {
-              // Optional: you can add additional metadata here if needed
-              created_at: new Date().toISOString()
+              created_at: new Date().toISOString(),
+              // If they've already paid, mark them as having access
+              has_access: localStorage.getItem("hasAccessToEbook") === "true"
             }
           }
         });
@@ -57,7 +67,10 @@ export const AuthForm = () => {
         }
         
         toast.success('Logged in successfully!');
-        navigate('/dashboard');
+        
+        // Check if they were redirected from somewhere
+        const from = location.state?.from?.pathname || "/dashboard";
+        navigate(from);
       }
     } catch (error) {
       console.error('Authentication error:', error);
@@ -69,9 +82,16 @@ export const AuthForm = () => {
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       <Card className="w-full max-w-md p-6">
-        <h2 className="text-2xl font-bold mb-6 text-center">
+        <h2 className="text-2xl font-bold mb-2 text-center">
           {isSignUp ? 'Create Account' : 'Sign In'}
         </h2>
+        
+        {localStorage.getItem("hasAccessToEbook") === "true" && (
+          <div className="mb-6 p-3 bg-green-50 border border-green-100 rounded-md text-green-800 text-sm">
+            We've confirmed your purchase! Create an account or sign in to access your ebook.
+          </div>
+        )}
+        
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <Input
