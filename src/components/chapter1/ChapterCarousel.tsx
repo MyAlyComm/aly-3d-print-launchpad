@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
   Carousel,
@@ -14,6 +13,7 @@ import { Progress } from "@/components/ui/progress";
 import { useNavigate } from "react-router-dom";
 import { useChapterForm } from "@/hooks/useChapterForm";
 import { useQueryClient } from '@tanstack/react-query';
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Chapter sections
 import { ArbitrageSection } from './ArbitrageSection';
@@ -30,7 +30,8 @@ export const ChapterCarousel = () => {
   const queryClient = useQueryClient();
   const [currentSlide, setCurrentSlide] = useState(0);
   const { formState, saveResponse } = useChapterForm(1, 'chapter-progress');
-  
+  const isMobile = useIsMobile();
+
   const sections = [
     { id: 'opportunity', component: OpportunitySection, title: 'The 3D Printing Opportunity' },
     { id: 'arbitrage', component: ArbitrageSection, title: 'Arbitrage Windows' },
@@ -87,17 +88,20 @@ export const ChapterCarousel = () => {
   const progress = ((currentSlide + 1) / sections.length) * 100;
 
   return (
-    <div className="relative space-y-6">
-      <div className="flex items-center justify-between mb-2">
+    <div className="relative space-y-4 md:space-y-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between mb-2 gap-2 md:gap-4">
         <div className="text-sm text-muted-foreground">
-          Step {currentSlide + 1} of {sections.length}: <span className="font-medium text-foreground">{sections[currentSlide]?.title}</span>
+          Step {currentSlide + 1} of {sections.length}: 
+          <span className="font-medium text-foreground ml-1">
+            {sections[currentSlide]?.title}
+          </span>
         </div>
         <div className="text-sm text-muted-foreground">
           {Math.round(progress)}% Complete
         </div>
       </div>
       
-      <Progress value={progress} className="h-2 mb-4" /> {/* Added mb-4 for consistent spacing */}
+      <Progress value={progress} className="h-2 mb-4" />
       
       <Carousel 
         className="w-full"
@@ -111,7 +115,7 @@ export const ChapterCarousel = () => {
             const SectionComponent = section.component;
             return (
               <CarouselItem key={section.id}>
-                <div className="p-6">
+                <div className="p-2 md:p-6">
                   <SectionComponent 
                     onSubmit={() => handleSubmitSection(section.id)} 
                   />
@@ -121,21 +125,21 @@ export const ChapterCarousel = () => {
           })}
         </CarouselContent>
         
-        <div className="flex items-center justify-between mt-4"> {/* Reduced top margin from mt-6 to mt-4 */}
-          <CarouselPrevious className="relative" />
+        <div className="flex items-center justify-between mt-4">
+          <CarouselPrevious className={`relative ${isMobile ? 'h-8 w-8' : ''}`} />
           <div className="text-center text-sm text-muted-foreground">
             {currentSlide + 1} / {sections.length}
           </div>
-          <CarouselNext className="relative" />
+          <CarouselNext className={`relative ${isMobile ? 'h-8 w-8' : ''}`} />
         </div>
       </Carousel>
 
       {isLastSlide && (
-        <div className="mt-8 flex justify-center">
+        <div className="mt-6 md:mt-8 flex justify-center">
           <Button 
             onClick={handleComplete} 
             className="group bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white" 
-            size="lg"
+            size={isMobile ? "default" : "lg"}
           >
             Complete Chapter 1
             <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
