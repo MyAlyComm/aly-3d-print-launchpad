@@ -20,18 +20,18 @@ const HeroSection = () => {
             </div>
             
             <h1 className="mb-4 md:mb-6 font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900">
-              From <span className="text-primary">$0 - $5K+</span> in 60 Days
+              Launch Your <span className="text-primary">3D Printing</span> Business With My Proven Blueprint!
             </h1>
             
             <p className="mb-6 md:mb-8 max-w-2xl text-base sm:text-lg md:text-xl text-gray-600">
-              Discover the complete 3D Printing Blueprint: Systems, Sales, and Marketing strategies to launch your profitable business.
+              Get instant access to guides, STL files, and strategies to start profiting from 3D printing, even with a $500 budget.
             </p>
             
             <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
               <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                   <Button size="lg" className="bg-secondary hover:bg-secondary-dark text-white font-bold text-lg px-6 py-5 w-full sm:w-auto">
-                    Get Your Blueprint Now
+                    Grab Your Free Guide Now
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
@@ -44,7 +44,7 @@ const HeroSection = () => {
                 variant="outline" 
                 className="border-primary text-primary hover:bg-primary hover:text-white font-bold text-lg px-6 py-5 w-full sm:w-auto"
               >
-                Learn More
+                Browse All Blueprints
               </Button>
             </div>
           </div>
@@ -58,12 +58,12 @@ const HeroSection = () => {
                 )}
                 <img
                   src="/lovable-uploads/20fb5ec7-9362-4ced-aa5c-42d3a7c41f92.png"
-                  alt="3D Printing Blueprint by Aly Yu - From $0 to $5K+ in 60 Days"
+                  alt="3D Printing Blueprint by Aly Yu"
                   className={`w-full h-auto transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                   onLoad={() => setImageLoaded(true)}
                   loading="eager"
-                  width={800}
-                  height={600}
+                  width={600}
+                  height={450}
                 />
               </div>
             </div>
@@ -75,3 +75,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
