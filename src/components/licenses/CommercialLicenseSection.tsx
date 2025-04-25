@@ -1,16 +1,15 @@
-
 import { Award, Check } from "lucide-react";
 import LeadMagnetDialog from "../FreeGuideDialog";
 import { Button } from "@/components/ui/button";
-
 interface CommercialLicenseSectionProps {
   open: boolean;
   setOpen: (open: boolean) => void;
 }
-
-const CommercialLicenseSection = ({ open, setOpen }: CommercialLicenseSectionProps) => {
-  return (
-    <div className="mt-16 bg-white rounded-xl shadow-lg overflow-hidden">
+const CommercialLicenseSection = ({
+  open,
+  setOpen
+}: CommercialLicenseSectionProps) => {
+  return <div className="mt-16 bg-white rounded-xl shadow-lg overflow-hidden">
       <div className="p-8 text-center">
         <div className="flex justify-center mb-4">
           <Award className="w-12 h-12 text-primary" />
@@ -28,11 +27,7 @@ const CommercialLicenseSection = ({ open, setOpen }: CommercialLicenseSectionPro
               5-in-1 Phone Stand Tripod
             </h3>
             <div className="flex justify-center mb-4">
-              <img 
-                src="https://cdn.makerworld.com/upload/model/2024/01/0e4e8d66-9a5a-4a08-9740-5ab86eed69c2/thumbnail_large.png" 
-                alt="5-in-1 Phone Stand" 
-                className="rounded-lg shadow-md max-h-64 object-cover"
-              />
+              <img src="https://cdn.makerworld.com/upload/model/2024/01/0e4e8d66-9a5a-4a08-9740-5ab86eed69c2/thumbnail_large.png" alt="5-in-1 Phone Stand" className="rounded-lg shadow-md max-h-64 object-cover" />
             </div>
             <ul className="space-y-3 mb-6">
               <li className="flex items-center">
@@ -48,11 +43,7 @@ const CommercialLicenseSection = ({ open, setOpen }: CommercialLicenseSectionPro
                 Multi-functional design
               </li>
             </ul>
-            <LeadMagnetDialog 
-              title="Claim 5-in-1 Phone Stand Commercial License"
-              description="Unlock full commercial rights to sell and distribute the 5-in-1 Phone Stand model on platforms like Etsy and MakerWorld"
-              buttonText="Claim Free Commercial License"
-            >
+            <LeadMagnetDialog title="Claim 5-in-1 Phone Stand Commercial License" description="Unlock full commercial rights to sell and distribute the 5-in-1 Phone Stand model on platforms like Etsy and MakerWorld" buttonText="Claim Free Commercial License">
               <Button className="w-full bg-secondary hover:bg-secondary-dark">
                 Claim Free Commercial License
               </Button>
@@ -80,11 +71,7 @@ const CommercialLicenseSection = ({ open, setOpen }: CommercialLicenseSectionPro
             <p className="text-gray-600 mb-4 italic">
               Limited time offer - Commercial licenses for multiple models!
             </p>
-            <LeadMagnetDialog 
-              title="Unlock Bonus 3D Models Commercial License"
-              description="Gain commercial rights for an exclusive collection of trending 3D models, including Cat Masks and Decorative Keychains"
-              buttonText="Get Bonus Models License"
-            >
+            <LeadMagnetDialog title="Unlock Bonus 3D Models Commercial License" description="Gain commercial rights for an exclusive collection of trending 3D models, including Cat Masks and Decorative Keychains" buttonText="Get Bonus Models License">
               <Button className="w-full bg-accent hover:bg-accent-dark">
                 Get Bonus Models License
               </Button>
@@ -93,13 +80,9 @@ const CommercialLicenseSection = ({ open, setOpen }: CommercialLicenseSectionPro
         </div>
 
         <div className="mt-8 text-center">
-          <p className="text-sm text-gray-500">
-            *Commercial license allows selling prints on platforms like Etsy, MakerWorld, and more
-          </p>
+          <p className="text-sm text-gray-500">*Commercial license allows selling physical prints on platforms like Etsy, Shopify, and anywhere else you'd like! You keep 100% of each sale with no royalties or fees.</p>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default CommercialLicenseSection;
