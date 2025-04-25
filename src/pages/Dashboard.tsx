@@ -1,3 +1,4 @@
+
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,79 @@ const Dashboard = () => {
     );
   };
 
+  // Define chapter information
+  const chapters = [
+    {
+      number: 1,
+      title: "Getting Started",
+      description: "Learn the basics of 3D printing and set up your equipment."
+    },
+    {
+      number: 2,
+      title: "First Prints",
+      description: "Create your first successful prints and calibrate your machine."
+    },
+    {
+      number: 3,
+      title: "Advanced Techniques",
+      description: "Master advanced printing techniques and material settings."
+    },
+    {
+      number: 4,
+      title: "Business Foundations",
+      description: "Create your business plan and legal framework."
+    },
+    {
+      number: 5,
+      title: "Marketing Your Products",
+      description: "Learn how to effectively market your 3D printed products."
+    },
+    {
+      number: 6,
+      title: "Scaling Production",
+      description: "Strategies for scaling your production capacity."
+    }
+  ];
+
+  // Additional chapters (7-13)
+  const additionalChapters = [
+    {
+      number: 7,
+      title: "Customer Service Excellence",
+      description: "Build exceptional customer service processes for your business."
+    },
+    {
+      number: 8,
+      title: "Advanced Design Skills",
+      description: "Learn advanced design techniques for unique products."
+    },
+    {
+      number: 9,
+      title: "Material Science",
+      description: "Understand different materials and their applications."
+    },
+    {
+      number: 10,
+      title: "Industry Specialization",
+      description: "Find and develop your niche in the 3D printing market."
+    },
+    {
+      number: 11,
+      title: "Building Your Brand",
+      description: "Establish a strong brand identity for your business."
+    },
+    {
+      number: 12,
+      title: "Financial Management",
+      description: "Learn financial strategies for a profitable 3D printing business."
+    },
+    {
+      number: 13,
+      title: "Future Trends & Innovation",
+      description: "Stay ahead with emerging technologies and future trends."
+    }
+  ];
+
   return (
     <DashboardLayout title="Dashboard">
       <div className="grid gap-6">
@@ -31,25 +105,34 @@ const Dashboard = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <ChapterCard
-            number={1}
-            title="Getting Started"
-            description="Learn the basics of 3D printing and set up your equipment."
-            isCompleted={isChapterCompleted(1)}
-          />
-          <ChapterCard
-            number={2}
-            title="First Prints"
-            description="Create your first successful prints and calibrate your machine."
-            isCompleted={isChapterCompleted(2)}
-          />
-          <ChapterCard
-            number={3}
-            title="Advanced Techniques"
-            description="Master advanced printing techniques and material settings."
-            isCompleted={isChapterCompleted(3)}
-          />
+        <div>
+          <h3 className="text-lg font-bold mb-4">Core Chapters</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {chapters.map((chapter) => (
+              <ChapterCard
+                key={chapter.number}
+                number={chapter.number}
+                title={chapter.title}
+                description={chapter.description}
+                isCompleted={isChapterCompleted(chapter.number)}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3 className="text-lg font-bold mb-4">Advanced Topics</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {additionalChapters.map((chapter) => (
+              <ChapterCard
+                key={chapter.number}
+                number={chapter.number}
+                title={chapter.title}
+                description={chapter.description}
+                isCompleted={isChapterCompleted(chapter.number)}
+              />
+            ))}
+          </div>
         </div>
 
         <Card className="mt-6">

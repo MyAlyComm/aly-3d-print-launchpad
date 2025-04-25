@@ -26,7 +26,7 @@ export const MiniProgress = ({ currentChapter }: { currentChapter: number }) => 
           
           <div className="flex items-center justify-between">
             <p className="text-sm text-gray-500">
-              Chapter {currentChapter} of 3
+              Chapter {currentChapter} of 13
             </p>
             <p className="text-sm flex items-center">
               {isCurrentChapterCompleted ? (

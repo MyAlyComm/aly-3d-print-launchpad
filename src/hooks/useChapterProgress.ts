@@ -22,7 +22,7 @@ export function useChapterProgress() {
       
       const { data, error } = await supabase
         .from("user_chapter_responses")
-        .select("chapter_number, completed_at, section_id")
+        .select("chapter_number, completed_at, section_id, response_data")
         .eq("user_id", user.id);
 
       if (error) {
@@ -93,7 +93,7 @@ export function useChapterProgress() {
       }
     });
     
-    const totalChapters = 3; // Total number of chapters
+    const totalChapters = 13; // Updated total number of chapters
     return (uniqueChapters.size / totalChapters) * 100;
   };
 
