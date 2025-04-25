@@ -56,8 +56,8 @@ const HeroSection = () => {
                 <Skeleton className="w-full aspect-[16/9]" />
               )}
               <img
-                src="/lovable-uploads/80580729-6d4e-4bd0-a66c-dff6d0d890e1.png"
-                alt="Aly's 3D Printing Blueprint"
+                src="/lovable-uploads/90ff8861-ff64-4a75-8a68-8afda542663d.png"
+                alt="3D Printing Blueprint by Aly Yu"
                 className={`w-full h-auto transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                 onLoad={() => setImageLoaded(true)}
                 loading="eager"
