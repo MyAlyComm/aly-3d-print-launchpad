@@ -1,9 +1,46 @@
 
+import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { useChapterForm } from "@/hooks/useChapterForm";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
-export const OpportunitySection = () => {
+const formSchema = z.object({
+  inspiration: z.string().min(1, "Please share what inspired you"),
+  goals: z.string().min(1, "Please share your goals")
+});
+
+export const OpportunitySection = ({ onSubmit }: { onSubmit?: () => void }) => {
+  const { formState, saveResponse } = useChapterForm(1, 'opportunity');
+  const sectionKey = 'opportunity-reflection';
+  const textInputs = formState[sectionKey]?.textInputs || {};
+  
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      inspiration: textInputs['inspiration'] || "",
+      goals: textInputs['goals'] || ""
+    }
+  });
+  
+  const handleFormSubmit = (values: z.infer<typeof formSchema>) => {
+    saveResponse(sectionKey, {
+      textInputs: { 
+        inspiration: values.inspiration,
+        goals: values.goals
+      }
+    }, true);
+    
+    if (onSubmit) onSubmit();
+  };
+
   return (
-    <section id="opportunity" className="mb-12">
+    <section id="opportunity" className="mb-12 space-y-6">
       <h2 className="text-3xl font-bold mb-6 text-gray-800">The 3D Printing Opportunity</h2>
       <div className="mb-6">
         <img
@@ -42,6 +79,58 @@ export const OpportunitySection = () => {
         Welcome to Chapter 1 of the 3D Printing Blueprint! In this chapter, we'll cover the essential 
         foundations you need to start your 3D printing business, even on a budget as low as $500.
       </p>
+      
+      <Card className="mt-8">
+        <CardContent className="pt-6">
+          <h3 className="text-xl font-semibold mb-4">Reflect on Your Journey</h3>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(handleFormSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="inspiration"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>What about this opportunity inspires you the most?</FormLabel>
+                    <FormControl>
+                      <Textarea 
+                        {...field}
+                        placeholder="Share what excites you about 3D printing..."
+                        className="min-h-[100px]"
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="goals"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>What are your specific goals for your 3D printing business?</FormLabel>
+                    <FormControl>
+                      <Textarea 
+                        {...field}
+                        placeholder="Describe your business goals..."
+                        className="min-h-[100px]"
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              
+              <div className="flex justify-end mt-4">
+                <Button 
+                  type="submit"
+                  className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white"
+                >
+                  Save & Continue
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
     </section>
   );
 };

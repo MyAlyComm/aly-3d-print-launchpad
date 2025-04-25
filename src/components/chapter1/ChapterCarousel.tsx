@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Carousel,
   CarouselContent,
@@ -9,6 +9,13 @@ import {
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from 'lucide-react';
+import { useToast } from "@/components/ui/use-toast";
+import { Progress } from "@/components/ui/progress";
+import { useNavigate } from "react-router-dom";
+import { useChapterForm } from "@/hooks/useChapterForm";
+import { useQueryClient } from '@tanstack/react-query';
+
+// Chapter sections
 import { ArbitrageSection } from './ArbitrageSection';
 import { TimelineSection } from './TimelineSection';
 import { MythsSection } from './MythsSection';
@@ -18,17 +25,80 @@ import { OpportunitySection } from './OpportunitySection';
 import { BudgetSection } from './BudgetSection';
 
 export const ChapterCarousel = () => {
-  const [currentSlide, setCurrentSlide] = React.useState(0);
-  const totalSlides = 7;
+  const { toast } = useToast();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const { formState, saveResponse } = useChapterForm(1, 'chapter-progress');
+  
+  const sections = [
+    { id: 'opportunity', component: OpportunitySection, title: 'The 3D Printing Opportunity' },
+    { id: 'arbitrage', component: ArbitrageSection, title: 'Arbitrage Windows' },
+    { id: 'budget', component: BudgetSection, title: 'Budget Considerations' },
+    { id: 'timeline', component: TimelineSection, title: 'Industry Timeline' },
+    { id: 'myths', component: MythsSection, title: 'Breaking Through Misconceptions' },
+    { id: 'future', component: FutureSection, title: 'The Future of 3D Printing' },
+    { id: 'assessment', component: SelfAssessmentSection, title: 'Self Assessment' }
+  ];
 
   const handleSlideChange = (api: any) => {
-    setCurrentSlide(api.selectedScrollSnap());
+    const newIndex = api.selectedScrollSnap();
+    setCurrentSlide(newIndex);
+    
+    // Mark this section as viewed in our progress
+    const sectionId = sections[newIndex]?.id;
+    if (sectionId) {
+      saveResponse('viewed-sections', {
+        checkboxes: { [sectionId]: true }
+      }, false);
+    }
   };
 
-  const isLastSlide = currentSlide === totalSlides - 1;
+  const handleComplete = async () => {
+    // Save final progress
+    await saveResponse('chapter-completion', { 
+      checkboxes: { 'completed': true }
+    }, true);
+    
+    // Invalidate queries to refresh progress data
+    queryClient.invalidateQueries({ queryKey: ["chapter-progress"] });
+    
+    toast({
+      title: "Chapter 1 Completed! 🎉",
+      description: "Your progress has been saved. Continue to the next chapter or review your notes.",
+    });
+    
+    // Navigate back to dashboard
+    navigate("/dashboard");
+  };
+
+  const handleSubmitSection = (sectionId: string) => {
+    saveResponse('submitted-sections', {
+      checkboxes: { [sectionId]: true }
+    }, true);
+    
+    toast({
+      title: "Section completed!",
+      description: "Your responses have been saved. Continue to the next section.",
+    });
+  };
+
+  const isLastSlide = currentSlide === sections.length - 1;
+  const progress = ((currentSlide + 1) / sections.length) * 100;
 
   return (
-    <div className="relative">
+    <div className="relative space-y-6">
+      <div className="flex items-center justify-between mb-2">
+        <div className="text-sm text-muted-foreground">
+          Step {currentSlide + 1} of {sections.length}: <span className="font-medium text-foreground">{sections[currentSlide]?.title}</span>
+        </div>
+        <div className="text-sm text-muted-foreground">
+          {Math.round(progress)}% Complete
+        </div>
+      </div>
+      
+      <Progress value={progress} className="h-2" />
+      
       <Carousel 
         className="w-full"
         opts={{
@@ -37,46 +107,24 @@ export const ChapterCarousel = () => {
         onSelect={handleSlideChange}
       >
         <CarouselContent>
-          <CarouselItem>
-            <div className="p-6">
-              <OpportunitySection />
-            </div>
-          </CarouselItem>
-          <CarouselItem>
-            <div className="p-6">
-              <ArbitrageSection />
-            </div>
-          </CarouselItem>
-          <CarouselItem>
-            <div className="p-6">
-              <BudgetSection />
-            </div>
-          </CarouselItem>
-          <CarouselItem>
-            <div className="p-6">
-              <TimelineSection />
-            </div>
-          </CarouselItem>
-          <CarouselItem>
-            <div className="p-6">
-              <MythsSection />
-            </div>
-          </CarouselItem>
-          <CarouselItem>
-            <div className="p-6">
-              <FutureSection />
-            </div>
-          </CarouselItem>
-          <CarouselItem>
-            <div className="p-6">
-              <SelfAssessmentSection />
-            </div>
-          </CarouselItem>
+          {sections.map((section, index) => {
+            const SectionComponent = section.component;
+            return (
+              <CarouselItem key={section.id}>
+                <div className="p-6">
+                  <SectionComponent 
+                    onSubmit={() => handleSubmitSection(section.id)} 
+                  />
+                </div>
+              </CarouselItem>
+            );
+          })}
         </CarouselContent>
-        <div className="flex items-center justify-between">
+        
+        <div className="flex items-center justify-between mt-6">
           <CarouselPrevious className="relative" />
           <div className="text-center text-sm text-muted-foreground">
-            {currentSlide + 1} / {totalSlides}
+            {currentSlide + 1} / {sections.length}
           </div>
           <CarouselNext className="relative" />
         </div>
@@ -84,8 +132,12 @@ export const ChapterCarousel = () => {
 
       {isLastSlide && (
         <div className="mt-8 flex justify-center">
-          <Button className="group" size="lg">
-            Complete Chapter Worksheet
+          <Button 
+            onClick={handleComplete} 
+            className="group bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white" 
+            size="lg"
+          >
+            Complete Chapter 1
             <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Button>
         </div>
