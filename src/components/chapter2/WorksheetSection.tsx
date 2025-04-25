@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 import { useChapterForm } from "@/hooks/useChapterForm";
 import { BudgetSection } from './worksheet/BudgetSection';
 import { ExperienceSection } from './worksheet/ExperienceSection';
+import { TimeSection } from './worksheet/TimeSection';
+import { GrowthSection } from './worksheet/GrowthSection';
+import { LocationSection } from './worksheet/LocationSection';
 import { SummarySection } from './worksheet/SummarySection';
 
 interface WorksheetSectionProps {
@@ -52,6 +55,21 @@ export const WorksheetSection: React.FC<WorksheetSectionProps> = ({ onSubmit }) 
           />
           
           <ExperienceSection 
+            checkboxes={checkboxes}
+            onCheckboxChange={handleCheckboxChange}
+          />
+          
+          <TimeSection 
+            checkboxes={checkboxes}
+            onCheckboxChange={handleCheckboxChange}
+          />
+          
+          <GrowthSection 
+            checkboxes={checkboxes}
+            onCheckboxChange={handleCheckboxChange}
+          />
+          
+          <LocationSection 
             checkboxes={checkboxes}
             onCheckboxChange={handleCheckboxChange}
           />
