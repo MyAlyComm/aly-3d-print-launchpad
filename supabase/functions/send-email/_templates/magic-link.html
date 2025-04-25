@@ -1,15 +1,15 @@
 
 <h2>Verify Email</h2>
 
-{% if .Data.requestType == "guide" %}
+{{ if eq .Data.requestType "guide" }}
   <p>Follow this link to access your Free 3D Printing Guide:</p>
-{% else %}
+{{ else }}
   <p>Follow this link to access your Commercial License:</p>
-{% endif %}
+{{ end }}
 <p><a href="{{ .ConfirmationURL }}">
-  {% if .Data.requestType == "guide" %}
+  {{ if eq .Data.requestType "guide" }}
     Free Guide
-  {% else %}
+  {{ else }}
     Commercial License
-  {% endif %}
+  {{ end }}
 </a></p>
