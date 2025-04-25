@@ -12,6 +12,23 @@ export const ChapterProgress = () => {
   const completedChapters = chapterProgresses?.length || 0;
   const progressPercentage = (completedChapters / totalChapters) * 100;
 
+  // Helper function to safely format dates
+  const formatDate = (dateString: string | null | undefined) => {
+    if (!dateString) return "Not completed";
+    
+    try {
+      const date = new Date(dateString);
+      // Check if date is valid before formatting
+      if (isNaN(date.getTime())) {
+        return "Not completed";
+      }
+      return date.toLocaleDateString();
+    } catch (error) {
+      console.error("Error formatting date:", error);
+      return "Not completed";
+    }
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -62,7 +79,10 @@ export const ChapterProgress = () => {
                           Chapter {progress.chapter_number}
                         </h3>
                         <p className="text-sm text-gray-600">
-                          Completed: {new Date(progress.completed_at || '').toLocaleDateString()}
+                          Section: {progress.section_id}
+                        </p>
+                        <p className="text-sm text-gray-600">
+                          Completed: {formatDate(progress.completed_at)}
                         </p>
                       </CardContent>
                     </Card>

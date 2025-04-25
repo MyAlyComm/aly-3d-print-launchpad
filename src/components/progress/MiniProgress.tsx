@@ -8,7 +8,7 @@ export const MiniProgress = ({ currentChapter }: { currentChapter: number }) => 
   const { chapterProgresses } = useChapterProgress();
   
   const totalChapters = 3;
-  const completedChapters = chapterProgresses?.length || 0;
+  const completedChapters = chapterProgresses?.filter(p => p.completed_at)?.length || 0;
   const progressPercentage = (completedChapters / totalChapters) * 100;
 
   return (
