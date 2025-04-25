@@ -1,0 +1,53 @@
+
+import { useNavigate } from "react-router-dom";
+import { Book, Layout, BookOpen } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+export const DashboardNav = () => {
+  const navigate = useNavigate();
+  
+  return (
+    <nav className="flex-1 space-y-2">
+      <Button 
+        variant="ghost" 
+        className="w-full justify-start"
+        onClick={() => navigate("/dashboard")}
+      >
+        <Layout className="mr-2 h-4 w-4" />
+        Dashboard
+      </Button>
+      <Button 
+        variant="ghost" 
+        className="w-full justify-start"
+        onClick={() => navigate("/dashboard/chapter-1")}
+      >
+        <Book className="mr-2 h-4 w-4" />
+        Chapter 1: Getting Started
+      </Button>
+      <Button 
+        variant="ghost" 
+        className="w-full justify-start"
+        onClick={() => navigate("/dashboard/chapter-2")}
+      >
+        <Book className="mr-2 h-4 w-4" />
+        Chapter 2: First Prints
+      </Button>
+      <Button 
+        variant="ghost" 
+        className="w-full justify-start"
+        onClick={() => navigate("/dashboard/chapter-3")}
+      >
+        <Book className="mr-2 h-4 w-4" />
+        Chapter 3: Advanced Techniques
+      </Button>
+      <Button 
+        variant="ghost" 
+        className="w-full justify-start"
+        onClick={() => navigate("/dashboard/resources")}
+      >
+        <BookOpen className="mr-2 h-4 w-4" />
+        Resources
+      </Button>
+    </nav>
+  );
+};
