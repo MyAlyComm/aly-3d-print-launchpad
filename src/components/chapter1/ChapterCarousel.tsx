@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import {
   Carousel,
@@ -33,13 +34,48 @@ export const ChapterCarousel = () => {
   const isMobile = useIsMobile();
 
   const sections = [
-    { id: 'opportunity', component: OpportunitySection, title: 'The 3D Printing Opportunity' },
-    { id: 'arbitrage', component: ArbitrageSection, title: 'Arbitrage Windows' },
-    { id: 'budget', component: BudgetSection, title: 'Budget Considerations' },
-    { id: 'timeline', component: TimelineSection, title: 'Industry Timeline' },
-    { id: 'myths', component: MythsSection, title: 'Breaking Through Misconceptions' },
-    { id: 'future', component: FutureSection, title: 'The Future of 3D Printing' },
-    { id: 'assessment', component: SelfAssessmentSection, title: 'Self Assessment' }
+    { 
+      id: 'opportunity', 
+      component: OpportunitySection, 
+      title: 'The 3D Printing Opportunity',
+      image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b'
+    },
+    { 
+      id: 'arbitrage', 
+      component: ArbitrageSection, 
+      title: 'Arbitrage Windows',
+      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475'
+    },
+    { 
+      id: 'budget', 
+      component: BudgetSection, 
+      title: 'Budget Planning',
+      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6'
+    },
+    { 
+      id: 'timeline', 
+      component: TimelineSection, 
+      title: 'Industry Timeline',
+      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158'
+    },
+    { 
+      id: 'myths', 
+      component: MythsSection, 
+      title: 'Breaking Through Misconceptions',
+      image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5'
+    },
+    { 
+      id: 'future', 
+      component: FutureSection, 
+      title: 'The Future of 3D Printing',
+      image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1'
+    },
+    { 
+      id: 'assessment', 
+      component: SelfAssessmentSection, 
+      title: 'Self Assessment',
+      image: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81'
+    }
   ];
 
   const handleSlideChange = (api: any) => {
@@ -97,11 +133,21 @@ export const ChapterCarousel = () => {
           </span>
         </div>
         <div className="text-sm text-muted-foreground">
-          {Math.round(progress)}% Complete
+          {Math.round(((currentSlide + 1) / sections.length) * 100)}% Complete
         </div>
       </div>
       
-      <Progress value={progress} className="h-2 mb-4" />
+      <Progress value={((currentSlide + 1) / sections.length) * 100} className="h-2 mb-4" />
+      
+      {isMobile && (
+        <div className="mb-4">
+          <img
+            src={sections[currentSlide]?.image}
+            alt={sections[currentSlide]?.title}
+            className="w-full h-40 object-cover rounded-lg"
+          />
+        </div>
+      )}
       
       <Carousel 
         className="w-full"
@@ -149,3 +195,4 @@ export const ChapterCarousel = () => {
     </div>
   );
 };
+
