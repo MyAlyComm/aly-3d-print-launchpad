@@ -38,11 +38,6 @@ const App = () => (
                 <NewEbookChapter />
               </ProtectedRoute>
             } />
-            <Route path="/dashboard/chapter-2" element={
-              <ProtectedRoute>
-                <Chapter2 />
-              </ProtectedRoute>
-            } />
             <Route path="/dashboard/resources" element={
               <ProtectedRoute>
                 <Resources />
