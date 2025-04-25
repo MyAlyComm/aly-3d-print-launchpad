@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -16,28 +15,20 @@ export const SelfAssessmentSection = ({ onSubmit }: { onSubmit?: () => void }) =
   const [isCompleted, setIsCompleted] = React.useState(false);
 
   const handleTextChange = (questionId: string, value: string) => {
-    // Pass false to prevent showing toast on every keystroke
     saveResponse(sectionKey, {
       textInputs: { [questionId]: value }
     }, false);
   };
   
   const handleSaveClick = () => {
-    // Explicitly show toast when user clicks save button
     saveResponse(sectionKey, {}, true);
-    
-    // Show confetti effect on completion
     confetti({
       particleCount: 100,
       spread: 70,
       origin: { y: 0.6 }
     });
-    
     setIsCompleted(true);
-    
-    // Immediately refresh the progress data
     queryClient.invalidateQueries({ queryKey: ["chapter-progress"] });
-    
     if (onSubmit) {
       setTimeout(() => {
         onSubmit();
@@ -69,7 +60,6 @@ export const SelfAssessmentSection = ({ onSubmit }: { onSubmit?: () => void }) =
     }
   ];
 
-  // Check if all questions have been answered
   const allAnswered = questions.every(q => textInputs[q.id]?.trim().length > 0);
 
   return (
