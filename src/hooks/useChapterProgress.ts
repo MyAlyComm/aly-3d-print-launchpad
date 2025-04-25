@@ -7,6 +7,7 @@ import { toast } from "sonner";
 export type ChapterProgress = {
   chapter_number: number;
   completed_at: string | null;
+  section_id: string;
 };
 
 export function useChapterProgress() {
@@ -20,7 +21,7 @@ export function useChapterProgress() {
       
       const { data, error } = await supabase
         .from("user_chapter_responses")
-        .select("chapter_number, completed_at")
+        .select("chapter_number, completed_at, section_id")
         .eq("user_id", user.id);
 
       if (error) {

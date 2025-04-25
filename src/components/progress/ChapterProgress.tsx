@@ -9,7 +9,7 @@ export const ChapterProgress = () => {
   const { chapterProgresses, isLoading } = useChapterProgress();
   
   const totalChapters = 3; // Total number of chapters in the course
-  const completedChapters = chapterProgresses?.length || 0;
+  const completedChapters = chapterProgresses?.filter(p => p.completed_at)?.length || 0;
   const progressPercentage = (completedChapters / totalChapters) * 100;
 
   // Helper function to safely format dates
@@ -55,7 +55,7 @@ export const ChapterProgress = () => {
                 <div className="space-y-4">
                   {[1, 2, 3].map((chapter) => {
                     const isCompleted = chapterProgresses?.some(
-                      (progress) => progress.chapter_number === chapter
+                      (progress) => progress.chapter_number === chapter && progress.completed_at
                     );
 
                     return (
@@ -79,7 +79,7 @@ export const ChapterProgress = () => {
                           Chapter {progress.chapter_number}
                         </h3>
                         <p className="text-sm text-gray-600">
-                          Section: {progress.section_id}
+                          Section: {progress.section_id || 'Unknown Section'}
                         </p>
                         <p className="text-sm text-gray-600">
                           Completed: {formatDate(progress.completed_at)}
