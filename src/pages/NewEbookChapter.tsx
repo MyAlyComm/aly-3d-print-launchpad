@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
@@ -30,37 +31,37 @@ const NewEbookChapter = () => {
     {
       id: "opportunity",
       title: "The 3D Printing Opportunity",
-      content: <OpportunitySection />,
+      component: <OpportunitySection onSubmit={goToNextSection} />,
     },
     {
       id: "arbitrage",
       title: "Understanding Arbitrage Windows",
-      content: <ArbitrageSection />,
+      component: <ArbitrageSection onSubmit={goToNextSection} />,
     },
     {
       id: "budget",
       title: "Budget Planning",
-      content: <BudgetSection />,
+      component: <BudgetSection />,
     },
     {
       id: "timeline",
       title: "Industry Timeline",
-      content: <TimelineSection />,
+      component: <TimelineSection />,
     },
     {
       id: "myths",
       title: "Breaking Through Misconceptions",
-      content: <MythsSection />,
+      component: <MythsSection />,
     },
     {
       id: "future",
       title: "The Future of 3D Printing",
-      content: <FutureSection />,
+      component: <FutureSection />,
     },
     {
       id: "assessment",
       title: "Self Assessment",
-      content: <SelfAssessmentSection />,
+      component: <SelfAssessmentSection onSubmit={handleCompleteChapter} />,
     }
   ];
 
@@ -106,7 +107,7 @@ const NewEbookChapter = () => {
           <CardContent className={isMobile ? "p-4" : "p-6"}>
             {/* Current Section Content */}
             <div className="min-h-[300px]">
-              {sections[currentSection].content}
+              {sections[currentSection].component}
             </div>
             
             {/* Navigation Controls */}
