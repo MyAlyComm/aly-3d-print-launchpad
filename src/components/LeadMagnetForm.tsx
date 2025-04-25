@@ -40,11 +40,10 @@ const LeadMagnetForm = ({
     try {
       localStorage.setItem("lead_capture_name", name);
       
-      // First, trigger the magic link authentication
-      const { error: authError } = await supabase.auth.signInWithOtp({
+      const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          emailRedirectTo: `${window.location.origin}/dashboard`,
+          emailRedirectTo: window.location.origin,
           data: {
             name: name,
             requestType: "guide",
@@ -52,18 +51,7 @@ const LeadMagnetForm = ({
         }
       });
 
-      if (authError) throw authError;
-
-      // Then, trigger our welcome email with the guide
-      const response = await fetch('https://gnzudunkcgbnmipshadn.functions.supabase.co/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to send guide email');
-      }
+      if (error) throw error;
 
       setSubmittedEmail(email);
       setIsSuccess(true);
