@@ -11,8 +11,6 @@ import NotFound from "./pages/NotFound";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import Dashboard from "./pages/Dashboard";
 import ChapterOne from "./pages/ChapterOne";
-import ChapterTwo from "./pages/ChapterTwo";
-import ChapterThree from "./pages/ChapterThree";
 import Resources from "./pages/Resources";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -39,16 +37,6 @@ const App = () => (
             <Route path="/dashboard/chapter-1" element={
               <ProtectedRoute>
                 <ChapterOne />
-              </ProtectedRoute>
-            } />
-            <Route path="/dashboard/chapter-2" element={
-              <ProtectedRoute>
-                <ChapterTwo />
-              </ProtectedRoute>
-            } />
-            <Route path="/dashboard/chapter-3" element={
-              <ProtectedRoute>
-                <ChapterThree />
               </ProtectedRoute>
             } />
             <Route path="/dashboard/resources" element={

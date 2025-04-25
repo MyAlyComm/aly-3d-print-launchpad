@@ -21,9 +21,9 @@ export const ChapterCarousel = () => {
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const totalSlides = 7;
 
-  const handleSlideChange = React.useCallback((index: number) => {
-    setCurrentSlide(index);
-  }, []);
+  const handleSlideChange = (api: any) => {
+    setCurrentSlide(api.selectedScrollSnap());
+  };
 
   const isLastSlide = currentSlide === totalSlides - 1;
 
@@ -31,6 +31,9 @@ export const ChapterCarousel = () => {
     <div className="relative">
       <Carousel 
         className="w-full"
+        opts={{
+          align: "start",
+        }}
         onSelect={handleSlideChange}
       >
         <CarouselContent>
