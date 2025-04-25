@@ -17,76 +17,72 @@ const Dashboard = () => {
     );
   };
 
-  // Define chapter information
+  // Define chapter information based on the 3D Printing Blueprint ebook structure
   const chapters = [
     {
       number: 1,
-      title: "Getting Started",
-      description: "Learn the basics of 3D printing and set up your equipment."
+      title: "Arbitrage Windows",
+      description: "The timelines of opportunity in the 3D printing industry."
     },
     {
       number: 2,
-      title: "First Prints",
-      description: "Create your first successful prints and calibrate your machine."
+      title: "Knowing Yourself, Knowing Your Tools",
+      description: "Discover your optimal path based on your skills and resources."
     },
     {
       number: 3,
-      title: "Advanced Techniques",
-      description: "Master advanced printing techniques and material settings."
+      title: "The 3 Plus 1 Equals 40 System",
+      description: "A system for creating sustainable revenue in 3D printing."
     },
     {
       number: 4,
-      title: "Business Foundations",
-      description: "Create your business plan and legal framework."
+      title: "The Product Trinity",
+      description: "Finding your first three winning products using the P.R.O.F.I.T.S. MATCH framework."
     },
     {
       number: 5,
-      title: "Marketing Your Products",
-      description: "Learn how to effectively market your 3D printed products."
+      title: "Choosing Your Production Tools",
+      description: "Select the right printer and accessories for your specific needs."
     },
     {
       number: 6,
-      title: "Scaling Production",
-      description: "Strategies for scaling your production capacity."
-    }
-  ];
-
-  // Additional chapters (7-13)
-  const additionalChapters = [
+      title: "Selecting Your Selling Platforms",
+      description: "Find the optimal platforms to sell your 3D printed products."
+    },
     {
       number: 7,
-      title: "Customer Service Excellence",
-      description: "Build exceptional customer service processes for your business."
+      title: "Setting Up for Success",
+      description: "The 5-step setup system for consistent production and quality."
     },
     {
       number: 8,
-      title: "Advanced Design Skills",
-      description: "Learn advanced design techniques for unique products."
+      title: "Zero-Cost Marketing That Works",
+      description: "A 10-step system to market your products without spending money."
     },
     {
       number: 9,
-      title: "Material Science",
-      description: "Understand different materials and their applications."
+      title: "Scaling Beyond $5K",
+      description: "Strategies to scale your business beyond the initial milestones."
     },
     {
       number: 10,
-      title: "Industry Specialization",
-      description: "Find and develop your niche in the 3D printing market."
+      title: "Future-Proofing Your Business",
+      description: "Position your business for long-term success in a changing market."
     },
     {
       number: 11,
-      title: "Building Your Brand",
-      description: "Establish a strong brand identity for your business."
+      title: "Your Business Ecosystem",
+      description: "Building systems and partnerships that support sustainable growth."
     },
     {
       number: 12,
-      title: "Financial Management",
-      description: "Learn financial strategies for a profitable 3D printing business."
+      title: "Advanced Product Development",
+      description: "Taking your product line to the next level with innovation."
     },
     {
       number: 13,
-      title: "Future Trends & Innovation",
-      description: "Stay ahead with emerging technologies and future trends."
+      title: "The Journey Ahead",
+      description: "Final strategies, resources, and next steps for your business."
     }
   ];
 
@@ -100,30 +96,15 @@ const Dashboard = () => {
         <div>
           <h2 className="text-xl font-bold mb-4">Welcome to Your 3D Printing Blueprint</h2>
           <p className="text-gray-600 mb-6">
-            This dashboard gives you access to the complete ebook content along with
-            additional resources to help you launch your 3D printing business.
+            This comprehensive guide will take you from a $500 investment to $5K+ monthly revenue
+            in 60 days with a systematic approach to building your 3D printing business.
           </p>
         </div>
 
         <div>
-          <h3 className="text-lg font-bold mb-4">Core Chapters</h3>
+          <h3 className="text-lg font-bold mb-4">Chapters</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {chapters.map((chapter) => (
-              <ChapterCard
-                key={chapter.number}
-                number={chapter.number}
-                title={chapter.title}
-                description={chapter.description}
-                isCompleted={isChapterCompleted(chapter.number)}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-bold mb-4">Advanced Topics</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {additionalChapters.map((chapter) => (
               <ChapterCard
                 key={chapter.number}
                 number={chapter.number}
@@ -143,7 +124,7 @@ const Dashboard = () => {
           <CardContent>
             <p className="mb-4">
               Access all the supporting materials for your 3D printing business, including
-              STL files, checklists, and more.
+              STL files, checklists, templates, and more.
             </p>
             <Button onClick={() => navigate("/dashboard/resources")}>View Resources</Button>
           </CardContent>

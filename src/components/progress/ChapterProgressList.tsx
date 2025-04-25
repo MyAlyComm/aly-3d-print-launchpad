@@ -7,21 +7,21 @@ import { useChapterProgress } from '@/hooks/useChapterProgress';
 export const ChapterProgressList = () => {
   const { isChapterCompleted, getChapterLatestSection } = useChapterProgress();
 
-  // Define chapter titles
+  // Define chapter titles from the ebook structure
   const chapterTitles = {
-    1: "Getting Started",
-    2: "First Prints",
-    3: "Advanced Techniques",
-    4: "Business Foundations",
-    5: "Marketing Your Products",
-    6: "Scaling Production",
-    7: "Customer Service Excellence",
-    8: "Advanced Design Skills",
-    9: "Material Science",
-    10: "Industry Specialization",
-    11: "Building Your Brand",
-    12: "Financial Management",
-    13: "Future Trends & Innovation"
+    1: "Arbitrage Windows - The Timelines of Opportunity",
+    2: "Knowing Yourself, Knowing Your Tools",
+    3: "The 3 Plus 1 Equals 40 System",
+    4: "The Product Trinity - Finding Your First Three Winning Products",
+    5: "Choosing Your Production Tools",
+    6: "Selecting Your Selling Platforms",
+    7: "Setting Up for Success",
+    8: "Zero-Cost Marketing That Works",
+    9: "Scaling Beyond $5K",
+    10: "Future-Proofing Your Business",
+    11: "Your Business Ecosystem",
+    12: "Advanced Product Development",
+    13: "The Journey Ahead"
   };
 
   return (

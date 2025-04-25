@@ -93,7 +93,7 @@ export function useChapterProgress() {
       }
     });
     
-    const totalChapters = 13; // Updated total number of chapters
+    const totalChapters = 13; // Total number of chapters
     return (uniqueChapters.size / totalChapters) * 100;
   };
 
