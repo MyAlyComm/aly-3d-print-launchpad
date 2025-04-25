@@ -39,13 +39,17 @@ const App = () => (
                 <ChapterOne />
               </ProtectedRoute>
             } />
+            <Route path="/dashboard/chapter-2" element={
+              <ProtectedRoute>
+                <ChapterTwo />
+              </ProtectedRoute>
+            } />
             <Route path="/dashboard/resources" element={
               <ProtectedRoute>
                 <Resources />
               </ProtectedRoute>
             } />
             
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
