@@ -1,10 +1,10 @@
-
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { ChapterCard } from "@/components/dashboard/ChapterCard";
 import { useChapterProgress } from "@/hooks/useChapterProgress";
+import { ChapterProgress } from "@/components/progress/ChapterProgress";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -19,6 +19,10 @@ const Dashboard = () => {
   return (
     <DashboardLayout title="Dashboard">
       <div className="grid gap-6">
+        <div className="max-w-3xl">
+          <ChapterProgress />
+        </div>
+
         <div>
           <h2 className="text-xl font-bold mb-4">Welcome to Your 3D Printing Blueprint</h2>
           <p className="text-gray-600 mb-6">

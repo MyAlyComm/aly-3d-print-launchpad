@@ -9,12 +9,14 @@ import { TimelineSection } from "@/components/chapter1/TimelineSection";
 import { MythsSection } from "@/components/chapter1/MythsSection";
 import { FutureSection } from "@/components/chapter1/FutureSection";
 import { SelfAssessmentSection } from "@/components/chapter1/SelfAssessmentSection";
+import { MiniProgress } from "@/components/progress/MiniProgress";
 
 const ChapterOne = () => {
   return (
     <DashboardLayout title="Chapter 1: Arbitrage Windows">
       <ScrollArea className="h-full pr-4">
         <div className="max-w-4xl mx-auto">
+          <MiniProgress currentChapter={1} />
           <ChapterHeader />
           <TableOfContents />
           
