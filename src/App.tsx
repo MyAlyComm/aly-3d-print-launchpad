@@ -11,7 +11,8 @@ import NotFound from "./pages/NotFound";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import Dashboard from "./pages/Dashboard";
 import ChapterOne from "./pages/ChapterOne";
-import ChapterTwo from "./pages/ChapterTwo"; // Add this import
+import ChapterTwo from "./pages/ChapterTwo";
+import NewEbookChapter from "./pages/NewEbookChapter"; // Add new page import
 import Resources from "./pages/Resources";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -38,6 +39,11 @@ const App = () => (
             <Route path="/dashboard/chapter-1" element={
               <ProtectedRoute>
                 <ChapterOne />
+              </ProtectedRoute>
+            } />
+            <Route path="/dashboard/new-chapter" element={
+              <ProtectedRoute>
+                <NewEbookChapter />
               </ProtectedRoute>
             } />
             <Route path="/dashboard/chapter-2" element={
