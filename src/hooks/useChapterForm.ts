@@ -70,15 +70,42 @@ export function useChapterForm(chapterNumber: number, sectionId: string) {
     };
 
     try {
-      const { error } = await supabase
+      // First check if a record already exists
+      const { data: existingRecord, error: checkError } = await supabase
         .from('user_chapter_responses')
-        .upsert({
-          user_id: user.id,
-          chapter_number: chapterNumber,
-          section_id: sectionId,
-          response_data: newState,
-          updated_at: new Date().toISOString()
-        });
+        .select('id')
+        .eq('user_id', user.id)
+        .eq('chapter_number', chapterNumber)
+        .eq('section_id', sectionId)
+        .maybeSingle();
+        
+      if (checkError) throw checkError;
+      
+      let error;
+      // If record exists, update it; otherwise insert new record
+      if (existingRecord) {
+        const { error: updateError } = await supabase
+          .from('user_chapter_responses')
+          .update({
+            response_data: newState,
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', existingRecord.id);
+          
+        error = updateError;
+      } else {
+        const { error: insertError } = await supabase
+          .from('user_chapter_responses')
+          .insert({
+            user_id: user.id,
+            chapter_number: chapterNumber,
+            section_id: sectionId,
+            response_data: newState,
+            updated_at: new Date().toISOString()
+          });
+          
+        error = insertError;
+      }
 
       if (error) throw error;
       setFormState(newState);
