@@ -1,14 +1,12 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
+import { ChapterNavigation } from "@/components/ebook/ChapterNavigation";
+import { ChapterProgressBar } from "@/components/ebook/ChapterProgress";
 
 // Import chapter 1 sections
 import { OpportunitySection } from "@/components/chapter1/OpportunitySection";
@@ -79,9 +77,6 @@ const NewEbookChapter = () => {
     }
   };
 
-  // Calculate progress percentage
-  const progress = ((currentSection + 1) / sections.length) * 100;
-
   // Handle chapter completion
   const handleCompleteChapter = () => {
     toast({
@@ -100,17 +95,11 @@ const NewEbookChapter = () => {
         <ChapterHeader />
         
         {/* Chapter Progress */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-2">
-            <div className="text-sm text-gray-600">
-              {currentSection + 1} of {sections.length}: {sections[currentSection].title}
-            </div>
-            <div className="text-sm text-gray-600">
-              {Math.round(progress)}% Complete
-            </div>
-          </div>
-          <Progress value={progress} className="h-2" />
-        </div>
+        <ChapterProgressBar 
+          currentSection={currentSection}
+          totalSections={sections.length}
+          sectionTitle={sections[currentSection].title}
+        />
         
         {/* Chapter Content Card */}
         <Card className="mb-6">
@@ -121,38 +110,13 @@ const NewEbookChapter = () => {
             </div>
             
             {/* Navigation Controls */}
-            <div className="flex items-center justify-between mt-8">
-              <Button
-                variant="outline"
-                onClick={goToPrevSection}
-                disabled={currentSection === 0}
-                className={isMobile ? "h-8 w-8 p-0" : ""}
-              >
-                <ChevronLeft className={isMobile ? "h-4 w-4" : "h-5 w-5 mr-1"} />
-                {!isMobile && "Previous"}
-              </Button>
-              
-              <span className="text-sm text-gray-500">
-                {currentSection + 1} / {sections.length}
-              </span>
-              
-              {currentSection < sections.length - 1 ? (
-                <Button
-                  onClick={goToNextSection}
-                  className={isMobile ? "h-8 w-8 p-0" : ""}
-                >
-                  {!isMobile && "Next"}
-                  <ChevronRight className={isMobile ? "h-4 w-4" : "h-5 w-5 ml-1"} />
-                </Button>
-              ) : (
-                <Button 
-                  onClick={handleCompleteChapter}
-                  className="bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600"
-                >
-                  Complete Chapter
-                </Button>
-              )}
-            </div>
+            <ChapterNavigation 
+              currentSection={currentSection}
+              totalSections={sections.length}
+              onNext={goToNextSection}
+              onPrev={goToPrevSection}
+              onComplete={handleCompleteChapter}
+            />
           </CardContent>
         </Card>
       </div>
