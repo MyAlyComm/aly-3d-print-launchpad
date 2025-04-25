@@ -20,16 +20,47 @@ export const AuthForm = () => {
 
     try {
       if (isSignUp) {
-        const { error } = await supabase.auth.signUp({ email, password });
-        if (error) throw error;
-        toast.success('Check your email to confirm your account');
+        const { error } = await supabase.auth.signUp({ 
+          email, 
+          password,
+          options: {
+            data: {
+              // Optional: you can add additional metadata here if needed
+              created_at: new Date().toISOString()
+            }
+          }
+        });
+        
+        if (error) {
+          // More specific error handling
+          if (error.message.includes('already in use')) {
+            toast.error('This email is already registered. Try logging in instead.');
+          } else {
+            toast.error(error.message || 'Sign up failed');
+          }
+          throw error;
+        }
+        
+        toast.success('Account created successfully! You can now log in.');
+        setIsSignUp(false); // Switch to login mode
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
+        
+        if (error) {
+          // More specific error handling
+          if (error.message.includes('Invalid login credentials')) {
+            toast.error('Incorrect email or password. Please try again.');
+          } else {
+            toast.error(error.message || 'Login failed');
+          }
+          throw error;
+        }
+        
+        toast.success('Logged in successfully!');
         navigate('/dashboard');
       }
-    } catch (error: any) {
-      toast.error(error.message);
+    } catch (error) {
+      console.error('Authentication error:', error);
     } finally {
       setLoading(false);
     }
@@ -58,10 +89,11 @@ export const AuthForm = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              minLength={6}
             />
           </div>
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? 'Loading...' : isSignUp ? 'Sign Up' : 'Sign In'}
+            {loading ? 'Processing...' : isSignUp ? 'Sign Up' : 'Sign In'}
           </Button>
         </form>
         <p className="mt-4 text-center text-sm text-gray-600">
@@ -78,3 +110,5 @@ export const AuthForm = () => {
     </div>
   );
 };
+
+export default AuthForm;
