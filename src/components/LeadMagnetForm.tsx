@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import { Check } from "lucide-react";
+import { Check, Mail } from "lucide-react";
 
 interface LeadMagnetFormProps {
   setDialogOpen?: (open: boolean) => void;
@@ -23,7 +23,7 @@ const LeadMagnetForm = ({
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [verificationSent, setVerificationSent] = useState(false);
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -40,30 +40,37 @@ const LeadMagnetForm = ({
     
     setLoading(true);
     
-    // Simulate ConvertKit integration
-    setTimeout(() => {
-      console.log("Submitted lead:", { name, email });
-      setLoading(false);
-      setSuccess(true);
+    try {
+      // Prepare for Supabase integration
+      // const { error } = await supabase.auth.signUp({
+      //   email,
+      //   options: {
+      //     data: {
+      //       full_name: name,
+      //     }
+      //   }
+      // });
       
+      // if (error) throw error;
+
+      // Simulating API call for now
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      setVerificationSent(true);
       toast({
-        title: "Success!",
-        description: "Your free guide is on its way to your inbox!",
+        title: "Verification Email Sent!",
+        description: "Please check your inbox (and spam folder) to verify your email address.",
       });
-      
-      // Close dialog after 2 seconds if in modal mode
-      if (setDialogOpen) {
-        setTimeout(() => {
-          setDialogOpen(false);
-          // Reset form after dialog closes
-          setTimeout(() => {
-            setSuccess(false);
-            setEmail("");
-            setName("");
-          }, 300);
-        }, 2000);
-      }
-    }, 1500);
+
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was a problem sending the verification email. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -73,17 +80,21 @@ const LeadMagnetForm = ({
         <p className="text-gray-600 mt-2">{description}</p>
       </div>
 
-      {success ? (
+      {verificationSent ? (
         <div className="flex flex-col items-center justify-center space-y-4 my-8 text-center">
           <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center">
-            <Check className="h-6 w-6 text-green-600" />
+            <Mail className="h-6 w-6 text-green-600" />
           </div>
-          <h4 className="text-xl font-medium text-gray-900">Success!</h4>
-          <p className="text-gray-600">
-            Your free guide is on its way to your inbox! 
-            <br />
-            (Check spam folder if you don't see it)
-          </p>
+          <h4 className="text-xl font-medium text-gray-900">Check Your Email</h4>
+          <div className="text-gray-600 space-y-2">
+            <p>We've sent a verification link to:</p>
+            <p className="font-medium">{email}</p>
+            <p className="text-sm">
+              Click the link in the email to verify your address and access the guide.
+              <br />
+              Can't find the email? Check your spam folder.
+            </p>
+          </div>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
