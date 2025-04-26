@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
-import { ChapterProgress } from "@/components/ui/progress/ChapterProgress";
+import { ChapterProgressBar } from "@/components/ebook/ChapterProgress";
 import { ChapterNavigation } from "@/components/ebook/ChapterNavigation";
 import { Beyond } from "@/components/chapters/chapter3/Beyond";
 import { CoreSystem } from "@/components/chapters/chapter3/CoreSystem";
@@ -41,7 +41,7 @@ const Chapter3 = () => {
   return (
     <DashboardLayout title="Chapter 3: The 3+1=40 System">
       <div className="container max-w-4xl mx-auto px-4 py-6">
-        <ChapterProgress 
+        <ChapterProgressBar
           currentSection={section} 
           totalSections={sections.length} 
           sectionTitle={sections[section].title} 
