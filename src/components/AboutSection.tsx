@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-
 const AboutSection = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   return <div className="py-12 md:py-16 bg-white">
@@ -12,11 +11,10 @@ const AboutSection = () => {
             <h2 className="text-3xl md:text-4xl font-bold font-display mb-6">Hey I'm Aly, 
 Your 3D Printing Mentor</h2>
             <div className="space-y-4 text-gray-700">
-              <p>I designed this blueprint because it's what I needed when I was starting out. And it's the culmination of everything I've learned about starting and growing a 3D printing business. It's the step-by-step guide that I wish I had before...</p>
-              <p>My 3D printing journey began with just a $500 budget after a friend showed me how she was making money with her printer. On March 29, 2025, I made my first $10 sale – that small win sparked what would become a profitable business.</p>
-              <p>
-                Today, I lead a thriving Skool community with over 1,200 members where I share everything I've learned about building a profitable 3D printing business. My mission is simple: help creative people like you turn their ideas into income.
-              </p>
+              <p>This blueprint is the culmination of everything I've learned about starting and growing a 3D printing business. It's the step-by-step guide that I wish I had before I got started...</p>
+              <p>I started my 3D printing journey in August, 2024 with just one $300 printer selling keychains to friends. It quickly grew into a real business bringing in more than $20K+ a month.
+I just wanted a side hustle to help pay for college, I had no idea that my Philosophy and Art History degree would be such a valuable tool to have in the industry. This open minded approach allowed me to design viral products, sell globally and now...</p>
+              <p>It's my turn to help others so that they can unlock the freedom that 3D printing creates. It's truly a world of possibility and in my Blueprint I'm sharing 've learned about building a profitable 3D printing business. My mission is simple: help creative people like you turn their ideas into income.</p>
               <p className="font-medium">
                 If I could start with $500 and build this, imagine what you could create with the right blueprint!
               </p>
