@@ -13,8 +13,8 @@ const Chapter9 = () => {
   const { saveResponse } = useChapterForm(9, "worksheet");
   
   const sections = [
-    { id: "introduction", title: "Creating Advocates & Partnerships", Component: Introduction },
-    { id: "customer-advocates", title: "Building Customer Advocates", Component: CustomerAdvocates },
+    { id: "introduction", title: "Scaling Beyond $5K", Component: Introduction },
+    { id: "customer-advocates", title: "Creating Customer Advocates", Component: CustomerAdvocates },
     { id: "strategic-partnerships", title: "Strategic Partnerships", Component: StrategicPartnerships }
   ];
 
