@@ -5,6 +5,14 @@ import { InfoCard } from "@/components/ui/chapter-layout/InfoCard";
 export const Introduction = () => {
   return (
     <div className="space-y-8">
+      <div className="my-8">
+        <img
+          src="/lovable-uploads/14afb3d3-7f7b-4836-82fb-9cd21e83395f.png"
+          alt="Zero-Cost Marketing That Works"
+          className="w-full rounded-lg shadow-lg mb-8"
+        />
+      </div>
+      
       <h1 className="text-3xl font-bold tracking-tight">
         Chapter 8: Zero-Cost Marketing That Works
       </h1>
