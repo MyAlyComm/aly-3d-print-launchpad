@@ -18,6 +18,7 @@ import { FutureSection } from "@/components/chapter1/FutureSection";
 import { SelfAssessmentSection } from "@/components/chapter1/SelfAssessmentSection";
 import { ChapterHeader } from "@/components/chapter1/ChapterHeader";
 import { BookIntroSection } from "@/components/chapter1/BookIntroSection";
+import { StorySection } from "@/components/chapter1/StorySection";
 
 const NewEbookChapter = () => {
   const [currentSection, setCurrentSection] = useState(0);
@@ -56,6 +57,11 @@ const NewEbookChapter = () => {
       id: "intro",
       title: "Book Introduction",
       component: <BookIntroSection onSubmit={goToNextSection} />,
+    },
+    {
+      id: "story",
+      title: "My Story & Journey",
+      component: <StorySection onSubmit={goToNextSection} />,
     },
     {
       id: "opportunity",
