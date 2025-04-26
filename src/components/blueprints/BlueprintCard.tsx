@@ -4,7 +4,6 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Check } from "lucide-react";
 import LeadMagnetForm from "../LeadMagnetForm";
 import FreeGuideDialog from "../FreeGuideDialog";
-import Image from "@/components/ui/image";  // We'll create this component
 
 interface BlueprintProps {
   id: number;
