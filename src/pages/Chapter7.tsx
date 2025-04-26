@@ -7,20 +7,26 @@ import { Introduction } from "@/components/chapters/chapter7/Introduction";
 import { InitialSetup } from "@/components/chapters/chapter7/InitialSetup";
 import { WorkflowOptimization } from "@/components/chapters/chapter7/WorkflowOptimization";
 import { SystemsSetup } from "@/components/chapters/chapter7/SystemsSetup";
+import { useChapterForm } from "@/hooks/useChapterForm";
 
 const Chapter7 = () => {
   const [section, setSection] = useState(0);
+  const { saveResponse } = useChapterForm(7, "worksheet");
+  
   const sections = [
-    { id: "introduction", title: "Introduction: The Foundation of Consistency", Component: Introduction },
-    { id: "initial-setup", title: "Initial Setup: The Five-Step System", Component: InitialSetup },
-    { id: "workflow-optimization", title: "Workflow Optimization", Component: WorkflowOptimization },
-    { id: "systems-setup", title: "Systems Setup Assessment", Component: SystemsSetup },
+    { id: "foundation", title: "Introduction: The Foundation of Consistency", Component: Introduction },
+    { id: "setup-system", title: "Initial Setup: The Five-Step System", Component: InitialSetup },
+    { id: "first-print", title: "Workflow Optimization", Component: WorkflowOptimization },
+    { id: "listings", title: "Systems Setup Assessment", Component: SystemsSetup },
   ];
 
   const handleNext = () => {
     if (section < sections.length - 1) {
       setSection(section + 1);
       window.scrollTo(0, 0);
+      
+      // Track progress for completed section
+      saveResponse(sections[section].id, { completed: true });
     }
   };
 
@@ -32,6 +38,12 @@ const Chapter7 = () => {
   };
 
   const handleComplete = () => {
+    // Track progress for the final section
+    saveResponse(sections[section].id, { completed: true });
+    
+    // Mark the worksheet as complete
+    saveResponse("worksheet", { completed: true });
+    
     window.scrollTo(0, 0);
   };
 

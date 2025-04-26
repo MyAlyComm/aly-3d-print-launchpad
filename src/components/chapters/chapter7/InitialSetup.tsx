@@ -7,6 +7,7 @@ export const InitialSetup = () => {
   const setupSteps = [
     {
       title: "Step 1: Finish your setup",
+      subtitlePrefix: "Essential Setup Requirements",
       points: [
         "A nearby table or surface for cooling and post-processing",
         "A designated computer station for designs and orders",
@@ -16,6 +17,7 @@ export const InitialSetup = () => {
     },
     {
       title: "Step 2: Make your first print",
+      subtitlePrefix: "First Print Process",
       points: [
         "Print a single copy of each product",
         "Note any shortcomings or issues",
@@ -25,6 +27,7 @@ export const InitialSetup = () => {
     },
     {
       title: "Step 3: Take photos",
+      subtitlePrefix: "Photo Requirements",
       points: [
         "One showing just the product",
         "One showing the product being used",
@@ -34,6 +37,7 @@ export const InitialSetup = () => {
     },
     {
       title: "Steps 4 & 5: List and Expand",
+      subtitlePrefix: "Final Steps",
       points: [
         "Create your first listings quickly",
         "Don't overthink branding initially",
@@ -58,6 +62,7 @@ export const InitialSetup = () => {
             <SetupStepCard
               key={index}
               title={step.title}
+              subtitlePrefix={step.subtitlePrefix}
               points={step.points}
             />
           ))}
