@@ -1,8 +1,7 @@
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import LeadMagnetForm from "./LeadMagnetForm";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Star } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -17,7 +16,6 @@ const HeroSection = () => {
     <div className="relative overflow-hidden bg-gradient-to-b from-primary-light/10 via-white to-white">
       <div className="absolute inset-0 gradient-blur"></div>
       
-      {/* Text Content Section */}
       <div className="container relative pt-16 pb-8 md:pt-20 px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center">
           <div className="mb-4 md:mb-6 inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
@@ -49,8 +47,7 @@ marketing strategies to start profiting from 3D printing</p>
           </div>
         </div>
 
-        {/* Social Proof Section */}
-        <div className="mt-8 flex flex-col items-center space-y-2">
+        <div className="mt-8 md:mt-12 flex flex-col items-center space-y-2">
           <div className="flex items-center space-x-1">
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
@@ -75,8 +72,7 @@ marketing strategies to start profiting from 3D printing</p>
           </div>
         </div>
 
-        {/* Ebook Cover Section */}
-        <div className="max-w-3xl mx-auto pb-16 md:pb-20">
+        <div className="max-w-3xl mx-auto pb-16 md:pb-20 mt-8 md:mt-12">
           <div className={`mx-auto ${isMobile ? 'max-w-sm' : 'max-w-xl'}`}>
             <div className="relative">
               <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur"></div>
@@ -102,7 +98,6 @@ marketing strategies to start profiting from 3D printing</p>
           </div>
         </div>
 
-        {/* Trusted Companies Section */}
         <TrustedCompanies />
       </div>
     </div>
