@@ -81,15 +81,21 @@ marketing strategies to start profiting from 3D printing</p>
             <div className="relative">
               <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur"></div>
               <div className="relative overflow-hidden rounded-xl">
-                {!imageLoaded && <Skeleton className="w-full aspect-[4/3]" />}
+                {!imageLoaded && (
+                  <div className="w-full aspect-[4/3] bg-gray-100 animate-pulse rounded-xl flex items-center justify-center">
+                    <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+                  </div>
+                )}
                 <img 
                   src="/lovable-uploads/20fb5ec7-9362-4ced-aa5c-42d3a7c41f92.png" 
                   alt="3D Printing Blueprint by Aly Yu" 
-                  className={`w-full h-auto transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`} 
-                  onLoad={() => setImageLoaded(true)} 
-                  loading="eager" 
-                  width={isMobile ? 400 : 600} 
-                  height={isMobile ? 300 : 450} 
+                  className={`w-full h-auto transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                  onLoad={() => setImageLoaded(true)}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  width={isMobile ? 400 : 600}
+                  height={isMobile ? 300 : 450}
                 />
               </div>
             </div>
