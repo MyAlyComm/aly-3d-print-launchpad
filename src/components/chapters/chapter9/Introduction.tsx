@@ -1,17 +1,10 @@
-
 import { ChapterSection } from "@/components/ui/chapter-layout/ChapterSection";
 import { InfoCard } from "@/components/ui/chapter-layout/InfoCard";
 import { ChapterGrid } from "@/components/ui/chapter-layout/ChapterGrid";
-
 export const Introduction = () => {
-  return (
-    <div className="space-y-8">
+  return <div className="space-y-8">
       <div className="my-8">
-        <img
-          src="/lovable-uploads/1935bd17-362f-4c25-bc16-bb5b81522fc8.png"
-          alt="Scaling Beyond $5K"
-          className="w-full rounded-lg shadow-lg mb-8"
-        />
+        
       </div>
       
       <h1 className="text-3xl font-bold tracking-tight">
@@ -113,38 +106,11 @@ export const Introduction = () => {
           </p>
           
           <ChapterGrid className="grid-cols-1 md:grid-cols-3 gap-6">
-            <InfoCard 
-              title="Strategy 1: Print Farm Expansion" 
-              points={[
-                "Add more printers to increase production capacity",
-                "Create dedicated production space",
-                "Implement print management systems",
-                "Maintain complete quality control",
-                "Reinvest 30-40% of profits into new equipment"
-              ]}
-            />
+            <InfoCard title="Strategy 1: Print Farm Expansion" points={["Add more printers to increase production capacity", "Create dedicated production space", "Implement print management systems", "Maintain complete quality control", "Reinvest 30-40% of profits into new equipment"]} />
             
-            <InfoCard 
-              title="Strategy 2: Production Partnership" 
-              points={[
-                "Partner with existing print shops",
-                "Create detailed production standards",
-                "Develop quality assurance processes",
-                "Minimal upfront investment needed",
-                "Faster scaling with less operational complexity"
-              ]}
-            />
+            <InfoCard title="Strategy 2: Production Partnership" points={["Partner with existing print shops", "Create detailed production standards", "Develop quality assurance processes", "Minimal upfront investment needed", "Faster scaling with less operational complexity"]} />
             
-            <InfoCard 
-              title="Strategy 3: Hybrid Manufacturing" 
-              points={[
-                "Combine 3D printing with other methods",
-                "Use traditional manufacturing for simple parts",
-                "Reserve 3D printing for custom components",
-                "Reduce per-unit costs at scale",
-                "Create stronger barriers to competition"
-              ]}
-            />
+            <InfoCard title="Strategy 3: Hybrid Manufacturing" points={["Combine 3D printing with other methods", "Use traditional manufacturing for simple parts", "Reserve 3D printing for custom components", "Reduce per-unit costs at scale", "Create stronger barriers to competition"]} />
           </ChapterGrid>
           
           <div className="bg-purple-50 border border-purple-200 rounded-lg p-6">
@@ -362,6 +328,5 @@ export const Introduction = () => {
           </p>
         </div>
       </ChapterSection>
-    </div>
-  );
+    </div>;
 };
