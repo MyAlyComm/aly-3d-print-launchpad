@@ -63,15 +63,15 @@ const JourneySection = () => {
       description: "Expanding globally and establishing partnerships with international distributors."
     },
     {
-      mainImage: "/lovable-uploads/photo-1470813740244-df37b8c1edcb",
-      hoverImage: "/lovable-uploads/photo-1500375592092-40eb2168fd21",
+      mainImage: "/lovable-uploads/fe8adce5-b909-4430-a057-0e0da07b26cf.png",
+      hoverImage: "/lovable-uploads/573b21db-fd6b-4fe9-ba36-ae007133ace1.png",
       month: "Month 9",
       icon: <ArrowRight className="w-5 h-5 text-purple-500" />,
       description: "Launched proprietary AI models to optimize 3D printing processes and predict market trends, significantly improving production efficiency and market response time."
     },
     {
-      mainImage: "/lovable-uploads/photo-1426604966848-d7adac402bff",
-      hoverImage: "/lovable-uploads/photo-1500673922987-e212871fec22",
+      mainImage: "/lovable-uploads/photo-1470813740244-df37b8c1edcb",
+      hoverImage: "/lovable-uploads/photo-1500375592092-40eb2168fd21",
       month: "Month 10",
       icon: <ArrowRight className="w-5 h-5 text-green-500" />,
       description: "Developed advanced automation systems and expanded our AI capabilities to revolutionize the 3D printing industry, setting new standards for efficiency and innovation."
