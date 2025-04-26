@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Check } from "lucide-react";
@@ -29,7 +28,12 @@ const BlueprintCard = ({
   onCheckout 
 }: BlueprintProps) => {
   return (
-    <div className={`blueprint-card ${popular ? 'blueprint-card-popular' : ''}`}>
+    <div className={`blueprint-card ${popular ? 'blueprint-card-popular relative overflow-hidden' : ''}`}>
+      {popular && (
+        <div className="absolute top-0 right-0 bg-secondary text-white text-xs font-semibold px-4 py-1 transform translate-x-1/3 -translate-y-1/2 rotate-45">
+          MOST POPULAR
+        </div>
+      )}
       <div className="mb-4">
         <h3 className="text-xl font-bold mb-1">{title}</h3>
         <p className="text-gray-600 text-sm mb-4">{description}</p>
