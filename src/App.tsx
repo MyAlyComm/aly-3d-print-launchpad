@@ -13,6 +13,7 @@ import NewEbookChapter from "./pages/NewEbookChapter";
 import Resources from "./pages/Resources";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Chapter1 from "./pages/Chapter1";
+import Chapter2 from "./pages/Chapter2";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,11 @@ const App = () => (
             <Route path="/dashboard/chapter-1" element={
               <ProtectedRoute>
                 <Chapter1 />
+              </ProtectedRoute>
+            } />
+            <Route path="/dashboard/chapter-2" element={
+              <ProtectedRoute>
+                <Chapter2 />
               </ProtectedRoute>
             } />
             
