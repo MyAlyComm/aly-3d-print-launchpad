@@ -7,7 +7,21 @@ export const StatsCards = () => {
   const { chapterProgresses, calculateOverallProgress } = useChapterProgress();
   const progress = calculateOverallProgress();
   const completedChapters = chapterProgresses?.filter(p => p.completed_at).length || 0;
-  const totalChapters = 13;
+  // Now we have 11 total chapters (10 main chapters + introduction)
+  const totalChapters = 11;
+  
+  // Find the next incomplete chapter number
+  const nextChapter = () => {
+    if (!chapterProgresses) return 0;
+    
+    for (let i = 0; i <= 10; i++) {
+      const chapterComplete = chapterProgresses.some(
+        p => p.chapter_number === i && p.completed_at
+      );
+      if (!chapterComplete) return i;
+    }
+    return 10; // Return last chapter if all are complete
+  };
 
   return (
     <div className="grid gap-4 md:grid-cols-3">
@@ -33,7 +47,9 @@ export const StatsCards = () => {
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{completedChapters}/{totalChapters}</div>
-          <p className="text-sm text-muted-foreground">Chapters completed</p>
+          <p className="text-sm text-muted-foreground">
+            {completedChapters === 0 ? "Start with Introduction" : "Chapters completed"}
+          </p>
         </CardContent>
       </Card>
       
@@ -45,8 +61,17 @@ export const StatsCards = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">Chapter {completedChapters + 1}</div>
-          <p className="text-sm text-muted-foreground">Continue your journey</p>
+          {nextChapter() === 0 ? (
+            <>
+              <div className="text-2xl font-bold">Introduction</div>
+              <p className="text-sm text-muted-foreground">Begin your journey</p>
+            </>
+          ) : (
+            <>
+              <div className="text-2xl font-bold">Chapter {nextChapter()}</div>
+              <p className="text-sm text-muted-foreground">Continue your journey</p>
+            </>
+          )}
         </CardContent>
       </Card>
     </div>
