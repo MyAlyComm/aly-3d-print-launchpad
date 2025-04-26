@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle, ArrowRight } from "lucide-react";
 import { useState } from "react";
@@ -57,7 +58,7 @@ const JourneySection = () => {
     },
     {
       mainImage: "/lovable-uploads/e3c4d94e-63ee-4200-8ca7-63cd8f397489.png",
-      hoverImage: "/lovable-uploads/placeholder.svg",
+      hoverImage: "/lovable-uploads/3706ae1a-1ab8-4fcf-ba59-df8598bd5b80.png",
       month: "Month 8",
       icon: <ArrowRight className="w-5 h-5 text-green-500" />,
       description: "Expanding globally and establishing partnerships with international distributors."
