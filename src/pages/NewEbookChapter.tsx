@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
@@ -18,6 +17,7 @@ import { MythsSection } from "@/components/chapter1/MythsSection";
 import { FutureSection } from "@/components/chapter1/FutureSection";
 import { SelfAssessmentSection } from "@/components/chapter1/SelfAssessmentSection";
 import { ChapterHeader } from "@/components/chapter1/ChapterHeader";
+import { BookIntroSection } from "@/components/chapter1/BookIntroSection";
 
 const NewEbookChapter = () => {
   const [currentSection, setCurrentSection] = useState(0);
@@ -52,6 +52,11 @@ const NewEbookChapter = () => {
 
   // Define sections array using existing Chapter 1 components
   const sections = [
+    {
+      id: "intro",
+      title: "Book Introduction",
+      component: <BookIntroSection onSubmit={goToNextSection} />,
+    },
     {
       id: "opportunity",
       title: "The 3D Printing Opportunity",
