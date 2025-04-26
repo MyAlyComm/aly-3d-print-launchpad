@@ -57,7 +57,7 @@ const JourneySection = () => {
     },
     {
       mainImage: "/lovable-uploads/6265514e-869f-4650-8698-e0a572599ea7.png",
-      hoverImage: "/placeholder.svg",
+      hoverImage: "/lovable-uploads/placeholder.svg",
       month: "Month 8",
       icon: <ArrowRight className="w-5 h-5 text-green-500" />,
       description: "Expanding globally and establishing partnerships with international distributors."
