@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Check } from "lucide-react";
@@ -30,7 +31,7 @@ const BlueprintCard = ({
   return (
     <div className={`blueprint-card ${popular ? 'blueprint-card-popular relative overflow-hidden' : ''}`}>
       {popular && (
-        <div className="absolute top-0 right-0 bg-secondary text-white text-xs font-semibold px-4 py-1 transform translate-x-1/3 -translate-y-1/2 rotate-45">
+        <div className="absolute top-2 right-[-30px] bg-secondary text-white text-xs font-semibold py-1 px-8 transform rotate-45 shadow-md">
           MOST POPULAR
         </div>
       )}
