@@ -16,7 +16,7 @@ const JourneySection = () => {
                 <AlertCircle className="w-5 h-5 text-primary" />
                 <h3 className="font-semibold text-lg text-gray-900">Month 1</h3>
               </div>
-              <p className="text-gray-600 text-sm leading-relaxed">I started my business with a $300 printer and $200 of supplies. With the profits of my sales I was able to buy 8 more 3D printers in my first month.</p>
+              <p className="text-gray-600 text-sm leading-relaxed">I started my business with a $300 printer and $200 of supplies. With the profits from selling keychains to friends and expanding to cat masks and planters, I was able to buy 8 more 3D printers in my first month.</p>
             </div>
           </div>
 
