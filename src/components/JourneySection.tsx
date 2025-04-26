@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle, ArrowRight } from "lucide-react";
 import { useState } from "react";
@@ -62,6 +61,20 @@ const JourneySection = () => {
       month: "Month 8",
       icon: <ArrowRight className="w-5 h-5 text-green-500" />,
       description: "Expanding globally and establishing partnerships with international distributors."
+    },
+    {
+      mainImage: "/lovable-uploads/photo-1470813740244-df37b8c1edcb",
+      hoverImage: "/lovable-uploads/photo-1500375592092-40eb2168fd21",
+      month: "Month 9",
+      icon: <ArrowRight className="w-5 h-5 text-purple-500" />,
+      description: "Launched proprietary AI models to optimize 3D printing processes and predict market trends, significantly improving production efficiency and market response time."
+    },
+    {
+      mainImage: "/lovable-uploads/photo-1426604966848-d7adac402bff",
+      hoverImage: "/lovable-uploads/photo-1500673922987-e212871fec22",
+      month: "Month 10",
+      icon: <ArrowRight className="w-5 h-5 text-green-500" />,
+      description: "Developed advanced automation systems and expanded our AI capabilities to revolutionize the 3D printing industry, setting new standards for efficiency and innovation."
     }
   ];
 
