@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import LeadMagnetForm from "./LeadMagnetForm";
@@ -75,13 +76,12 @@ marketing strategies to start profiting from 3D printing</p>
           </div>
         </div>
 
-        {/* Personal Message Section */}
-        <div className="max-w-2xl mx-auto mt-12">
+        {/* Story Sections */}
+        <div className="max-w-2xl mx-auto mt-12 space-y-8">
+          {/* Personal Message Section */}
           <PersonalMessage />
-        </div>
-
-        {/* Before Story Section */}
-        <div className="max-w-2xl mx-auto mt-8">
+          
+          {/* Before Story Section - Ensuring it's visible with proper spacing */}
           <BeforeStorySection />
         </div>
       </div>
