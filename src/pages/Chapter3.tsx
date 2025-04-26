@@ -1,0 +1,66 @@
+
+import { useState } from "react";
+import DashboardLayout from "@/components/dashboard/DashboardLayout";
+import { ChapterProgress } from "@/components/ui/progress/ChapterProgress";
+import { ChapterNavigation } from "@/components/ebook/ChapterNavigation";
+import { Beyond } from "@/components/chapters/chapter3/Beyond";
+import { CoreSystem } from "@/components/chapters/chapter3/CoreSystem";
+import { Implementation } from "@/components/chapters/chapter3/Implementation";
+import { SystemWorksheet } from "@/components/chapters/chapter3/SystemWorksheet";
+
+const Chapter3 = () => {
+  const [section, setSection] = useState(0);
+  const sections = [
+    { id: "beyond", title: "Beyond Traditional Value Creation", Component: Beyond },
+    { id: "core-system", title: "The Core System Explained", Component: CoreSystem },
+    { id: "implementation", title: "Implementing the System", Component: Implementation },
+    { id: "worksheet", title: "Chapter 3 Self-Assessment", Component: SystemWorksheet },
+  ];
+
+  const handleNext = () => {
+    if (section < sections.length - 1) {
+      setSection(section + 1);
+      window.scrollTo(0, 0);
+    }
+  };
+
+  const handlePrev = () => {
+    if (section > 0) {
+      setSection(section - 1);
+      window.scrollTo(0, 0);
+    }
+  };
+
+  const handleComplete = () => {
+    // Handle chapter completion
+    window.scrollTo(0, 0);
+  };
+
+  const CurrentSection = sections[section].Component;
+
+  return (
+    <DashboardLayout title="Chapter 3: The 3+1=40 System">
+      <div className="container max-w-4xl mx-auto px-4 py-6">
+        <ChapterProgress 
+          currentSection={section} 
+          totalSections={sections.length} 
+          sectionTitle={sections[section].title} 
+        />
+        
+        <div className="prose max-w-none">
+          <CurrentSection />
+        </div>
+
+        <ChapterNavigation
+          currentSection={section}
+          totalSections={sections.length}
+          onNext={handleNext}
+          onPrev={handlePrev}
+          onComplete={handleComplete}
+        />
+      </div>
+    </DashboardLayout>
+  );
+};
+
+export default Chapter3;

@@ -1,11 +1,10 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
-import React from "react"; // Add this explicit import
+import React from "react";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
@@ -16,14 +15,13 @@ import Resources from "./pages/Resources";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Chapter1 from "./pages/Chapter1";
 import Chapter2 from "./pages/Chapter2";
+import Chapter3 from "./pages/Chapter3";
 
-// Move queryClient creation inside the component to ensure it's only created once per render
 const App = () => {
-  // Create a client
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 1000 * 60 * 5, // 5 minutes
+        staleTime: 1000 * 60 * 5,
         retry: 1,
       },
     }
@@ -65,6 +63,11 @@ const App = () => {
                 <Route path="/dashboard/chapter-2" element={
                   <ProtectedRoute>
                     <Chapter2 />
+                  </ProtectedRoute>
+                } />
+                <Route path="/dashboard/chapter-3" element={
+                  <ProtectedRoute>
+                    <Chapter3 />
                   </ProtectedRoute>
                 } />
                 
