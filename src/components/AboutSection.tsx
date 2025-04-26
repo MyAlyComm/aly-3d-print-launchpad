@@ -10,7 +10,11 @@ const AboutSection = () => {
             <div className="text-sm font-medium text-primary mb-2">ABOUT YOUR MENTOR</div>
             <h2 className="text-3xl md:text-4xl font-bold font-display mb-6">Hey, I'm Aly, Your 3D Printing Mentor</h2>
             <div className="space-y-4 text-gray-700">
-              <p>I designed this blueprint from the ground up. It's the culmination of everything I've learned about how to start and grow a 3D printing business. It's the step-by-step guide that I wish I had 9 months ago...</p>
+              <p>I designed this blueprint because I needed it 9 months ago, and it didn't exist...
+
+
+
+It's the culmination of everything I've learned about how to start and grow a 3D printing business. It's the step-by-step guide that I wish I had 9 months ago...</p>
               <p>
                 My 3D printing journey began with just a $500 budget after a friend showed me how she was making money with her printer. On March 29, 2025, I made my first $10 sale – that small win sparked what would become a profitable business.
               </p>
