@@ -3,21 +3,17 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import LeadMagnetForm from "../LeadMagnetForm";
 import { useState } from "react";
-
 interface CommercialLicenseSectionProps {
   open: boolean;
   setOpen: (open: boolean) => void;
 }
-
 const CommercialLicenseSection = ({
   open,
   setOpen
 }: CommercialLicenseSectionProps) => {
   const [phoneStandOpen, setPhoneStandOpen] = useState(false);
   const [bonusModelsOpen, setBonusModelsOpen] = useState(false);
-  
-  return (
-    <div className="mt-16 bg-white rounded-xl shadow-lg overflow-hidden">
+  return <div className="mt-16 bg-white rounded-xl shadow-lg overflow-hidden">
       <div className="p-8 text-center">
         <div className="flex justify-center mb-4">
           <Award className="w-12 h-12 text-primary" />
@@ -35,7 +31,7 @@ const CommercialLicenseSection = ({
               5-in-1 Phone Stand Tripod
             </h3>
             <div className="flex justify-center mb-4">
-              <img src="https://cdn.makerworld.com/upload/model/2024/01/0e4e8d66-9a5a-4a08-9740-5ab86eed69c2/thumbnail_large.png" alt="5-in-1 Phone Stand" className="rounded-lg shadow-md max-h-64 object-cover" />
+              <img alt="5-in-1 Phone Stand" className="rounded-lg shadow-md max-h-64 object-cover" src="/lovable-uploads/0827e81b-92e3-4a97-a473-33ff95248dec.jpg" />
             </div>
             <ul className="space-y-3 mb-6">
               <li className="flex items-center">
@@ -58,13 +54,7 @@ const CommercialLicenseSection = ({
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[425px]">
-                <LeadMagnetForm
-                  setDialogOpen={setPhoneStandOpen}
-                  title="Claim 5-in-1 Phone Stand Commercial License" 
-                  description="Unlock full commercial rights to sell and distribute the 5-in-1 Phone Stand model on platforms like Etsy and MakerWorld" 
-                  buttonText="Claim Free Commercial License"
-                  requestType="commercial_license"
-                />
+                <LeadMagnetForm setDialogOpen={setPhoneStandOpen} title="Claim 5-in-1 Phone Stand Commercial License" description="Unlock full commercial rights to sell and distribute the 5-in-1 Phone Stand model on platforms like Etsy and MakerWorld" buttonText="Claim Free Commercial License" requestType="commercial_license" />
               </DialogContent>
             </Dialog>
           </div>
@@ -97,13 +87,7 @@ const CommercialLicenseSection = ({
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[425px]">
-                <LeadMagnetForm 
-                  setDialogOpen={setBonusModelsOpen}
-                  title="Unlock Bonus 3D Models Commercial License" 
-                  description="Gain commercial rights for an exclusive collection of trending 3D models, including Cat Masks and Decorative Keychains" 
-                  buttonText="Get Bonus Models License"
-                  requestType="commercial_license"
-                />
+                <LeadMagnetForm setDialogOpen={setBonusModelsOpen} title="Unlock Bonus 3D Models Commercial License" description="Gain commercial rights for an exclusive collection of trending 3D models, including Cat Masks and Decorative Keychains" buttonText="Get Bonus Models License" requestType="commercial_license" />
               </DialogContent>
             </Dialog>
           </div>
@@ -113,8 +97,6 @@ const CommercialLicenseSection = ({
           <p className="text-sm text-gray-500">*Commercial license allows selling physical prints on platforms like Etsy, Shopify, and anywhere else you'd like! You keep 100% of each sale with no royalties or fees.</p>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default CommercialLicenseSection;
