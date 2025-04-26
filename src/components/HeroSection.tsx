@@ -67,7 +67,7 @@ marketing strategies to start profiting from 3D printing</p>
                 ))}
               </div>
               <p className="text-sm text-gray-600">
-                Join <span className="font-semibold">2000+</span> students making money 3D printing
+                Join <span className="font-semibold">2000+</span> other entrepreneurs in our online community
               </p>
             </div>
           </div>
