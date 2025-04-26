@@ -9,8 +9,8 @@ export const getChapterTitle = (chapterNumber: number) => {
     5: "Choosing Your Production Tools",
     6: "Setting Up for Success",
     7: "Zero-Cost Marketing That Works",
-    8: "Zero-Cost Marketing That Works",
-    9: "Scaling Beyond $5K",
+    8: "Creating Customer Advocates",
+    9: "Strategic Partnerships",
     10: "Future-Proofing Your Business"
   };
   return titles[chapterNumber as keyof typeof titles] || `Chapter ${chapterNumber}`;
