@@ -36,7 +36,8 @@ const blueprints = [
       "Gen Z marketing strategies",
       "Proven product templates",
       "Engagement tactics",
-    ]
+    ],
+    image: "/lovable-uploads/80580729-6d4e-4bd0-a66c-dff6d0d890e1.png"
   },
   {
     id: 3,
@@ -51,7 +52,8 @@ const blueprints = [
       "Pricing calculator & templates",
       "Advanced optimization techniques",
       "Private community access",
-    ]
+    ],
+    image: "/lovable-uploads/b1236689-73b3-4e92-9e4d-b466a948bcb1.png"
   },
   {
     id: 4,
@@ -66,7 +68,8 @@ const blueprints = [
       "Product design services",
       "Full business setup available",
       "Premium support options",
-    ]
+    ],
+    image: "/lovable-uploads/d1a2c586-5f86-4edf-865e-d27b19a65ec9.png"
   }
 ];
 
