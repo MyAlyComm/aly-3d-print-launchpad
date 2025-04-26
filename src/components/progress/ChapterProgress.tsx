@@ -6,6 +6,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useChapterProgress } from "@/hooks/useChapterProgress";
 import { ChapterProgressList } from "./ChapterProgressList";
 import { UserResponses } from "./UserResponses";
+import { BarChart3, FileText } from "lucide-react";
 
 export const ChapterProgress = () => {
   const { calculateOverallProgress } = useChapterProgress();
@@ -28,20 +29,22 @@ export const ChapterProgress = () => {
 
           <Tabs defaultValue="progress" className="w-full">
             <TabsList className="w-full">
-              <TabsTrigger value="progress" className="flex-1">Progress</TabsTrigger>
-              <TabsTrigger value="responses" className="flex-1">Responses</TabsTrigger>
+              <TabsTrigger value="progress" className="flex-1">
+                <BarChart3 className="h-4 w-4 mr-2" />
+                <span>Progress</span>
+              </TabsTrigger>
+              <TabsTrigger value="responses" className="flex-1">
+                <FileText className="h-4 w-4 mr-2" />
+                <span>Responses</span>
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="progress" className="mt-2">
-              <div className="max-h-[200px] overflow-y-auto">
-                <ChapterProgressList />
-              </div>
+              <ChapterProgressList />
             </TabsContent>
 
             <TabsContent value="responses" className="mt-2">
-              <div className="max-h-[200px] overflow-y-auto">
-                <UserResponses />
-              </div>
+              <UserResponses />
             </TabsContent>
           </Tabs>
         </div>
