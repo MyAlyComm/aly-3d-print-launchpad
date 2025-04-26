@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import LeadMagnetForm from "./LeadMagnetForm";
@@ -8,7 +7,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Star } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import PersonalMessage from "./PersonalMessage";
-import BeforeStorySection from "./BeforeStorySection";
+import JourneySection from "./JourneySection";
 
 const HeroSection = () => {
   const [open, setOpen] = useState(false);
@@ -77,12 +76,12 @@ marketing strategies to start profiting from 3D printing</p>
         </div>
 
         {/* Story Sections */}
-        <div className="max-w-2xl mx-auto mt-12 space-y-8">
+        <div className="max-w-4xl mx-auto mt-12 space-y-8">
           {/* Personal Message Section */}
           <PersonalMessage />
           
-          {/* Before Story Section - Ensuring it's visible with proper spacing */}
-          <BeforeStorySection />
+          {/* Journey Section - Before and After */}
+          <JourneySection />
         </div>
       </div>
 
