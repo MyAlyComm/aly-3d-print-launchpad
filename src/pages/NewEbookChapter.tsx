@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
@@ -11,7 +12,7 @@ import { ChapterProgressBar } from "@/components/ebook/ChapterProgress";
 // Import chapter 1 sections
 import { OpportunitySection } from "@/components/chapter1/OpportunitySection";
 import { ArbitrageSection } from "@/components/chapter1/ArbitrageSection";
-import { BudgetSection } from "@/components/chapter1/BudgetSection";
+// Remove import for BudgetSection
 import { TimelineSection } from "@/components/chapter1/TimelineSection";
 import { MythsSection } from "@/components/chapter1/MythsSection";
 import { FutureSection } from "@/components/chapter1/FutureSection";
@@ -73,11 +74,7 @@ const NewEbookChapter = () => {
       title: "Understanding Arbitrage Windows",
       component: <ArbitrageSection onSubmit={goToNextSection} />,
     },
-    {
-      id: "budget",
-      title: "Budget Planning",
-      component: <BudgetSection />,
-    },
+    // Removed BudgetSection
     {
       id: "timeline",
       title: "Industry Timeline",
