@@ -13,6 +13,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { user } = useAuth();
   const [hasAccess, setHasAccess] = useState<boolean | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasShownToast, setHasShownToast] = useState(false);
   
   useEffect(() => {
     // Check if user has purchased access
@@ -39,6 +40,19 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     checkAccess();
   }, [user]);
 
+  // Only show toasts once per component mount
+  useEffect(() => {
+    if (!isLoading && !hasShownToast) {
+      if (!user) {
+        toast.error("You need to be logged in to view this content");
+        setHasShownToast(true);
+      } else if (!hasAccess) {
+        toast.error("You need to purchase access to view this content");
+        setHasShownToast(true);
+      }
+    }
+  }, [user, hasAccess, isLoading, hasShownToast]);
+
   if (isLoading) {
     // You could add a loading spinner here
     return (
@@ -49,19 +63,11 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   }
 
   if (!user) {
-    // Only show toast on initial navigation, not on re-renders
-    if (location.state?.showToast !== false) {
-      toast.error("You need to be logged in to view this content");
-    }
-    return <Navigate to="/auth" state={{ from: location, showToast: false }} replace />;
+    return <Navigate to="/auth" state={{ from: location }} replace />;
   }
 
   if (!hasAccess) {
-    // Only show toast on initial navigation, not on re-renders
-    if (location.state?.showToast !== false) {
-      toast.error("You need to purchase access to view this content");
-    }
-    return <Navigate to="/" state={{ from: location, showToast: false }} replace />;
+    return <Navigate to="/" state={{ from: location }} replace />;
   }
 
   return <>{children}</>;
