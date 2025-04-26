@@ -6,8 +6,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Star } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import PersonalMessage from "./PersonalMessage";
-import JourneySection from "./JourneySection";
 import TrustedCompanies from "./TrustedCompanies";
 
 const HeroSection = () => {
@@ -15,7 +13,8 @@ const HeroSection = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const isMobile = useIsMobile();
 
-  return <div className="relative overflow-hidden bg-gradient-to-b from-primary-light/10 via-white to-white">
+  return (
+    <div className="relative overflow-hidden bg-gradient-to-b from-primary-light/10 via-white to-white">
       <div className="absolute inset-0 gradient-blur"></div>
       
       {/* Text Content Section */}
@@ -48,69 +47,60 @@ marketing strategies to start profiting from 3D printing</p>
               Browse All Blueprints
             </Button>
           </div>
+        </div>
 
-          {/* Social Proof Section */}
-          <div className="mt-8 flex flex-col items-center space-y-2">
-            <div className="flex items-center space-x-1">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+        {/* Social Proof Section */}
+        <div className="mt-8 flex flex-col items-center space-y-2">
+          <div className="flex items-center space-x-1">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+            ))}
+          </div>
+          <div className="flex items-center space-x-3">
+            <div className="flex -space-x-2">
+              {[
+                "/lovable-uploads/80580729-6d4e-4bd0-a66c-dff6d0d890e1.png",
+                "/lovable-uploads/90ff8861-ff64-4a75-8a68-8afda542663d.png",
+                "/lovable-uploads/e49ddb52-4568-42a4-9701-8bdb0ebd0833.png"
+              ].map((src, n) => (
+                <Avatar key={n} className="w-8 h-8 border-2 border-white">
+                  <AvatarImage src={src} alt={`Student ${n + 1}`} />
+                  <AvatarFallback>ST</AvatarFallback>
+                </Avatar>
               ))}
             </div>
-            <div className="flex items-center space-x-3">
-              <div className="flex -space-x-2">
-                {[
-                  "/lovable-uploads/80580729-6d4e-4bd0-a66c-dff6d0d890e1.png",
-                  "/lovable-uploads/90ff8861-ff64-4a75-8a68-8afda542663d.png",
-                  "/lovable-uploads/e49ddb52-4568-42a4-9701-8bdb0ebd0833.png"
-                ].map((src, n) => (
-                  <Avatar key={n} className="w-8 h-8 border-2 border-white">
-                    <AvatarImage src={src} alt={`Student ${n + 1}`} />
-                    <AvatarFallback>ST</AvatarFallback>
-                  </Avatar>
-                ))}
-              </div>
-              <p className="text-sm text-gray-600">
-                Join <span className="font-semibold">2000+</span> other entrepreneurs in our online community
-              </p>
-            </div>
+            <p className="text-sm text-gray-600">
+              Join <span className="font-semibold">2000+</span> other entrepreneurs in our online community
+            </p>
           </div>
         </div>
 
-        {/* Story Sections */}
-        <div className="container px-4 md:px-6">
-          <div className="max-w-4xl mx-auto mt-12 space-y-8 mb-16">
-            {/* Personal Message Section */}
-            <PersonalMessage />
-            
-            {/* Journey Section - Before and After */}
-            <JourneySection />
-            {/* Trusted Companies Section */}
-            <TrustedCompanies />
-          </div>
-
-          {/* Ebook Cover Section - Adjusted width and spacing */}
-          <div className="max-w-3xl mx-auto pb-16 md:pb-20">
-            <div className={`mx-auto ${isMobile ? 'max-w-sm' : 'max-w-xl'}`}>
-              <div className="relative">
-                <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur"></div>
-                <div className="relative overflow-hidden rounded-xl">
-                  {!imageLoaded && <Skeleton className="w-full aspect-[4/3]" />}
-                  <img 
-                    src="/lovable-uploads/20fb5ec7-9362-4ced-aa5c-42d3a7c41f92.png" 
-                    alt="3D Printing Blueprint by Aly Yu" 
-                    className={`w-full h-auto transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`} 
-                    onLoad={() => setImageLoaded(true)} 
-                    loading="eager" 
-                    width={isMobile ? 400 : 600} 
-                    height={isMobile ? 300 : 450} 
-                  />
-                </div>
+        {/* Ebook Cover Section */}
+        <div className="max-w-3xl mx-auto pb-16 md:pb-20">
+          <div className={`mx-auto ${isMobile ? 'max-w-sm' : 'max-w-xl'}`}>
+            <div className="relative">
+              <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur"></div>
+              <div className="relative overflow-hidden rounded-xl">
+                {!imageLoaded && <Skeleton className="w-full aspect-[4/3]" />}
+                <img 
+                  src="/lovable-uploads/20fb5ec7-9362-4ced-aa5c-42d3a7c41f92.png" 
+                  alt="3D Printing Blueprint by Aly Yu" 
+                  className={`w-full h-auto transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`} 
+                  onLoad={() => setImageLoaded(true)} 
+                  loading="eager" 
+                  width={isMobile ? 400 : 600} 
+                  height={isMobile ? 300 : 450} 
+                />
               </div>
             </div>
           </div>
         </div>
+
+        {/* Trusted Companies Section */}
+        <TrustedCompanies />
       </div>
-    </div>;
+    </div>
+  );
 };
 
 export default HeroSection;
