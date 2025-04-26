@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import LeadMagnetForm from "./LeadMagnetForm";
@@ -19,7 +20,7 @@ const HeroSection = () => {
       <div className="container relative pt-16 pb-8 md:pt-20 px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center">
           <div className="mb-4 md:mb-6 inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
-            @aly3dprints • 24.5K followers
+            Created by @aly3dprints • 45.9K followers
           </div>
           
           <h1 className="mb-4 md:mb-6 font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900">

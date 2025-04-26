@@ -1,8 +1,8 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "react-router-dom";
 import LeadMagnetDialog from "./FreeGuideDialog";
+import { FileText } from "lucide-react";
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -44,9 +44,10 @@ const NavBar = () => {
     >
       <div className="container">
         <div className="flex items-center justify-between">
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
+            <FileText className="h-6 w-6 text-primary" />
             <a href="/" onClick={handleTitleClick} className="text-xl font-bold text-primary">
-              Aly's 3D Studio
+              3DBlueprint.io
             </a>
           </div>
 
