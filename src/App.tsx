@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -22,6 +21,7 @@ import Chapter5 from "./pages/Chapter5";
 import Chapter6 from "./pages/Chapter6";
 import Chapter7 from "./pages/Chapter7";
 import Chapter8 from "./pages/Chapter8";
+import Chapter9 from "./pages/Chapter9";
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -99,6 +99,11 @@ const App = () => {
                 <Route path="/dashboard/chapter-8" element={
                   <ProtectedRoute>
                     <Chapter8 />
+                  </ProtectedRoute>
+                } />
+                <Route path="/dashboard/chapter-9" element={
+                  <ProtectedRoute>
+                    <Chapter9 />
                   </ProtectedRoute>
                 } />
                 <Route path="*" element={<NotFound />} />

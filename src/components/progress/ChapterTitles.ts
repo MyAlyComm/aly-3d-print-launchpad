@@ -7,8 +7,8 @@ export const getChapterTitle = (chapterNumber: number) => {
     3: "The 3 Plus 1 Equals 40 System",
     4: "The Product Trinity",
     5: "Choosing Your Production Tools",
-    6: "Selecting Your Selling Platforms",
-    7: "Setting Up for Success",
+    6: "Setting Up for Success",
+    7: "Zero-Cost Marketing That Works",
     8: "Zero-Cost Marketing That Works",
     9: "Scaling Beyond $5K",
     10: "Future-Proofing Your Business"
