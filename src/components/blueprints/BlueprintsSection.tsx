@@ -1,4 +1,3 @@
-
 import BlueprintCard from "./BlueprintCard";
 import {
   DropdownMenu,
@@ -7,7 +6,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Check } from "lucide-react";
 
 const blueprints = [
   {
