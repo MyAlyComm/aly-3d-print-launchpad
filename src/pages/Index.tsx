@@ -1,3 +1,4 @@
+
 import NavBar from "@/components/NavBar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
@@ -8,6 +9,8 @@ import FAQSection from "@/components/FAQSection";
 import FooterSection from "@/components/FooterSection";
 import Analytics from "@/components/Analytics";
 import ZapierIntegration from "@/components/ZapierIntegration";
+import PersonalMessage from "@/components/PersonalMessage";
+import JourneySection from "@/components/JourneySection";
 import { useEffect } from "react";
 
 const Index = () => {
