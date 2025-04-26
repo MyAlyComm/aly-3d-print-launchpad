@@ -4,6 +4,7 @@ import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { ChapterProgressBar } from "@/components/ebook/ChapterProgress";
 import { ChapterNavigation } from "@/components/ebook/ChapterNavigation";
 import { Conclusion } from "@/components/chapters/chapter11/Conclusion";
+import { useChapterForm } from "@/hooks/useChapterForm";
 
 const Chapter11 = () => {
   const [section, setSection] = useState(0);
