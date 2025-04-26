@@ -7,6 +7,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Star } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import PersonalMessage from "./PersonalMessage";
+import BeforeStorySection from "./BeforeStorySection";
 
 const HeroSection = () => {
   const [open, setOpen] = useState(false);
@@ -77,6 +78,11 @@ marketing strategies to start profiting from 3D printing</p>
         {/* Personal Message Section */}
         <div className="max-w-2xl mx-auto mt-12">
           <PersonalMessage />
+        </div>
+
+        {/* Before Story Section */}
+        <div className="max-w-2xl mx-auto mt-8">
+          <BeforeStorySection />
         </div>
       </div>
 
