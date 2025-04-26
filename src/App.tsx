@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -20,6 +19,7 @@ import Chapter3 from "./pages/Chapter3";
 import Chapter4 from "./pages/Chapter4";
 import Chapter5 from "./pages/Chapter5";
 import Chapter6 from "./pages/Chapter6";
+import Chapter7 from "./pages/Chapter7";
 
 const App = () => {
   const queryClient = new QueryClient({
