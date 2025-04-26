@@ -15,8 +15,8 @@ const DetailedStorySection = () => {
                 <div className="relative">
                   <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur"></div>
                   <img 
-                    src="/lovable-uploads/20fb5ec7-9362-4ced-aa5c-42d3a7c41f92.png"
-                    alt="Blueprint creation process" 
+                    src="/lovable-uploads/48ee05cd-0501-4975-aa98-cc4a394c0c73.png"
+                    alt="AI inspiration" 
                     className="relative rounded-xl w-full aspect-square object-cover"
                   />
                 </div>
@@ -37,9 +37,9 @@ const DetailedStorySection = () => {
                 <div className="relative">
                   <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur"></div>
                   <img 
-                    src="/lovable-uploads/1935bd17-362f-4c25-bc16-bb5b81522fc8.png"
-                    alt="5 in 1 phone stand product" 
-                    className="relative rounded-xl w-full aspect-square object-cover bg-white"
+                    src="/lovable-uploads/d65a07f1-14a2-4846-9708-4aff89f8be5e.png"
+                    alt="MyAly.ai - The Future of 3D Printing" 
+                    className="relative rounded-xl w-full aspect-square object-cover"
                   />
                 </div>
                 <div>
@@ -59,8 +59,8 @@ const DetailedStorySection = () => {
                 <div className="relative">
                   <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur"></div>
                   <img 
-                    src="/lovable-uploads/b1236689-73b3-4e92-9e4d-b466a948bcb1.png"
-                    alt="Mission and vision" 
+                    src="/lovable-uploads/3a8950bc-4b47-4788-a36e-bff4563eeb2e.png"
+                    alt="Future vision with AI" 
                     className="relative rounded-xl w-full aspect-square object-cover"
                   />
                 </div>

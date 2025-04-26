@@ -37,9 +37,9 @@ const Index = () => {
       <main>
         <HeroSection />
         <AboutSection />
-        <DetailedStorySection />
         <OfferSection />
         <HowItWorksSection />
+        <DetailedStorySection />
         <TrustSection />
         <FAQSection />
         <section className="py-16">
