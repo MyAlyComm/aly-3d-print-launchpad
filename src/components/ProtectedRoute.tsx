@@ -13,7 +13,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { user } = useAuth();
   const [hasAccess, setHasAccess] = useState<boolean | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-
+  
   useEffect(() => {
     // Check if user has purchased access
     const checkAccess = async () => {
@@ -49,13 +49,19 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   }
 
   if (!user) {
-    toast.error("You need to be logged in to view this content");
-    return <Navigate to="/auth" state={{ from: location }} replace />;
+    // Only show toast on initial navigation, not on re-renders
+    if (location.state?.showToast !== false) {
+      toast.error("You need to be logged in to view this content");
+    }
+    return <Navigate to="/auth" state={{ from: location, showToast: false }} replace />;
   }
 
   if (!hasAccess) {
-    toast.error("You need to purchase access to view this content");
-    return <Navigate to="/" state={{ from: location }} replace />;
+    // Only show toast on initial navigation, not on re-renders
+    if (location.state?.showToast !== false) {
+      toast.error("You need to purchase access to view this content");
+    }
+    return <Navigate to="/" state={{ from: location, showToast: false }} replace />;
   }
 
   return <>{children}</>;
