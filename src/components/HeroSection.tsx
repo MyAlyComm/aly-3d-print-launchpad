@@ -1,13 +1,17 @@
+
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import LeadMagnetForm from "./LeadMagnetForm";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Star } from "lucide-react";
+
 const HeroSection = () => {
   const [open, setOpen] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const isMobile = useIsMobile();
+
   return <div className="relative overflow-hidden bg-gradient-to-b from-primary-light/10 via-white to-white">
       <div className="absolute inset-0 gradient-blur"></div>
       
@@ -22,7 +26,7 @@ const HeroSection = () => {
             Launch Your <span className="text-primary">3D Printing</span> Business With The Ultimate Blueprint!
           </h1>
           
-          <p className="mb-6 md:mb-8 max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-gray-600">Get instant access to guides, STL files and 
+          <p className="mb-6 md:mb-8 max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-gray-600">Get instant access to guides, STL files and 
 marketing strategies to start profiting from 3D printing</p>
           
           <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 justify-center">
@@ -41,6 +45,25 @@ marketing strategies to start profiting from 3D printing</p>
               Browse All Blueprints
             </Button>
           </div>
+
+          {/* Social Proof Section */}
+          <div className="mt-8 flex flex-col items-center space-y-2">
+            <div className="flex items-center space-x-1">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+              ))}
+            </div>
+            <div className="flex items-center space-x-3">
+              <div className="flex -space-x-2">
+                {[1, 2, 3].map((n) => (
+                  <div key={n} className="w-8 h-8 rounded-full border-2 border-white bg-gray-200"></div>
+                ))}
+              </div>
+              <p className="text-sm text-gray-600">
+                <span className="font-semibold">4.9/5</span> from over <span className="font-semibold">2,000+</span> students
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -58,4 +81,5 @@ marketing strategies to start profiting from 3D printing</p>
       </div>
     </div>;
 };
+
 export default HeroSection;
