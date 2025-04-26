@@ -96,7 +96,7 @@ const JourneySection = () => {
                 <ArrowRight className="w-5 h-5 text-blue-500" />
                 <h3 className="font-semibold text-lg text-gray-900">Month 6</h3>
               </div>
-              <p className="text-gray-600 text-sm leading-relaxed">Investing in marketing and branding to reach a wider customer base.</p>
+              <p className="text-gray-600 text-sm leading-relaxed">I obsessed over the history of 3D printing, determined to map the key variables in the industry and create complex algorithms to predict future outcomes. I shifted my focus towards helping others grow their business and learn from my knowledge bases.</p>
             </div>
           </div>
 
