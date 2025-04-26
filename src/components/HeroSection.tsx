@@ -1,18 +1,14 @@
-
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import LeadMagnetForm from "./LeadMagnetForm";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useIsMobile } from "@/hooks/use-mobile";
-
 const HeroSection = () => {
   const [open, setOpen] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const isMobile = useIsMobile();
-
-  return (
-    <div className="relative overflow-hidden bg-gradient-to-b from-primary-light/10 via-white to-white">
+  return <div className="relative overflow-hidden bg-gradient-to-b from-primary-light/10 via-white to-white">
       <div className="absolute inset-0 gradient-blur"></div>
       
       {/* Text Content Section */}
@@ -26,9 +22,8 @@ const HeroSection = () => {
             Launch Your <span className="text-primary">3D Printing</span> Business With The Ultimate Blueprint!
           </h1>
           
-          <p className="mb-6 md:mb-8 max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-gray-600">
-            Get instant access to guides, STL files, and strategies to start profiting from 3D printing, even with a $500 budget.
-          </p>
+          <p className="mb-6 md:mb-8 max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-gray-600">Get instant access to guides, STL files and 
+marketing strategies to start profiting from 3D printing</p>
           
           <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 justify-center">
             <Dialog open={open} onOpenChange={setOpen}>
@@ -38,18 +33,11 @@ const HeroSection = () => {
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[425px]">
-                <LeadMagnetForm 
-                  setDialogOpen={setOpen} 
-                  requestType="guide"
-                />
+                <LeadMagnetForm setDialogOpen={setOpen} requestType="guide" />
               </DialogContent>
             </Dialog>
             
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-primary text-primary hover:bg-primary hover:text-white font-bold text-lg px-6 py-5 w-full sm:w-auto"
-            >
+            <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-bold text-lg px-6 py-5 w-full sm:w-auto">
               Browse All Blueprints
             </Button>
           </div>
@@ -62,24 +50,12 @@ const HeroSection = () => {
           <div className="relative">
             <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur"></div>
             <div className="relative overflow-hidden rounded-xl">
-              {!imageLoaded && (
-                <Skeleton className="w-full aspect-[4/3]" />
-              )}
-              <img
-                src="/lovable-uploads/20fb5ec7-9362-4ced-aa5c-42d3a7c41f92.png"
-                alt="3D Printing Blueprint by Aly Yu"
-                className={`w-full h-auto transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-                onLoad={() => setImageLoaded(true)}
-                loading="eager"
-                width={isMobile ? 500 : 800}
-                height={isMobile ? 375 : 600}
-              />
+              {!imageLoaded && <Skeleton className="w-full aspect-[4/3]" />}
+              <img src="/lovable-uploads/20fb5ec7-9362-4ced-aa5c-42d3a7c41f92.png" alt="3D Printing Blueprint by Aly Yu" className={`w-full h-auto transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`} onLoad={() => setImageLoaded(true)} loading="eager" width={isMobile ? 500 : 800} height={isMobile ? 375 : 600} />
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default HeroSection;
