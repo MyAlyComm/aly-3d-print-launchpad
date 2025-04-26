@@ -76,7 +76,7 @@ const JourneySection = () => {
           <div className="space-y-4 transition-transform duration-300 hover:-translate-y-2">
             <div className="relative">
               <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur group-hover:opacity-40 transition-opacity"></div>
-              <img src="/lovable-uploads/90ff8861-ff64-4a75-8a68-8afda542663d.png" alt="Custom manufacturing setup" className="relative rounded-xl w-full aspect-square object-cover" />
+              <img alt="Custom manufacturing setup" className="relative rounded-xl w-full aspect-square object-cover" src="/lovable-uploads/5146c83e-374b-41f6-b521-c13fb2db3347.jpg" />
             </div>
             <div>
               <div className="flex items-center gap-2 mb-2">
