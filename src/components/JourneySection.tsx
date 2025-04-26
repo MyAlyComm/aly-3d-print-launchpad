@@ -81,7 +81,7 @@ const JourneySection = () => {
                 <ArrowRight className="w-5 h-5 text-primary" />
                 <h3 className="font-semibold text-lg text-gray-900">Month 5</h3>
               </div>
-              <p className="text-gray-600 text-sm leading-relaxed">Expanding into custom manufacturing solutions and optimizing production workflow.</p>
+              <p className="text-gray-600 text-sm leading-relaxed">I designed a 5 in 1 phone stand which went viral and has since been downloaded and purchased thousands of times in just a few months. I also started more complex custom work for clients and began building my AI company.</p>
             </div>
           </div>
 
