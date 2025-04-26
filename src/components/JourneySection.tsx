@@ -56,7 +56,7 @@ const JourneySection = () => {
       description: "I finished my thesis: The Axiogenetic Theorem. A mathematical model to assign and predict true value outcomes as functions of the products of the rate of Innovation and Time expended."
     },
     {
-      mainImage: "/lovable-uploads/6265514e-869f-4650-8698-e0a572599ea7.png",
+      mainImage: "/lovable-uploads/e3c4d94e-63ee-4200-8ca7-63cd8f397489.png",
       hoverImage: "/lovable-uploads/placeholder.svg",
       month: "Month 8",
       icon: <ArrowRight className="w-5 h-5 text-green-500" />,
