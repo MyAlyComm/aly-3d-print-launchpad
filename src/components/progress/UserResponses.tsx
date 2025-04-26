@@ -10,20 +10,45 @@ interface ResponseData {
   checkboxes?: Record<string, boolean>;
 }
 
+const getChapterTitle = (chapterNumber: number) => {
+  const titles = {
+    0: "Introduction: The Opportunity",
+    1: "Arbitrage Windows",
+    2: "Knowing Yourself, Knowing Your Tools",
+    3: "The 3 Plus 1 Equals 40 System",
+    4: "The Product Trinity",
+    5: "Choosing Your Production Tools",
+    6: "Selecting Your Selling Platforms",
+    7: "Setting Up for Success",
+    8: "Zero-Cost Marketing That Works",
+    9: "Scaling Beyond $5K",
+    10: "Future-Proofing Your Business"
+  };
+  return titles[chapterNumber as keyof typeof titles] || `Chapter ${chapterNumber}`;
+};
+
 export const UserResponses = () => {
   const { chapterProgresses } = useChapterProgress();
 
   if (!chapterProgresses || chapterProgresses.length === 0) {
     return (
-      <div className="text-center py-6 text-gray-500">
-        <p>No responses recorded yet. Start working on chapters to track your progress.</p>
+      <div className="text-center py-6 text-muted-foreground">
+        <p>Start with the Introduction chapter to begin tracking your progress.</p>
       </div>
     );
   }
 
+  // Sort responses by chapter number and completion date
+  const sortedResponses = [...chapterProgresses].sort((a, b) => {
+    if (a.chapter_number === b.chapter_number) {
+      return new Date(b.completed_at || 0).getTime() - new Date(a.completed_at || 0).getTime();
+    }
+    return a.chapter_number - b.chapter_number;
+  });
+
   return (
     <div className="space-y-6">
-      {chapterProgresses.map((progress) => {
+      {sortedResponses.map((progress) => {
         // Safely handle the case where response_data might be undefined
         const responses = progress.response_data as Record<string, ResponseData> || {};
         
@@ -35,18 +60,23 @@ export const UserResponses = () => {
           if (!sectionData || (!sectionData.textInputs && !sectionData.checkboxes)) return null;
           
           return (
-            <Card key={`${progress.chapter_number}-${sectionId}`}>
+            <Card key={`${progress.chapter_number}-${sectionId}`} className="bg-card">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <h3 className="text-lg font-semibold">
-                      Chapter {progress.chapter_number}
+                      {progress.chapter_number === 0 ? 'Introduction' : `Chapter ${progress.chapter_number}`}
                     </h3>
-                    <p className="text-sm text-gray-600 font-medium">
-                      {getSectionName(sectionId)}
-                    </p>
+                    <div className="flex flex-col gap-1">
+                      <p className="text-sm text-muted-foreground font-medium">
+                        {getChapterTitle(progress.chapter_number)}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {getSectionName(sectionId)}
+                      </p>
+                    </div>
                   </div>
-                  <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+                  <span className="text-xs bg-muted px-2 py-1 rounded-full">
                     {formatDate(progress.completed_at)}
                   </span>
                 </div>
@@ -60,7 +90,7 @@ export const UserResponses = () => {
                             <TableCell className="align-top font-medium w-1/3">
                               {getQuestionText(questionId)}
                             </TableCell>
-                            <TableCell>{answer}</TableCell>
+                            <TableCell className="whitespace-pre-wrap">{answer}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
