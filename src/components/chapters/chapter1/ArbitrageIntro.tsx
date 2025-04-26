@@ -1,10 +1,18 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 
 export const ArbitrageIntro = () => {
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold">ARBITRAGE WINDOWS - THE TIMELINES OF OPPORTUNITY</h2>
+
+      <div className="my-8">
+        <img
+          src="/lovable-uploads/72adc6d5-64f9-4a52-b3cd-09e2ef9b3882.png"
+          alt="Arbitrage Windows Concept"
+          className="w-full rounded-lg shadow-lg"
+        />
+      </div>
+
       <p className="text-gray-700">
         In business, the biggest profits don't come from being better. They come from being early.
       </p>
