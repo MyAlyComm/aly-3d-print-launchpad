@@ -107,4 +107,31 @@
   .blueprint-card-popular {
     @apply border-2 border-secondary/30;
   }
+
+  .logo-gradient {
+    background: linear-gradient(
+      90deg,
+      #0EA5E9,
+      #8B5CF6,
+      #F97316,
+      #0EA5E9
+    );
+    background-size: 300% 100%;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: gradient 8s linear infinite;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
 }

@@ -46,7 +46,7 @@ const NavBar = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <FileText className="h-6 w-6 text-primary" />
-            <a href="/" onClick={handleTitleClick} className="text-xl font-bold text-primary">
+            <a href="/" onClick={handleTitleClick} className="text-xl font-bold logo-gradient">
               3DBlueprint.io
             </a>
           </div>
