@@ -10,7 +10,7 @@ export const DashboardSidebarContent = () => {
   return (
     <div className="flex h-full flex-col">
       <div className="mb-8">
-        <h2 className="text-xl font-bold text-primary">Aly's 3D Studio</h2>
+        <h2 className="text-xl font-bold text-primary">3DBlueprint.io</h2>
         <p className="text-sm text-gray-500">Ebook Dashboard</p>
       </div>
       
