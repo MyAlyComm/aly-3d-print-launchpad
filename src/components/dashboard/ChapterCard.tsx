@@ -1,4 +1,3 @@
-
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, ArrowRight, Image } from "lucide-react";
@@ -24,9 +23,8 @@ export function ChapterCard({
 
   return (
     <Card className={cn(
-      "transition-all duration-300 hover:shadow-md relative overflow-hidden grid md:grid-cols-[1fr_200px]",
+      "transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative overflow-hidden grid md:grid-cols-[1fr_200px]",
       isCompleted && "bg-gradient-to-br from-primary/5 to-transparent",
-      !isCompleted && "hover:-translate-y-1"
     )}>
       {isCompleted && (
         <div className="absolute top-3 right-3 text-primary z-10">

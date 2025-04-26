@@ -1,4 +1,3 @@
-
 import NavBar from "@/components/NavBar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
@@ -13,6 +12,7 @@ import ZapierIntegration from "@/components/ZapierIntegration";
 import PersonalMessage from "@/components/PersonalMessage";
 import JourneySection from "@/components/JourneySection";
 import { useEffect } from "react";
+import { BackToTop } from "@/components/ui/back-to-top";
 
 const Index = () => {
   useEffect(() => {
@@ -31,6 +31,7 @@ const Index = () => {
       {/* Analytics and Integration Components */}
       <Analytics />
       <ZapierIntegration />
+      <BackToTop />
       
       {/* Main Landing Page Content */}
       <NavBar />
