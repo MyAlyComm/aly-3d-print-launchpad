@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle, ArrowRight } from "lucide-react";
 
@@ -11,8 +12,8 @@ const JourneySection = () => {
             <div className="relative">
               <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur group-hover:opacity-40 transition-opacity"></div>
               <img 
-                src="/lovable-uploads/b1236689-73b3-4e92-9e4d-b466a948bcb1.png"
-                alt="Aly feeling overwhelmed" 
+                src="/lovable-uploads/7868338f-6cdb-4097-b11e-25b26904b7e1.png"
+                alt="Setting up first 3D printer" 
                 className="relative rounded-xl w-full aspect-square object-cover"
               />
             </div>
@@ -22,7 +23,7 @@ const JourneySection = () => {
                 <h3 className="font-semibold text-lg text-gray-900">Month 1-3</h3>
               </div>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Started my journey completely lost. Spent countless hours searching through scattered information and making costly mistakes.
+                Started my journey with unboxing my first 3D printer. Learning the basics of setup and calibration.
               </p>
             </div>
           </div>
@@ -31,9 +32,11 @@ const JourneySection = () => {
           <div className="space-y-4 transition-transform duration-300 hover:-translate-y-2">
             <div className="relative">
               <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur group-hover:opacity-40 transition-opacity"></div>
-              <div className="relative rounded-xl w-full aspect-square bg-gray-100 flex items-center justify-center">
-                <p className="text-gray-400">Progress image coming soon</p>
-              </div>
+              <img 
+                src="/lovable-uploads/0f08439b-373a-474c-971a-ae51de7a6701.png"
+                alt="Learning and researching" 
+                className="relative rounded-xl w-full aspect-square object-cover"
+              />
             </div>
             <div>
               <div className="flex items-center gap-2 mb-2">
@@ -41,7 +44,7 @@ const JourneySection = () => {
                 <h3 className="font-semibold text-lg text-gray-900">Month 3-5</h3>
               </div>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Started getting the hang of basic printing. Began experimenting with different materials and settings.
+                Dedicated time to learning, researching, and planning the business strategy while improving print quality.
               </p>
             </div>
           </div>
@@ -50,9 +53,11 @@ const JourneySection = () => {
           <div className="space-y-4 transition-transform duration-300 hover:-translate-y-2">
             <div className="relative">
               <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur group-hover:opacity-40 transition-opacity"></div>
-              <div className="relative rounded-xl w-full aspect-square bg-gray-100 flex items-center justify-center">
-                <p className="text-gray-400">Progress image coming soon</p>
-              </div>
+              <img 
+                src="/lovable-uploads/04fa3465-1dd4-4878-bde7-ee7d0398b515.png"
+                alt="Scaling up operations" 
+                className="relative rounded-xl w-full aspect-square object-cover"
+              />
             </div>
             <div>
               <div className="flex items-center gap-2 mb-2">
@@ -60,7 +65,7 @@ const JourneySection = () => {
                 <h3 className="font-semibold text-lg text-gray-900">Month 5-7</h3>
               </div>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Made my first sales and started understanding the business side. Learned about marketing and customer service.
+                Scaling up operations with proper organization and multiple printers to increase production capacity.
               </p>
             </div>
           </div>
@@ -69,9 +74,11 @@ const JourneySection = () => {
           <div className="space-y-4 transition-transform duration-300 hover:-translate-y-2">
             <div className="relative">
               <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur group-hover:opacity-40 transition-opacity"></div>
-              <div className="relative rounded-xl w-full aspect-square bg-gray-100 flex items-center justify-center">
-                <p className="text-gray-400">Success image coming soon</p>
-              </div>
+              <img 
+                src="/lovable-uploads/1dadb0e8-cc5d-4b6f-955b-cb6f463eab22.png"
+                alt="Growing business success" 
+                className="relative rounded-xl w-full aspect-square object-cover"
+              />
             </div>
             <div>
               <div className="flex items-center gap-2 mb-2">
@@ -79,7 +86,7 @@ const JourneySection = () => {
                 <h3 className="font-semibold text-lg text-gray-900">Month 7-9</h3>
               </div>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Running a successful business and helping others avoid the mistakes I made. Created this comprehensive blueprint.
+                Fulfilling bulk orders and running a successful business with efficient systems in place.
               </p>
             </div>
           </div>
