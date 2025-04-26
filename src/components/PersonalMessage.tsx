@@ -9,9 +9,9 @@ const PersonalMessage = () => {
         <div className="flex items-start gap-4">
           <div className="flex-shrink-0">
             <img 
-              src="/lovable-uploads/80580729-6d4e-4bd0-a66c-dff6d0d890e1.png"
+              src="/lovable-uploads/6265514e-869f-4650-8698-e0a572599ea7.png"
               alt="Aly" 
-              className="w-24 h-24 rounded-full border-4 border-primary" 
+              className="w-24 h-24 rounded-full border-4 border-primary object-cover" 
             />
           </div>
           <div className="flex-1">
