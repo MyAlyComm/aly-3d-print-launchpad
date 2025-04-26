@@ -46,9 +46,7 @@ const JourneySection = () => {
                 <ArrowRight className="w-5 h-5 text-purple-500" />
                 <h3 className="font-semibold text-lg text-gray-900">Month 3</h3>
               </div>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Scaling up operations with proper organization and multiple printers to increase production capacity.
-              </p>
+              <p className="text-gray-600 text-sm leading-relaxed">I scaled up my operations and the sofa in my living room was traded in for industrial shelving and over 30 printers to increase production capacity.</p>
             </div>
           </div>
 
