@@ -29,7 +29,7 @@ const DetailedStorySection = () => {
               <div className="space-y-4">
                 <div className="relative">
                   <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur"></div>
-                  <img src="/lovable-uploads/d65a07f1-14a2-4846-9708-4aff89f8be5e.png" alt="MyAly.ai - The Future of 3D Printing" className="relative rounded-xl w-full aspect-square object-cover" />
+                  <img alt="MyAly.ai - The Future of 3D Printing" className="relative rounded-xl w-full aspect-square object-cover" src="/lovable-uploads/f2d611cd-8fd6-4e92-bc7d-844fcf09334f.jpg" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-primary-dark mb-3">My Journey</h3>
