@@ -83,6 +83,22 @@ export const DashboardNav = () => {
       <Button 
         variant="ghost" 
         className="w-full justify-start"
+        onClick={() => navigate("/dashboard/chapter-8")}
+      >
+        <BookText className="mr-2 h-4 w-4" />
+        Chapter 8: Zero-Cost Marketing That Works
+      </Button>
+      <Button 
+        variant="ghost" 
+        className="w-full justify-start"
+        onClick={() => navigate("/dashboard/chapter-9")}
+      >
+        <BookText className="mr-2 h-4 w-4" />
+        Chapter 9: Scaling Beyond $5K
+      </Button>
+      <Button 
+        variant="ghost" 
+        className="w-full justify-start"
         onClick={() => navigate("/dashboard/resources")}
       >
         <BookOpen className="mr-2 h-4 w-4" />
