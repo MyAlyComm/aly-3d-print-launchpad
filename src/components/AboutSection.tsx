@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Separator } from "@/components/ui/separator";
 
 const AboutSection = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -13,13 +14,29 @@ const AboutSection = () => {
             <div className="text-sm font-medium text-primary mb-2">THE BRAIN BEHIND THE BLUEPRINT</div>
             <h2 className="text-3xl md:text-4xl font-bold font-display mb-6">Hey I'm Aly, 
 Your 3D Printing Mentor</h2>
-            <div className="space-y-4 text-gray-700">
-              <p>I designed this blueprint because it's what I needed when I was starting out. And it's the culmination of everything I've learned about starting and growing a 3D printing business. It's the step-by-step guide that I wish I had before...</p>
-              <p>My journey started in August 2024 with a single $300 printer, selling keychains to friends. What began as a side hustle to help pay for college transformed into a thriving business generating over $20K monthly. Who knew my Philosophy and Art History degree would become such a valuable asset in this industry? This unique perspective helped me design viral products and expand globally.</p>
-              <p>Now, it's my turn to help others discover the freedom that 3D printing creates. I'm sharing everything I've learned about building a profitable business in this industry. My mission is simple: help creative people like you turn your ideas into income.</p>
-              <p className="font-medium">
-                If I could start with $500 and build this, imagine what you could create with the right blueprint!
-              </p>
+            
+            <div className="space-y-6 text-gray-700">
+              <div>
+                <h3 className="text-lg font-medium text-primary-dark mb-2">Why I Created This Blueprint</h3>
+                <p>I designed this blueprint because it's what I needed when I was starting out. And it's the culmination of everything I've learned about starting and growing a 3D printing business. It's the step-by-step guide that I wish I had before...</p>
+              </div>
+              
+              <Separator className="my-2" />
+              
+              <div>
+                <h3 className="text-lg font-medium text-primary-dark mb-2">My Journey</h3>
+                <p>My journey started in August 2024 with a single $300 printer, selling keychains to friends. What began as a side hustle to help pay for college transformed into a thriving business generating over $20K monthly. Who knew my Philosophy and Art History degree would become such a valuable asset in this industry? This unique perspective helped me design viral products and expand globally.</p>
+              </div>
+              
+              <Separator className="my-2" />
+              
+              <div>
+                <h3 className="text-lg font-medium text-primary-dark mb-2">My Mission</h3>
+                <p>Now, it's my turn to help others discover the freedom that 3D printing creates. I'm sharing everything I've learned about building a profitable business in this industry. My mission is simple: help creative people like you turn your ideas into income.</p>
+                <p className="font-medium mt-2">
+                  If I could start with $500 and build this, imagine what you could create with the right blueprint!
+                </p>
+              </div>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 mt-8">
