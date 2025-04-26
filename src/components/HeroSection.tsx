@@ -76,23 +76,33 @@ marketing strategies to start profiting from 3D printing</p>
         </div>
 
         {/* Story Sections */}
-        <div className="max-w-4xl mx-auto mt-12 space-y-8">
-          {/* Personal Message Section */}
-          <PersonalMessage />
-          
-          {/* Journey Section - Before and After */}
-          <JourneySection />
-        </div>
-      </div>
+        <div className="container px-4 md:px-6">
+          <div className="max-w-4xl mx-auto mt-12 space-y-8 mb-16">
+            {/* Personal Message Section */}
+            <PersonalMessage />
+            
+            {/* Journey Section - Before and After */}
+            <JourneySection />
+          </div>
 
-      {/* Ebook Cover Section */}
-      <div className="container relative pb-16 md:pb-20 px-4 md:px-6">
-        <div className={`mx-auto ${isMobile ? 'max-w-md' : 'max-w-2xl'}`}>
-          <div className="relative">
-            <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur"></div>
-            <div className="relative overflow-hidden rounded-xl">
-              {!imageLoaded && <Skeleton className="w-full aspect-[4/3]" />}
-              <img src="/lovable-uploads/20fb5ec7-9362-4ced-aa5c-42d3a7c41f92.png" alt="3D Printing Blueprint by Aly Yu" className={`w-full h-auto transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`} onLoad={() => setImageLoaded(true)} loading="eager" width={isMobile ? 500 : 800} height={isMobile ? 375 : 600} />
+          {/* Ebook Cover Section - Adjusted width and spacing */}
+          <div className="max-w-3xl mx-auto pb-16 md:pb-20">
+            <div className={`mx-auto ${isMobile ? 'max-w-sm' : 'max-w-xl'}`}>
+              <div className="relative">
+                <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur"></div>
+                <div className="relative overflow-hidden rounded-xl">
+                  {!imageLoaded && <Skeleton className="w-full aspect-[4/3]" />}
+                  <img 
+                    src="/lovable-uploads/20fb5ec7-9362-4ced-aa5c-42d3a7c41f92.png" 
+                    alt="3D Printing Blueprint by Aly Yu" 
+                    className={`w-full h-auto transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`} 
+                    onLoad={() => setImageLoaded(true)} 
+                    loading="eager" 
+                    width={isMobile ? 400 : 600} 
+                    height={isMobile ? 300 : 450} 
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
