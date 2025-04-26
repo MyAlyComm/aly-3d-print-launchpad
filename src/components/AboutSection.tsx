@@ -1,8 +1,11 @@
+
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+
 const AboutSection = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  
   return <div className="py-12 md:py-16 bg-white">
       <div className="container px-4 md:px-6">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -11,10 +14,9 @@ const AboutSection = () => {
             <h2 className="text-3xl md:text-4xl font-bold font-display mb-6">Hey I'm Aly, 
 Your 3D Printing Mentor</h2>
             <div className="space-y-4 text-gray-700">
-              <p>This blueprint is the culmination of everything I've learned about starting and growing a 3D printing business. It's the step-by-step guide that I wish I had before I got started...</p>
-              <p>I started my 3D printing journey in August, 2024 with just one $300 printer selling keychains to friends. It quickly grew into a real business bringing in more than $20K+ a month.
-I just wanted a side hustle to help pay for college, I had no idea that my Philosophy and Art History degree would be such a valuable tool to have in the industry. This open minded approach allowed me to design viral products, sell globally and now...</p>
-              <p>It's my turn to help others so that they can unlock the freedom that 3D printing creates. It's truly a world of possibility and in my Blueprint I'm sharing 've learned about building a profitable 3D printing business. My mission is simple: help creative people like you turn their ideas into income.</p>
+              <p>I designed this blueprint because it's what I needed when I was starting out. And it's the culmination of everything I've learned about starting and growing a 3D printing business. It's the step-by-step guide that I wish I had before...</p>
+              <p>My journey started in August 2024 with a single $300 printer, selling keychains to friends. What began as a side hustle to help pay for college transformed into a thriving business generating over $20K monthly. Who knew my Philosophy and Art History degree would become such a valuable asset in this industry? This unique perspective helped me design viral products and expand globally.</p>
+              <p>Now, it's my turn to help others discover the freedom that 3D printing creates. I'm sharing everything I've learned about building a profitable business in this industry. My mission is simple: help creative people like you turn your ideas into income.</p>
               <p className="font-medium">
                 If I could start with $500 and build this, imagine what you could create with the right blueprint!
               </p>
@@ -49,4 +51,5 @@ I just wanted a side hustle to help pay for college, I had no idea that my Philo
       </div>
     </div>;
 };
+
 export default AboutSection;
