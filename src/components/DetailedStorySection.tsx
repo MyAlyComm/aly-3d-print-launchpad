@@ -1,9 +1,6 @@
-
 import { Card, CardContent } from "@/components/ui/card";
-
 const DetailedStorySection = () => {
-  return (
-    <div className="py-12 md:py-16 bg-white">
+  return <div className="py-12 md:py-16 bg-white">
       <div className="container px-4 md:px-6">
         <h2 className="text-3xl md:text-4xl font-bold font-display mb-12 text-center">My Journey in Detail</h2>
         
@@ -14,11 +11,7 @@ const DetailedStorySection = () => {
               <div className="space-y-4">
                 <div className="relative">
                   <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur"></div>
-                  <img 
-                    src="/lovable-uploads/48ee05cd-0501-4975-aa98-cc4a394c0c73.png"
-                    alt="AI inspiration" 
-                    className="relative rounded-xl w-full aspect-square object-cover"
-                  />
+                  <img alt="AI inspiration" className="relative rounded-xl w-full aspect-square object-cover" src="/lovable-uploads/441f796f-981b-4951-a495-ee188b79a2f3.jpg" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-primary-dark mb-3">Why I Created This Blueprint</h3>
@@ -36,11 +29,7 @@ const DetailedStorySection = () => {
               <div className="space-y-4">
                 <div className="relative">
                   <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur"></div>
-                  <img 
-                    src="/lovable-uploads/d65a07f1-14a2-4846-9708-4aff89f8be5e.png"
-                    alt="MyAly.ai - The Future of 3D Printing" 
-                    className="relative rounded-xl w-full aspect-square object-cover"
-                  />
+                  <img src="/lovable-uploads/d65a07f1-14a2-4846-9708-4aff89f8be5e.png" alt="MyAly.ai - The Future of 3D Printing" className="relative rounded-xl w-full aspect-square object-cover" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-primary-dark mb-3">My Journey</h3>
@@ -58,11 +47,7 @@ const DetailedStorySection = () => {
               <div className="space-y-4">
                 <div className="relative">
                   <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur"></div>
-                  <img 
-                    src="/lovable-uploads/3a8950bc-4b47-4788-a36e-bff4563eeb2e.png"
-                    alt="Future vision with AI" 
-                    className="relative rounded-xl w-full aspect-square object-cover"
-                  />
+                  <img src="/lovable-uploads/3a8950bc-4b47-4788-a36e-bff4563eeb2e.png" alt="Future vision with AI" className="relative rounded-xl w-full aspect-square object-cover" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-primary-dark mb-3">My Mission</h3>
@@ -78,8 +63,6 @@ const DetailedStorySection = () => {
           </Card>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default DetailedStorySection;
