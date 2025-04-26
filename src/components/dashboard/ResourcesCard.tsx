@@ -11,17 +11,20 @@ export const ResourcesCard = () => {
     {
       icon: FileText,
       title: "Templates & Checklists",
-      description: "Ready-to-use business documents"
+      description: "Ready-to-use business documents",
+      path: "/dashboard/resources#templates"
     },
     {
       icon: Video,
       title: "Video Tutorials",
-      description: "Step-by-step guidance"
+      description: "Step-by-step guidance",
+      path: "/dashboard/resources#videos"
     },
     {
       icon: Image,
       title: "Design Files",
-      description: "STL files and models"
+      description: "STL files and models",
+      path: "/dashboard/resources#designs"
     }
   ];
 
@@ -36,7 +39,8 @@ export const ResourcesCard = () => {
           {resourceCategories.map((category) => (
             <div 
               key={category.title}
-              className="flex items-start space-x-3 p-3 rounded-lg hover:bg-accent/5 transition-colors"
+              className="flex items-start space-x-3 p-3 rounded-lg hover:bg-accent/5 transition-colors cursor-pointer"
+              onClick={() => navigate(category.path)}
             >
               <category.icon className="h-5 w-5 text-primary mt-0.5" />
               <div>

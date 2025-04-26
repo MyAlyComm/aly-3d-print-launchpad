@@ -33,11 +33,11 @@ export const QuickNavCards = () => {
               </p>
             </div>
             <Button 
-              onClick={() => navigate(`/dashboard/chapter-${nextChapter}`)}
+              onClick={() => navigate(nextChapter === 0 ? "/dashboard/new-chapter" : `/dashboard/chapter-${nextChapter}`)}
               className="ml-4"
             >
               <BookOpen className="mr-2 h-4 w-4" />
-              Start Chapter {nextChapter}
+              {nextChapter === 0 ? "Start Introduction" : `Start Chapter ${nextChapter}`}
             </Button>
           </div>
         </CardContent>
