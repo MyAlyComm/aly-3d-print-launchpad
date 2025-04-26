@@ -89,7 +89,11 @@ const App = () => {
                     <Chapter6 />
                   </ProtectedRoute>
                 } />
-                
+                <Route path="/dashboard/chapter-7" element={
+                  <ProtectedRoute>
+                    <Chapter7 />
+                  </ProtectedRoute>
+                } />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
