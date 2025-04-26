@@ -11,7 +11,7 @@ const PersonalMessage = () => {
             <img 
               src="/lovable-uploads/80580729-6d4e-4bd0-a66c-dff6d0d890e1.png"
               alt="Aly" 
-              className="w-16 h-16 rounded-full border-2 border-primary"
+              className="w-24 h-24 rounded-full border-4 border-primary" 
             />
           </div>
           <div className="flex-1">
