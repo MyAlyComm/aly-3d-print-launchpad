@@ -1,4 +1,3 @@
-
 export const formatDate = (dateString: string | null | undefined) => {
   if (!dateString) return "Not yet completed";
   
@@ -23,95 +22,76 @@ export const formatDate = (dateString: string | null | undefined) => {
 
 export const getSectionName = (sectionId: string) => {
   const sectionNames: Record<string, string> = {
+    // Introduction sections
+    'opportunity': 'The Opportunity',
+    'how-to-use': 'How To Use This Book',
+    'book-structure': 'Book Structure',
+    'chapters-overview': 'Chapters Overview',
+    'story': 'My Story & Journey',
+    'journey': 'From $500 to $20K',
+    'business': 'Building a Real Business',
+    'conclusion': 'Conclusion',
+
     // Chapter 1
-    "arbitrage": "Arbitrage Windows",
-    "timeline": "Evolution of 3D Printing",
-    "myths": "The Stained Glass Effect",
-    "future": "The New Horizon",
-    "self-assessment": "Your Arbitrage Advantage",
-    
+    'arbitrage': 'Understanding Arbitrage Windows',
+    'timeline': 'Evolution Timeline',
+    'myths': 'Common Myths',
+    'future': 'Future Opportunities',
+
     // Chapter 2
-    "theorem": "The Axiogenetic Theorem",
-    "awakening": "The Awakening",
-    "revelation": "The Revelation",
-    "decisionTree": "The Decision Tree Framework",
-    "worksheet": "My 3D Printing Business Path",
-    
+    'theorem': 'The Axiogenetic Theorem',
+    'awakening': 'The Awakening',
+    'revelation': 'The Revelation',
+    'decisionTree': 'Decision Tree Framework',
+
     // Chapter 3
-    "core-system": "The Core System",
-    "three-products": "Your Core Products",
-    "plus-one": "Plus 1 Innovation",
-    "monthly-cycles": "Monthly Cycles",
-    "worksheet-3": "Your 3 Plus 1 Plan",
-    
+    'core-system': 'The Core System',
+    'three-products': 'Three Core Products',
+    'plus-one': 'Plus One Innovation',
+    'monthly-cycles': 'Monthly Revenue Cycles',
+
     // Chapter 4
-    "profits-framework": "The P.R.O.F.I.T.S Framework",
-    "match-framework": "The MATCH Framework",
-    "commercial-licensing": "Commercial Licensing",
-    "product-trinity": "Building Your Product Trinity",
-    "worksheet-4": "Evaluating Your Products",
-    
+    'profits-framework': 'The P.R.O.F.I.T.S Framework',
+    'match-framework': 'The MATCH Framework',
+    'commercial-licensing': 'Understanding Commercial Licenses',
+    'product-trinity': 'Your Product Trinity',
+
     // Chapter 5
-    "requirements": "Understanding Requirements",
-    "printer-selection": "Printer Recommendations",
-    "accessories": "Essential Accessories",
-    "workspace": "Workspace Essentials",
-    "worksheet-5": "Getting Started Checklist",
-    
+    'requirements': 'Understanding Requirements',
+    'printer-selection': 'Selecting Your Printer',
+    'accessories': 'Essential Accessories',
+    'workspace': 'Setting Up Your Workspace',
+
     // Chapter 6
-    "platform-comparison": "Platform Comparison",
-    "platform-strategy": "Platform Strategy",
-    "month-plan": "Month 1 & 2 Strategy",
-    "worksheet-6": "Platform Selection Strategy",
-    
+    'platform-comparison': 'Platform Analysis',
+    'platform-strategy': 'Platform Selection Strategy',
+    'month-plan': 'First Two Months Plan',
+
     // Chapter 7
-    "foundation": "Foundation of Consistency",
-    "setup-system": "5-Step Setup System",
-    "first-print": "Making Your First Print",
-    "listings": "Creating Listings",
-    "worksheet-7": "Production System Setup",
-    
+    'foundation': 'Foundation of Success',
+    'setup-system': '5-Step Setup System',
+    'first-print': 'Your First Print',
+    'listings': 'Creating Listings',
+
     // Chapter 8
-    "marketing-funnel": "Zero-Cost Marketing Funnel",
-    "marketing-steps": "10-Step System",
-    "troubleshooting": "Troubleshooting",
-    "content-creation": "Content Creation",
-    "worksheet-8": "30-Day Marketing Plan",
-    
+    'marketing-funnel': 'Zero-Cost Marketing Funnel',
+    'marketing-steps': '10-Step System',
+    'troubleshooting': 'Common Issues & Solutions',
+    'content-creation': 'Content Strategy',
+
     // Chapter 9
-    "scaling-mindset": "The Scaling Mindset",
-    "production-scaling": "Production Scaling",
-    "market-expansion": "Market Expansion",
-    "team-building": "Building Your Team",
-    "worksheet-9": "Your Scale-Up Plan",
-    
+    'scaling-mindset': 'The Scaling Mindset',
+    'production-scaling': 'Scaling Production',
+    'market-expansion': 'Market Expansion',
+    'team-building': 'Building Your Team',
+
     // Chapter 10
-    "industry-shifts": "Coming Industry Shifts",
-    "future-value": "Future-Value Matrix",
-    "competitive-moat": "Competitive Moat Framework",
-    "future-strategy": "Future-Proofing Strategies",
-    "worksheet-10": "Your Future-Proofing Plan",
-    
-    // Chapter 11
-    "business-systems": "Business Systems",
-    "partnerships": "Strategic Partnerships",
-    "outsourcing": "Effective Outsourcing",
-    "ecosystem-integration": "Ecosystem Integration",
-    "worksheet-11": "Ecosystem Development Plan",
-    
-    // Chapter 12
-    "product-innovation": "Product Innovation",
-    "advanced-design": "Advanced Design Techniques",
-    "product-extensions": "Product Extensions",
-    "product-strategy": "Long-term Product Strategy",
-    "worksheet-12": "Product Development Plan",
-    
-    // Chapter 13
-    "success-stories": "Success Stories",
-    "challenges": "Overcoming Challenges",
-    "next-steps": "Your Next Steps",
-    "resources": "Resources & Tools",
-    "worksheet-13": "Your Journey Ahead"
+    'future-value': 'Future Value Matrix',
+    'competitive-moat': 'Building Your Moat',
+    'future-strategy': 'Future-Proofing Strategy',
+
+    // Common sections
+    'worksheet': 'Chapter Worksheet',
   };
   
   return sectionNames[sectionId] || sectionId;

@@ -23,7 +23,8 @@ export function useChapterProgress() {
       const { data, error } = await supabase
         .from("user_chapter_responses")
         .select("chapter_number, completed_at, section_id, response_data")
-        .eq("user_id", user.id);
+        .eq("user_id", user.id)
+        .order("created_at");
 
       if (error) {
         toast.error("Failed to load chapter progress");
@@ -36,7 +37,11 @@ export function useChapterProgress() {
   });
 
   const updateProgress = useMutation({
-    mutationFn: async ({ chapterNumber, sectionId }: { chapterNumber: number; sectionId: string }) => {
+    mutationFn: async ({ chapterNumber, sectionId, responseData = {} }: { 
+      chapterNumber: number; 
+      sectionId: string;
+      responseData?: Record<string, any>;
+    }) => {
       if (!user) throw new Error("User not authenticated");
 
       const { error } = await supabase
@@ -45,6 +50,7 @@ export function useChapterProgress() {
           user_id: user.id,
           chapter_number: chapterNumber,
           section_id: sectionId,
+          response_data: responseData,
           completed_at: new Date().toISOString(),
         });
 
@@ -59,14 +65,17 @@ export function useChapterProgress() {
     },
   });
 
-  // Helper function to check if a chapter is completed
   const isChapterCompleted = (chapterNumber: number) => {
-    return chapterProgresses?.some(
+    const requiredSections = getRequiredSectionsForChapter(chapterNumber);
+    const completedSections = chapterProgresses?.filter(
       (progress) => progress.chapter_number === chapterNumber && progress.completed_at
-    ) || false;
+    ) || [];
+
+    return requiredSections.every((section) =>
+      completedSections.some((completed) => completed.section_id === section)
+    );
   };
 
-  // Get the latest section worked on for a chapter
   const getChapterLatestSection = (chapterNumber: number) => {
     const chapterEntries = chapterProgresses?.filter(
       (progress) => progress.chapter_number === chapterNumber
@@ -74,7 +83,6 @@ export function useChapterProgress() {
     
     if (chapterEntries.length === 0) return null;
     
-    // Sort by completed_at date, most recent first
     return chapterEntries
       .sort((a, b) => {
         if (!a.completed_at) return 1;
@@ -83,18 +91,56 @@ export function useChapterProgress() {
       })[0];
   };
 
-  // Calculate overall course progress
   const calculateOverallProgress = () => {
-    // Count unique chapters that have any activity
-    const uniqueChapters = new Set();
-    chapterProgresses?.forEach(progress => {
-      if (progress.completed_at) {
-        uniqueChapters.add(progress.chapter_number);
-      }
-    });
+    const totalChapters = 11; // Introduction (0) + 10 chapters
+    const completedChapters = Array.from({ length: totalChapters }, (_, i) => i)
+      .filter(isChapterCompleted)
+      .length;
     
-    const totalChapters = 13; // Total number of chapters
-    return (uniqueChapters.size / totalChapters) * 100;
+    return (completedChapters / totalChapters) * 100;
+  };
+
+  const getRequiredSectionsForChapter = (chapterNumber: number): string[] => {
+    if (chapterNumber === 0) { // Introduction
+      return [
+        'opportunity',
+        'how-to-use',
+        'book-structure',
+        'chapters-overview',
+        'story',
+        'journey',
+        'business',
+        'conclusion'
+      ];
+    }
+    
+    // Return the required sections for regular chapters
+    const commonSections = ['worksheet'];
+    
+    switch (chapterNumber) {
+      case 1:
+        return [...commonSections, 'arbitrage', 'timeline', 'myths', 'future'];
+      case 2:
+        return [...commonSections, 'theorem', 'awakening', 'revelation', 'decisionTree'];
+      case 3:
+        return [...commonSections, 'core-system', 'three-products', 'plus-one', 'monthly-cycles'];
+      case 4:
+        return [...commonSections, 'profits-framework', 'match-framework', 'commercial-licensing', 'product-trinity'];
+      case 5:
+        return [...commonSections, 'requirements', 'printer-selection', 'accessories', 'workspace'];
+      case 6:
+        return [...commonSections, 'platform-comparison', 'platform-strategy', 'month-plan'];
+      case 7:
+        return [...commonSections, 'foundation', 'setup-system', 'first-print', 'listings'];
+      case 8:
+        return [...commonSections, 'marketing-funnel', 'marketing-steps', 'troubleshooting', 'content-creation'];
+      case 9:
+        return [...commonSections, 'scaling-mindset', 'production-scaling', 'market-expansion', 'team-building'];
+      case 10:
+        return [...commonSections, 'future-value', 'competitive-moat', 'future-strategy'];
+      default:
+        return commonSections;
+    }
   };
 
   return {
@@ -103,6 +149,7 @@ export function useChapterProgress() {
     updateProgress,
     isChapterCompleted,
     getChapterLatestSection,
-    calculateOverallProgress
+    calculateOverallProgress,
+    getRequiredSectionsForChapter
   };
 }
