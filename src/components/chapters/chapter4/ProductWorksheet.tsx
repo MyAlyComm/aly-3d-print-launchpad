@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -76,29 +76,72 @@ export const ProductWorksheet = () => {
   });
 
   // Initialize form state from saved data if available
-  useState(() => {
+  useEffect(() => {
     if (!isLoading && formState) {
-      if (formState.productNames) {
-        setProductNames(formState.productNames);
+      // Extract saved data from the formState
+      const savedData = formState.worksheet?.textInputs || {};
+      
+      // Initialize product names if they exist in saved data
+      if (savedData.productNames) {
+        try {
+          const parsedProductNames = JSON.parse(savedData.productNames);
+          if (parsedProductNames && typeof parsedProductNames === 'object') {
+            setProductNames(parsedProductNames);
+          }
+        } catch (e) {
+          console.error("Error parsing product names:", e);
+        }
       }
 
-      if (formState.profitsScores) {
-        setProfitsScores(formState.profitsScores);
+      // Initialize profits scores if they exist in saved data
+      if (savedData.profitsScores) {
+        try {
+          const parsedProfitsScores = JSON.parse(savedData.profitsScores);
+          if (parsedProfitsScores && typeof parsedProfitsScores === 'object') {
+            setProfitsScores(parsedProfitsScores);
+          }
+        } catch (e) {
+          console.error("Error parsing profits scores:", e);
+        }
       }
 
-      if (formState.matchScores) {
-        setMatchScores(formState.matchScores);
+      // Initialize match scores if they exist in saved data
+      if (savedData.matchScores) {
+        try {
+          const parsedMatchScores = JSON.parse(savedData.matchScores);
+          if (parsedMatchScores && typeof parsedMatchScores === 'object') {
+            setMatchScores(parsedMatchScores);
+          }
+        } catch (e) {
+          console.error("Error parsing match scores:", e);
+        }
       }
 
-      if (formState.finalScores) {
-        setFinalScores(formState.finalScores);
+      // Initialize final scores if they exist in saved data
+      if (savedData.finalScores) {
+        try {
+          const parsedFinalScores = JSON.parse(savedData.finalScores);
+          if (parsedFinalScores && typeof parsedFinalScores === 'object') {
+            setFinalScores(parsedFinalScores);
+          }
+        } catch (e) {
+          console.error("Error parsing final scores:", e);
+        }
       }
 
-      if (formState.trinity) {
-        setTrinity(formState.trinity);
+      // Initialize trinity selections if they exist in saved data
+      if (savedData.trinity) {
+        try {
+          const parsedTrinity = JSON.parse(savedData.trinity);
+          if (parsedTrinity && typeof parsedTrinity === 'object') {
+            setTrinity(parsedTrinity);
+          }
+        } catch (e) {
+          console.error("Error parsing trinity:", e);
+        }
       }
     }
-  });
+  }, [isLoading, formState]);
 
   // Handle product name change
   const handleProductNameChange = (product: string, value: string) => {
@@ -213,12 +256,15 @@ export const ProductWorksheet = () => {
 
   // Save all worksheet responses
   const handleSave = () => {
+    // Convert state objects to JSON strings for storage in textInputs
     saveResponse('worksheet', {
-      productNames,
-      profitsScores,
-      matchScores,
-      finalScores,
-      trinity
+      textInputs: {
+        productNames: JSON.stringify(productNames),
+        profitsScores: JSON.stringify(profitsScores),
+        matchScores: JSON.stringify(matchScores),
+        finalScores: JSON.stringify(finalScores),
+        trinity: JSON.stringify(trinity)
+      }
     }, true);
   };
   
@@ -775,3 +821,4 @@ export const ProductWorksheet = () => {
     </div>
   );
 };
+
