@@ -1,6 +1,6 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useChapterForm } from "@/hooks/useChapterForm";
 import { useChapterProgress } from "@/hooks/useChapterProgress";
 import { Button } from "@/components/ui/button";
@@ -38,15 +38,43 @@ export const MonthPlan = () => {
   });
   
   // Load saved data when available
-  useState(() => {
+  useEffect(() => {
     if (!isLoading && formState && formState["month-plan"]) {
       const savedData = formState["month-plan"];
+      
+      // Create a new checkboxes object with default values
+      const updatedCheckboxes = {
+        facebook: false,
+        etsy: false,
+        website: false,
+        amazon: false,
+        other: false,
+        ...savedData.checkboxes // Merge with saved checkboxes
+      };
+      
+      // Create a new textInputs object with default values
+      const updatedTextInputs = {
+        otherPlatform: "",
+        primaryPlatform: "",
+        expansionPlatform: "",
+        advantages1: "",
+        advantages2: "",
+        advantages3: "",
+        challenges: "",
+        listingStrategy: "",
+        pricingStrategy: "",
+        productCount: "",
+        salesTarget: "",
+        optimizationTechniques: "",
+        ...savedData.textInputs // Merge with saved text inputs
+      };
+      
       setLocalFormState({
-        checkboxes: savedData.checkboxes || localFormState.checkboxes,
-        textInputs: savedData.textInputs || localFormState.textInputs
+        checkboxes: updatedCheckboxes,
+        textInputs: updatedTextInputs
       });
     }
-  });
+  }, [isLoading, formState]);
 
   const handleCheckboxChange = (id: string) => {
     setLocalFormState({
