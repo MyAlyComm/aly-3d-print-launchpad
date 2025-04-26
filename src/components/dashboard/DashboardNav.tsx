@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { Book, Layout, BookOpen, BookText } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -46,6 +47,14 @@ export const DashboardNav = () => {
       >
         <BookText className="mr-2 h-4 w-4" />
         Chapter 3: The 3+1=40 System
+      </Button>
+      <Button 
+        variant="ghost" 
+        className="w-full justify-start"
+        onClick={() => navigate("/dashboard/chapter-4")}
+      >
+        <BookText className="mr-2 h-4 w-4" />
+        Chapter 4: The Product Trinity
       </Button>
       <Button 
         variant="ghost" 
