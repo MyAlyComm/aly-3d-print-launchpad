@@ -1,12 +1,11 @@
 
 import { Card } from "@/components/ui/card";
-import { ChapterSection } from "@/components/ui/chapter-layout/ChapterSection";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useChapterForm } from "@/hooks/useChapterForm";
 import { useState } from "react";
 import { toast } from "sonner";
+import { CheckboxSection } from "./sections/CheckboxSection";
+import { ImprovementSection } from "./sections/ImprovementSection";
 
 export const SystemsSetup = () => {
   const { formState, saveResponse } = useChapterForm(7, "systems-setup");
@@ -67,129 +66,44 @@ export const SystemsSetup = () => {
     toast.success("Progress saved successfully!");
   };
 
+  const productionSpaceItems = [
+    { id: "printing_area", label: "Dedicated printing area", checked: localForm.checkboxes.printing_area },
+    { id: "post_processing", label: "Post-processing workspace", checked: localForm.checkboxes.post_processing },
+    { id: "materials_storage", label: "Materials storage", checked: localForm.checkboxes.materials_storage },
+    { id: "shipping_station", label: "Packing/shipping station", checked: localForm.checkboxes.shipping_station }
+  ];
+
+  const proceduresItems = [
+    { id: "file_preparation", label: "File preparation and slicing", checked: localForm.checkboxes.file_preparation },
+    { id: "print_monitoring", label: "Print setup and monitoring", checked: localForm.checkboxes.print_monitoring },
+    { id: "finishing", label: "Post-processing and finishing", checked: localForm.checkboxes.finishing },
+    { id: "shipping", label: "Packaging and shipping", checked: localForm.checkboxes.shipping }
+  ];
+
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       <h2 className="text-2xl font-bold">Systems Setup Assessment</h2>
       
       <Card className="p-6">
-        <h3 className="font-bold text-lg mb-4">Production Space Setup</h3>
-        <div className="space-y-2">
-          <div className="flex items-center space-x-2">
-            <Checkbox 
-              id="printing_area" 
-              checked={localForm.checkboxes.printing_area}
-              onCheckedChange={() => handleCheckboxChange("printing_area")}
-            />
-            <label htmlFor="printing_area">Dedicated printing area</label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox 
-              id="post_processing" 
-              checked={localForm.checkboxes.post_processing}
-              onCheckedChange={() => handleCheckboxChange("post_processing")}
-            />
-            <label htmlFor="post_processing">Post-processing workspace</label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox 
-              id="materials_storage" 
-              checked={localForm.checkboxes.materials_storage}
-              onCheckedChange={() => handleCheckboxChange("materials_storage")}
-            />
-            <label htmlFor="materials_storage">Materials storage</label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox 
-              id="shipping_station" 
-              checked={localForm.checkboxes.shipping_station}
-              onCheckedChange={() => handleCheckboxChange("shipping_station")}
-            />
-            <label htmlFor="shipping_station">Packing/shipping station</label>
-          </div>
-        </div>
+        <CheckboxSection 
+          title="Production Space Setup"
+          items={productionSpaceItems}
+          onCheckboxChange={handleCheckboxChange}
+        />
       </Card>
 
       <Card className="p-6">
-        <h3 className="font-bold text-lg mb-4">Documented Procedures</h3>
-        <div className="space-y-2">
-          <div className="flex items-center space-x-2">
-            <Checkbox 
-              id="file_preparation" 
-              checked={localForm.checkboxes.file_preparation}
-              onCheckedChange={() => handleCheckboxChange("file_preparation")}
-            />
-            <label htmlFor="file_preparation">File preparation and slicing</label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox 
-              id="print_monitoring" 
-              checked={localForm.checkboxes.print_monitoring}
-              onCheckedChange={() => handleCheckboxChange("print_monitoring")}
-            />
-            <label htmlFor="print_monitoring">Print setup and monitoring</label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox 
-              id="finishing" 
-              checked={localForm.checkboxes.finishing}
-              onCheckedChange={() => handleCheckboxChange("finishing")}
-            />
-            <label htmlFor="finishing">Post-processing and finishing</label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox 
-              id="shipping" 
-              checked={localForm.checkboxes.shipping}
-              onCheckedChange={() => handleCheckboxChange("shipping")}
-            />
-            <label htmlFor="shipping">Packaging and shipping</label>
-          </div>
-        </div>
+        <CheckboxSection 
+          title="Documented Procedures"
+          items={proceduresItems}
+          onCheckboxChange={handleCheckboxChange}
+        />
       </Card>
 
-      <div className="space-y-4">
-        <h3 className="font-bold text-lg">Areas for Improvement</h3>
-        
-        <div>
-          <label className="block mb-2">First improvement needed:</label>
-          <Textarea
-            value={localForm.improvements.first}
-            onChange={(e) => handleTextChange("first", e.target.value)}
-            placeholder="Describe the first improvement you need to make..."
-            className="mb-4"
-          />
-        </div>
-        
-        <div>
-          <label className="block mb-2">Second improvement needed:</label>
-          <Textarea
-            value={localForm.improvements.second}
-            onChange={(e) => handleTextChange("second", e.target.value)}
-            placeholder="Describe the second improvement you need to make..."
-            className="mb-4"
-          />
-        </div>
-        
-        <div>
-          <label className="block mb-2">Third improvement needed:</label>
-          <Textarea
-            value={localForm.improvements.third}
-            onChange={(e) => handleTextChange("third", e.target.value)}
-            placeholder="Describe the third improvement you need to make..."
-            className="mb-4"
-          />
-        </div>
-        
-        <div>
-          <label className="block mb-2">Implementation plan:</label>
-          <Textarea
-            value={localForm.improvements.plan}
-            onChange={(e) => handleTextChange("plan", e.target.value)}
-            placeholder="Describe your plan for implementing these improvements..."
-            className="h-32"
-          />
-        </div>
-      </div>
+      <ImprovementSection 
+        values={localForm.improvements}
+        onTextChange={handleTextChange}
+      />
 
       <div className="flex justify-center">
         <Button type="submit" className="w-full md:w-auto">
