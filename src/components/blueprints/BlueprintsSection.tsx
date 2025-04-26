@@ -21,7 +21,8 @@ const blueprints = [
       "Frequently asked questions",
       "Initial setup checklist",
       "Resource recommendations",
-    ]
+    ],
+    image: "/lovable-uploads/6356c68c-e0f8-4cae-a628-a5c3d4a3b0f6.png"
   },
   {
     id: 2,
