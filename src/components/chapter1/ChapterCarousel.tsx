@@ -22,7 +22,6 @@ import { MythsSection } from './MythsSection';
 import { FutureSection } from './FutureSection';
 import { SelfAssessmentSection } from './SelfAssessmentSection';
 import { OpportunitySection } from './OpportunitySection';
-// Removed BudgetSection import
 
 export const ChapterCarousel = () => {
   const { toast } = useToast();
@@ -40,17 +39,16 @@ export const ChapterCarousel = () => {
       image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b'
     },
     { 
-      id: 'arbitrage', 
-      component: ArbitrageSection, 
-      title: 'Arbitrage Windows',
-      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475'
-    },
-    // Removed budget section
-    { 
       id: 'timeline', 
       component: TimelineSection, 
       title: 'Industry Timeline',
       image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158'
+    },
+    { 
+      id: 'arbitrage', 
+      component: ArbitrageSection, 
+      title: 'Arbitrage Windows',
+      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475'
     },
     { 
       id: 'myths', 
