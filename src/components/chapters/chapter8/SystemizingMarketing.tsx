@@ -1,4 +1,3 @@
-
 import { ChapterSection } from "@/components/ui/chapter-layout/ChapterSection";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
@@ -191,6 +190,156 @@ export const SystemizingMarketing = () => {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
+        </div>
+      </ChapterSection>
+      
+      <ChapterSection title="Step 8: Turn Customers Into Advocates">
+        <div className="space-y-6">
+          <p className="font-bold">Creating an Army of Unpaid Salespeople</p>
+          
+          <p>
+            Your happiest customers can become your most effective marketing force—if you give them 
+            the tools and incentives to do so. This step transforms one-time buyers into ongoing 
+            advocates who bring new customers to you.
+          </p>
+          
+          <p>
+            The digital-physical connection is your unique advantage as a 3D printing business. 
+            Unlike purely digital products, your physical items exist in the real world where 
+            they're seen and discussed. Leverage this by:
+          </p>
+          
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h3 className="font-semibold mb-4">Creating Shareable Moments</h3>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>Design products with "Instagram spots"—distinctive visual elements</li>
+              <li>Include a branded card suggesting sharing with a specific hashtag</li>
+              <li>Make the unboxing process itself worthy of recording</li>
+              <li>Add unexpected elements that create genuine surprise</li>
+            </ul>
+          </div>
+          
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-6">
+            <h3 className="font-semibold mb-4">Amplifying Social Proof</h3>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>Create a gallery of customer photos on your social profiles</li>
+              <li>Respond to and share every mention of your products</li>
+              <li>Feature customer stories prominently in your marketing</li>
+              <li>Create regular "customer spotlight" content</li>
+            </ul>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-4">
+            <Card>
+              <CardContent className="pt-6">
+                <h4 className="font-medium mb-2">Time/Convenience Products</h4>
+                <ul className="list-disc pl-6 text-sm space-y-1">
+                  <li>Create problem-solving communities</li>
+                  <li>Host occasional livestreams</li>
+                  <li>Encourage customer hacks</li>
+                </ul>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardContent className="pt-6">
+                <h4 className="font-medium mb-2">Emotion/Experience Products</h4>
+                <ul className="list-disc pl-6 text-sm space-y-1">
+                  <li>Create hashtags for style collections</li>
+                  <li>Feature artistic arrangements</li>
+                  <li>Build lifestyle communities</li>
+                </ul>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardContent className="pt-6">
+                <h4 className="font-medium mb-2">Differentiation Products</h4>
+                <ul className="list-disc pl-6 text-sm space-y-1">
+                  <li>Highlight shared values</li>
+                  <li>Create "insider" content</li>
+                  <li>Develop brand culture</li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </ChapterSection>
+      
+      <ChapterSection title="Step 9: Create Strategic Partnerships">
+        <div className="space-y-6">
+          <p className="font-bold">Amplify Your Reach Through Collaboration</p>
+          
+          <p>
+            Strategic partnerships with complementary businesses can exponentially expand your 
+            reach without spending money on advertising. This approach leverages existing trust 
+            in other brands to introduce your products to pre-qualified audiences.
+          </p>
+          
+          <div className="grid md:grid-cols-3 gap-4">
+            <Card>
+              <CardContent className="pt-6">
+                <h4 className="font-medium mb-2">Time/Convenience Products</h4>
+                <ul className="list-disc pl-6 text-sm space-y-1">
+                  <li>Productivity tool creators</li>
+                  <li>Organizational coaches</li>
+                  <li>Efficiency experts</li>
+                  <li>Example: Desk organizers + productivity app creators</li>
+                </ul>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardContent className="pt-6">
+                <h4 className="font-medium mb-2">Emotion/Experience Products</h4>
+                <ul className="list-disc pl-6 text-sm space-y-1">
+                  <li>Style influencers</li>
+                  <li>Interior designers</li>
+                  <li>Lifestyle bloggers</li>
+                  <li>Example: Planters + indoor plant shops</li>
+                </ul>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardContent className="pt-6">
+                <h4 className="font-medium mb-2">Differentiation Products</h4>
+                <ul className="list-disc pl-6 text-sm space-y-1">
+                  <li>Values-aligned brands</li>
+                  <li>Process-focused creators</li>
+                  <li>Philosophy-sharing platforms</li>
+                  <li>Example: Sustainable designs + eco-conscious bloggers</li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+          
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h3 className="font-semibold mb-4">Partnership Value Exchange</h3>
+            <p className="mb-2">
+              Apply the 3:1 value exchange principle. For every promotional opportunity, 
+              offer three valuable contributions first:
+            </p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>Create exclusive designs for their audience</li>
+              <li>Offer special discount codes for their followers</li>
+              <li>Provide content for their platforms</li>
+              <li>Share their content with your audience</li>
+              <li>Create co-branded products or bundles</li>
+              <li>Contribute your expertise for their projects</li>
+            </ul>
+          </div>
+          
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-6">
+            <h3 className="font-semibold mb-4">Effective Outreach Structure</h3>
+            <ol className="list-decimal pl-6 space-y-2">
+              <li>Specific compliment showing you know their work</li>
+              <li>Clear explanation of audience overlap</li>
+              <li>Value you can provide (3 specific offerings)</li>
+              <li>Potential collaboration idea</li>
+              <li>Simple next step they can take</li>
+            </ol>
+          </div>
         </div>
       </ChapterSection>
       
