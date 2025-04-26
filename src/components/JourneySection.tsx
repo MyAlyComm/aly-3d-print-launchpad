@@ -89,7 +89,7 @@ const JourneySection = () => {
           <div className="space-y-4 transition-transform duration-300 hover:-translate-y-2">
             <div className="relative">
               <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur group-hover:opacity-40 transition-opacity"></div>
-              <img src="/lovable-uploads/1935bd17-362f-4c25-bc16-bb5b81522fc8.png" alt="Marketing and branding" className="relative rounded-xl w-full aspect-square object-cover" />
+              <img alt="Marketing and branding" className="relative rounded-xl w-full aspect-square object-cover" src="/lovable-uploads/1273d951-6c16-4a5d-a99a-d233f5e92918.png" />
             </div>
             <div>
               <div className="flex items-center gap-2 mb-2">
