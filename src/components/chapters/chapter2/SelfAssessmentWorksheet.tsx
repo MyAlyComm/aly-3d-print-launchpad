@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { ChapterSection } from "@/components/ui/chapter-layout/ChapterSection";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -10,10 +9,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useChapterForm } from "@/hooks/useChapterForm";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 export const SelfAssessmentWorksheet = () => {
   const { formState, saveResponse, isLoading } = useChapterForm(2, "worksheet");
   const [showSummary, setShowSummary] = useState(false);
+  const navigate = useNavigate();
 
   const handleRadioChange = (field: string, value: string) => {
     saveResponse("assessment", { 
@@ -51,6 +52,10 @@ export const SelfAssessmentWorksheet = () => {
     setShowSummary(true);
     toast.success("Assessment completed!");
     window.scrollTo(0, 0);
+  };
+
+  const handleNextChapter = () => {
+    navigate("/dashboard/chapter-3");
   };
 
   if (isLoading) {
@@ -337,18 +342,25 @@ export const SelfAssessmentWorksheet = () => {
               <h3 className="text-xl font-bold text-green-800 mb-4">Assessment Complete!</h3>
               <p className="mb-4">Thank you for completing your self-assessment. Keep this information in mind as we move forward to the next chapter.</p>
               <p className="mb-2 font-semibold">Next Steps:</p>
-              <ul className="list-disc pl-5 space-y-2">
+              <ul className="list-disc pl-5 space-y-2 mb-6">
                 <li>In Chapter 3, we'll explore the "3 Plus 1 Equals 40" system—a powerful framework that can be adapted to any path identified by this decision tree.</li>
                 <li>This system will help you maximize your results while minimizing wasted effort.</li>
                 <li>Make sure to keep your self-assessment results handy as we'll refer back to them.</li>
               </ul>
-              <Button 
-                className="mt-6" 
-                variant="outline" 
-                onClick={() => setShowSummary(false)}
-              >
-                Review Your Assessment
-              </Button>
+              <div className="flex flex-col space-y-4">
+                <Button 
+                  variant="outline" 
+                  onClick={() => setShowSummary(false)}
+                >
+                  Review Your Assessment
+                </Button>
+                <Button 
+                  className="bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600"
+                  onClick={handleNextChapter}
+                >
+                  Continue to Chapter 3
+                </Button>
+              </div>
             </CardContent>
           </Card>
         )}
