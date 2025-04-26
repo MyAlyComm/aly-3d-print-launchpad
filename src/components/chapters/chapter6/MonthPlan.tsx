@@ -10,7 +10,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 
 export const MonthPlan = () => {
-  const [formState, setFormState] = useState({
+  const { formState, saveResponse, isLoading } = useChapterForm(6, "month-plan");
+  const { updateProgress } = useChapterProgress();
+  
+  const [localFormState, setLocalFormState] = useState({
     checkboxes: {
       facebook: false,
       etsy: false,
@@ -33,39 +36,33 @@ export const MonthPlan = () => {
       optimizationTechniques: ""
     }
   });
-
-  const { updateProgress } = useChapterProgress();
-  const { saveResponse, savedData } = useChapterForm("worksheet", 6);
   
-  // If we have saved data, load it
+  // Load saved data when available
   useState(() => {
-    if (savedData) {
-      try {
-        const parsedData = JSON.parse(savedData);
-        if (parsedData.checkboxes && parsedData.textInputs) {
-          setFormState(parsedData);
-        }
-      } catch (e) {
-        console.error("Error parsing saved data:", e);
-      }
+    if (!isLoading && formState && formState["month-plan"]) {
+      const savedData = formState["month-plan"];
+      setLocalFormState({
+        checkboxes: savedData.checkboxes || localFormState.checkboxes,
+        textInputs: savedData.textInputs || localFormState.textInputs
+      });
     }
   });
 
   const handleCheckboxChange = (id: string) => {
-    setFormState({
-      ...formState,
+    setLocalFormState({
+      ...localFormState,
       checkboxes: {
-        ...formState.checkboxes,
-        [id]: !formState.checkboxes[id as keyof typeof formState.checkboxes]
+        ...localFormState.checkboxes,
+        [id]: !localFormState.checkboxes[id as keyof typeof localFormState.checkboxes]
       }
     });
   };
 
   const handleTextChange = (id: string, value: string) => {
-    setFormState({
-      ...formState,
+    setLocalFormState({
+      ...localFormState,
       textInputs: {
-        ...formState.textInputs,
+        ...localFormState.textInputs,
         [id]: value
       }
     });
@@ -74,11 +71,17 @@ export const MonthPlan = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    await saveResponse(JSON.stringify(formState));
-    await updateProgress({ 
-      chapterNumber: 6, 
-      sectionId: "worksheet",
-      responseData: formState 
+    // Save the form data using the hook's saveResponse function
+    await saveResponse("month-plan", {
+      checkboxes: localFormState.checkboxes,
+      textInputs: localFormState.textInputs
+    }, true);
+    
+    // Update the chapter progress
+    await updateProgress.mutateAsync({
+      chapterNumber: 6,
+      sectionId: "month-plan",
+      responseData: localFormState
     });
     
     toast.success("Progress saved successfully!");
@@ -228,7 +231,7 @@ export const MonthPlan = () => {
                 <div className="flex items-center space-x-2">
                   <Checkbox 
                     id="facebook" 
-                    checked={formState.checkboxes.facebook}
+                    checked={localFormState.checkboxes.facebook}
                     onCheckedChange={() => handleCheckboxChange("facebook")}
                   />
                   <label htmlFor="facebook">Facebook Marketplace</label>
@@ -236,7 +239,7 @@ export const MonthPlan = () => {
                 <div className="flex items-center space-x-2">
                   <Checkbox 
                     id="etsy" 
-                    checked={formState.checkboxes.etsy}
+                    checked={localFormState.checkboxes.etsy}
                     onCheckedChange={() => handleCheckboxChange("etsy")}
                   />
                   <label htmlFor="etsy">Etsy</label>
@@ -244,7 +247,7 @@ export const MonthPlan = () => {
                 <div className="flex items-center space-x-2">
                   <Checkbox 
                     id="website" 
-                    checked={formState.checkboxes.website}
+                    checked={localFormState.checkboxes.website}
                     onCheckedChange={() => handleCheckboxChange("website")}
                   />
                   <label htmlFor="website">My Own Website</label>
@@ -252,7 +255,7 @@ export const MonthPlan = () => {
                 <div className="flex items-center space-x-2">
                   <Checkbox 
                     id="amazon" 
-                    checked={formState.checkboxes.amazon}
+                    checked={localFormState.checkboxes.amazon}
                     onCheckedChange={() => handleCheckboxChange("amazon")}
                   />
                   <label htmlFor="amazon">Amazon</label>
@@ -260,14 +263,14 @@ export const MonthPlan = () => {
                 <div className="flex items-center space-x-2">
                   <Checkbox 
                     id="other" 
-                    checked={formState.checkboxes.other}
+                    checked={localFormState.checkboxes.other}
                     onCheckedChange={() => handleCheckboxChange("other")}
                   />
                   <label htmlFor="other">Other:</label>
                   <Input 
                     className="max-w-xs" 
                     placeholder="Specify other platform" 
-                    value={formState.textInputs.otherPlatform}
+                    value={localFormState.textInputs.otherPlatform}
                     onChange={(e) => handleTextChange("otherPlatform", e.target.value)}
                   />
                 </div>
@@ -279,7 +282,7 @@ export const MonthPlan = () => {
                 <label className="font-medium block mb-2">My primary platform for Month 1 will be:</label>
                 <Input 
                   placeholder="Enter your primary platform" 
-                  value={formState.textInputs.primaryPlatform}
+                  value={localFormState.textInputs.primaryPlatform}
                   onChange={(e) => handleTextChange("primaryPlatform", e.target.value)}
                 />
               </div>
@@ -288,7 +291,7 @@ export const MonthPlan = () => {
                 <label className="font-medium block mb-2">My planned expansion platform for Month 2 will be:</label>
                 <Input 
                   placeholder="Enter your expansion platform" 
-                  value={formState.textInputs.expansionPlatform}
+                  value={localFormState.textInputs.expansionPlatform}
                   onChange={(e) => handleTextChange("expansionPlatform", e.target.value)}
                 />
               </div>
@@ -300,18 +303,18 @@ export const MonthPlan = () => {
                 <Input 
                   placeholder="Key advantage 1" 
                   className="mb-2"
-                  value={formState.textInputs.advantages1}
+                  value={localFormState.textInputs.advantages1}
                   onChange={(e) => handleTextChange("advantages1", e.target.value)}
                 />
                 <Input 
                   placeholder="Key advantage 2" 
                   className="mb-2"
-                  value={formState.textInputs.advantages2}
+                  value={localFormState.textInputs.advantages2}
                   onChange={(e) => handleTextChange("advantages2", e.target.value)}
                 />
                 <Input 
                   placeholder="Key advantage 3"
-                  value={formState.textInputs.advantages3}
+                  value={localFormState.textInputs.advantages3}
                   onChange={(e) => handleTextChange("advantages3", e.target.value)}
                 />
               </div>
@@ -322,7 +325,7 @@ export const MonthPlan = () => {
               <Textarea 
                 placeholder="Describe potential challenges and how you'll address them" 
                 className="h-24"
-                value={formState.textInputs.challenges}
+                value={localFormState.textInputs.challenges}
                 onChange={(e) => handleTextChange("challenges", e.target.value)}
               />
             </div>
@@ -332,7 +335,7 @@ export const MonthPlan = () => {
               <Textarea 
                 placeholder="Describe your listing creation strategy" 
                 className="h-24"
-                value={formState.textInputs.listingStrategy}
+                value={localFormState.textInputs.listingStrategy}
                 onChange={(e) => handleTextChange("listingStrategy", e.target.value)}
               />
             </div>
@@ -342,7 +345,7 @@ export const MonthPlan = () => {
               <Textarea 
                 placeholder="Describe your pricing strategy" 
                 className="h-24"
-                value={formState.textInputs.pricingStrategy}
+                value={localFormState.textInputs.pricingStrategy}
                 onChange={(e) => handleTextChange("pricingStrategy", e.target.value)}
               />
             </div>
@@ -353,7 +356,7 @@ export const MonthPlan = () => {
                 <Input 
                   type="number" 
                   placeholder="Number of products" 
-                  value={formState.textInputs.productCount}
+                  value={localFormState.textInputs.productCount}
                   onChange={(e) => handleTextChange("productCount", e.target.value)}
                 />
               </div>
@@ -363,7 +366,7 @@ export const MonthPlan = () => {
                 <Input 
                   type="number" 
                   placeholder="Number of sales" 
-                  value={formState.textInputs.salesTarget}
+                  value={localFormState.textInputs.salesTarget}
                   onChange={(e) => handleTextChange("salesTarget", e.target.value)}
                 />
               </div>
@@ -374,7 +377,7 @@ export const MonthPlan = () => {
               <Textarea 
                 placeholder="List your optimization techniques" 
                 className="h-24"
-                value={formState.textInputs.optimizationTechniques}
+                value={localFormState.textInputs.optimizationTechniques}
                 onChange={(e) => handleTextChange("optimizationTechniques", e.target.value)}
               />
             </div>
