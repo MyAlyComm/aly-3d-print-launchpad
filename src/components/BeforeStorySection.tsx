@@ -1,6 +1,6 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Confused } from "lucide-react";
+import { AlertCircle } from "lucide-react";
 
 const BeforeStorySection = () => {
   return (
@@ -19,7 +19,7 @@ const BeforeStorySection = () => {
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-4">
-              <Confused className="w-5 h-5 text-primary" />
+              <AlertCircle className="w-5 h-5 text-primary" />
               <h3 className="font-semibold text-xl text-gray-900">This Was Me 9 Months Ago...</h3>
             </div>
             <p className="text-gray-600 text-base leading-relaxed">
