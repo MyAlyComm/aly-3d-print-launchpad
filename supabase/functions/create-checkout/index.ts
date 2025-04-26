@@ -14,7 +14,7 @@ serve(async (req) => {
   }
 
   try {
-    const { blueprintId } = await req.json();
+    const { blueprintId, origin } = await req.json();
     
     // Initialize Stripe
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
@@ -23,9 +23,11 @@ serve(async (req) => {
 
     // Map blueprint IDs to their respective prices and names
     const blueprintData: Record<number, { price: number; name: string }> = {
-      2: { price: 2700, name: "Beginner's STL Guide" },
-      3: { price: 4700, name: "Ultimate 3D Printing eBook" },
-      4: { price: 9700, name: "Pro STL Bundle" }
+      2: { price: 1900, name: "Facebook Marketplace Secrets" },
+      3: { price: 9700, name: "3D Blueprint: Ultimate Edition" },
+      4: { price: 29700, name: "Custom Tailored 3D Blueprint" },
+      5: { price: 99700, name: "Product Design Bundle" },
+      6: { price: 199700, name: "Complete Business Bundle" }
     };
 
     const blueprint = blueprintData[blueprintId];
@@ -49,8 +51,8 @@ serve(async (req) => {
         },
       ],
       mode: "payment",
-      success_url: `${req.headers.get("origin")}/payment-success`,
-      cancel_url: `${req.headers.get("origin")}/`,
+      success_url: `${origin}/payment-success`,
+      cancel_url: `${origin}/`,
     });
 
     return new Response(JSON.stringify({ url: session.url }), {

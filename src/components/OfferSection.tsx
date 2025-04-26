@@ -14,13 +14,15 @@ const OfferSection = () => {
   const handleCheckout = async (blueprintId: number) => {
     try {
       const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: { blueprintId }
+        body: { 
+          blueprintId,
+          origin: window.location.origin
+        }
       });
 
       if (error) throw error;
 
       if (data?.url) {
-        // Redirect to Stripe Checkout
         window.location.href = data.url;
       }
     } catch (error) {

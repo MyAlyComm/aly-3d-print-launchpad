@@ -4,60 +4,90 @@ import BlueprintCard from "./BlueprintCard";
 const blueprints = [
   {
     id: 1,
-    title: "Free 3D Printing Quick-Start Guide",
+    title: "Free Mini Blueprint",
     price: "FREE",
     popular: false,
     isFree: true,
-    description: "Your first step to 3D printing success",
+    description: "FAQ & Quickstart Guide to get you started",
     features: [
-      "Essential printer settings for beginners",
-      "5 profitable product ideas",
-      "Basic Etsy setup tutorial",
-      "Material selection guide",
+      "Basic 3D printing concepts",
+      "Frequently asked questions",
+      "Initial setup checklist",
+      "Resource recommendations",
     ]
   },
   {
     id: 2,
-    title: "Beginner's STL Guide",
-    price: "$27",
+    title: "Facebook Marketplace Secrets",
+    price: "$19",
     popular: false,
     isFree: false,
-    description: "Start your 3D printing journey with confidence",
+    description: "A Gen Z Guide to 3D Printed Zuckerbucks",
     features: [
-      "10 premium STL files",
-      "Step-by-step setup instructions",
-      "Print optimization techniques",
-      "Basic marketing strategies",
+      "Facebook Marketplace optimization",
+      "Gen Z marketing strategies",
+      "Proven product templates",
+      "Engagement tactics",
     ]
   },
   {
     id: 3,
-    title: "Ultimate 3D Printing eBook",
-    price: "$47",
+    title: "3D Blueprint: Ultimate Edition",
+    price: "$97",
     popular: true,
     isFree: false,
     description: "The complete roadmap to 3D printing profits",
     features: [
-      "Comprehensive business setup guide",
+      "Comprehensive business setup",
       "Marketing strategy blueprint",
       "Pricing calculator & templates",
       "Advanced optimization techniques",
-      "Access to private community",
+      "Private community access",
     ]
   },
   {
     id: 4,
-    title: "Pro STL Bundle",
-    price: "$97",
+    title: "Custom Tailored 3D Blueprint",
+    price: "$297",
     popular: false,
     isFree: false,
-    description: "Premium designs ready to print and sell",
+    description: "Personalized guidance for your success",
     features: [
-      "30 trending premium STL files",
+      "Custom-tailored blueprint",
+      "1-month PrintProfit.io membership",
+      "Personalized strategy session",
+      "Priority support access",
+      "Custom product recommendations",
+    ]
+  },
+  {
+    id: 5,
+    title: "Product Design Bundle",
+    price: "$997",
+    popular: false,
+    isFree: false,
+    description: "Full product design service",
+    features: [
+      "Complete product design",
+      "Market research & validation",
+      "Production-ready files",
       "Commercial license included",
-      "Monthly new design updates",
-      "Print settings for each model",
-      "Product photography guide",
+      "Unlimited revisions",
+    ]
+  },
+  {
+    id: 6,
+    title: "Complete Business Bundle",
+    price: "$1,997",
+    popular: false,
+    isFree: false,
+    description: "Your entire business, built for you",
+    features: [
+      "Custom branding package",
+      "Professional website",
+      "Social media strategy",
+      "Product selection & design",
+      "Launch plan & timeline",
     ]
   },
 ];
@@ -73,14 +103,14 @@ const BlueprintsSection = ({ onCheckout, open, setOpen }: BlueprintsSectionProps
     <>
       <div className="text-center max-w-3xl mx-auto mb-12">
         <h2 className="text-3xl md:text-4xl font-bold font-display mb-6">
-          What's Inside the 3D Printing Blueprint?
+          Choose Your Path to Success
         </h2>
         <p className="text-xl text-gray-600">
-          Choose the blueprint that fits your goals and budget. Each resource is designed to help you start and grow your 3D printing business.
+          Select the blueprint that matches your goals and investment level. From free guides to full-service solutions.
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
         {blueprints.map((blueprint) => (
           <BlueprintCard 
             key={blueprint.id} 
