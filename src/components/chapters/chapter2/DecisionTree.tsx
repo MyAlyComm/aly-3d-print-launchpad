@@ -1,4 +1,3 @@
-
 import React from "react";
 import { InfoCard } from "@/components/ui/chapter-layout/InfoCard";
 import { ChapterSection } from "@/components/ui/chapter-layout/ChapterSection";
@@ -9,6 +8,14 @@ export const DecisionTree = () => {
   return (
     <div className="space-y-8">
       <ChapterSection title="The Decision Tree Framework">
+        <div className="my-8">
+          <img
+            src="/lovable-uploads/f65da361-c443-4d32-aae6-4d603d905f91.png"
+            alt="Decision Tree Framework Concept"
+            className="w-full rounded-lg shadow-lg mb-8"
+          />
+        </div>
+
         <p className="text-gray-700 mb-6">
           After helping thousands of aspiring 3D printing entrepreneurs, I've developed a comprehensive decision framework that will guide you toward your optimal path. Unlike one-size-fits-all advice, this framework considers your unique combination of circumstances, skills, and ambitions.
         </p>
