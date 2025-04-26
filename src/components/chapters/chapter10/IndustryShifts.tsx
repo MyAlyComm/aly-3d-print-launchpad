@@ -1,8 +1,7 @@
-
 import { ChapterSection } from "@/components/ui/chapter-layout/ChapterSection";
 import { ChapterGrid } from "@/components/ui/chapter-layout/ChapterGrid";
 import { InfoCard } from "@/components/ui/chapter-layout/InfoCard";
-import { Bot, Flask, Factory, TrendingUp } from "lucide-react";
+import { Bot, FlaskConical, Factory, TrendingUp } from "lucide-react";
 
 export const IndustryShifts = () => {
   return (
@@ -47,7 +46,7 @@ export const IndustryShifts = () => {
         
         <div className="p-5 border border-gray-200 rounded-lg relative">
           <div className="absolute -top-4 left-4 bg-white px-2 font-semibold flex items-center text-primary">
-            <Flask className="mr-2 h-4 w-4" />
+            <FlaskConical className="mr-2 h-4 w-4" />
             <span>2. Material Revolution</span>
           </div>
           <div className="space-y-4 mt-2">

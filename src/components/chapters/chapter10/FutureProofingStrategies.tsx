@@ -1,6 +1,5 @@
-
 import { ChapterSection } from "@/components/ui/chapter-layout/ChapterSection";
-import { Bot, Flask, Factory, TrendingUp } from "lucide-react";
+import { Bot, FlaskConical, Factory, TrendingUp } from "lucide-react";
 
 export const FutureProofingStrategies = () => {
   return (
@@ -55,7 +54,7 @@ export const FutureProofingStrategies = () => {
         
         <div className="rounded-lg border border-blue-200 overflow-hidden">
           <div className="bg-blue-100 p-4 flex items-center">
-            <Flask className="h-5 w-5 text-blue-700 mr-2" />
+            <FlaskConical className="h-5 w-5 text-blue-700 mr-2" />
             <h3 className="font-bold text-blue-900">Adapting to Material Revolution</h3>
           </div>
           <div className="p-5 space-y-4 bg-white">
