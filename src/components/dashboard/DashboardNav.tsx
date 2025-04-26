@@ -22,15 +22,15 @@ export const DashboardNav = () => {
         onClick={() => navigate("/dashboard/new-chapter")}
       >
         <Book className="mr-2 h-4 w-4" />
-        Chapter 1: Fundamentals
+        Introduction
       </Button>
       <Button 
         variant="ghost" 
         className="w-full justify-start"
-        onClick={() => navigate("/dashboard/chapter-2")}
+        onClick={() => navigate("/dashboard/chapter-1")}
       >
         <BookText className="mr-2 h-4 w-4" />
-        Chapter 2: Know Yourself
+        Chapter 1: Arbitrage Windows
       </Button>
       <Button 
         variant="ghost" 

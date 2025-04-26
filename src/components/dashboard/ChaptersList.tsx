@@ -1,3 +1,4 @@
+
 import { useChapterProgress } from "@/hooks/useChapterProgress";
 import { ChapterCard } from "./ChapterCard";
 
@@ -5,6 +6,12 @@ export const ChaptersList = () => {
   const { isChapterCompleted } = useChapterProgress();
 
   const chapters = [
+    {
+      number: 0,
+      title: "Introduction: The Opportunity",
+      description: "Understanding the potential of 3D printing and how to use this book.",
+      imageUrl: "https://images.unsplash.com/photo-1559028012-481c04fa702d"
+    },
     {
       number: 1,
       title: "Arbitrage Windows",
@@ -21,66 +28,48 @@ export const ChaptersList = () => {
       number: 3,
       title: "The 3 Plus 1 Equals 40 System",
       description: "A system for creating sustainable revenue in 3D printing.",
-      imageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+      imageUrl: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173"
     },
     {
       number: 4,
       title: "The Product Trinity",
       description: "Finding your first three winning products using the P.R.O.F.I.T.S. MATCH framework.",
-      imageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+      imageUrl: "https://images.unsplash.com/photo-1607344645866-009c320c5ab8"
     },
     {
       number: 5,
       title: "Choosing Your Production Tools",
       description: "Select the right printer and accessories for your specific needs.",
-      imageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+      imageUrl: "https://images.unsplash.com/photo-1615936998658-70e47a5ada00"
     },
     {
       number: 6,
       title: "Selecting Your Selling Platforms",
       description: "Find the optimal platforms to sell your 3D printed products.",
-      imageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+      imageUrl: "https://images.unsplash.com/photo-1563013544-824ae1b704d3"
     },
     {
       number: 7,
       title: "Setting Up for Success",
       description: "The 5-step setup system for consistent production and quality.",
-      imageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+      imageUrl: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f"
     },
     {
       number: 8,
       title: "Zero-Cost Marketing That Works",
       description: "A 10-step system to market your products without spending money.",
-      imageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+      imageUrl: "https://images.unsplash.com/photo-1542744173-8659373a3e97"
     },
     {
       number: 9,
       title: "Scaling Beyond $5K",
       description: "Strategies to scale your business beyond the initial milestones.",
-      imageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+      imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71"
     },
     {
       number: 10,
       title: "Future-Proofing Your Business",
       description: "Position your business for long-term success in a changing market.",
-      imageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
-    },
-    {
-      number: 11,
-      title: "Your Business Ecosystem",
-      description: "Building systems and partnerships that support sustainable growth.",
-      imageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
-    },
-    {
-      number: 12,
-      title: "Advanced Product Development",
-      description: "Taking your product line to the next level with innovation.",
-      imageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
-    },
-    {
-      number: 13,
-      title: "The Journey Ahead",
-      description: "Final strategies, resources, and next steps for your business.",
       imageUrl: "https://images.unsplash.com/photo-1498050108023-c5249f4df085"
     }
   ];
