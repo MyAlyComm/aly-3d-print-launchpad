@@ -9,7 +9,7 @@ const PersonalMessage = () => {
         <div className="flex items-start gap-4">
           <div className="flex-shrink-0">
             <img 
-              src="/lovable-uploads/6265514e-869f-4650-8698-e0a572599ea7.png"
+              src="/lovable-uploads/d1a2c586-5f86-4edf-865e-d27b19a65ec9.png"
               alt="Aly" 
               className="w-24 h-24 rounded-full border-4 border-primary object-cover" 
             />
@@ -17,13 +17,13 @@ const PersonalMessage = () => {
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
               <MessageSquare className="w-4 h-4 text-primary" />
-              <h3 className="font-semibold text-gray-900">A Message from Aly</h3>
+              <h3 className="font-semibold text-gray-900">A Message from the Founder</h3>
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">
-              Hey there! I created this blueprint because I saw too many people struggling to start their 3D printing business. 
-              After growing my own successful studio and helping hundreds of entrepreneurs, I've compiled everything I've learned 
-              into this comprehensive guide. Whether you're starting with a $500 budget or $5000, this blueprint will show you 
-              exactly how to turn 3D printing into a profitable business.
+              Hey there! I created this blueprint to empower creators and entrepreneurs who want to turn their creativity into income. 
+              After building my own successful 3D printing studio and helping hundreds of entrepreneurs, I've distilled my insights 
+              into this comprehensive guide. No matter your background or starting budget, this blueprint will show you how to 
+              transform 3D printing from a hobby into a profitable business.
             </p>
           </div>
         </div>
