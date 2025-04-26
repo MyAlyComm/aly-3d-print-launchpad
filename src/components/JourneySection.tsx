@@ -111,9 +111,7 @@ const JourneySection = () => {
                 <ArrowRight className="w-5 h-5 text-purple-500" />
                 <h3 className="font-semibold text-lg text-gray-900">Month 7</h3>
               </div>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Hiring team members and establishing standard operating procedures.
-              </p>
+              <p className="text-gray-600 text-sm leading-relaxed">I finished my thesis: The Axiogenetic Theorem. A mathematical model to assign and predict true value outcomes as functions of the products of the rate of Innovation and Time expended. </p>
             </div>
           </div>
 
