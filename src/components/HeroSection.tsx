@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import LeadMagnetForm from "./LeadMagnetForm";
@@ -6,6 +5,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Star } from "lucide-react";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const HeroSection = () => {
   const [open, setOpen] = useState(false);
@@ -55,12 +55,19 @@ marketing strategies to start profiting from 3D printing</p>
             </div>
             <div className="flex items-center space-x-3">
               <div className="flex -space-x-2">
-                {[1, 2, 3].map((n) => (
-                  <div key={n} className="w-8 h-8 rounded-full border-2 border-white bg-gray-200"></div>
+                {[
+                  "/lovable-uploads/80580729-6d4e-4bd0-a66c-dff6d0d890e1.png",
+                  "/lovable-uploads/90ff8861-ff64-4a75-8a68-8afda542663d.png",
+                  "/lovable-uploads/e49ddb52-4568-42a4-9701-8bdb0ebd0833.png"
+                ].map((src, n) => (
+                  <Avatar key={n} className="w-8 h-8 border-2 border-white">
+                    <AvatarImage src={src} alt={`Student ${n + 1}`} />
+                    <AvatarFallback>ST</AvatarFallback>
+                  </Avatar>
                 ))}
               </div>
               <p className="text-sm text-gray-600">
-                <span className="font-semibold">4.9/5</span> from over <span className="font-semibold">2,000+</span> students
+                Join <span className="font-semibold">2000+</span> students making money 3D printing
               </p>
             </div>
           </div>
