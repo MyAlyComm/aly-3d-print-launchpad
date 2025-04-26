@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
   Carousel,
@@ -23,7 +22,7 @@ import { MythsSection } from './MythsSection';
 import { FutureSection } from './FutureSection';
 import { SelfAssessmentSection } from './SelfAssessmentSection';
 import { OpportunitySection } from './OpportunitySection';
-import { BudgetSection } from './BudgetSection';
+// Removed BudgetSection import
 
 export const ChapterCarousel = () => {
   const { toast } = useToast();
@@ -46,12 +45,7 @@ export const ChapterCarousel = () => {
       title: 'Arbitrage Windows',
       image: 'https://images.unsplash.com/photo-1518770660439-4636190af475'
     },
-    { 
-      id: 'budget', 
-      component: BudgetSection, 
-      title: 'Budget Planning',
-      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6'
-    },
+    // Removed budget section
     { 
       id: 'timeline', 
       component: TimelineSection, 
