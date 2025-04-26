@@ -1,7 +1,5 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle, ArrowRight } from "lucide-react";
-
 const JourneySection = () => {
   return <Card className="bg-white/80 backdrop-blur border-primary/10 shadow-lg">
       <CardContent className="pt-6 space-y-8">
@@ -11,7 +9,7 @@ const JourneySection = () => {
           <div className="space-y-4 transition-transform duration-300 hover:-translate-y-2">
             <div className="relative">
               <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur group-hover:opacity-40 transition-opacity"></div>
-              <img src="/lovable-uploads/7868338f-6cdb-4097-b11e-25b26904b7e1.png" alt="Setting up first 3D printer" className="relative rounded-xl w-full aspect-square object-cover" />
+              <img alt="Setting up first 3D printer" className="relative rounded-xl w-full aspect-square object-cover" src="/lovable-uploads/511b02f5-662b-4442-ada4-7d79753c2d2d.jpg" />
             </div>
             <div>
               <div className="flex items-center gap-2 mb-2">
@@ -141,5 +139,4 @@ const JourneySection = () => {
       </CardContent>
     </Card>;
 };
-
 export default JourneySection;
