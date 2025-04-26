@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -103,12 +102,17 @@ export default {
 					'50%': {
 						transform: 'translateY(-10px)'
 					}
+				},
+				scroll: {
+					'0%': { transform: 'translateX(0)' },
+					'100%': { transform: 'translateX(calc(-50% - 2rem))' },
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'bounce-slow': 'bounce-slow 3s infinite ease-in-out'
+				'bounce-slow': 'bounce-slow 3s infinite ease-in-out',
+				'scroll': 'scroll 40s linear infinite'
 			}
 		}
 	},

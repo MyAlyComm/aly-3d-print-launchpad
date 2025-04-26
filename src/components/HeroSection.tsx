@@ -8,6 +8,7 @@ import { Star } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import PersonalMessage from "./PersonalMessage";
 import JourneySection from "./JourneySection";
+import TrustedCompanies from "./TrustedCompanies";
 
 const HeroSection = () => {
   const [open, setOpen] = useState(false);
@@ -83,6 +84,8 @@ marketing strategies to start profiting from 3D printing</p>
             
             {/* Journey Section - Before and After */}
             <JourneySection />
+            {/* Trusted Companies Section */}
+            <TrustedCompanies />
           </div>
 
           {/* Ebook Cover Section - Adjusted width and spacing */}
