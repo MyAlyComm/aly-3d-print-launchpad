@@ -25,8 +25,10 @@ const Chapter7 = () => {
       setSection(section + 1);
       window.scrollTo(0, 0);
       
-      // Track progress for completed section
-      saveResponse(sections[section].id, { completed: true });
+      // Track progress for completed section - using the correct format
+      saveResponse(sections[section].id, { 
+        checkboxes: { completed: true } 
+      });
     }
   };
 
@@ -38,11 +40,15 @@ const Chapter7 = () => {
   };
 
   const handleComplete = () => {
-    // Track progress for the final section
-    saveResponse(sections[section].id, { completed: true });
+    // Track progress for the final section - using the correct format
+    saveResponse(sections[section].id, { 
+      checkboxes: { completed: true } 
+    });
     
-    // Mark the worksheet as complete
-    saveResponse("worksheet", { completed: true });
+    // Mark the worksheet as complete - using the correct format
+    saveResponse("worksheet", { 
+      checkboxes: { completed: true } 
+    });
     
     window.scrollTo(0, 0);
   };
