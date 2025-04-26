@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
@@ -10,9 +9,7 @@ import { ChapterNavigation } from "@/components/ebook/ChapterNavigation";
 import { ChapterProgressBar } from "@/components/ebook/ChapterProgress";
 
 // Import chapter 1 sections
-import { OpportunitySection } from "@/components/chapter1/OpportunitySection";
 import { ArbitrageSection } from "@/components/chapter1/ArbitrageSection";
-// Remove import for BudgetSection
 import { TimelineSection } from "@/components/chapter1/TimelineSection";
 import { MythsSection } from "@/components/chapter1/MythsSection";
 import { FutureSection } from "@/components/chapter1/FutureSection";
@@ -52,7 +49,7 @@ const NewEbookChapter = () => {
     navigate("/dashboard");
   };
 
-  // Define sections array using existing Chapter 1 components
+  // Define sections array with updated order
   const sections = [
     {
       id: "intro",
@@ -65,16 +62,10 @@ const NewEbookChapter = () => {
       component: <StorySection onSubmit={goToNextSection} />,
     },
     {
-      id: "opportunity",
-      title: "The 3D Printing Opportunity",
-      component: <OpportunitySection onSubmit={goToNextSection} />,
-    },
-    {
       id: "arbitrage",
       title: "Understanding Arbitrage Windows",
       component: <ArbitrageSection onSubmit={goToNextSection} />,
     },
-    // Removed BudgetSection
     {
       id: "timeline",
       title: "Industry Timeline",
@@ -134,4 +125,3 @@ const NewEbookChapter = () => {
 };
 
 export default NewEbookChapter;
-
