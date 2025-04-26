@@ -1,39 +1,39 @@
 
-const companies = [
-  "Prusa Research",
-  "Creality",
-  "Elegoo",
-  "Bambu Lab",
-  "Anycubic",
-  "Makerbot",
-  "Formlabs",
-  "Ultimaker",
+const blueprintFeatures = [
+  "Marketing Strategies",
+  "Printer Buying Guide",
+  "How to Find Profitable Products",
+  "AI Product Design",
+  "Custom Product Creation",
+  "Marketplace Optimization",
+  "Pricing Strategies",
+  "Customer Service Guide",
 ];
 
 const TrustedCompanies = () => {
   return (
-    <div className="bg-gray-50/50 py-8 overflow-hidden">
-      <div className="text-center mb-6">
-        <h3 className="text-xl font-semibold text-gray-900">Trusted By Leading 3D Printing Companies</h3>
+    <div className="w-full bg-gradient-to-r from-primary/5 to-secondary/5 py-12 overflow-hidden">
+      <div className="text-center mb-8">
+        <h3 className="text-2xl font-semibold text-gray-900">Complete System Including</h3>
       </div>
       <div className="relative">
         <div className="flex space-x-16 animate-[scroll_40s_linear_infinite]">
-          {/* First set of companies */}
-          {companies.map((company, idx) => (
+          {/* First set of features */}
+          {blueprintFeatures.map((feature, idx) => (
             <span
-              key={`${company}-1`}
-              className="text-gray-500 text-lg font-medium whitespace-nowrap"
+              key={`${feature}-1`}
+              className="text-gray-700 text-lg font-medium whitespace-nowrap hover:text-primary transition-colors duration-300"
             >
-              {company}
+              {feature}
             </span>
           ))}
           {/* Duplicate set for seamless scrolling */}
-          {companies.map((company, idx) => (
+          {blueprintFeatures.map((feature, idx) => (
             <span
-              key={`${company}-2`}
-              className="text-gray-500 text-lg font-medium whitespace-nowrap"
+              key={`${feature}-2`}
+              className="text-gray-700 text-lg font-medium whitespace-nowrap hover:text-primary transition-colors duration-300"
             >
-              {company}
+              {feature}
             </span>
           ))}
         </div>
