@@ -37,9 +37,9 @@ const DetailedStorySection = () => {
                 <div className="relative">
                   <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur"></div>
                   <img 
-                    src="/lovable-uploads/90ff8861-ff64-4a75-8a68-8afda542663d.png"
-                    alt="3D printing journey" 
-                    className="relative rounded-xl w-full aspect-square object-cover"
+                    src="/lovable-uploads/1935bd17-362f-4c25-bc16-bb5b81522fc8.png"
+                    alt="5 in 1 phone stand product" 
+                    className="relative rounded-xl w-full aspect-square object-cover bg-white"
                   />
                 </div>
                 <div>
