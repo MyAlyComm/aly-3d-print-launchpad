@@ -1,5 +1,13 @@
 
 import BlueprintCard from "./BlueprintCard";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { ChevronDown } from "lucide-react";
 
 const blueprints = [
   {
@@ -47,49 +55,40 @@ const blueprints = [
   },
   {
     id: 4,
-    title: "Custom Tailored 3D Blueprint",
-    price: "$297",
+    title: "Enterprise Solutions",
+    price: "From $297",
     popular: false,
     isFree: false,
-    description: "Personalized guidance for your success",
+    description: "Tailored solutions for serious entrepreneurs",
     features: [
       "Custom-tailored blueprint",
       "1-month PrintProfit.io membership",
-      "Personalized strategy session",
-      "Priority support access",
-      "Custom product recommendations",
+      "Product design services",
+      "Full business setup available",
+      "Premium support options",
     ]
+  }
+];
+
+const enterpriseOptions = [
+  {
+    id: 4,
+    title: "Custom Tailored 3D Blueprint",
+    price: "$297",
+    description: "Personalized guidance for your success",
   },
   {
     id: 5,
     title: "Product Design Bundle",
     price: "$997",
-    popular: false,
-    isFree: false,
     description: "Full product design service",
-    features: [
-      "Complete product design",
-      "Market research & validation",
-      "Production-ready files",
-      "Commercial license included",
-      "Unlimited revisions",
-    ]
   },
   {
     id: 6,
     title: "Complete Business Bundle",
     price: "$1,997",
-    popular: false,
-    isFree: false,
     description: "Your entire business, built for you",
-    features: [
-      "Custom branding package",
-      "Professional website",
-      "Social media strategy",
-      "Product selection & design",
-      "Launch plan & timeline",
-    ]
-  },
+  }
 ];
 
 interface BlueprintsSectionProps {
@@ -110,15 +109,58 @@ const BlueprintsSection = ({ onCheckout, open, setOpen }: BlueprintsSectionProps
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
         {blueprints.map((blueprint) => (
-          <BlueprintCard 
-            key={blueprint.id} 
-            {...blueprint} 
-            onCheckout={onCheckout}
-            open={open}
-            setOpen={setOpen}
-          />
+          <div key={blueprint.id}>
+            {blueprint.id === 4 ? (
+              <div className="blueprint-card">
+                <div className="mb-4">
+                  <h3 className="text-xl font-bold mb-1">{blueprint.title}</h3>
+                  <p className="text-gray-600 text-sm mb-4">{blueprint.description}</p>
+                  <div className="mb-6">
+                    <span className="text-3xl font-bold text-primary">{blueprint.price}</span>
+                  </div>
+                </div>
+                
+                <ul className="space-y-3 mb-8">
+                  {blueprint.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start">
+                      <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700 text-sm">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button className="w-full">
+                      Select Package <ChevronDown className="ml-2 h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-72">
+                    {enterpriseOptions.map((option) => (
+                      <DropdownMenuItem 
+                        key={option.id}
+                        className="flex flex-col items-start py-3 cursor-pointer"
+                        onClick={() => onCheckout(option.id)}
+                      >
+                        <div className="font-semibold">{option.title}</div>
+                        <div className="text-sm text-gray-500">{option.price}</div>
+                        <div className="text-xs text-gray-400">{option.description}</div>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            ) : (
+              <BlueprintCard 
+                {...blueprint} 
+                onCheckout={onCheckout}
+                open={open}
+                setOpen={setOpen}
+              />
+            )}
+          </div>
         ))}
       </div>
     </>

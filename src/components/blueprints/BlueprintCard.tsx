@@ -26,7 +26,9 @@ const BlueprintCard = ({
   isFree, 
   description, 
   features, 
-  onCheckout 
+  onCheckout,
+  open,
+  setOpen
 }: BlueprintProps) => {
   return (
     <div className={`blueprint-card ${popular ? 'blueprint-card-popular relative overflow-hidden' : ''}`}>
