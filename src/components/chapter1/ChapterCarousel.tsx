@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
   Carousel,
@@ -40,16 +39,16 @@ export const ChapterCarousel = () => {
       image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158'
     },
     { 
-      id: 'opportunity', 
-      component: OpportunitySection, 
-      title: 'The 3D Printing Opportunity',
-      image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b'
-    },
-    { 
       id: 'arbitrage', 
       component: ArbitrageSection, 
       title: 'Arbitrage Windows',
       image: 'https://images.unsplash.com/photo-1518770660439-4636190af475'
+    },
+    { 
+      id: 'opportunity', 
+      component: OpportunitySection, 
+      title: 'The 3D Printing Opportunity',
+      image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b'
     },
     { 
       id: 'myths', 
