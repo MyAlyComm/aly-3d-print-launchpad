@@ -1,11 +1,8 @@
-
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-
 const AboutSection = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
-  
   return <div className="py-12 md:py-16 bg-white">
       <div className="container px-4 md:px-6">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -14,9 +11,10 @@ const AboutSection = () => {
             <h2 className="text-3xl md:text-4xl font-bold font-display mb-6">Hey I'm Aly, 
 Your 3D Printing Mentor</h2>
             
-            <p className="text-gray-700 mb-8">
-              From a single $300 printer to a thriving $20K/month business, I've learned what it takes to succeed in 3D printing. Now, I'm sharing my blueprint to help you build your own profitable business, even starting with just $500.
-            </p>
+            <p className="text-gray-700 mb-8">From a single $300 printer to a thriving $20K+/month business, I've learned what it takes to succeed in 3D printing. But the journey would have been so much easier if I knew all the things I do now.
+
+
+So now I'm sharing my blueprint to help you build your own profitable business. </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button className="bg-primary hover:bg-primary-dark">
@@ -47,5 +45,4 @@ Your 3D Printing Mentor</h2>
       </div>
     </div>;
 };
-
 export default AboutSection;
