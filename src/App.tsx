@@ -24,6 +24,7 @@ import Chapter7 from "./pages/Chapter7";
 import Chapter8 from "./pages/Chapter8";
 import Chapter9 from "./pages/Chapter9";
 import Chapter10 from "./pages/Chapter10";
+import Chapter11 from "./pages/Chapter11";
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -111,6 +112,11 @@ const App = () => {
                 <Route path="/dashboard/chapter-10" element={
                   <ProtectedRoute>
                     <Chapter10 />
+                  </ProtectedRoute>
+                } />
+                <Route path="/dashboard/chapter-11" element={
+                  <ProtectedRoute>
+                    <Chapter11 />
                   </ProtectedRoute>
                 } />
                 <Route path="*" element={<NotFound />} />

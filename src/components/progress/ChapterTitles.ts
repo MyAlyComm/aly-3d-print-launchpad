@@ -1,4 +1,3 @@
-
 export const getChapterTitle = (chapterNumber: number) => {
   const titles = {
     0: "Introduction: The Opportunity",
@@ -11,7 +10,8 @@ export const getChapterTitle = (chapterNumber: number) => {
     7: "Zero-Cost Marketing That Works",
     8: "Creating Customer Advocates",
     9: "Strategic Partnerships",
-    10: "Future-Proofing Your Business"
+    10: "Future-Proofing Your Business",
+    11: "The Journey Ahead"
   };
   return titles[chapterNumber as keyof typeof titles] || `Chapter ${chapterNumber}`;
 };

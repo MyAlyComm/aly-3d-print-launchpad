@@ -1,4 +1,3 @@
-
 import { useChapterProgress } from "@/hooks/useChapterProgress";
 import { ChapterCard } from "./ChapterCard";
 
@@ -71,6 +70,12 @@ export const ChaptersList = () => {
       title: "Future-Proofing Your Business",
       description: "Prepare for industry changes and position yourself for long-term success.",
       imageUrl: "https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+    },
+    {
+      number: 11,
+      title: "The Journey Ahead",
+      description: "Reflect on your journey and prepare for your next steps as a successful 3D printing entrepreneur.",
+      imageUrl: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4"
     }
   ];
 

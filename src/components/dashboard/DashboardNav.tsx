@@ -107,6 +107,14 @@ export const DashboardNav = () => {
       <Button 
         variant="ghost" 
         className="w-full justify-start"
+        onClick={() => navigate("/dashboard/chapter-11")}
+      >
+        <BookText className="mr-2 h-4 w-4" />
+        Chapter 11: The Journey Ahead
+      </Button>
+      <Button 
+        variant="ghost" 
+        className="w-full justify-start"
         onClick={() => navigate("/dashboard/resources")}
       >
         <BookOpen className="mr-2 h-4 w-4" />
