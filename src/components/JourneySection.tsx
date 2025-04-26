@@ -31,7 +31,7 @@ const JourneySection = () => {
                 <ArrowRight className="w-5 h-5 text-blue-500" />
                 <h3 className="font-semibold text-lg text-gray-900">Month 2</h3>
               </div>
-              <p className="text-gray-600 text-sm leading-relaxed">Dedicated time to learning, researching, and planning grew my business to over 10K/month.</p>
+              <p className="text-gray-600 text-sm leading-relaxed">While going to University full time, I dedicated all my spare time to learning, researching, and planning and grew my business to over 10K/month: selling on my website and amazon.</p>
             </div>
           </div>
 
