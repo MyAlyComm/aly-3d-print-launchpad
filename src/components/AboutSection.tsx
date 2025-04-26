@@ -36,7 +36,7 @@ So now I'm sharing my blueprint to help you build your own profitable business.Â
 
               <div className="absolute -right-6 -bottom-6 bg-white rounded-lg shadow-lg p-4 max-w-[180px]">
                 <div className="text-sm font-medium text-gray-500">Instagram</div>
-                <div className="text-xl font-bold text-primary">24.5K</div>
+                <div className="text-xl font-bold text-primary">46.1K</div>
                 <div className="text-sm text-gray-500">Followers</div>
               </div>
             </div>
