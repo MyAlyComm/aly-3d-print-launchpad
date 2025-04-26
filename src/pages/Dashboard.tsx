@@ -4,7 +4,6 @@ import { StatsCards } from "@/components/dashboard/StatsCards";
 import { WelcomeCard } from "@/components/dashboard/WelcomeCard";
 import { ChaptersList } from "@/components/dashboard/ChaptersList";
 import { ResourcesCard } from "@/components/dashboard/ResourcesCard";
-import { ProgressChart } from "@/components/dashboard/ProgressChart";
 import { QuickNavCards } from "@/components/dashboard/QuickNavCards";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -17,7 +16,6 @@ const Dashboard = () => {
         <div className="grid gap-6">
           <StatsCards />
           <QuickNavCards />
-          <ProgressChart />
           <WelcomeCard />
         </div>
 
