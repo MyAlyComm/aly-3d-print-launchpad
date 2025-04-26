@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+
 const AboutSection = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   return <div className="py-12 md:py-16 bg-white">
@@ -8,17 +9,11 @@ const AboutSection = () => {
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="order-2 md:order-1">
             <div className="text-sm font-medium text-primary mb-2">THE BRAIN BEHIND THE BLUEPRINT</div>
-            <h2 className="text-3xl md:text-4xl font-bold font-display mb-6">Hey I'm Aly, 
+            <h2 className="text-3xl md:text-4xl font-bold font-display mb-6">Hey I'm Aly, 
 Your 3D Printing Mentor</h2>
             <div className="space-y-4 text-gray-700">
-              <p>I designed this blueprint because I needed it 9 months ago, and it didn't exist... 
-
-
-It's the culmination of everything I've learned about how to start and grow a 3D printing business. 
-
-
-It's the step-by-step guide that I wish I had when</p>
-              <p>I started my 3D printing journey began with just a $500 budget after a friend showed me how she was making money with her printer. On March 29, 2025, I made my first $10 sale – that small win sparked what would become a profitable business.</p>
+              <p>I designed this blueprint because it's what I needed when I was starting out. And it's the culmination of everything I've learned about starting and growing a 3D printing business. It's the step-by-step guide that I wish I had before...</p>
+              <p>My 3D printing journey began with just a $500 budget after a friend showed me how she was making money with her printer. On March 29, 2025, I made my first $10 sale – that small win sparked what would become a profitable business.</p>
               <p>
                 Today, I lead a thriving Skool community with over 1,200 members where I share everything I've learned about building a profitable 3D printing business. My mission is simple: help creative people like you turn their ideas into income.
               </p>
