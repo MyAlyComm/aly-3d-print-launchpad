@@ -1,21 +1,18 @@
+import React from 'react';
+import { Users, Award, ShieldCheck } from 'lucide-react';
+
 const trustPoints = [{
   title: "24.5K+ Instagram Followers",
-  description: "Join a growing community of 3D printing enthusiasts and entrepreneurs.",
-  icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-    </svg>
+  description: "Leading Innovator: Aly stays at the cutting edge of AI, E-Commerce and Generative Product Design. Through her company MyAly AI, she is building the next generation of AI tools for the 3D printing industry.",
+  icon: <Users className="h-6 w-6" />
 }, {
   title: "1,200+ Skool Community Members",
-  description: "Access to an active community of successful 3D printing entrepreneurs.",
-  icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-    </svg>
+  description: "Marketing Consultant for some of the biggest brands in the industry.",
+  icon: <Award className="h-6 w-6" />
 }, {
   title: "Brand Partnership with Elevate.store",
   description: "Officially endorsed by leading industry platforms and stores.",
-  icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-    </svg>
+  icon: <ShieldCheck className="h-6 w-6" />
 }, {
   title: "100+ Success Stories",
   description: "Helped over 100 creators sell their first print and start profitable businesses.",
@@ -23,6 +20,7 @@ const trustPoints = [{
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
     </svg>
 }];
+
 const partnerLogos = [{
   name: "Etsy",
   logo: "https://upload.wikimedia.org/wikipedia/commons/6/64/Etsy_logo.svg"
@@ -33,6 +31,7 @@ const partnerLogos = [{
   name: "Shopify",
   logo: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Shopify_logo_2018.svg"
 }];
+
 const TrustSection = () => {
   return <div className="py-16 bg-gray-50">
       <div className="container">
@@ -85,4 +84,5 @@ const TrustSection = () => {
       </div>
     </div>;
 };
+
 export default TrustSection;
