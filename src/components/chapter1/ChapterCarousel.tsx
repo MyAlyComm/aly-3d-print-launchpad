@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import {
   Carousel,
@@ -33,16 +34,16 @@ export const ChapterCarousel = () => {
 
   const sections = [
     { 
-      id: 'opportunity', 
-      component: OpportunitySection, 
-      title: 'The 3D Printing Opportunity',
-      image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b'
-    },
-    { 
       id: 'timeline', 
       component: TimelineSection, 
       title: 'Industry Timeline',
       image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158'
+    },
+    { 
+      id: 'opportunity', 
+      component: OpportunitySection, 
+      title: 'The 3D Printing Opportunity',
+      image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b'
     },
     { 
       id: 'arbitrage', 
