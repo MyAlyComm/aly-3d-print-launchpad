@@ -17,7 +17,7 @@ const TrustedCompanies = () => {
         <h3 className="text-2xl font-semibold text-gray-900">Complete System Including</h3>
       </div>
       <div className="relative">
-        <div className="flex space-x-16 animate-[scroll_40s_linear_infinite]">
+        <div className="flex space-x-16 animate-[scroll_20s_linear_infinite]">
           {/* First set of features */}
           {blueprintFeatures.map((feature, idx) => (
             <span
