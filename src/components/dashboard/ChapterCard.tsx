@@ -24,7 +24,7 @@ export function ChapterCard({
 
   return (
     <Card className={cn(
-      "transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative overflow-hidden grid md:grid-cols-[1fr_200px]",
+      "transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative overflow-hidden grid md:grid-cols-[1fr_250px]",
       isCompleted && "bg-gradient-to-br from-primary/5 to-transparent",
     )}>
       {isCompleted && (
@@ -53,18 +53,20 @@ export function ChapterCard({
           </Button>
         </CardContent>
       </div>
-      <div className="hidden md:block relative h-full">
+      <div className="hidden md:block relative h-full w-[250px]">
         {imageUrl ? (
-          <div className="relative h-full">
-            <div className="absolute inset-0 bg-gradient-to-l from-black/40 to-black/60 z-10" />
+          <div className="relative h-full w-full">
             <img 
               src={imageUrl} 
               alt={`Chapter ${number} illustration`} 
-              className="w-full h-full object-cover object-center opacity-80 hover:opacity-100 transition-opacity"
+              className="w-full h-full object-cover"
+              style={{
+                aspectRatio: "1/1",
+                objectFit: "cover",
+                objectPosition: "center",
+              }}
             />
-            <div className="absolute inset-0 z-20 flex items-center justify-center text-white text-sm font-medium p-4">
-              {title}
-            </div>
+            <div className="absolute inset-0 bg-gradient-to-l from-black/10 to-transparent mix-blend-overlay" />
           </div>
         ) : (
           <div className="w-full h-full bg-gray-100 flex items-center justify-center">
