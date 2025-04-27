@@ -28,14 +28,14 @@ const DashboardLayout = ({ children, title }: DashboardLayoutProps) => {
           <Button
             variant="ghost"
             size="sm"
-            className="text-sm text-gray-600"
+            className="text-sm text-gray-600 hover:text-gray-900"
             onClick={() => navigate('/dashboard')}
           >
             <ChevronLeft className="h-4 w-4 mr-1" />
             Back to Ebooks Hub
           </Button>
         </div>
-        <main className="flex-1 overflow-y-auto bg-white p-4 md:p-6">
+        <main className="flex-1 overflow-y-auto bg-gray-50 p-4 md:p-6">
           {children}
         </main>
       </div>

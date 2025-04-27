@@ -12,15 +12,22 @@ const Dashboard = () => {
   
   return (
     <DashboardLayout title={`Welcome${user?.email ? ', ' + user.email.split('@')[0] : ''}`}>
-      <div className="grid gap-8 pb-8">
-        <div className="grid gap-6">
-          <StatsCards />
-          <QuickNavCards />
-          <WelcomeCard />
+      <div className="max-w-7xl mx-auto">
+        <div className="grid gap-8 pb-8">
+          <div className="grid gap-6">
+            <StatsCards />
+            <QuickNavCards />
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="md:col-span-2">
+                <ChaptersList />
+              </div>
+              <div className="space-y-6">
+                <WelcomeCard />
+                <ResourcesCard />
+              </div>
+            </div>
+          </div>
         </div>
-
-        <ChaptersList />
-        <ResourcesCard />
       </div>
     </DashboardLayout>
   );
