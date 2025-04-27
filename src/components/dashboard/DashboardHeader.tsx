@@ -1,5 +1,6 @@
 
-import { Menu } from "lucide-react";
+import { Menu, Home, BookOpen, User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -11,11 +12,12 @@ interface DashboardHeaderProps {
 
 export const DashboardHeader = ({ title }: DashboardHeaderProps) => {
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
 
   return (
-    <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
+    <div className="bg-white border-b border-gray-200 sticky top-0 z-40">
       <div className="px-4 py-4 flex items-center justify-between">
-        {isMobile && (
+        {isMobile ? (
           <Drawer>
             <DrawerTrigger asChild>
               <Button variant="ghost" size="icon">
@@ -29,9 +31,36 @@ export const DashboardHeader = ({ title }: DashboardHeaderProps) => {
               </div>
             </DrawerContent>
           </Drawer>
+        ) : (
+          <nav className="flex items-center gap-2">
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={() => navigate("/")}
+            >
+              <Home className="mr-2 h-4 w-4" />
+              Home
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={() => navigate("/dashboard")}
+            >
+              <BookOpen className="mr-2 h-4 w-4" />
+              All Ebooks
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={() => navigate("/account")}
+            >
+              <User className="mr-2 h-4 w-4" />
+              Account
+            </Button>
+          </nav>
         )}
         <h1 className="text-xl font-bold text-gray-900">{title}</h1>
       </div>
-    </header>
+    </div>
   );
 };
