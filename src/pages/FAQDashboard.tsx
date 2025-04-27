@@ -1,10 +1,9 @@
-
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { WelcomeCard } from "@/components/dashboard/WelcomeCard";
 import { ResourcesCard } from "@/components/dashboard/ResourcesCard";
 import { useAuth } from "@/hooks/useAuth";
 import { Card, CardContent } from "@/components/ui/card";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, BookOpen, Lightbulb, Target, Printer3d, FileText, HelpCircle, Wallet, Users, Package, Brain } from "lucide-react";
 import {
   Collapsible,
   CollapsibleContent,
@@ -23,7 +22,9 @@ const FAQSections = [
 - Now sold to 60+ countries with multiple viral products
 - Billion-dollar brands seek my marketing and consulting help
 - Zero previous experience or special connections`,
-    image: "/lovable-uploads/1273d951-6c16-4a5d-a99a-d233f5e92918.png"
+    image: "/lovable-uploads/1273d951-6c16-4a5d-a99a-d233f5e92918.png",
+    icon: BookOpen,
+    gradient: "from-purple-50 to-blue-50 hover:from-purple-100 hover:to-blue-100"
   },
   {
     id: "reality",
@@ -32,7 +33,9 @@ const FAQSections = [
     content: `"Some people think 3D printing is just for cheap plastic toys. But the reality is that it's less about what you sell and more about how you sell it. What the industry has a shortage of is creativity combined with systems—and that's where I come in."
 
 "I work 17 hours a day so that you don't have to. I've tested, failed, and refined so you can take the shortcuts."`,
-    image: "/lovable-uploads/90ff8861-ff64-4a75-8a68-8afda542663d.png"
+    image: "/lovable-uploads/90ff8861-ff64-4a75-8a68-8afda542663d.png",
+    icon: Lightbulb,
+    gradient: "from-orange-50 to-yellow-50 hover:from-orange-100 hover:to-yellow-100"
   },
   {
     id: "opportunity",
@@ -43,56 +46,72 @@ const FAQSections = [
 - The industry expanded 47% in 2024 alone
 - Create products with 50-95% profit margins
 - Turn $500 into $5K+ monthly with the right approach`,
-    image: "/lovable-uploads/573b21db-fd6b-4fe9-ba36-ae007133ace1.png"
+    image: "/lovable-uploads/573b21db-fd6b-4fe9-ba36-ae007133ace1.png",
+    icon: Target,
+    gradient: "from-emerald-50 to-teal-50 hover:from-emerald-100 hover:to-teal-100"
   },
   {
     id: "equipment",
     title: "Do you need expensive equipment?",
     description: "Start with any budget and grow from there",
     content: "You can start with any budget and grow from there. I started with just a $300 printer and $200 worth of supplies.",
-    image: "/lovable-uploads/e4159516-8779-495b-b04c-115389589491.png"
+    image: "/lovable-uploads/e4159516-8779-495b-b04c-115389589491.png",
+    icon: Printer3d,
+    gradient: "from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100"
   },
   {
     id: "skills",
     title: "Do you need design skills?",
     description: "90% of successful sellers didn't create their first designs",
     content: "90% of successful sellers didn't create their first designs. You don't need to be a designer to start a 3D printing business.",
-    image: "/lovable-uploads/4999495f-757f-4f9d-a959-19490908a461.png"
+    image: "/lovable-uploads/4999495f-757f-4f9d-a959-19490908a461.png",
+    icon: FileText,
+    gradient: "from-pink-50 to-rose-50 hover:from-pink-100 hover:to-rose-100"
   },
   {
     id: "software",
     title: "Which software do you use?",
     description: "Options for beginners through experts",
     content: "There are many software options available for beginners through experts. I recommend starting with Tinkercad.",
-    image: "/lovable-uploads/649c7549-c9f8-4a01-8949-355ca597999d.png"
+    image: "/lovable-uploads/649c7549-c9f8-4a01-8949-355ca597999d.png",
+    icon: HelpCircle,
+    gradient: "from-violet-50 to-purple-50 hover:from-violet-100 hover:to-purple-100"
   },
   {
     id: "saturation",
     title: "Is the market saturated?",
     description: "Thousands of untapped niches still exist",
     content: "Thousands of untapped niches still exist. The market is far from saturated.",
-    image: "/lovable-uploads/a99931e5-994c-4939-824c-4c0a8a94a9fe.png"
+    image: "/lovable-uploads/a99931e5-994c-4939-824c-4c0a8a94a9fe.png",
+    icon: Users,
+    gradient: "from-cyan-50 to-sky-50 hover:from-cyan-100 hover:to-sky-100"
   },
   {
     id: "budget",
     title: "STARTING BUDGET OPTIONS",
     description: "Start where you are, grow from there",
     content: "Start where you are, grow from there. You can start with any budget.",
-    image: "/lovable-uploads/38899999-4963-4945-8c5a-912515c5616d.png"
+    image: "/lovable-uploads/38899999-4963-4945-8c5a-912515c5616d.png",
+    icon: Wallet,
+    gradient: "from-lime-50 to-green-50 hover:from-lime-100 hover:to-green-100"
   },
   {
     id: "income",
     title: "REALISTIC INCOME POTENTIAL",
     description: "From side hustle to full-time business",
     content: "From side hustle to full-time business. The income potential is realistic.",
-    image: "/lovable-uploads/95999999-9999-4999-8999-999999999999.png"
+    image: "/lovable-uploads/95999999-9999-4999-8999-999999999999.png",
+    icon: Brain,
+    gradient: "from-amber-50 to-yellow-50 hover:from-amber-100 hover:to-yellow-100"
   },
   {
     id: "products",
     title: "BEST-SELLING PRODUCTS",
     description: "What actually sells and why",
     content: "What actually sells and why. I'll show you the best-selling products.",
-    image: "/lovable-uploads/21d99999-1999-4999-8999-199999999999.png"
+    image: "/lovable-uploads/21d99999-1999-4999-8999-199999999999.png",
+    icon: Package,
+    gradient: "from-fuchsia-50 to-pink-50 hover:from-fuchsia-100 hover:to-pink-100"
   }
 ];
 
@@ -138,7 +157,7 @@ const FAQDashboard = () => {
                 <CardContent className="p-6 space-y-4">
                   {FAQSections.map((section) => (
                     <Collapsible key={section.id} className="space-y-2">
-                      <Card className="bg-gradient-to-r from-purple-50 to-blue-50 hover:from-purple-100 hover:to-blue-100 transition-colors duration-300">
+                      <Card className={`bg-gradient-to-r ${section.gradient} transition-colors duration-300`}>
                         <div className="p-4">
                           <div className="flex items-start gap-4">
                             <img 
@@ -148,11 +167,14 @@ const FAQDashboard = () => {
                             />
                             <div className="flex-1 min-w-0">
                               <CollapsibleTrigger className="flex items-center justify-between w-full text-left group">
-                                <div>
-                                  <h3 className="font-medium text-sm md:text-base text-purple-900 group-hover:text-purple-700 transition-colors break-words">{section.title}</h3>
-                                  <p className="text-xs md:text-sm text-gray-600 break-words">{section.description}</p>
+                                <div className="flex items-center gap-2">
+                                  <section.icon className="h-5 w-5 text-gray-600" />
+                                  <div>
+                                    <h3 className="font-medium text-sm md:text-base text-gray-900 group-hover:text-gray-700 transition-colors break-words">{section.title}</h3>
+                                    <p className="text-xs md:text-sm text-gray-600 break-words">{section.description}</p>
+                                  </div>
                                 </div>
-                                <ChevronDown className="h-4 w-4 shrink-0 text-purple-600 transition-transform duration-200" />
+                                <ChevronDown className="h-4 w-4 shrink-0 text-gray-600 transition-transform duration-200" />
                               </CollapsibleTrigger>
                             </div>
                           </div>
