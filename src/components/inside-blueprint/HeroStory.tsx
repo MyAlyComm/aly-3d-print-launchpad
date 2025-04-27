@@ -5,9 +5,11 @@ export const HeroStory = () => {
         <div className="flex flex-col lg:flex-row items-center gap-12">
           <div className="flex-1 space-y-8">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-              From Hobby to <span className="text-primary">$10,000/Month</span> with 3D Printing
+              From Hobby to <span className="text-primary">$20,000/Month</span> with 3D Printing
             </h1>
-            <p className="text-lg text-gray-700 leading-relaxed">In 2024, I started with just one printer and a $500 budget. Today, I run a thriving 3D printing business. This isn't just my story—it's your blueprint to success.</p>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              In 2024, I started out with just one little printer and $200 of supplies. That business quickly grew to 20K+ a month thanks to my innovative marketing and business systems. Now it's my turn to help other creators find their successful path.
+            </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" className="text-lg">
                 Get The Complete Blueprint
