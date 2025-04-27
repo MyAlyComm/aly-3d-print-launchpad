@@ -2,14 +2,35 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { chapters } from "@/components/dashboard/chapters/types";
 import { BookOpen } from "lucide-react";
+import { Introduction as MarketAnalysis } from "@/components/chapters/chapter4/ProductTrinity";
+import { Introduction as IncomeChapter } from "@/components/chapters/chapter6/Introduction";
+import { Introduction as BestSellersChapter } from "@/components/chapters/chapter7/Introduction";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export const ChapterPreviews = () => {
+  const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
+
   // Select 3 key chapters to showcase
   const previewChapters = [
     chapters[4], // Market Analysis
     chapters[6], // Income Potential
     chapters[7]  // Best-Selling Products
   ];
+
+  const getChapterContent = (number: number) => {
+    switch (number) {
+      case 5:
+        return <MarketAnalysis />;
+      case 7:
+        return <IncomeChapter />;
+      case 8:
+        return <BestSellersChapter />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <section className="py-20 bg-gradient-to-b from-white to-primary/5">
@@ -41,6 +62,24 @@ export const ChapterPreviews = () => {
                   {chapter.description}
                 </p>
                 
+                <Button
+                  variant="outline"
+                  onClick={() => setSelectedChapter(selectedChapter === chapter.number ? null : chapter.number)}
+                  className="w-full"
+                >
+                  {selectedChapter === chapter.number ? "Close Preview" : "Read Preview"}
+                </Button>
+
+                {selectedChapter === chapter.number && (
+                  <Card className="mt-4">
+                    <CardContent className="p-4">
+                      <ScrollArea className="h-[300px]">
+                        {getChapterContent(chapter.number)}
+                      </ScrollArea>
+                    </CardContent>
+                  </Card>
+                )}
+                
                 {chapter.imageUrl && (
                   <div className="relative mt-4 aspect-video overflow-hidden rounded-lg">
                     <img
@@ -60,3 +99,4 @@ export const ChapterPreviews = () => {
     </section>
   );
 };
+
