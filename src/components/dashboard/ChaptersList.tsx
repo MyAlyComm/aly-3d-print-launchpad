@@ -1,9 +1,16 @@
 
 import { useChapterProgress } from "@/hooks/useChapterProgress";
 import { ChapterCard } from "./ChapterCard";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
 
 export const ChaptersList = () => {
-  const { isChapterCompleted } = useChapterProgress();
+  const { isChapterCompleted, calculateOverallProgress } = useChapterProgress();
+  const navigate = useNavigate();
+  const progress = calculateOverallProgress();
 
   const chapters = [
     {
@@ -80,21 +87,124 @@ export const ChaptersList = () => {
     }
   ];
 
+  // Find the next chapter to complete
+  const findNextChapterToComplete = () => {
+    for (let i = 0; i <= 11; i++) {
+      if (!isChapterCompleted(i)) {
+        return i;
+      }
+    }
+    return 0;
+  };
+
+  const nextChapter = findNextChapterToComplete();
+  
+  // Group chapters for tab display
+  const beginnerChapters = chapters.filter(c => c.number >= 0 && c.number <= 3);
+  const intermediateChapters = chapters.filter(c => c.number >= 4 && c.number <= 7);
+  const advancedChapters = chapters.filter(c => c.number >= 8 && c.number <= 11);
+
   return (
     <div>
-      <h3 className="text-xl font-bold mb-6">Your Learning Journey</h3>
-      <div className="grid gap-6">
-        {chapters.map((chapter) => (
-          <ChapterCard
-            key={chapter.number}
-            number={chapter.number}
-            title={chapter.title}
-            description={chapter.description}
-            isCompleted={isChapterCompleted(chapter.number)}
-            imageUrl={chapter.imageUrl}
-          />
-        ))}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+        <h3 className="text-xl font-bold">Your Learning Journey</h3>
+        <div className="w-full md:w-1/3 space-y-1">
+          <div className="flex justify-between text-sm">
+            <span>Progress</span>
+            <span className="font-medium">{Math.round(progress)}%</span>
+          </div>
+          <Progress value={progress} className="h-2" />
+        </div>
       </div>
+      
+      <div className="mb-8">
+        <div className="p-4 bg-gradient-to-r from-primary/20 to-primary/5 rounded-lg flex flex-col md:flex-row gap-4 justify-between items-center">
+          <div>
+            <h4 className="font-medium text-lg">Continue Learning</h4>
+            <p className="text-sm text-muted-foreground">
+              {nextChapter === 0 ? "Start with the Introduction" : `Resume with Chapter ${nextChapter}`}
+            </p>
+          </div>
+          <Button 
+            onClick={() => navigate(nextChapter === 0 ? 
+              "/dashboard/new-chapter" : 
+              `/dashboard/chapter-${nextChapter}`
+            )}
+          >
+            {nextChapter === 0 ? "Start Introduction" : `Continue Chapter ${nextChapter}`}
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+      
+      <Tabs defaultValue="all" className="w-full">
+        <TabsList className="mb-6">
+          <TabsTrigger value="all">All Chapters</TabsTrigger>
+          <TabsTrigger value="beginner">Beginner (0-3)</TabsTrigger>
+          <TabsTrigger value="intermediate">Intermediate (4-7)</TabsTrigger>
+          <TabsTrigger value="advanced">Advanced (8-11)</TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="all" className="mt-0">
+          <div className="grid gap-6">
+            {chapters.map((chapter) => (
+              <ChapterCard
+                key={chapter.number}
+                number={chapter.number}
+                title={chapter.title}
+                description={chapter.description}
+                isCompleted={isChapterCompleted(chapter.number)}
+                imageUrl={chapter.imageUrl}
+              />
+            ))}
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="beginner" className="mt-0">
+          <div className="grid gap-6">
+            {beginnerChapters.map((chapter) => (
+              <ChapterCard
+                key={chapter.number}
+                number={chapter.number}
+                title={chapter.title}
+                description={chapter.description}
+                isCompleted={isChapterCompleted(chapter.number)}
+                imageUrl={chapter.imageUrl}
+              />
+            ))}
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="intermediate" className="mt-0">
+          <div className="grid gap-6">
+            {intermediateChapters.map((chapter) => (
+              <ChapterCard
+                key={chapter.number}
+                number={chapter.number}
+                title={chapter.title}
+                description={chapter.description}
+                isCompleted={isChapterCompleted(chapter.number)}
+                imageUrl={chapter.imageUrl}
+              />
+            ))}
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="advanced" className="mt-0">
+          <div className="grid gap-6">
+            {advancedChapters.map((chapter) => (
+              <ChapterCard
+                key={chapter.number}
+                number={chapter.number}
+                title={chapter.title}
+                description={chapter.description}
+                isCompleted={isChapterCompleted(chapter.number)}
+                imageUrl={chapter.imageUrl}
+              />
+            ))}
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
