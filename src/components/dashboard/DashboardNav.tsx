@@ -11,7 +11,7 @@ export const DashboardNav = () => {
       <Button 
         variant="ghost" 
         className="w-full justify-start"
-        onClick={() => navigate("/dashboard")}
+        onClick={() => navigate("/dashboard/3d-blueprint")}
       >
         <Layout className="mr-2 h-4 w-4" />
         Dashboard
@@ -19,7 +19,7 @@ export const DashboardNav = () => {
       <Button 
         variant="ghost" 
         className="w-full justify-start"
-        onClick={() => navigate("/dashboard/new-chapter")}
+        onClick={() => navigate("/dashboard/3d-blueprint/new-chapter")}
       >
         <Book className="mr-2 h-4 w-4" />
         Introduction
@@ -27,7 +27,7 @@ export const DashboardNav = () => {
       <Button 
         variant="ghost" 
         className="w-full justify-start"
-        onClick={() => navigate("/dashboard/chapter-1")}
+        onClick={() => navigate("/dashboard/3d-blueprint/chapter-1")}
       >
         <BookText className="mr-2 h-4 w-4" />
         Chapter 1: Arbitrage Windows
@@ -35,7 +35,7 @@ export const DashboardNav = () => {
       <Button 
         variant="ghost" 
         className="w-full justify-start"
-        onClick={() => navigate("/dashboard/chapter-2")}
+        onClick={() => navigate("/dashboard/3d-blueprint/chapter-2")}
       >
         <BookText className="mr-2 h-4 w-4" />
         Chapter 2: Knowing Yourself
@@ -43,7 +43,7 @@ export const DashboardNav = () => {
       <Button 
         variant="ghost" 
         className="w-full justify-start"
-        onClick={() => navigate("/dashboard/chapter-3")}
+        onClick={() => navigate("/dashboard/3d-blueprint/chapter-3")}
       >
         <BookText className="mr-2 h-4 w-4" />
         Chapter 3: The 3+1=40 System
@@ -51,7 +51,7 @@ export const DashboardNav = () => {
       <Button 
         variant="ghost" 
         className="w-full justify-start"
-        onClick={() => navigate("/dashboard/chapter-4")}
+        onClick={() => navigate("/dashboard/3d-blueprint/chapter-4")}
       >
         <BookText className="mr-2 h-4 w-4" />
         Chapter 4: The Product Trinity
@@ -59,7 +59,7 @@ export const DashboardNav = () => {
       <Button 
         variant="ghost" 
         className="w-full justify-start"
-        onClick={() => navigate("/dashboard/chapter-5")}
+        onClick={() => navigate("/dashboard/3d-blueprint/chapter-5")}
       >
         <BookText className="mr-2 h-4 w-4" />
         Chapter 5: Production Tools
@@ -67,7 +67,7 @@ export const DashboardNav = () => {
       <Button 
         variant="ghost" 
         className="w-full justify-start"
-        onClick={() => navigate("/dashboard/chapter-6")}
+        onClick={() => navigate("/dashboard/3d-blueprint/chapter-6")}
       >
         <BookText className="mr-2 h-4 w-4" />
         Chapter 6: Selling Platforms
@@ -75,7 +75,7 @@ export const DashboardNav = () => {
       <Button 
         variant="ghost" 
         className="w-full justify-start"
-        onClick={() => navigate("/dashboard/chapter-7")}
+        onClick={() => navigate("/dashboard/3d-blueprint/chapter-7")}
       >
         <BookText className="mr-2 h-4 w-4" />
         Chapter 7: Setting Up For Success
@@ -83,7 +83,7 @@ export const DashboardNav = () => {
       <Button 
         variant="ghost" 
         className="w-full justify-start"
-        onClick={() => navigate("/dashboard/chapter-8")}
+        onClick={() => navigate("/dashboard/3d-blueprint/chapter-8")}
       >
         <BookText className="mr-2 h-4 w-4" />
         Chapter 8: Zero-Cost Marketing That Works
@@ -91,7 +91,7 @@ export const DashboardNav = () => {
       <Button 
         variant="ghost" 
         className="w-full justify-start"
-        onClick={() => navigate("/dashboard/chapter-9")}
+        onClick={() => navigate("/dashboard/3d-blueprint/chapter-9")}
       >
         <BookText className="mr-2 h-4 w-4" />
         Chapter 9: Scaling Beyond $5K
@@ -99,7 +99,7 @@ export const DashboardNav = () => {
       <Button 
         variant="ghost" 
         className="w-full justify-start"
-        onClick={() => navigate("/dashboard/chapter-10")}
+        onClick={() => navigate("/dashboard/3d-blueprint/chapter-10")}
       >
         <BookText className="mr-2 h-4 w-4" />
         Chapter 10: Future-Proofing Your Business
@@ -107,7 +107,7 @@ export const DashboardNav = () => {
       <Button 
         variant="ghost" 
         className="w-full justify-start"
-        onClick={() => navigate("/dashboard/chapter-11")}
+        onClick={() => navigate("/dashboard/3d-blueprint/chapter-11")}
       >
         <BookText className="mr-2 h-4 w-4" />
         Chapter 11: The Journey Ahead
@@ -115,10 +115,18 @@ export const DashboardNav = () => {
       <Button 
         variant="ghost" 
         className="w-full justify-start"
-        onClick={() => navigate("/dashboard/resources")}
+        onClick={() => navigate("/dashboard/3d-blueprint/resources")}
       >
         <BookOpen className="mr-2 h-4 w-4" />
         Resources
+      </Button>
+      <Button 
+        variant="ghost" 
+        className="w-full justify-start text-primary"
+        onClick={() => navigate("/dashboard")}
+      >
+        <BookOpen className="mr-2 h-4 w-4" />
+        All Ebooks
       </Button>
     </nav>
   );

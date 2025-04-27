@@ -1,5 +1,5 @@
 
-import { Home } from "lucide-react";
+import { Home, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { DashboardNav } from "./DashboardNav";
@@ -11,7 +11,7 @@ export const DashboardSidebarContent = () => {
     <div className="flex h-full flex-col">
       <div className="mb-8">
         <h2 className="text-xl font-bold text-primary">3DBlueprint.io</h2>
-        <p className="text-sm text-gray-500">Ebook Dashboard</p>
+        <p className="text-sm text-gray-500">3D Printing Blueprint</p>
       </div>
       
       <DashboardNav />
@@ -24,6 +24,14 @@ export const DashboardSidebarContent = () => {
         >
           <Home className="mr-2 h-4 w-4" />
           Back to Home
+        </Button>
+        <Button 
+          variant="ghost" 
+          className="w-full mt-2 text-primary"
+          onClick={() => navigate("/dashboard")}
+        >
+          <BookOpen className="mr-2 h-4 w-4" />
+          All Ebooks
         </Button>
         <Button 
           variant="ghost" 

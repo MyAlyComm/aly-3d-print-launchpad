@@ -2,6 +2,9 @@
 import { ReactNode } from "react";
 import { DashboardHeader } from "./DashboardHeader";
 import { DashboardSidebarContent } from "./DashboardSidebarContent";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -9,6 +12,8 @@ interface DashboardLayoutProps {
 }
 
 const DashboardLayout = ({ children, title }: DashboardLayoutProps) => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen flex w-full">
       {/* Desktop Sidebar */}
@@ -19,6 +24,17 @@ const DashboardLayout = ({ children, title }: DashboardLayoutProps) => {
       {/* Main content */}
       <div className="flex-1 flex flex-col">
         <DashboardHeader title={title} />
+        <div className="bg-white px-4 py-2 border-b border-gray-200">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-sm text-gray-600"
+            onClick={() => navigate('/dashboard')}
+          >
+            <ChevronLeft className="h-4 w-4 mr-1" />
+            Back to Ebooks Hub
+          </Button>
+        </div>
         <main className="flex-1 overflow-y-auto bg-white p-4 md:p-6">
           {children}
         </main>

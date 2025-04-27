@@ -25,6 +25,7 @@ import Chapter8 from "./pages/Chapter8";
 import Chapter9 from "./pages/Chapter9";
 import Chapter10 from "./pages/Chapter10";
 import Chapter11 from "./pages/Chapter11";
+import EbooksHub from "./pages/EbooksHub";
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -49,72 +50,80 @@ const App = () => {
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/payment-success" element={<PaymentSuccess />} />
                 
+                {/* New Ebooks Hub route */}
                 <Route path="/dashboard" element={
+                  <ProtectedRoute>
+                    <EbooksHub />
+                  </ProtectedRoute>
+                } />
+
+                {/* 3D Blueprint Ebook routes - nested under /dashboard/3d-blueprint */}
+                <Route path="/dashboard/3d-blueprint" element={
                   <ProtectedRoute>
                     <Dashboard />
                   </ProtectedRoute>
                 } />
-                <Route path="/dashboard/new-chapter" element={
+                <Route path="/dashboard/3d-blueprint/new-chapter" element={
                   <ProtectedRoute>
                     <NewEbookChapter />
                   </ProtectedRoute>
                 } />
-                <Route path="/dashboard/resources" element={
+                <Route path="/dashboard/3d-blueprint/resources" element={
                   <ProtectedRoute>
                     <Resources />
                   </ProtectedRoute>
                 } />
-                <Route path="/dashboard/chapter-1" element={
+                <Route path="/dashboard/3d-blueprint/chapter-1" element={
                   <ProtectedRoute>
                     <Chapter1 />
                   </ProtectedRoute>
                 } />
-                <Route path="/dashboard/chapter-2" element={
+                <Route path="/dashboard/3d-blueprint/chapter-2" element={
                   <ProtectedRoute>
                     <Chapter2 />
                   </ProtectedRoute>
                 } />
-                <Route path="/dashboard/chapter-3" element={
+                <Route path="/dashboard/3d-blueprint/chapter-3" element={
                   <ProtectedRoute>
                     <Chapter3 />
                   </ProtectedRoute>
                 } />
-                <Route path="/dashboard/chapter-4" element={
+                <Route path="/dashboard/3d-blueprint/chapter-4" element={
                   <ProtectedRoute>
                     <Chapter4 />
                   </ProtectedRoute>
                 } />
-                <Route path="/dashboard/chapter-5" element={
+                <Route path="/dashboard/3d-blueprint/chapter-5" element={
                   <ProtectedRoute>
                     <Chapter5 />
                   </ProtectedRoute>
                 } />
-                <Route path="/dashboard/chapter-6" element={
+                <Route path="/dashboard/3d-blueprint/chapter-6" element={
                   <ProtectedRoute>
                     <Chapter6 />
                   </ProtectedRoute>
                 } />
-                <Route path="/dashboard/chapter-7" element={
+                <Route path="/dashboard/3d-blueprint/chapter-7" element={
                   <ProtectedRoute>
                     <Chapter7 />
                   </ProtectedRoute>
                 } />
-                <Route path="/dashboard/chapter-8" element={
+                <Route path="/dashboard/3d-blueprint/chapter-8" element={
                   <ProtectedRoute>
                     <Chapter8 />
                   </ProtectedRoute>
                 } />
-                <Route path="/dashboard/chapter-9" element={
+                <Route path="/dashboard/3d-blueprint/chapter-9" element={
                   <ProtectedRoute>
                     <Chapter9 />
                   </ProtectedRoute>
                 } />
-                <Route path="/dashboard/chapter-10" element={
+                <Route path="/dashboard/3d-blueprint/chapter-10" element={
                   <ProtectedRoute>
                     <Chapter10 />
                   </ProtectedRoute>
                 } />
-                <Route path="/dashboard/chapter-11" element={
+                <Route path="/dashboard/3d-blueprint/chapter-11" element={
                   <ProtectedRoute>
                     <Chapter11 />
                   </ProtectedRoute>
