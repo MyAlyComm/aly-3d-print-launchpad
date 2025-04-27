@@ -1,5 +1,5 @@
-
 import { Card, CardContent } from "@/components/ui/card";
+import { ArrowDown } from "lucide-react";
 
 export const JourneyTimeline = () => {
   const timelineItems = [
@@ -7,7 +7,7 @@ export const JourneyTimeline = () => {
       date: "August 2024",
       title: "The Beginning",
       description: "Started with one Ender 3 printer and a $500 budget. Made my first sale within two weeks.",
-      image: "/lovable-uploads/0827e81b-92e3-4a97-a473-33ff95248dec.jpg"
+      image: "/lovable-uploads/fcd13ba4-e265-4001-804e-b98d30cf751b.png"
     },
     {
       date: "October 2024",
@@ -40,9 +40,10 @@ export const JourneyTimeline = () => {
       <div className="container px-4 mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl font-bold mb-4">My Journey to Success</h2>
-          <p className="text-gray-600 text-lg">
+          <p className="text-gray-600 text-lg mb-8">
             From a single printer to a thriving business—here's how it happened
           </p>
+          <ArrowDown className="w-8 h-8 mx-auto text-primary animate-bounce" />
         </div>
 
         <div className="max-w-4xl mx-auto relative">
@@ -53,7 +54,6 @@ export const JourneyTimeline = () => {
             {timelineItems.map((item, index) => (
               <div key={index} className="group relative">
                 <Card className="hover:shadow-lg transition-all duration-300 relative z-10">
-                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-primary z-20" />
                   <CardContent className="p-0">
                     <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                       <div className="relative md:w-1/3">
