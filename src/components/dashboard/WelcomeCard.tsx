@@ -6,13 +6,14 @@ export const WelcomeCard = () => {
     <Card className="border-primary/20">
       <CardContent className="pt-6">
         <div className="max-w-full">
-          <h2 className="text-2xl font-bold mb-2">Welcome to Your 3D Printing Blueprint</h2>
+          <h2 className="text-2xl font-bold mb-2">From Zero to $20K in 60 Days</h2>
           <p className="text-gray-600 leading-relaxed break-words">
-            From $500 to $5K+ monthly revenue in 60 days - this comprehensive guide will take you through 
-            the exact system that helped hundreds of entrepreneurs build successful 3D printing businesses.
+            "9 months ago I had never even touched a 3D printer. With just $500 in starting capital, 
+            I generated $6,300 in my first month and grew from 1 little printer to 8. By month two, 
+            I hit $20K in sales—all while studying philosophy at university full time."
           </p>
           <p className="text-gray-600 mt-2">
-            Complete each chapter and its worksheets to build a solid foundation for your journey.
+            Follow this comprehensive FAQ and blueprint to start your own successful 3D printing business.
           </p>
         </div>
       </CardContent>
