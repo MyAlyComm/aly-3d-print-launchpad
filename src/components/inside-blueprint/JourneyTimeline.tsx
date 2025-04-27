@@ -1,6 +1,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { CircleDot } from "lucide-react";
 
 export const JourneyTimeline = () => {
   const timelineItems = [
@@ -45,6 +46,22 @@ export const JourneyTimeline = () => {
             From a single printer to a thriving business—here's how it happened
           </p>
         </div>
+
+        {/* Timeline dots */}
+        <div className="hidden md:flex justify-center items-center mb-12 max-w-4xl mx-auto">
+          <div className="flex items-center w-full">
+            {timelineItems.map((_, index) => (
+              <div key={index} className="flex-1 flex items-center justify-center">
+                <CircleDot 
+                  className="w-6 h-6 text-primary" 
+                />
+                {index < timelineItems.length - 1 && (
+                  <div className="h-[2px] bg-primary/30 flex-1 mx-2" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
         
         <Carousel className="max-w-4xl mx-auto">
           <CarouselContent>
@@ -78,3 +95,4 @@ export const JourneyTimeline = () => {
     </section>
   );
 };
+
