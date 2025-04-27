@@ -20,10 +20,11 @@ const PersonalMessage = () => {
               <h3 className="font-semibold text-gray-900">A Message from the Founder</h3>
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">
-              Hey there! I created this blueprint to empower creators and entrepreneurs who want to turn their creativity into income. 
-              After building my own successful 3D printing studio and helping hundreds of entrepreneurs, I've distilled my insights 
-              into this comprehensive guide. No matter your background or starting budget, this blueprint will show you how to 
-              transform 3D printing from a hobby into a profitable business.
+              Aly stays at the cutting edge of AI, E-Commerce and Generative Product Design. 
+              Through her company MyAly AI, she is building the next generation of AI tools 
+              for the 3D printing industry. Marketing Consultant for some of the biggest brands 
+              in the industry. Officially endorsed by leading industry platforms and stores. 
+              Helped over 100 creators sell their first print and start profitable businesses.
             </p>
           </div>
         </div>
@@ -33,3 +34,4 @@ const PersonalMessage = () => {
 };
 
 export default PersonalMessage;
+
