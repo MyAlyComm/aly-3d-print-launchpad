@@ -1,5 +1,5 @@
 
-import { MessageSquare, Instagram, Users, Award, Check } from "lucide-react";
+import { Instagram, Users, Award, Check } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 const PersonalMessage = () => {
