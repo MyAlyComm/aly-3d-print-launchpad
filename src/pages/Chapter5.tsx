@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { ChapterProgressBar } from "@/components/ebook/ChapterProgress";
@@ -7,10 +8,12 @@ import { RequirementsSection } from "@/components/chapters/chapter5/Requirements
 import { PrinterSelection } from "@/components/chapters/chapter5/PrinterSelection";
 import { Accessories } from "@/components/chapters/chapter5/Accessories";
 import { Workspace } from "@/components/chapters/chapter5/Workspace";
-import { navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Chapter5 = () => {
   const [section, setSection] = useState(0);
+  const navigate = useNavigate();
+  
   const sections = [
     { id: "requirements", title: "Introduction & Requirements", Component: Introduction },
     { id: "printer-selection", title: "Printer Selection Guide", Component: PrinterSelection },

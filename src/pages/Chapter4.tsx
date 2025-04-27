@@ -1,4 +1,6 @@
+
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { ChapterProgressBar } from "@/components/ebook/ChapterProgress";
 import { ChapterNavigation } from "@/components/ebook/ChapterNavigation";
@@ -9,6 +11,8 @@ import { ProductWorksheet } from "@/components/chapters/chapter4/ProductWorkshee
 
 const Chapter4 = () => {
   const [section, setSection] = useState(0);
+  const navigate = useNavigate();
+  
   const sections = [
     { id: "profits-framework", title: "The PROFITS Framework", Component: ProfitsFramework },
     { id: "match-framework", title: "The MATCH Framework", Component: MatchFramework },

@@ -1,4 +1,6 @@
+
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { ChapterProgressBar } from "@/components/ebook/ChapterProgress";
 import { ChapterNavigation } from "@/components/ebook/ChapterNavigation";
@@ -9,6 +11,8 @@ import { SystemWorksheet } from "@/components/chapters/chapter3/SystemWorksheet"
 
 const Chapter3 = () => {
   const [section, setSection] = useState(0);
+  const navigate = useNavigate();
+  
   const sections = [
     { id: "beyond", title: "Beyond Traditional Value Creation", Component: Beyond },
     { id: "core-system", title: "The Core System Explained", Component: CoreSystem },

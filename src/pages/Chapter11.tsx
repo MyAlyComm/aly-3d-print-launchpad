@@ -1,4 +1,6 @@
+
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { ChapterProgressBar } from "@/components/ebook/ChapterProgress";
 import { ChapterNavigation } from "@/components/ebook/ChapterNavigation";
@@ -7,6 +9,7 @@ import { useChapterForm } from "@/hooks/useChapterForm";
 
 const Chapter11 = () => {
   const [section, setSection] = useState(0);
+  const navigate = useNavigate();
   const { saveResponse } = useChapterForm(11, "worksheet");
   
   const sections = [
