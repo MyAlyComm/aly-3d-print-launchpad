@@ -65,8 +65,8 @@ export const DashboardSidebarContent = () => {
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="w-full">
-              <Award className="mr-2 h-4 w-4" />
+            <Button variant="ghost" className="w-full justify-start bg-primary/5 hover:bg-primary/10">
+              <Award className="mr-2 h-4 w-4 text-amber-500" />
               Achievements
             </Button>
           </DropdownMenuTrigger>
