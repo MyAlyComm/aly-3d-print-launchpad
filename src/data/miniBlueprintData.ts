@@ -1,4 +1,3 @@
-
 import { BookOpen, Target, Lightbulb, Brain, Compass, Clock, Award, BookText, Package } from "lucide-react";
 import type { FAQSectionType } from "@/components/dashboard/FAQSection";
 
