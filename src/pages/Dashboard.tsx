@@ -5,6 +5,7 @@ import { WelcomeCard } from "@/components/dashboard/WelcomeCard";
 import { ChaptersList } from "@/components/dashboard/ChaptersList";
 import { ResourcesCard } from "@/components/dashboard/ResourcesCard";
 import { QuickNavCards } from "@/components/dashboard/QuickNavCards";
+import { DashboardHero } from "@/components/dashboard/DashboardHero";
 import { useAuth } from "@/hooks/useAuth";
 
 const Dashboard = () => {
@@ -12,6 +13,7 @@ const Dashboard = () => {
   
   return (
     <DashboardLayout title={`Welcome${user?.email ? ', ' + user.email.split('@')[0] : ''}`}>
+      <DashboardHero />
       <div className="max-w-7xl mx-auto">
         <div className="grid gap-8 pb-8">
           <div className="grid gap-6">
