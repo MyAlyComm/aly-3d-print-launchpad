@@ -1,3 +1,4 @@
+
 import NavBar from "@/components/NavBar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
@@ -37,18 +38,18 @@ const Index = () => {
       <NavBar />
       <main>
         <HeroSection />
+        <section className="py-16 bg-gradient-to-b from-white to-primary/5">
+          <div className="container mx-auto px-4 space-y-8">
+            <JourneySection />
+            <PersonalMessage />
+          </div>
+        </section>
         <AboutSection />
         <OfferSection />
         <HowItWorksSection />
         <DetailedStorySection />
         <TrustSection />
         <FAQSection />
-        <section className="py-16">
-          <div className="container mx-auto px-4 space-y-8">
-            <PersonalMessage />
-            <JourneySection />
-          </div>
-        </section>
         <FooterSection />
       </main>
     </div>
