@@ -1,7 +1,5 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { CircleDot } from "lucide-react";
 
 export const JourneyTimeline = () => {
   const timelineItems = [
@@ -47,50 +45,36 @@ export const JourneyTimeline = () => {
           </p>
         </div>
 
-        {/* Timeline dots */}
-        <div className="hidden md:flex justify-center items-center mb-12 max-w-4xl mx-auto">
-          <div className="flex items-center w-full">
-            {timelineItems.map((_, index) => (
-              <div key={index} className="flex-1 flex items-center justify-center">
-                <CircleDot 
-                  className="w-6 h-6 text-primary" 
-                />
+        <div className="max-w-4xl mx-auto space-y-8">
+          {timelineItems.map((item, index) => (
+            <div key={index} className="group">
+              <Card className="relative hover:shadow-lg transition-all duration-300">
+                <div className="absolute left-0 top-1/2 -translate-x-3 -translate-y-1/2 w-6 h-6 rounded-full bg-primary z-10" />
                 {index < timelineItems.length - 1 && (
-                  <div className="h-[2px] bg-primary/30 flex-1 mx-2" />
+                  <div className="absolute left-0 top-[50%] -translate-x-3 h-[calc(100%+2rem)] w-[2px] bg-primary/30" />
                 )}
-              </div>
-            ))}
-          </div>
-        </div>
-        
-        <Carousel className="max-w-4xl mx-auto">
-          <CarouselContent>
-            {timelineItems.map((item, index) => (
-              <CarouselItem key={index} className="md:basis-1/1">
-                <Card className="mx-2 hover:shadow-lg transition-all duration-300">
-                  <CardContent className="p-0">
-                    <div className="relative">
+                <CardContent className="p-0">
+                  <div className="flex flex-col md:flex-row">
+                    <div className="relative md:w-1/3">
                       <img 
                         src={item.image} 
                         alt={item.title}
-                        className="w-full h-48 object-cover rounded-t-lg"
+                        className="w-full h-48 md:h-full object-cover"
                       />
-                      <div className="absolute top-0 left-0 bg-primary text-white px-4 py-2 rounded-tr-lg rounded-bl-lg">
+                      <div className="absolute top-0 left-0 bg-primary text-white px-4 py-2 rounded-br-lg">
                         {item.date}
                       </div>
                     </div>
-                    <div className="p-6 space-y-4">
-                      <h3 className="text-2xl font-semibold text-primary">{item.title}</h3>
+                    <div className="p-6 md:w-2/3 flex flex-col justify-center">
+                      <h3 className="text-2xl font-semibold text-primary mb-3">{item.title}</h3>
                       <p className="text-gray-600">{item.description}</p>
                     </div>
-                  </CardContent>
-                </Card>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="hidden md:flex" />
-          <CarouselNext className="hidden md:flex" />
-        </Carousel>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
