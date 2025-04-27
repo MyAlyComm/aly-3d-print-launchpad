@@ -14,7 +14,7 @@ export const FAQSections: FAQSectionType[] = [
 - Now sold to 60+ countries with multiple viral products
 - Billion-dollar brands seek my marketing and consulting help
 - Zero previous experience or special connections`,
-    image: "/lovable-uploads/1273d951-6c16-4a5d-a99a-d233f5e92918.png",
+    image: "/lovable-uploads/82a916c1-2d7b-40fe-b51f-22cc7f474c56.png",
     icon: BookOpen,
     gradient: "from-purple-50 to-blue-50 hover:from-purple-100 hover:to-blue-100"
   },
