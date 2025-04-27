@@ -18,7 +18,9 @@ const ZapierIntegration = lazy(() => import("@/components/ZapierIntegration"));
 const PersonalMessage = lazy(() => import("@/components/PersonalMessage"));
 const JourneySection = lazy(() => import("@/components/JourneySection"));
 const ChaptersCarousel = lazy(() => import("@/components/ChaptersCarousel"));
-const FreeResourceCards = lazy(() => import("@/components/resources/FreeResourceCards"));
+
+// Import FreeResourceCards component directly since it's a named export
+import { FreeResourceCards } from "@/components/resources/FreeResourceCards";
 
 const LoadingFallback = () => (
   <div className="w-full h-48 flex items-center justify-center">
