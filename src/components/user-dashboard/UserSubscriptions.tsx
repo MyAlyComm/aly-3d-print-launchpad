@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { User } from "@supabase/supabase-js";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { toast } from "@/components/ui/sonner";
@@ -11,6 +12,7 @@ interface UserSubscriptionsProps {
 }
 
 export const UserSubscriptions = ({ user }: UserSubscriptionsProps) => {
+  const navigate = useNavigate();
   const [activeSubscription, setActiveSubscription] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   
