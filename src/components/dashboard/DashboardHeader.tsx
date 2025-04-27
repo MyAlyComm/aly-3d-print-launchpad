@@ -2,7 +2,7 @@
 import React, { ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { LogOut, Award } from "lucide-react";
+import { LogOut, Award, Layout, Book, BookText, BookOpen } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -31,7 +31,6 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
       
-      // Clear any local storage related to authentication
       localStorage.removeItem("hasAccessToEbook");
       
       toast.success("Signed out successfully");
@@ -43,10 +42,49 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
   };
 
   return (
-    <header className="sticky top-0 z-30 border-b bg-white">
+    <div className="sticky top-0 z-30 bg-white border-b">
       <div className="flex h-16 items-center justify-between px-4">
         <h1 className="text-lg font-semibold">{title}</h1>
-        <div className="flex items-center gap-4">
+        
+        <div className="flex items-center gap-2">
+          <nav className="hidden md:flex items-center gap-2 mr-4">
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={() => navigate("/dashboard/3d-blueprint")}
+            >
+              <Layout className="mr-2 h-4 w-4" />
+              Dashboard
+            </Button>
+            
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={() => navigate("/dashboard/3d-blueprint/new-chapter")}
+            >
+              <Book className="mr-2 h-4 w-4" />
+              Introduction
+            </Button>
+            
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={() => navigate("/dashboard/3d-blueprint/chapter-1")}
+            >
+              <BookText className="mr-2 h-4 w-4" />
+              Chapter 1
+            </Button>
+            
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={() => navigate("/dashboard/3d-blueprint/resources")}
+            >
+              <BookOpen className="mr-2 h-4 w-4" />
+              Resources
+            </Button>
+          </nav>
+
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm">
@@ -71,8 +109,10 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
               )}
             </DropdownMenuContent>
           </DropdownMenu>
+
           {children}
-          <div className="flex items-center gap-2">
+          
+          <div className="flex items-center gap-2 ml-4">
             <span className="text-sm hidden md:block">
               {user?.email}
             </span>
@@ -82,6 +122,6 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
           </div>
         </div>
       </div>
-    </header>
+    </div>
   );
 };
