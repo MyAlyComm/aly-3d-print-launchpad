@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -19,6 +18,8 @@ export const ChapterProgress = () => {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
+          <ProgressRewards />
+          
           <div>
             <div className="flex justify-between text-sm text-muted-foreground mb-2">
               <span>Overall Completion</span>
