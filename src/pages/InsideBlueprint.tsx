@@ -2,6 +2,7 @@
 import { BackToTop } from "@/components/ui/back-to-top";
 import { HeroStory } from "@/components/inside-blueprint/HeroStory";
 import { ValueProposition } from "@/components/inside-blueprint/ValueProposition";
+import { DashboardPreview } from "@/components/inside-blueprint/DashboardPreview";
 import { JourneyTimeline } from "@/components/inside-blueprint/JourneyTimeline";
 import { BlueprintPreview } from "@/components/inside-blueprint/BlueprintPreview";
 import { BlueprintTestimonials } from "@/components/inside-blueprint/BlueprintTestimonials";
@@ -27,6 +28,7 @@ const InsideBlueprint = () => {
       <main className="space-y-1">
         <HeroStory />
         <ValueProposition />
+        <DashboardPreview />
         <BlueprintPreview />
         <ChapterCarousel />
         <JourneyTimeline />
