@@ -1,9 +1,10 @@
+
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { WelcomeCard } from "@/components/dashboard/WelcomeCard";
 import { ResourcesCard } from "@/components/dashboard/ResourcesCard";
 import { useAuth } from "@/hooks/useAuth";
 import { Card, CardContent } from "@/components/ui/card";
-import { ChevronDown, BookOpen, Lightbulb, Target, Printer3d, FileText, HelpCircle, Wallet, Users, Package, Brain } from "lucide-react";
+import { ChevronDown, BookOpen, Lightbulb, Target, Printer, FileText, HelpCircle, Wallet, Users, Package, Brain } from "lucide-react";
 import {
   Collapsible,
   CollapsibleContent,
@@ -56,7 +57,7 @@ const FAQSections = [
     description: "Start with any budget and grow from there",
     content: "You can start with any budget and grow from there. I started with just a $300 printer and $200 worth of supplies.",
     image: "/lovable-uploads/e4159516-8779-495b-b04c-115389589491.png",
-    icon: Printer3d,
+    icon: Printer,
     gradient: "from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100"
   },
   {
