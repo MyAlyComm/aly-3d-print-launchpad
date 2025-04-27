@@ -15,14 +15,42 @@ export const ChapterPreviews = () => {
   // Select 3 key chapters to showcase
   const previewChapters = [
     chapters[0], // Chapter 1: Arbitrage Windows
-    chapters[6], // Income Potential
+    {
+      number: 1,
+      title: "Finding Your Perfect Starting Point",
+      description: `Learn how to identify your ideal "Home Base" platform and build strategically from there. We'll explore how to tap into existing marketplaces and leverage AI tools to maximize your success.`,
+      imageUrl: chapters[0].imageUrl
+    },
     chapters[7]  // Best-Selling Products
   ];
 
   const getChapterContent = (number: number) => {
     switch (number) {
       case 1:
-        return <ArbitrageIntro />;
+        return (
+          <div className="prose prose-sm max-w-none">
+            <p className="mb-4">
+              There's a million different ways to sell your 3D prints. In fact, between social media platforms and sales channels combined with the various softwares and content strategies associated with each - it can be incredibly overwhelming.
+            </p>
+            <p className="mb-4">
+              In your first 60 days, you don't need to be everywhere. You need to master one platform first, then expand strategically.
+            </p>
+            <h3 className="text-lg font-semibold mt-6 mb-3">The Platform Strategy</h3>
+            <p className="mb-4">
+              For people starting out I suggest picking a platform that already has traffic. If you spend a month building the world's best website but nobody knows it exists, you're not going to make very many sales.
+            </p>
+            <p className="mb-4">
+              In the beginning your time is best spent by going somewhere there's already buyers. I started out by selling on Facebook Marketplace. It costs nothing to post, you can make listings in seconds, and with strategic pricing and keywords you can get eyeballs on your listings in minutes.
+            </p>
+            <p className="mb-6">
+              I made enough money on Facebook in my first month that I was able to buy 7 more printers before I ever had a website.
+            </p>
+            <h3 className="text-lg font-semibold mt-6 mb-3">Real Success Stories</h3>
+            <p className="text-sm text-gray-600 italic">
+              Read more to discover inspiring stories from Project Trill and Juri's journey in the complete chapter...
+            </p>
+          </div>
+        );
       case 7:
         return <IncomeChapter />;
       case 8:
