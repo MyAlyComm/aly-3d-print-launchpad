@@ -1,9 +1,9 @@
-
 import { BackToTop } from "@/components/ui/back-to-top";
-import { ChapterHighlight } from "@/components/inside-blueprint/ChapterHighlight";
 import { HeroStory } from "@/components/inside-blueprint/HeroStory";
-import { JourneyTimeline } from "@/components/inside-blueprint/JourneyTimeline";
 import { ValueProposition } from "@/components/inside-blueprint/ValueProposition";
+import { JourneyTimeline } from "@/components/inside-blueprint/JourneyTimeline";
+import { BlueprintPreview } from "@/components/inside-blueprint/BlueprintPreview";
+import { BlueprintTestimonials } from "@/components/inside-blueprint/BlueprintTestimonials";
 import { CallToAction } from "@/components/inside-blueprint/CallToAction";
 import { useEffect } from "react";
 
@@ -21,17 +21,11 @@ const InsideBlueprint = () => {
     <div className="min-h-screen bg-gradient-to-b from-primary-light/10 via-white to-white">
       <BackToTop />
       <main className="space-y-1">
-        <div className="absolute inset-0 gradient-blur pointer-events-none" />
         <HeroStory />
-        <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
-          <ValueProposition />
-        </div>
-        <ChapterHighlight />
-        <div className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent pointer-events-none" />
-          <JourneyTimeline />
-        </div>
+        <ValueProposition />
+        <BlueprintPreview />
+        <JourneyTimeline />
+        <BlueprintTestimonials />
         <CallToAction />
       </main>
     </div>
