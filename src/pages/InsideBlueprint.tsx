@@ -10,16 +10,44 @@ import { CallToAction } from "@/components/inside-blueprint/CallToAction";
 import { SampleChapterPreview } from "@/components/inside-blueprint/SampleChapterPreview";
 import { ChapterPreviews } from "@/components/inside-blueprint/ChapterPreviews";
 import { ChapterCarousel } from "@/components/inside-blueprint/ChapterCarousel";
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+
+const FAQPageCTA = lazy(() => import("@/components/dashboard/FAQPageCTA"));
 
 const InsideBlueprint = () => {
   useEffect(() => {
-    document.title = "Inside The Blueprint | Aly's 3D Printing Success Story";
+    // SEO Optimizations
+    document.title = "Inside The Blueprint | Aly's Complete 3D Printing Business Guide";
     
-    const metaDescription = document.createElement('meta');
-    metaDescription.name = 'description';
-    metaDescription.content = 'Discover how Aly built a thriving 3D printing business from scratch and learn the exact blueprint to replicate her success.';
-    document.head.appendChild(metaDescription);
+    const metaTags = [
+      { name: 'description', content: 'Discover how Aly built a thriving 3D printing business from scratch and learn the exact blueprint to replicate her success. Get access to proven systems and strategies.' },
+      { name: 'keywords', content: '3D printing business, business blueprint, 3D printing guide, Aly 3D prints, business systems, 3D printing success' },
+      { property: 'og:title', content: 'Inside The Blueprint | Aly\'s 3D Printing Success Story' },
+      { property: 'og:description', content: 'Learn the exact systems and strategies to build a profitable 3D printing business with our comprehensive blueprint.' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:image', content: '/lovable-uploads/511b02f5-662b-4442-ada4-7d79753c2d2d.jpg' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: 'Inside The Blueprint | Aly\'s 3D Printing Success Story' },
+      { name: 'twitter:description', content: 'Learn the exact systems and strategies to build a profitable 3D printing business with our comprehensive blueprint.' },
+      { name: 'twitter:image', content: '/lovable-uploads/511b02f5-662b-4442-ada4-7d79753c2d2d.jpg' }
+    ];
+
+    metaTags.forEach(tag => {
+      let meta = document.createElement('meta');
+      Object.keys(tag).forEach(key => {
+        meta.setAttribute(key, tag[key]);
+      });
+      document.head.appendChild(meta);
+    });
+
+    return () => {
+      // Cleanup meta tags on unmount
+      metaTags.forEach(tag => {
+        const selector = Object.keys(tag).map(key => `meta[${key}="${tag[key]}"]`).join(',');
+        document.querySelector(selector)?.remove();
+      });
+    };
   }, []);
 
   return (
@@ -28,14 +56,19 @@ const InsideBlueprint = () => {
       <main className="space-y-1">
         <HeroStory />
         <ValueProposition />
-        <DashboardPreview />
-        <BlueprintPreview />
-        <ChapterCarousel />
-        <JourneyTimeline />
-        <BlueprintTestimonials />
-        <CallToAction />
-        <SampleChapterPreview />
-        <ChapterPreviews />
+        
+        {/* Lazy load components that are not immediately visible */}
+        <Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
+          <DashboardPreview />
+          <BlueprintPreview />
+          <ChapterCarousel />
+          <JourneyTimeline />
+          <BlueprintTestimonials />
+          <CallToAction />
+          <SampleChapterPreview />
+          <ChapterPreviews />
+          <FAQPageCTA />
+        </Suspense>
       </main>
     </div>
   );
