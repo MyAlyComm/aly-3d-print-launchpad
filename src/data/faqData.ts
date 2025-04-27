@@ -46,7 +46,12 @@ export const FAQSections: FAQSectionType[] = [
     id: "equipment",
     title: "Do you need expensive equipment?",
     description: "Start with any budget and grow from there",
-    content: "You can start with any budget and grow from there. I started with just a $300 printer and $200 worth of supplies.",
+    content: `No! You can start with any budget:
+
+- Sub-$500 printers now produce professional-quality results
+- I built my first $5,000 month with just one printer
+- Success depends on strategy, not initial investment
+- The Blueprint includes printer recommendations for every budget level based on testing 40+ models`,
     image: "/lovable-uploads/e4159516-8779-495b-b04c-115389589491.png",
     icon: Printer,
     gradient: "from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100"
@@ -55,7 +60,12 @@ export const FAQSections: FAQSectionType[] = [
     id: "skills",
     title: "Do you need design skills?",
     description: "90% of successful sellers didn't create their first designs",
-    content: "90% of successful sellers didn't create their first designs. You don't need to be a designer to start a 3D printing business.",
+    content: `No! 90% of successful sellers didn't create their first designs:
+
+- Commercial licenses provide market-tested designs ($10-30/month)
+- Simple customization tools require zero technical skills
+- Focus on marketing and production quality instead
+- The Blueprint provides a complete system for finding, licensing, and modifying profitable designs`,
     image: "/lovable-uploads/4999495f-757f-4f9d-a959-19490908a461.png",
     icon: FileText,
     gradient: "from-pink-50 to-rose-50 hover:from-pink-100 hover:to-rose-100"
@@ -64,7 +74,7 @@ export const FAQSections: FAQSectionType[] = [
     id: "software",
     title: "Which software do you use?",
     description: "Options for beginners through experts",
-    content: "There are many software options available for beginners through experts. I recommend starting with Tinkercad.",
+    content: `It depends on what you're trying to make! If you're using pre-made files that you bought online, all you need is a free slicing software and no technical expertise. If you want to learn to 3D model, you can use a Mac, PC, or tablet—there are a variety of free and paid modeling software options suitable for everyone from beginners to experts.`,
     image: "/lovable-uploads/649c7549-c9f8-4a01-8949-355ca597999d.png",
     icon: HelpCircle,
     gradient: "from-violet-50 to-purple-50 hover:from-violet-100 hover:to-purple-100"
@@ -73,7 +83,12 @@ export const FAQSections: FAQSectionType[] = [
     id: "saturation",
     title: "Is the market saturated?",
     description: "Thousands of untapped niches still exist",
-    content: "Thousands of untapped niches still exist. The market is far from saturated.",
+    content: `REALITY: Thousands of untapped niches exist
+
+- Most sellers compete in only a handful of categories
+- Problem-solving products have virtually unlimited market potential
+- Local markets have minimal competition
+- The Blueprint includes my P.R.O.F.I.T.S. MATCH framework for finding high-demand, low-competition products`,
     image: "/lovable-uploads/a99931e5-994c-4939-824c-4c0a8a94a9fe.png",
     icon: Users,
     gradient: "from-cyan-50 to-sky-50 hover:from-cyan-100 hover:to-sky-100"
@@ -82,7 +97,13 @@ export const FAQSections: FAQSectionType[] = [
     id: "budget",
     title: "STARTING BUDGET OPTIONS",
     description: "Start where you are, grow from there",
-    content: "Start where you are, grow from there. You can start with any budget.",
+    content: `Start where you are and grow from there:
+
+- $0 Budget: Broker between clients and existing services
+- $500-$1,000: Perfect for a side hustle—where I started
+- $1,000-$2,000: Sweet spot for serious part-timers
+- $2,000-$5,000: Full-time business potential
+- $5,000+: Accelerated growth with maximum flexibility`,
     image: "/lovable-uploads/38899999-4963-4945-8c5a-912515c5616d.png",
     icon: Wallet,
     gradient: "from-lime-50 to-green-50 hover:from-lime-100 hover:to-green-100"
@@ -91,7 +112,14 @@ export const FAQSections: FAQSectionType[] = [
     id: "income",
     title: "REALISTIC INCOME POTENTIAL",
     description: "From side hustle to full-time business",
-    content: "From side hustle to full-time business. The income potential is realistic.",
+    content: `From side hustle to full-time business:
+
+First 30 Days: $300-$3,000 with focused effort
+Days 30-60: $1,000-$5,000 with optimized approach
+Months 3-6: $3,000-$50,000 with established systems
+Months 6-12: $15,000-$200,000+ with scaling strategies
+
+The Blueprint contains my 60-day roadmap from $500 to $20,000 monthly revenue.`,
     image: "/lovable-uploads/95999999-9999-4999-8999-999999999999.png",
     icon: Brain,
     gradient: "from-amber-50 to-yellow-50 hover:from-amber-100 hover:to-yellow-100"
@@ -100,9 +128,30 @@ export const FAQSections: FAQSectionType[] = [
     id: "products",
     title: "BEST-SELLING PRODUCTS",
     description: "What actually sells and why",
-    content: "What actually sells and why. I'll show you the best-selling products.",
+    content: `Products that solve problems:
+
+Home Decor
+Toys & Gaming Accessories
+Organization and Utility
+
+The P.R.O.F.I.T.S. Method:
+
+- Problem-solving
+- Return on investment
+- Opportunity
+- Feasibility
+- In-demand
+- Time-efficient
+- Sustainable
+
+WHERE TO SELL:
+- Facebook Marketplace: Fastest path to first sales (where I started)
+- Etsy: Perfect for unique and creative items
+- Your Own Website: For building a long-term brand
+- Amazon: For standardized products with broad appeal`,
     image: "/lovable-uploads/21d99999-1999-4999-8999-199999999999.png",
     icon: Package,
     gradient: "from-fuchsia-50 to-pink-50 hover:from-fuchsia-100 hover:to-pink-100"
   }
 ];
+
