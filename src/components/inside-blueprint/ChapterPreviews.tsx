@@ -2,7 +2,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { chapters } from "@/components/dashboard/chapters/types";
 import { BookOpen } from "lucide-react";
-import { ProductTrinity } from "@/components/chapters/chapter4/ProductTrinity";
+import { ArbitrageIntro } from "@/components/chapters/chapter1/ArbitrageIntro";
 import { Introduction as IncomeChapter } from "@/components/chapters/chapter6/Introduction";
 import { Introduction as BestSellersChapter } from "@/components/chapters/chapter7/Introduction";
 import { Button } from "@/components/ui/button";
@@ -14,15 +14,15 @@ export const ChapterPreviews = () => {
 
   // Select 3 key chapters to showcase
   const previewChapters = [
-    chapters[4], // Market Analysis
+    chapters[0], // Chapter 1: Arbitrage Windows
     chapters[6], // Income Potential
     chapters[7]  // Best-Selling Products
   ];
 
   const getChapterContent = (number: number) => {
     switch (number) {
-      case 5:
-        return <ProductTrinity />; // Using ProductTrinity directly instead of non-existent Introduction
+      case 1:
+        return <ArbitrageIntro />;
       case 7:
         return <IncomeChapter />;
       case 8:
