@@ -85,14 +85,14 @@ export const DashboardHeader = ({ title }: DashboardHeaderProps) => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuItem onClick={() => navigate(`/dashboard/chapter-${nextChapter}`)}>
+                <DropdownMenuItem onClick={() => navigate(`/dashboard/3d-blueprint/chapter-${nextChapter}`)}>
                   Continue: Chapter {nextChapter === 0 ? "Introduction" : nextChapter}
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate("/dashboard/new-chapter")}>
+                <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint/new-chapter")}>
                   Introduction
                 </DropdownMenuItem>
                 {Array.from({length: 11}, (_, i) => i + 1).map((num) => (
-                  <DropdownMenuItem key={num} onClick={() => navigate(`/dashboard/chapter-${num}`)}>
+                  <DropdownMenuItem key={num} onClick={() => navigate(`/dashboard/3d-blueprint/chapter-${num}`)}>
                     Chapter {num}
                   </DropdownMenuItem>
                 ))}

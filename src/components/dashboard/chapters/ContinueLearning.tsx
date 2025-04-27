@@ -21,8 +21,8 @@ export const ContinueLearning = ({ nextChapter }: ContinueLearningProps) => {
         </div>
         <Button 
           onClick={() => navigate(nextChapter === 0 ? 
-            "/dashboard/new-chapter" : 
-            `/dashboard/chapter-${nextChapter}`
+            "/dashboard/3d-blueprint/new-chapter" : 
+            `/dashboard/3d-blueprint/chapter-${nextChapter}`
           )}
         >
           {nextChapter === 0 ? "Start Introduction" : `Continue Chapter ${nextChapter}`}

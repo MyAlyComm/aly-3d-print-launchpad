@@ -12,19 +12,19 @@ export const ResourcesCard = () => {
       icon: FileText,
       title: "Templates & Checklists",
       description: "Ready-to-use business documents",
-      path: "/dashboard/resources#templates"
+      path: "/dashboard/3d-blueprint/resources#templates"
     },
     {
       icon: Video,
       title: "Video Tutorials",
       description: "Step-by-step guidance",
-      path: "/dashboard/resources#videos"
+      path: "/dashboard/3d-blueprint/resources#videos"
     },
     {
       icon: Image,
       title: "Design Files",
       description: "STL files and models",
-      path: "/dashboard/resources#designs"
+      path: "/dashboard/3d-blueprint/resources#designs"
     }
   ];
 
@@ -51,7 +51,7 @@ export const ResourcesCard = () => {
           ))}
         </div>
         <Button 
-          onClick={() => navigate("/dashboard/resources")}
+          onClick={() => navigate("/dashboard/3d-blueprint/resources")}
           className="w-full"
         >
           View All Resources

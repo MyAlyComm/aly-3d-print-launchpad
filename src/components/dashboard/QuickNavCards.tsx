@@ -33,7 +33,10 @@ export const QuickNavCards = () => {
               </p>
             </div>
             <Button 
-              onClick={() => navigate(nextChapter === 0 ? "/dashboard/new-chapter" : `/dashboard/chapter-${nextChapter}`)}
+              onClick={() => navigate(nextChapter === 0 ? 
+                "/dashboard/3d-blueprint/new-chapter" : 
+                `/dashboard/3d-blueprint/chapter-${nextChapter}`
+              )}
               className="ml-4"
             >
               <BookOpen className="mr-2 h-4 w-4" />
@@ -54,7 +57,7 @@ export const QuickNavCards = () => {
             </div>
             <Button 
               variant="secondary"
-              onClick={() => navigate("/dashboard/resources")}
+              onClick={() => navigate("/dashboard/3d-blueprint/resources")}
               className="ml-4"
             >
               View Resources

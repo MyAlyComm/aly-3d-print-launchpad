@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { DashboardNav } from "./DashboardNav";
 import { supabase } from "@/integrations/supabase/client";
-import { toast } from "@/components/ui/sonner";
+import { toast } from "sonner";
 
 export const DashboardSidebarContent = () => {
   const navigate = useNavigate();
