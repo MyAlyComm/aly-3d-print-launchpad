@@ -7,17 +7,27 @@ export const DashboardPreview = () => {
   return (
     <section className="py-24 bg-gradient-to-b from-primary/5 to-white overflow-hidden">
       <div className="container px-4 mx-auto">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-4 py-2 rounded-full mb-4">
-            <BarChart3 className="w-4 h-4" />
-            <span className="font-medium">Interactive Experience</span>
+        <div className="grid md:grid-cols-2 gap-16 items-center mb-16">
+          <div className="space-y-6">
+            <div className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-4 py-2 rounded-full">
+              <BarChart3 className="w-4 h-4" />
+              <span className="font-medium">Interactive Experience</span>
+            </div>
+            <h2 className="text-3xl font-bold">
+              Not Just an Ebook - Your Personal Business Dashboard
+            </h2>
+            <p className="text-gray-600 text-lg leading-relaxed">
+              I created these business systems after months of trial and error, market research and collaborating with hundreds of industry players. But I want to do more than simply teach you, I want to empower you. That's why I coded this entire website and interactive dashboard myself from the ground up. It's the information I wish I had, in a way that's easy to understand.
+            </p>
           </div>
-          <h2 className="text-3xl font-bold mb-4">
-            Not Just an Ebook - Your Personal Business Dashboard
-          </h2>
-          <p className="text-gray-600 text-lg">
-            Track your progress, mark completed chapters, and save your business planning worksheets all in one place
-          </p>
+          <div className="relative">
+            <div className="absolute -top-8 -left-8 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+            <img 
+              src="/lovable-uploads/511b02f5-662b-4442-ada4-7d79753c2d2d.jpg"
+              alt="Aly working on the blueprint dashboard"
+              className="rounded-2xl shadow-2xl relative z-10"
+            />
+          </div>
         </div>
 
         <div className="max-w-5xl mx-auto">
