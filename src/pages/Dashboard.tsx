@@ -15,7 +15,7 @@ const Dashboard = () => {
     <DashboardLayout title={`Welcome${user?.email ? ', ' + user.email.split('@')[0] : ''}`}>
       <DashboardHero />
       <div className="max-w-7xl mx-auto">
-        <div className="grid gap-8 pb-8">
+        <div className="grid gap-8 pb-8 mt-8"> {/* Added mt-8 for more top margin */}
           <div className="grid gap-6">
             <StatsCards />
             <QuickNavCards />
@@ -36,3 +36,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
