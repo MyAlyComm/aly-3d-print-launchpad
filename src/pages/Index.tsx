@@ -1,3 +1,4 @@
+
 import { lazy, Suspense } from 'react';
 import NavBar from "@/components/NavBar";
 import HeroSection from "@/components/HeroSection";
@@ -17,7 +18,7 @@ const ZapierIntegration = lazy(() => import("@/components/ZapierIntegration"));
 const PersonalMessage = lazy(() => import("@/components/PersonalMessage"));
 const JourneySection = lazy(() => import("@/components/JourneySection"));
 const ChaptersCarousel = lazy(() => import("@/components/ChaptersCarousel"));
-const FreeResourceCards = lazy(() => import("@/components/FreeResourceCards"));
+const FreeResourceCards = lazy(() => import("@/components/resources/FreeResourceCards"));
 
 const LoadingFallback = () => (
   <div className="w-full h-48 flex items-center justify-center">
