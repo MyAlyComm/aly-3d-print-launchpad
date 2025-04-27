@@ -1,3 +1,4 @@
+
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { WelcomeCard } from "@/components/dashboard/WelcomeCard";
 import { ResourcesCard } from "@/components/dashboard/ResourcesCard";
@@ -102,22 +103,34 @@ const FAQDashboard = () => {
     <DashboardLayout 
       title={`3D Printing FAQ${user?.email ? ' - ' + user.email.split('@')[0] : ''}`}
     >
-      <div className="bg-primary-50 py-6 mb-6 rounded-lg px-4 md:px-6">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-2xl md:text-3xl font-bold text-center mb-2 break-words">
-            The Complete 3D Printing Business FAQ
-          </h1>
-          <p className="text-center text-gray-600 break-words">
-            All your questions about starting a profitable 3D printing business answered in one place.
-          </p>
+      {/* Hero Section */}
+      <div className="relative mb-8">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-600/20 mix-blend-multiply" />
+        <div className="relative h-[200px] md:h-[300px] w-full overflow-hidden rounded-lg">
+          <img 
+            src="/lovable-uploads/90ff8861-ff64-4a75-8a68-8afda542663d.png" 
+            alt="3D Printing Hero"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center text-white max-w-4xl mx-auto px-4">
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">
+                The Complete 3D Printing Business FAQ
+              </h1>
+              <p className="text-lg md:text-xl text-white/90">
+                From Zero to $20K in 60 Days - All Your Questions Answered
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-      
+
       <div className="max-w-7xl mx-auto">
         <div className="grid gap-6 pb-8">
           <div className="grid md:grid-cols-3 gap-6">
             <div className="space-y-6">
-              <WelcomeCard />
+              <WelcomeCard variant="faq" />
               <ResourcesCard />
             </div>
             <div className="md:col-span-2">
@@ -125,27 +138,27 @@ const FAQDashboard = () => {
                 <CardContent className="p-6 space-y-4">
                   {FAQSections.map((section) => (
                     <Collapsible key={section.id} className="space-y-2">
-                      <Card className="bg-secondary/5">
+                      <Card className="bg-gradient-to-r from-purple-50 to-blue-50 hover:from-purple-100 hover:to-blue-100 transition-colors duration-300">
                         <div className="p-4">
                           <div className="flex items-start gap-4">
                             <img 
                               src={section.image} 
                               alt={section.title}
-                              className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
+                              className="w-16 h-16 object-cover rounded-lg flex-shrink-0 shadow-md"
                             />
                             <div className="flex-1 min-w-0">
-                              <CollapsibleTrigger className="flex items-center justify-between w-full text-left">
+                              <CollapsibleTrigger className="flex items-center justify-between w-full text-left group">
                                 <div>
-                                  <h3 className="font-medium text-sm md:text-base break-words">{section.title}</h3>
-                                  <p className="text-xs md:text-sm text-muted-foreground break-words">{section.description}</p>
+                                  <h3 className="font-medium text-sm md:text-base text-purple-900 group-hover:text-purple-700 transition-colors break-words">{section.title}</h3>
+                                  <p className="text-xs md:text-sm text-gray-600 break-words">{section.description}</p>
                                 </div>
-                                <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" />
+                                <ChevronDown className="h-4 w-4 shrink-0 text-purple-600 transition-transform duration-200" />
                               </CollapsibleTrigger>
                             </div>
                           </div>
                           <CollapsibleContent className="mt-4">
                             <div className="prose prose-sm max-w-none">
-                              <div className="whitespace-pre-line text-sm text-gray-600">
+                              <div className="whitespace-pre-line text-sm text-gray-600 pl-20">
                                 {section.content}
                               </div>
                             </div>
