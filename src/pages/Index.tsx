@@ -12,6 +12,7 @@ import Analytics from "@/components/Analytics";
 import ZapierIntegration from "@/components/ZapierIntegration";
 import PersonalMessage from "@/components/PersonalMessage";
 import JourneySection from "@/components/JourneySection";
+import ChaptersCarousel from "@/components/ChaptersCarousel";
 import { useEffect } from "react";
 import { BackToTop } from "@/components/ui/back-to-top";
 
@@ -39,7 +40,8 @@ const Index = () => {
       <main>
         <HeroSection />
         <section className="py-16 bg-gradient-to-b from-white to-primary/5">
-          <div className="container mx-auto px-4 space-y-8">
+          <div className="container mx-auto px-4 space-y-16">
+            <ChaptersCarousel />
             <JourneySection />
             <PersonalMessage />
           </div>
