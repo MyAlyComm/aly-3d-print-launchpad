@@ -5,8 +5,8 @@ import { PhotoCarousel } from "./photo-carousel/PhotoCarousel";
 const ChaptersCarousel = () => {
   const chapters = [
     {
-      mainImage: "/lovable-uploads/17ca882e-ce0b-4cb3-a187-4c3d63689167.png",
-      hoverImage: "/lovable-uploads/17ca882e-ce0b-4cb3-a187-4c3d63689167.png",
+      mainImage: "/lovable-uploads/b5a22fbd-f015-4274-b91c-4d99379b6d21.png",
+      hoverImage: "/lovable-uploads/b5a22fbd-f015-4274-b91c-4d99379b6d21.png",
       month: "Chapter 4",
       description: "The Product Trinity - Finding Your First Three Winning Products. Learn how to identify and validate profitable product opportunities using the P.R.O.F.I.T.S and MATCH frameworks.",
       icon: <ArrowRight className="w-5 h-5 text-primary" />
