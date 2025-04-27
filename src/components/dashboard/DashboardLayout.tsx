@@ -22,7 +22,7 @@ const DashboardLayout = ({
         {extraContent}
       </DashboardHeader>
       
-      <main className={cn("flex-1 w-full max-w-full", className)}>
+      <main className={cn("flex-1 container px-4 mx-auto w-full", className)}>
         {children}
       </main>
     </div>

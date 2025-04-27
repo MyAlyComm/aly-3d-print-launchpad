@@ -46,7 +46,7 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
   return (
     <div className="sticky top-0 z-30 bg-white border-b w-full">
       <div className="flex h-16 items-center justify-between px-4">
-        <h1 className="text-lg font-semibold truncate mr-2">{title}</h1>
+        <h1 className="text-lg font-semibold text-gray-800 truncate mr-2">{title}</h1>
         
         <div className="flex items-center gap-2">
           {!isMobile && (
@@ -55,6 +55,7 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
                 variant="ghost" 
                 size="sm"
                 onClick={() => navigate("/dashboard/3d-blueprint")}
+                className="text-gray-700 hover:text-gray-900"
               >
                 <Layout className="mr-2 h-4 w-4" />
                 Dashboard
@@ -64,6 +65,7 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
                 variant="ghost" 
                 size="sm"
                 onClick={() => navigate("/dashboard/3d-blueprint/new-chapter")}
+                className="text-gray-700 hover:text-gray-900"
               >
                 <Book className="mr-2 h-4 w-4" />
                 Introduction
@@ -73,6 +75,7 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
                 variant="ghost" 
                 size="sm"
                 onClick={() => navigate("/dashboard/3d-blueprint/chapter-1")}
+                className="text-gray-700 hover:text-gray-900"
               >
                 <BookText className="mr-2 h-4 w-4" />
                 Chapter 1
@@ -82,6 +85,7 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
                 variant="ghost" 
                 size="sm"
                 onClick={() => navigate("/dashboard/3d-blueprint/resources")}
+                className="text-gray-700 hover:text-gray-900"
               >
                 <BookOpen className="mr-2 h-4 w-4" />
                 Resources
@@ -92,24 +96,24 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
           {isMobile && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="icon">
+                <Button variant="outline" size="icon" className="text-gray-700">
                   <Menu className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-52">
-                <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint")}>
+              <DropdownMenuContent align="end" className="w-52 bg-white">
+                <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint")} className="text-gray-800">
                   <Layout className="mr-2 h-4 w-4" />
                   Dashboard
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint/new-chapter")}>
+                <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint/new-chapter")} className="text-gray-800">
                   <Book className="mr-2 h-4 w-4" />
                   Introduction
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint/chapter-1")}>
+                <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint/chapter-1")} className="text-gray-800">
                   <BookText className="mr-2 h-4 w-4" />
                   Chapter 1
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint/resources")}>
+                <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint/resources")} className="text-gray-800">
                   <BookOpen className="mr-2 h-4 w-4" />
                   Resources
                 </DropdownMenuItem>
@@ -119,19 +123,19 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="text-gray-700">
                 <Award className="mr-2 h-4 w-4 text-amber-500" />
                 {!isMobile && "Achievements"}
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
+            <DropdownMenuContent align="end" className="w-56 bg-white">
               {badges.length === 0 ? (
-                <DropdownMenuItem disabled>
-                  <span className="text-muted-foreground">No achievements yet</span>
+                <DropdownMenuItem disabled className="text-gray-500">
+                  <span>No achievements yet</span>
                 </DropdownMenuItem>
               ) : (
                 badges.map((badge) => (
-                  <DropdownMenuItem key={badge.id} className="flex items-center gap-2">
+                  <DropdownMenuItem key={badge.id} className="flex items-center gap-2 text-gray-800">
                     <span className={badge.color}>
                       <Award className="h-4 w-4" />
                     </span>
@@ -146,11 +150,11 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
           
           <div className="flex items-center gap-2 ml-2">
             {!isMobile && (
-              <span className="text-sm truncate max-w-[100px]">
+              <span className="text-sm text-gray-700 truncate max-w-[100px]">
                 {user?.email?.split('@')[0]}
               </span>
             )}
-            <Button variant="ghost" size="icon" onClick={handleSignOut}>
+            <Button variant="ghost" size="icon" onClick={handleSignOut} className="text-gray-700">
               <LogOut className="h-4 w-4" />
             </Button>
           </div>
