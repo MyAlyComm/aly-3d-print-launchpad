@@ -2,7 +2,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { chapters } from "@/components/dashboard/chapters/types";
 import { BookOpen } from "lucide-react";
-import { Introduction as MarketAnalysis } from "@/components/chapters/chapter4/ProductTrinity";
+import { ProductTrinity } from "@/components/chapters/chapter4/ProductTrinity";
 import { Introduction as IncomeChapter } from "@/components/chapters/chapter6/Introduction";
 import { Introduction as BestSellersChapter } from "@/components/chapters/chapter7/Introduction";
 import { Button } from "@/components/ui/button";
@@ -22,7 +22,7 @@ export const ChapterPreviews = () => {
   const getChapterContent = (number: number) => {
     switch (number) {
       case 5:
-        return <MarketAnalysis />;
+        return <ProductTrinity />; // Using ProductTrinity directly instead of non-existent Introduction
       case 7:
         return <IncomeChapter />;
       case 8:
@@ -99,4 +99,3 @@ export const ChapterPreviews = () => {
     </section>
   );
 };
-
