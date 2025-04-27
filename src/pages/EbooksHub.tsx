@@ -28,6 +28,16 @@ const EbooksHub = () => {
       coverImage: "/lovable-uploads/b1236689-73b3-4e92-9e4d-b466a948bcb1.png"
     },
     {
+      id: "3d-faq",
+      title: "3D Printing FAQ",
+      description: "From Zero to $20K in 60 Days - All your questions answered",
+      chaptersCount: 10,
+      estimatedTime: "4-5 hours",
+      lastRead: "Introduction: My Story",
+      progress: 10,
+      coverImage: "/lovable-uploads/cd69d117-8edf-4d26-8dca-118a8eefc2ca.png"
+    },
+    {
       id: "coming-soon",
       title: "Coming Soon",
       description: "More ebooks will be available soon",

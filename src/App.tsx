@@ -28,6 +28,7 @@ import EbooksHub from "./pages/EbooksHub";
 import UserDashboard from "./pages/UserDashboard";
 import InsideBlueprint from "./pages/InsideBlueprint";
 import SwankyViewBlueprint from "./pages/SwankyViewBlueprint";
+import FAQDashboard from "./pages/FAQDashboard";
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -136,6 +137,14 @@ const App = () => {
                     <Chapter11 />
                   </ProtectedRoute>
                 } />
+                
+                {/* 3D FAQ Ebook routes */}
+                <Route path="/dashboard/3d-faq" element={
+                  <ProtectedRoute>
+                    <FAQDashboard />
+                  </ProtectedRoute>
+                } />
+                
                 <Route path="/swankyview" element={<SwankyViewBlueprint />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
