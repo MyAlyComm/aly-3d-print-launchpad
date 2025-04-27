@@ -1,4 +1,8 @@
-import { BookOpen, Target, Lightbulb, Brain, Compass, Clock, Award, BookText, Package } from "lucide-react";
+import { 
+  BookOpen, Target, Lightbulb, Brain, Compass, 
+  Clock, Award, BookText, Package, Star, 
+  TrendingUp, Rocket, Globe, Mountain 
+} from "lucide-react";
 import type { FAQSectionType } from "@/components/dashboard/FAQSection";
 
 export const MiniBlueprintSections: FAQSectionType[] = [
@@ -12,8 +16,8 @@ export const MiniBlueprintSections: FAQSectionType[] = [
 • Billion-dollar brands seek my marketing and consulting help
 • Zero previous experience or special connections`,
     image: "/lovable-uploads/82a916c1-2d7b-40fe-b51f-22cc7f474c56.png",
-    icon: BookOpen,
-    gradient: "from-purple-50 to-blue-50 hover:from-purple-100 hover:to-blue-100"
+    icon: Star,
+    gradient: "from-purple-100 to-blue-100 hover:from-purple-200 hover:to-blue-200"
   },
   {
     id: "arbitrage",
@@ -27,8 +31,8 @@ An arbitrage window opens when:
 
 This creates a brief period—sometimes months, sometimes a few years—where extraordinary profits are possible for those who recognize the opportunity and act.`,
     image: "/lovable-uploads/90ff8861-ff64-4a75-8a68-8afda542663d.png",
-    icon: Target,
-    gradient: "from-orange-50 to-yellow-50 hover:from-orange-100 hover:to-yellow-100"
+    icon: TrendingUp,
+    gradient: "from-orange-100 to-yellow-100 hover:from-orange-200 hover:to-yellow-200"
   },
   {
     id: "why-now",
@@ -141,7 +145,7 @@ Location Impact:
 
 Your constraints aren't limitations—they're guideposts for the right approach.`,
     image: "/lovable-uploads/21d99999-1999-4999-8999-199999999999.png",
-    icon: Package,
-    gradient: "from-fuchsia-50 to-pink-50 hover:from-fuchsia-100 hover:to-pink-100"
+    icon: Globe,
+    gradient: "from-teal-100 to-green-100 hover:from-teal-200 hover:to-green-200"
   }
 ];
