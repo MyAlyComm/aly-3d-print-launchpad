@@ -1,5 +1,5 @@
 
-import { Book, FileText, Printer, Tool } from "lucide-react";
+import { Book, FileText, Printer, Wrench } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import FreeGuideDialog from "@/components/FreeGuideDialog";
 import { Button } from "@/components/ui/button";
@@ -29,7 +29,7 @@ const resources = [
   {
     title: "AI Tool Mastery Guide",
     description: "Master the AI tools that will revolutionize your 3D printing workflow.",
-    icon: Tool,
+    icon: Wrench,
     buttonText: "Get AI Guide",
     type: "ai"
   }
