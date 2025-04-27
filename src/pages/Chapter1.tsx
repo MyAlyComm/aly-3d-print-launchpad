@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChapterProgressBar } from "@/components/ebook/ChapterProgress";
@@ -17,6 +17,7 @@ const Chapter1 = () => {
   const [section, setSection] = useState(0);
   const { updateProgress } = useChapterProgress();
   const navigate = useNavigate();
+  const progressUpdated = useRef(false);
 
   const sections = [
     {
@@ -47,15 +48,27 @@ const Chapter1 = () => {
   ];
 
   useEffect(() => {
-    // Update the progress when a new section is viewed
-    const currentSection = sections[section];
-    if (currentSection) {
-      updateProgress.mutate({
-        chapterNumber: 1,
-        sectionId: currentSection.id
-      });
+    // Prevent duplicate progress updates by using a ref
+    if (!progressUpdated.current) {
+      progressUpdated.current = true;
+      
+      // Update the progress when a new section is viewed
+      const currentSection = sections[section];
+      if (currentSection) {
+        updateProgress.mutate({
+          chapterNumber: 1,
+          sectionId: currentSection.id
+        });
+      }
+
+      // Reset the ref after a delay
+      const timer = setTimeout(() => {
+        progressUpdated.current = false;
+      }, 5000); // 5 second cooldown between progress updates
+      
+      return () => clearTimeout(timer);
     }
-  }, [section, updateProgress]);
+  }, [section, updateProgress, sections]);
 
   const handleNext = () => {
     if (section < sections.length - 1) {

@@ -44,21 +44,45 @@ export function useChapterProgress() {
     }) => {
       if (!user) throw new Error("User not authenticated");
 
-      const { error } = await supabase
+      // First check if this section already exists for the user to avoid duplicates
+      const { data: existingEntries } = await supabase
         .from("user_chapter_responses")
-        .upsert({
-          user_id: user.id,
-          chapter_number: chapterNumber,
-          section_id: sectionId,
-          response_data: responseData,
-          completed_at: new Date().toISOString(),
-        });
+        .select("id")
+        .eq("user_id", user.id)
+        .eq("chapter_number", chapterNumber)
+        .eq("section_id", sectionId)
+        .single();
+        
+      // If entry exists, update it instead of inserting a new one
+      if (existingEntries) {
+        const { error } = await supabase
+          .from("user_chapter_responses")
+          .update({
+            response_data: responseData,
+            completed_at: new Date().toISOString()
+          })
+          .eq("user_id", user.id)
+          .eq("chapter_number", chapterNumber)
+          .eq("section_id", sectionId);
+        
+        if (error) throw error;
+      } else {
+        // If no entry exists, insert a new one
+        const { error } = await supabase
+          .from("user_chapter_responses")
+          .insert({
+            user_id: user.id,
+            chapter_number: chapterNumber,
+            section_id: sectionId,
+            response_data: responseData,
+            completed_at: new Date().toISOString(),
+          });
 
-      if (error) throw error;
+        if (error) throw error;
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["chapter-progress"] });
-      toast.success("Progress updated");
     },
     onError: () => {
       toast.error("Failed to update progress");
