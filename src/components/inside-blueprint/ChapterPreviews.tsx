@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { chapters } from "@/components/dashboard/chapters/types";
 import { BookOpen } from "lucide-react";
@@ -12,9 +11,13 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 export const ChapterPreviews = () => {
   const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
 
-  // Select 3 key chapters to showcase
   const previewChapters = [
-    chapters[0], // Chapter 1: Arbitrage Windows
+    {
+      number: 0,
+      title: "My Story: Zero to $20K",
+      description: "The journey from a $300 printer to a global business in just 60 days.",
+      imageUrl: chapters[0].imageUrl
+    },
     {
       number: 1,
       title: "Finding Your Perfect Starting Point",
@@ -26,6 +29,31 @@ export const ChapterPreviews = () => {
 
   const getChapterContent = (number: number) => {
     switch (number) {
+      case 0:
+        return (
+          <div className="prose prose-sm max-w-none">
+            <p className="mb-4">
+              When I bought my first 3D printer, I had no idea it would change my life. It was a simple $300 machine, and I was just hoping to make some fun trinkets.
+            </p>
+            <p className="mb-4">
+              60 days later, I had generated over $20,000 in sales and was managing a fleet of printers running 24/7. The demand was insane, and I could barely keep up.
+            </p>
+            <h3 className="text-lg font-semibold mt-6 mb-3">The Turning Point</h3>
+            <p className="mb-4">
+              The real breakthrough came when I discovered there were "Arbitrage Windows" - periods where demand far exceeded supply, and the barriers to entry were still low.
+            </p>
+            <p className="mb-4">
+              I wasn't competing on price or even quality initially. I was simply showing up where buyers already were, with products they already wanted, when few others were doing the same.
+            </p>
+            <p className="mb-6">
+              This realization led me to develop systems and strategies that would eventually help hundreds of others build their own successful 3D printing businesses.
+            </p>
+            <h3 className="text-lg font-semibold mt-6 mb-3">The Journey Ahead</h3>
+            <p className="text-sm text-gray-600 italic">
+              Continue reading to learn how a simple $300 investment turned into a thriving global business...
+            </p>
+          </div>
+        );
       case 1:
         return (
           <div className="prose prose-sm max-w-none">
