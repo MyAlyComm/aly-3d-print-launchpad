@@ -1,3 +1,4 @@
+
 import React from "react";
 import { InfoCard } from "@/components/ui/chapter-layout/InfoCard";
 import { ChapterSection } from "@/components/ui/chapter-layout/ChapterSection";
@@ -21,7 +22,7 @@ export const TheRevelation = () => {
             As I segmented each group, I began to understand that what's needed in the industry isn't more information.
           </p>
           
-          <p className="animate-shimmer bg-gradient-to-r from-[#FFD700] via-[#DAA520] to-[#FFD700] bg-[length:200%_auto] bg-clip-text text-transparent text-xl font-bold mt-4">
+          <p className="bg-gradient-to-r from-[#FFD700] via-[#DAA520] to-[#FFD700] bg-clip-text text-transparent text-xl font-bold mt-4">
             It's more value in less time.
           </p>
         </div>
