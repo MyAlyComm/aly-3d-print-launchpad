@@ -1,5 +1,5 @@
 
-import { BookOpen, FileText, BarChart3 } from "lucide-react";
+import { BookOpen, FileText, BarChart3, Sparkles } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 export const ValueProposition = () => {
@@ -7,24 +7,31 @@ export const ValueProposition = () => {
     {
       icon: <BookOpen className="w-6 h-6 text-primary" />,
       title: "Step-by-Step Guide",
-      description: "Follow my proven framework to start and scale your 3D printing business, even if you're starting from zero."
+      description: "Follow my proven framework to start and scale your 3D printing business, even if you're starting from zero.",
+      color: "from-primary/10 to-primary/5"
     },
     {
-      icon: <FileText className="w-6 h-6 text-primary" />,
+      icon: <FileText className="w-6 h-6 text-secondary" />,
       title: "Complete Resources",
-      description: "Get access to my product research framework, pricing calculator, and marketing templates."
+      description: "Get access to my product research framework, pricing calculator, and marketing templates.",
+      color: "from-secondary/10 to-secondary/5"
     },
     {
-      icon: <BarChart3 className="w-6 h-6 text-primary" />,
+      icon: <BarChart3 className="w-6 h-6 text-accent" />,
       title: "Real Results",
-      description: "Join hundreds of successful entrepreneurs who've used this blueprint to build profitable 3D printing businesses."
+      description: "Join hundreds of successful entrepreneurs who've used this blueprint to build profitable 3D printing businesses.",
+      color: "from-accent/10 to-accent/5"
     }
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-gradient-to-b from-white to-primary/5">
       <div className="container px-4 mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-16">
+          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4">
+            <Sparkles className="w-4 h-4" />
+            <span className="font-medium">Transform Your Business</span>
+          </div>
           <h2 className="text-3xl font-bold mb-4">Transform Your 3D Printing Hobby Into a Business</h2>
           <p className="text-gray-600 text-lg">
             Stop wasting time with trial and error. Get the exact roadmap I used to build my successful business.
@@ -32,12 +39,15 @@ export const ValueProposition = () => {
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           {benefits.map((benefit, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
+            <Card 
+              key={index} 
+              className="group hover:shadow-lg transition-all duration-300 cursor-pointer overflow-hidden"
+            >
               <CardContent className="p-6 text-center space-y-4">
-                <div className="mx-auto w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <div className={`mx-auto w-12 h-12 rounded-full bg-gradient-to-br ${benefit.color} flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300`}>
                   {benefit.icon}
                 </div>
-                <h3 className="font-semibold text-xl">{benefit.title}</h3>
+                <h3 className="font-semibold text-xl group-hover:text-primary transition-colors duration-300">{benefit.title}</h3>
                 <p className="text-gray-600">{benefit.description}</p>
               </CardContent>
             </Card>
