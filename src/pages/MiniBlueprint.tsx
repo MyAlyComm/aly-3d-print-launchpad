@@ -6,7 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { FAQSection } from "@/components/dashboard/FAQSection";
 import { FAQHero } from "@/components/dashboard/FAQHero";
 import { MiniBlueprintSections } from "@/data/miniBlueprintData";
-import { FAQPageCTA } from "@/components/dashboard/FAQPageCTA";
+import FAQPageCTA from "@/components/dashboard/FAQPageCTA";
 
 const MiniBlueprint = () => {
   const { user } = useAuth();
@@ -43,4 +43,3 @@ const MiniBlueprint = () => {
 };
 
 export default MiniBlueprint;
-

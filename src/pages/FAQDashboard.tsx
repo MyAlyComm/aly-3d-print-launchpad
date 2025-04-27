@@ -6,7 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { FAQSection } from "@/components/dashboard/FAQSection";
 import { FAQHero } from "@/components/dashboard/FAQHero";
 import { FAQSections } from "@/data/faqData";
-import { FAQPageCTA } from "@/components/dashboard/FAQPageCTA";
+import FAQPageCTA from "@/components/dashboard/FAQPageCTA";
 
 const FAQDashboard = () => {
   const { user } = useAuth();
