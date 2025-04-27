@@ -34,7 +34,7 @@ export const chapters: Chapter[] = [
     number: 4,
     title: "Market Analysis",
     description: "Understanding market saturation and finding untapped niches.",
-    imageUrl: "/lovable-uploads/fc1baf39-e8b0-4bb0-b151-42f879ec5c0d.png"
+    imageUrl: "/lovable-uploads/b5a22fbd-f015-4274-b91c-4d99379b6d21.png"
   },
   {
     number: 5,
