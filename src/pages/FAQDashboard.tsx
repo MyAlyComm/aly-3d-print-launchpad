@@ -125,11 +125,11 @@ const FAQDashboard = () => {
     >
       {/* Hero Section */}
       <div className="relative mb-8">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-600/20 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-yellow-500/20 mix-blend-multiply" />
         <div className="relative h-[200px] md:h-[300px] w-full overflow-hidden rounded-lg">
           <img 
-            src="/lovable-uploads/90ff8861-ff64-4a75-8a68-8afda542663d.png" 
-            alt="3D Printing Hero"
+            src="/lovable-uploads/cf54e8e5-7d73-4081-8494-a864ec2169e8.png" 
+            alt="ROI and Opportunity in 3D Printing"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/30" />
