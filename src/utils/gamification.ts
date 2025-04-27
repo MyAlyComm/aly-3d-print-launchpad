@@ -18,7 +18,8 @@ export const calculatePoints = (chapterNumber: number, sectionsCompleted: number
   return basePoints + chapterBonus;
 };
 
-export const getBadgesForProgress = (progress: ChapterProgress[]): Badge[] => {
+// Update the function to handle different response_data types
+export const getBadgesForProgress = (progress: any[]): Badge[] => {
   const badges: Badge[] = [];
   
   // First chapter badge

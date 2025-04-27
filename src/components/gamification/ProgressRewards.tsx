@@ -8,8 +8,8 @@ import { motion } from "framer-motion";
 
 export const ProgressRewards = () => {
   const { chapterProgresses } = useChapterProgress();
-  // Safe cast to expected type - we know the structure is compatible
-  const badges = getBadgesForProgress(chapterProgresses || []);
+  // Updated to cast any[] to avoid TypeScript errors with response_data
+  const badges = getBadgesForProgress(chapterProgresses as any[] || []);
 
   // Helper function to get the correct icon component
   const getIconComponent = (iconName: string) => {
