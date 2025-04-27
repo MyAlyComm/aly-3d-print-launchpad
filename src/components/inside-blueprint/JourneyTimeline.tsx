@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 
 export const JourneyTimeline = () => {
@@ -54,14 +53,14 @@ export const JourneyTimeline = () => {
                   <div className="absolute left-0 top-[50%] -translate-x-3 h-[calc(100%+2rem)] w-[2px] bg-primary/30" />
                 )}
                 <CardContent className="p-0">
-                  <div className="flex flex-col md:flex-row">
+                  <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                     <div className="relative md:w-1/3">
                       <img 
                         src={item.image} 
                         alt={item.title}
                         className="w-full h-48 md:h-full object-cover"
                       />
-                      <div className="absolute top-0 left-0 bg-primary text-white px-4 py-2 rounded-br-lg">
+                      <div className={`absolute top-0 ${index % 2 === 0 ? 'left-0 rounded-br-lg' : 'right-0 rounded-bl-lg'} bg-primary text-white px-4 py-2`}>
                         {item.date}
                       </div>
                     </div>
@@ -79,4 +78,3 @@ export const JourneyTimeline = () => {
     </section>
   );
 };
-
