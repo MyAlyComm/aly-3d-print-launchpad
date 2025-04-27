@@ -10,6 +10,7 @@ import { CallToAction } from "@/components/inside-blueprint/CallToAction";
 import { SampleChapterPreview } from "@/components/inside-blueprint/SampleChapterPreview";
 import { ChapterPreviews } from "@/components/inside-blueprint/ChapterPreviews";
 import { ChapterCarousel } from "@/components/inside-blueprint/ChapterCarousel";
+import { FreeResourceCards } from "@/components/resources/FreeResourceCards";
 import { useEffect, lazy, Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -57,6 +58,9 @@ const InsideBlueprint = () => {
       <main className="space-y-1">
         <HeroStory />
         <ValueProposition />
+        
+        {/* Add FreeResourceCards before the lazy loaded components */}
+        <FreeResourceCards />
         
         {/* Lazy load components that are not immediately visible */}
         <Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
