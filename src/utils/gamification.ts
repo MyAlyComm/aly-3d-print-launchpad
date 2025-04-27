@@ -5,7 +5,7 @@ export type Badge = {
   id: string;
   title: string;
   description: string;
-  icon: 'star' | 'trophy' | 'medal' | 'rocket' | 'flag';
+  icon: 'Star' | 'Trophy' | 'Medal' | 'Rocket' | 'Flag';
   color: string;
 };
 
@@ -27,7 +27,7 @@ export const getBadgesForProgress = (progress: ChapterProgress[]): Badge[] => {
       id: 'first-chapter',
       title: 'Journey Begins',
       description: 'Completed your first chapter',
-      icon: 'rocket',
+      icon: 'Rocket',
       color: 'text-primary'
     });
   }
@@ -44,7 +44,7 @@ export const getBadgesForProgress = (progress: ChapterProgress[]): Badge[] => {
       id: 'quick-learner',
       title: 'Quick Learner',
       description: 'Completed a chapter in under 24 hours',
-      icon: 'flag',
+      icon: 'Flag',
       color: 'text-secondary'
     });
   }
@@ -56,7 +56,7 @@ export const getBadgesForProgress = (progress: ChapterProgress[]): Badge[] => {
       id: 'achiever',
       title: 'Rising Star',
       description: 'Completed three full chapters',
-      icon: 'star',
+      icon: 'Star',
       color: 'text-accent'
     });
   }

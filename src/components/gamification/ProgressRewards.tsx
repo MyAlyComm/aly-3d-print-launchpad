@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 
 export const ProgressRewards = () => {
   const { chapterProgresses } = useChapterProgress();
+  // Safe cast to expected type - we know the structure is compatible
   const badges = getBadgesForProgress(chapterProgresses || []);
 
   return (
@@ -17,7 +18,7 @@ export const ProgressRewards = () => {
           <h4 className="text-sm font-medium text-muted-foreground">Your Achievements</h4>
           <div className="flex flex-wrap gap-3">
             {badges.map((badge: Badge) => {
-              const Icon = Icons[badge.icon];
+              const Icon = Icons[badge.icon as keyof typeof Icons];
               return (
                 <motion.div
                   key={badge.id}

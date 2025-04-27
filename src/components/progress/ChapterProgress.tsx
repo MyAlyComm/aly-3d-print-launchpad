@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,6 +7,7 @@ import { useChapterProgress } from "@/hooks/useChapterProgress";
 import { ChapterProgressList } from "./ChapterProgressList";
 import { UserResponses } from "./UserResponses";
 import { BarChart3, FileText } from "lucide-react";
+import { ProgressRewards } from "@/components/gamification/ProgressRewards";
 
 export const ChapterProgress = () => {
   const { calculateOverallProgress } = useChapterProgress();
