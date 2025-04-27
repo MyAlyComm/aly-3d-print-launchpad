@@ -9,10 +9,12 @@ import {
   CardHeader, 
   CardTitle 
 } from "@/components/ui/card";
-import { BookOpen, ArrowRight, Clock, Bookmark } from "lucide-react";
+import { BookOpen, ArrowRight, Clock, Bookmark, User } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 const EbooksHub = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const availableEbooks = [
     {
@@ -39,9 +41,19 @@ const EbooksHub = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-12">
-        <header className="mb-12">
-          <h1 className="text-3xl font-bold tracking-tight">My Ebooks</h1>
-          <p className="text-gray-500 mt-2">Access all your purchased ebooks and resources</p>
+        <header className="mb-12 flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">My Ebooks</h1>
+            <p className="text-gray-500 mt-2">Access all your purchased ebooks and resources</p>
+          </div>
+          <Button
+            variant="outline"
+            onClick={() => navigate("/account")}
+            className="hidden sm:flex"
+          >
+            <User className="mr-2 h-4 w-4" />
+            My Account
+          </Button>
         </header>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -107,6 +119,17 @@ const EbooksHub = () => {
               </CardFooter>
             </Card>
           ))}
+        </div>
+        
+        <div className="mt-8 flex justify-center sm:hidden">
+          <Button
+            variant="outline"
+            onClick={() => navigate("/account")}
+            className="w-full max-w-xs"
+          >
+            <User className="mr-2 h-4 w-4" />
+            Manage My Account
+          </Button>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 
-import { Home, BookOpen } from "lucide-react";
+import { Home, BookOpen, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { DashboardNav } from "./DashboardNav";
@@ -32,6 +32,14 @@ export const DashboardSidebarContent = () => {
         >
           <BookOpen className="mr-2 h-4 w-4" />
           All Ebooks
+        </Button>
+        <Button 
+          variant="ghost" 
+          className="w-full mt-2"
+          onClick={() => navigate("/account")}
+        >
+          <User className="mr-2 h-4 w-4" />
+          My Account
         </Button>
         <Button 
           variant="ghost" 

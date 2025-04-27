@@ -26,6 +26,7 @@ import Chapter9 from "./pages/Chapter9";
 import Chapter10 from "./pages/Chapter10";
 import Chapter11 from "./pages/Chapter11";
 import EbooksHub from "./pages/EbooksHub";
+import UserDashboard from "./pages/UserDashboard";
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -49,8 +50,13 @@ const App = () => {
                 <Route path="/" element={<Index />} />
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/payment-success" element={<PaymentSuccess />} />
+                <Route path="/account" element={
+                  <ProtectedRoute>
+                    <UserDashboard />
+                  </ProtectedRoute>
+                } />
                 
-                {/* New Ebooks Hub route */}
+                {/* Ebooks Hub route */}
                 <Route path="/dashboard" element={
                   <ProtectedRoute>
                     <EbooksHub />

@@ -244,6 +244,117 @@ export type Database = {
           },
         ]
       }
+      grant_application_attachments: {
+        Row: {
+          application_id: string
+          file_name: string
+          file_type: string
+          file_url: string
+          id: string
+          uploaded_at: string
+        }
+        Insert: {
+          application_id: string
+          file_name: string
+          file_type: string
+          file_url: string
+          id?: string
+          uploaded_at?: string
+        }
+        Update: {
+          application_id?: string
+          file_name?: string
+          file_type?: string
+          file_url?: string
+          id?: string
+          uploaded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "grant_application_attachments_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "grant_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      grant_applications: {
+        Row: {
+          budget_breakdown: Json
+          created_at: string
+          funding_amount_requested: number
+          id: string
+          implementation_plan: string
+          innovation_aspect: string
+          location: string
+          organization_name: string | null
+          problem_statement: string
+          project_category: string
+          project_summary: string
+          project_timeline: number
+          project_title: string
+          proposed_solution: string
+          status: Database["public"]["Enums"]["grant_application_status"] | null
+          submitted_at: string | null
+          sustainability_impact: string
+          team_size: number | null
+          updated_at: string
+          user_id: string
+          website_url: string | null
+        }
+        Insert: {
+          budget_breakdown: Json
+          created_at?: string
+          funding_amount_requested: number
+          id?: string
+          implementation_plan: string
+          innovation_aspect: string
+          location: string
+          organization_name?: string | null
+          problem_statement: string
+          project_category: string
+          project_summary: string
+          project_timeline: number
+          project_title: string
+          proposed_solution: string
+          status?:
+            | Database["public"]["Enums"]["grant_application_status"]
+            | null
+          submitted_at?: string | null
+          sustainability_impact: string
+          team_size?: number | null
+          updated_at?: string
+          user_id: string
+          website_url?: string | null
+        }
+        Update: {
+          budget_breakdown?: Json
+          created_at?: string
+          funding_amount_requested?: number
+          id?: string
+          implementation_plan?: string
+          innovation_aspect?: string
+          location?: string
+          organization_name?: string | null
+          problem_statement?: string
+          project_category?: string
+          project_summary?: string
+          project_timeline?: number
+          project_title?: string
+          proposed_solution?: string
+          status?:
+            | Database["public"]["Enums"]["grant_application_status"]
+            | null
+          submitted_at?: string | null
+          sustainability_impact?: string
+          team_size?: number | null
+          updated_at?: string
+          user_id?: string
+          website_url?: string | null
+        }
+        Relationships: []
+      }
       newsletters: {
         Row: {
           content: string
@@ -616,7 +727,12 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      grant_application_status:
+        | "draft"
+        | "submitted"
+        | "under_review"
+        | "approved"
+        | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -731,6 +847,14 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      grant_application_status: [
+        "draft",
+        "submitted",
+        "under_review",
+        "approved",
+        "rejected",
+      ],
+    },
   },
 } as const
