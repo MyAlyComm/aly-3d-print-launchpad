@@ -1,4 +1,3 @@
-
 import { ArrowRight } from "lucide-react";
 import { PhotoCarousel } from "./photo-carousel/PhotoCarousel";
 
@@ -12,8 +11,8 @@ const ChaptersCarousel = () => {
       icon: <ArrowRight className="w-5 h-5 text-primary" />
     },
     {
-      mainImage: "/lovable-uploads/19e3fb35-7a5c-4b4a-9d7e-46bee87b38c7.png",
-      hoverImage: "/lovable-uploads/19e3fb35-7a5c-4b4a-9d7e-46bee87b38c7.png",
+      mainImage: "/lovable-uploads/c846a9eb-c5c7-4610-b64a-bef92497f7a2.png",
+      hoverImage: "/lovable-uploads/c846a9eb-c5c7-4610-b64a-bef92497f7a2.png",
       month: "Chapter 5",
       description: "Choosing Your Production Tools. A comprehensive guide to selecting the right 3D printers and essential equipment for your business needs.",
       icon: <ArrowRight className="w-5 h-5 text-purple-500" />
