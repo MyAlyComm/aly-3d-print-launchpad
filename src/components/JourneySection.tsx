@@ -1,10 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle, ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { PhotoCarousel } from "@/components/photo-carousel/PhotoCarousel";
 
 const JourneySection = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
   const journeyStages = [
     {
       mainImage: "/lovable-uploads/511b02f5-662b-4442-ada4-7d79753c2d2d.jpg",
@@ -80,58 +78,8 @@ const JourneySection = () => {
 
   return (
     <Card className="bg-white/80 backdrop-blur border-primary/10 shadow-lg">
-      <CardContent className="pt-6 space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {journeyStages.slice(0, 4).map((stage, index) => (
-            <div key={stage.month} className="space-y-4 transition-transform duration-300 hover:-translate-y-2">
-              <div 
-                className="relative"
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur group-hover:opacity-40 transition-opacity"></div>
-                <img 
-                  src={hoveredIndex === index ? stage.hoverImage : stage.mainImage}
-                  alt={`${stage.month} journey`}
-                  className="relative rounded-xl w-full aspect-square object-cover transition-opacity duration-300"
-                />
-              </div>
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  {stage.icon}
-                  <h3 className="font-semibold text-lg text-gray-900">{stage.month}</h3>
-                </div>
-                <p className="text-gray-600 text-sm leading-relaxed">{stage.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {journeyStages.slice(4).map((stage, index) => (
-            <div key={stage.month} className="space-y-4 transition-transform duration-300 hover:-translate-y-2">
-              <div 
-                className="relative"
-                onMouseEnter={() => setHoveredIndex(index + 4)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-30 blur group-hover:opacity-40 transition-opacity"></div>
-                <img 
-                  src={hoveredIndex === index + 4 ? stage.hoverImage : stage.mainImage}
-                  alt={`${stage.month} journey`}
-                  className="relative rounded-xl w-full aspect-square object-cover transition-opacity duration-300"
-                />
-              </div>
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  {stage.icon}
-                  <h3 className="font-semibold text-lg text-gray-900">{stage.month}</h3>
-                </div>
-                <p className="text-gray-600 text-sm leading-relaxed">{stage.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+      <CardContent className="pt-6">
+        <PhotoCarousel photos={journeyStages} />
       </CardContent>
     </Card>
   );
