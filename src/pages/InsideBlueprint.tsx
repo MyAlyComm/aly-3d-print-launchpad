@@ -13,6 +13,7 @@ import { ChapterCarousel } from "@/components/inside-blueprint/ChapterCarousel";
 import { useEffect, lazy, Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
+// Make sure we're using a component that has a default export
 const FAQPageCTA = lazy(() => import("@/components/dashboard/FAQPageCTA"));
 
 const InsideBlueprint = () => {

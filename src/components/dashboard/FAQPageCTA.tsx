@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 
-export const FAQPageCTA = () => {
+const FAQPageCTA = () => {
   return (
     <div className="bg-gradient-to-r from-primary/10 to-secondary/10 py-16 rounded-lg shadow-sm">
       <div className="container max-w-7xl mx-auto text-center">
@@ -38,3 +38,4 @@ export const FAQPageCTA = () => {
   );
 };
 
+export default FAQPageCTA;
