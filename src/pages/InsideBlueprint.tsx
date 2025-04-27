@@ -18,13 +18,20 @@ const InsideBlueprint = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-primary-light/10 via-white to-white">
       <BackToTop />
-      <main>
+      <main className="space-y-1">
+        <div className="absolute inset-0 gradient-blur pointer-events-none" />
         <HeroStory />
-        <ValueProposition />
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
+          <ValueProposition />
+        </div>
         <ChapterHighlight />
-        <JourneyTimeline />
+        <div className="relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent pointer-events-none" />
+          <JourneyTimeline />
+        </div>
         <CallToAction />
       </main>
     </div>
