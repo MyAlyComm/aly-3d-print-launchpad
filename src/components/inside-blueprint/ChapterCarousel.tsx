@@ -7,39 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-
-const chapters = [
-  {
-    number: 0,
-    title: "My Story: Zero to $20K",
-    description: "The journey from a $300 printer to a global business in just 60 days.",
-    imageUrl: "/lovable-uploads/511b02f5-662b-4442-ada4-7d79753c2d2d.jpg"
-  },
-  {
-    number: 1,
-    title: "Finding Your Perfect Starting Point",
-    description: "Learn how to identify your ideal 'Home Base' platform and build strategically from there.",
-    imageUrl: "/lovable-uploads/0f08439b-373a-474c-971a-ae51de7a6701.png"
-  },
-  {
-    number: 2,
-    title: "The Axiogenetic Theorem",
-    description: "Understanding market dynamics and value creation in the 3D printing space.",
-    imageUrl: "/lovable-uploads/72adc6d5-64f9-4a52-b3cd-09e2ef9b3882.png"
-  },
-  {
-    number: 3,
-    title: "Core Systems",
-    description: "Building scalable systems for sustainable growth.",
-    imageUrl: "/lovable-uploads/04fa3465-1dd4-4878-bde7-ee7d0398b515.png"
-  },
-  {
-    number: 4,
-    title: "Product Strategy",
-    description: "Selecting and optimizing your product offerings.",
-    imageUrl: "/lovable-uploads/1dadb0e8-cc5d-4b6f-955b-cb6f463eab22.png"
-  }
-];
+import { chapters } from "@/components/dashboard/chapters/types";
 
 export const ChapterCarousel = () => {
   return (
