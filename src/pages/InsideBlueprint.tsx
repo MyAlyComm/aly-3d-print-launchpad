@@ -7,6 +7,7 @@ import { BlueprintPreview } from "@/components/inside-blueprint/BlueprintPreview
 import { BlueprintTestimonials } from "@/components/inside-blueprint/BlueprintTestimonials";
 import { CallToAction } from "@/components/inside-blueprint/CallToAction";
 import { SampleChapterPreview } from "@/components/inside-blueprint/SampleChapterPreview";
+import { ChapterPreviews } from "@/components/inside-blueprint/ChapterPreviews";
 import { useEffect } from "react";
 
 const InsideBlueprint = () => {
@@ -30,6 +31,7 @@ const InsideBlueprint = () => {
         <BlueprintTestimonials />
         <CallToAction />
         <SampleChapterPreview />
+        <ChapterPreviews />
       </main>
     </div>
   );
