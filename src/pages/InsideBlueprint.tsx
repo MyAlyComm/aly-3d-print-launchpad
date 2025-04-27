@@ -1,3 +1,4 @@
+
 import { BackToTop } from "@/components/ui/back-to-top";
 import { HeroStory } from "@/components/inside-blueprint/HeroStory";
 import { ValueProposition } from "@/components/inside-blueprint/ValueProposition";
@@ -5,6 +6,7 @@ import { JourneyTimeline } from "@/components/inside-blueprint/JourneyTimeline";
 import { BlueprintPreview } from "@/components/inside-blueprint/BlueprintPreview";
 import { BlueprintTestimonials } from "@/components/inside-blueprint/BlueprintTestimonials";
 import { CallToAction } from "@/components/inside-blueprint/CallToAction";
+import { SampleChapterPreview } from "@/components/inside-blueprint/SampleChapterPreview";
 import { useEffect } from "react";
 
 const InsideBlueprint = () => {
@@ -27,6 +29,7 @@ const InsideBlueprint = () => {
         <JourneyTimeline />
         <BlueprintTestimonials />
         <CallToAction />
+        <SampleChapterPreview />
       </main>
     </div>
   );
