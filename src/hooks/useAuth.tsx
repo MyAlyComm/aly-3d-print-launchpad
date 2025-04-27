@@ -1,5 +1,7 @@
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+// Make sure React is explicitly imported
+import * as React from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -11,10 +13,11 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType>({ user: null, session: null });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
+  // Explicitly use React.useState to avoid any potential reference issues
+  const [user, setUser] = React.useState<User | null>(null);
+  const [session, setSession] = React.useState<Session | null>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {

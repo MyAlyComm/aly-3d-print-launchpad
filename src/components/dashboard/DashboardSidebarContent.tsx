@@ -3,9 +3,27 @@ import { Home, BookOpen, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { DashboardNav } from "./DashboardNav";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/components/ui/sonner";
 
 export const DashboardSidebarContent = () => {
   const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      
+      // Clear any local storage related to authentication
+      localStorage.removeItem("hasAccessToEbook");
+      
+      toast.success("Signed out successfully");
+      navigate("/");
+    } catch (error) {
+      console.error("Error signing out:", error);
+      toast.error("Failed to sign out");
+    }
+  };
 
   return (
     <div className="flex h-full flex-col">
@@ -44,11 +62,7 @@ export const DashboardSidebarContent = () => {
         <Button 
           variant="ghost" 
           className="w-full mt-2 text-red-600 hover:text-red-700 hover:bg-red-50"
-          onClick={() => {
-            localStorage.removeItem("hasAccessToEbook");
-            navigate("/");
-            window.location.reload();
-          }}
+          onClick={handleSignOut}
         >
           Sign Out
         </Button>
