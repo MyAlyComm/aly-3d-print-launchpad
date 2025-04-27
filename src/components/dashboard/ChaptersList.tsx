@@ -33,11 +33,11 @@ export const ChaptersList = () => {
       <ContinueLearning nextChapter={nextChapter} />
       
       <Tabs defaultValue="all" className="w-full">
-        <TabsList className="mb-6">
-          <TabsTrigger value="all">All Chapters</TabsTrigger>
-          <TabsTrigger value="beginner">Beginner (0-3)</TabsTrigger>
-          <TabsTrigger value="intermediate">Intermediate (4-7)</TabsTrigger>
-          <TabsTrigger value="advanced">Advanced (8-11)</TabsTrigger>
+        <TabsList className="mb-6 w-full overflow-x-auto flex">
+          <TabsTrigger value="all" className="flex-1">All</TabsTrigger>
+          <TabsTrigger value="beginner" className="flex-1">Beginner</TabsTrigger>
+          <TabsTrigger value="intermediate" className="flex-1">Intermediate</TabsTrigger>
+          <TabsTrigger value="advanced" className="flex-1">Advanced</TabsTrigger>
         </TabsList>
         
         <TabsContent value="all" className="mt-0">

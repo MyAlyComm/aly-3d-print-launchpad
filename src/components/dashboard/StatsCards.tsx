@@ -26,8 +26,8 @@ export const StatsCards = () => {
   return (
     <div className="grid gap-4 md:grid-cols-3">
       <Card className="bg-gradient-to-br from-primary/10 to-primary/5">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+        <CardHeader className="pb-2">
+          <CardTitle className="flex items-center gap-2 text-lg">
             <Trophy className="h-5 w-5 text-primary" />
             Progress
           </CardTitle>
@@ -39,8 +39,8 @@ export const StatsCards = () => {
       </Card>
       
       <Card className="bg-gradient-to-br from-secondary/10 to-secondary/5">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+        <CardHeader className="pb-2">
+          <CardTitle className="flex items-center gap-2 text-lg">
             <BookOpen className="h-5 w-5 text-secondary" />
             Chapters
           </CardTitle>
@@ -54,8 +54,8 @@ export const StatsCards = () => {
       </Card>
       
       <Card className="bg-gradient-to-br from-accent/10 to-accent/5">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+        <CardHeader className="pb-2">
+          <CardTitle className="flex items-center gap-2 text-lg">
             <Rocket className="h-5 w-5 text-accent" />
             Next Step
           </CardTitle>

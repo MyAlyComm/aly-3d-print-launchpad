@@ -31,7 +31,7 @@ export const ResourcesCard = () => {
   return (
     <Card className="bg-gradient-to-br from-gray-50 to-white border-primary/20">
       <CardHeader>
-        <CardTitle>Resources & Downloads</CardTitle>
+        <CardTitle className="text-xl break-words">Resources & Downloads</CardTitle>
         <CardDescription>Access all supporting materials for your business</CardDescription>
       </CardHeader>
       <CardContent>
@@ -39,10 +39,10 @@ export const ResourcesCard = () => {
           {resourceCategories.map((category) => (
             <div 
               key={category.title}
-              className="flex flex-col items-center space-y-3 p-4 rounded-lg hover:bg-accent/5 transition-colors cursor-pointer group"
+              className="flex flex-col items-center space-y-3 p-3 rounded-lg hover:bg-accent/5 transition-colors cursor-pointer group"
               onClick={() => navigate(category.path)}
             >
-              <div className="w-16 h-16 rounded-lg overflow-hidden border border-gray-200 group-hover:border-primary/20 transition-colors">
+              <div className="w-12 h-12 rounded-lg overflow-hidden border border-gray-200 group-hover:border-primary/20 transition-colors">
                 <img 
                   src={category.icon} 
                   alt={category.title}
@@ -50,8 +50,8 @@ export const ResourcesCard = () => {
                 />
               </div>
               <div className="text-center">
-                <h4 className="font-medium">{category.title}</h4>
-                <p className="text-sm text-muted-foreground">{category.description}</p>
+                <h4 className="font-medium text-sm">{category.title}</h4>
+                <p className="text-xs text-muted-foreground">{category.description}</p>
               </div>
             </div>
           ))}

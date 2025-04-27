@@ -13,7 +13,7 @@ export const ContinueLearning = ({ nextChapter }: ContinueLearningProps) => {
   return (
     <div className="mb-8">
       <div className="p-4 bg-gradient-to-r from-primary/20 to-primary/5 rounded-lg flex flex-col md:flex-row gap-4 justify-between items-center">
-        <div>
+        <div className="text-center md:text-left">
           <h4 className="font-medium text-lg">Continue Learning</h4>
           <p className="text-sm text-muted-foreground">
             {nextChapter === 0 ? "Start with the Introduction" : `Resume with Chapter ${nextChapter}`}
@@ -24,6 +24,7 @@ export const ContinueLearning = ({ nextChapter }: ContinueLearningProps) => {
             "/dashboard/3d-blueprint/new-chapter" : 
             `/dashboard/3d-blueprint/chapter-${nextChapter}`
           )}
+          className="whitespace-nowrap"
         >
           {nextChapter === 0 ? "Start Introduction" : `Continue Chapter ${nextChapter}`}
           <ArrowRight className="ml-2 h-4 w-4" />

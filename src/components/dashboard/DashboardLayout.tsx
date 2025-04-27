@@ -17,12 +17,12 @@ const DashboardLayout = ({
   className 
 }: DashboardLayoutProps) => {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100 w-full overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-gray-100 w-full overflow-hidden">
       <DashboardHeader title={title}>
         {extraContent}
       </DashboardHeader>
       
-      <main className={cn("flex-1 container px-4 mx-auto w-full", className)}>
+      <main className={cn("flex-1 container mx-auto w-full px-3 sm:px-4", className)}>
         {children}
       </main>
     </div>
