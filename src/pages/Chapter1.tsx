@@ -1,18 +1,22 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { MiniProgress } from "@/components/progress/MiniProgress";
+import { ChapterProgressBar } from "@/components/ebook/ChapterProgress";
+import { ChapterNavigation } from "@/components/ebook/ChapterNavigation";
 import { ArbitrageIntro } from "@/components/chapters/chapter1/ArbitrageIntro";
 import { Timeline } from "@/components/chapters/chapter1/Timeline";
 import { Misconceptions } from "@/components/chapters/chapter1/Misconceptions";
 import { FutureOutlook } from "@/components/chapters/chapter1/FutureOutlook";
 import { SelfAssessment } from "@/components/chapters/chapter1/SelfAssessment";
+import { useChapterProgress } from "@/hooks/useChapterProgress";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const Chapter1 = () => {
   const [section, setSection] = useState(0);
+  const { updateProgress } = useChapterProgress();
+  const navigate = useNavigate();
 
   const sections = [
     {
@@ -42,6 +46,17 @@ const Chapter1 = () => {
     }
   ];
 
+  useEffect(() => {
+    // Update the progress when a new section is viewed
+    const currentSection = sections[section];
+    if (currentSection) {
+      updateProgress.mutate({
+        chapterNumber: 1,
+        sectionId: currentSection.id
+      });
+    }
+  }, [section, updateProgress]);
+
   const handleNext = () => {
     if (section < sections.length - 1) {
       setSection(section + 1);
@@ -56,30 +71,40 @@ const Chapter1 = () => {
     }
   };
 
+  const handleComplete = () => {
+    updateProgress.mutate({
+      chapterNumber: 1,
+      sectionId: "worksheet",
+      responseData: { completed: true }
+    });
+    
+    toast.success("Chapter 1 completed!", {
+      description: "Your progress has been saved"
+    });
+    
+    navigate("/dashboard");
+  };
+
   return (
     <DashboardLayout title="Chapter 1: Arbitrage Windows">
       <div className="container max-w-4xl mx-auto px-4 py-6">
-        <MiniProgress currentChapter={1} />
+        <ChapterProgressBar 
+          currentSection={section}
+          totalSections={sections.length}
+          sectionTitle={sections[section].title}
+        />
         
-        <Card className="mb-6">
-          <CardContent className="p-6">
+        <Card className="mb-6 shadow-md border-t-4 border-t-primary">
+          <CardContent className="p-6 md:p-8">
             {sections[section].content}
             
-            <div className="flex justify-between mt-8 pt-4 border-t border-gray-200">
-              <Button
-                variant="outline"
-                onClick={handlePrev}
-                disabled={section === 0}
-              >
-                <ChevronLeft className="mr-2 h-4 w-4" /> Previous
-              </Button>
-              
-              {section < sections.length - 1 && (
-                <Button onClick={handleNext}>
-                  Next <ChevronRight className="ml-2 h-4 w-4" />
-                </Button>
-              )}
-            </div>
+            <ChapterNavigation
+              currentSection={section}
+              totalSections={sections.length}
+              onNext={handleNext}
+              onPrev={handlePrev}
+              onComplete={handleComplete}
+            />
           </CardContent>
         </Card>
       </div>

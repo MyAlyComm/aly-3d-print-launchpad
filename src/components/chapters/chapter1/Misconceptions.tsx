@@ -1,15 +1,50 @@
 
 import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
+import { AlertTriangle, CheckCircle } from "lucide-react";
 
 export const Misconceptions = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+  
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold">Common Misconceptions: The Stained Glass Effect</h2>
-      <p className="text-gray-700">
-        Like the eras before it, our current phase has created a world of opportunity, but it's also spawned widespread misinformation and misconceptions. I call these the "Stained Glass Effect" – views that might contain fragments of truth but distort reality so severely that they blind people to the opportunities right in front of them.
-      </p>
+      <motion.h2 
+        className="text-2xl sm:text-3xl font-bold text-primary/90 mb-4"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        Common Misconceptions: The Stained Glass Effect
+      </motion.h2>
       
-      <div className="grid gap-4">
+      <motion.p 
+        className="text-gray-700"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        Like the eras before it, our current phase has created a world of opportunity, but it's also spawned widespread misinformation and misconceptions. I call these the "Stained Glass Effect" – views that might contain fragments of truth but distort reality so severely that they blind people to the opportunities right in front of them.
+      </motion.p>
+      
+      <motion.div
+        className="grid gap-4 mt-8"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {[
           {
             myth: "It's too late to start a 3D printing business",
@@ -36,12 +71,22 @@ export const Misconceptions = () => {
             reality: "A modern 3D printer uses about the same electricity as a laptop computer—around 50-150 watts. Even running 24/7, that's $10-30 per month."
           }
         ].map((item, index) => (
-          <div key={index} className="bg-muted p-4 rounded-lg">
-            <h4 className="font-bold text-red-600 mb-2">Myth: {item.myth}</h4>
-            <p className="text-gray-700">Reality: {item.reality}</p>
-          </div>
+          <motion.div 
+            key={index} 
+            variants={itemVariants}
+            className="bg-white p-5 rounded-lg shadow-sm border hover:shadow-md transition-shadow"
+          >
+            <div className="flex items-start space-x-2 mb-3">
+              <AlertTriangle className="text-red-500 h-5 w-5 mt-1 flex-shrink-0" />
+              <h4 className="font-bold text-gray-800">Myth: {item.myth}</h4>
+            </div>
+            <div className="flex items-start space-x-2">
+              <CheckCircle className="text-green-500 h-5 w-5 mt-1 flex-shrink-0" />
+              <p className="text-gray-700">Reality: {item.reality}</p>
+            </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };
