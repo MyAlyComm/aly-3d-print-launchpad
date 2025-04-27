@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -27,6 +26,7 @@ import Chapter10 from "./pages/Chapter10";
 import Chapter11 from "./pages/Chapter11";
 import EbooksHub from "./pages/EbooksHub";
 import UserDashboard from "./pages/UserDashboard";
+import InsideBlueprint from "./pages/InsideBlueprint";
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -48,6 +48,7 @@ const App = () => {
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<Index />} />
+                <Route path="/inside-blueprint" element={<InsideBlueprint />} />
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/payment-success" element={<PaymentSuccess />} />
                 <Route path="/account" element={
