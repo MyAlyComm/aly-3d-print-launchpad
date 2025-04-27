@@ -1,8 +1,21 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Quote } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export const BlueprintTestimonials = () => {
+  const [visibleCards, setVisibleCards] = useState<number[]>([]);
+  
+  useEffect(() => {
+    const showCards = () => {
+      const cards = Array.from({ length: testimonials.length }, (_, i) => i);
+      setVisibleCards(cards);
+    };
+    
+    const timer = setTimeout(showCards, 500);
+    return () => clearTimeout(timer);
+  }, []);
+
   const testimonials = [
     {
       name: "Michael R.",
@@ -25,10 +38,12 @@ export const BlueprintTestimonials = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-primary/5">
+    <section className="py-20 bg-gradient-to-b from-white to-primary/5 overflow-hidden">
       <div className="container px-4 mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-bold mb-4">Success Stories</h2>
+          <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            Success Stories
+          </h2>
           <p className="text-gray-600 text-lg">
             Join hundreds of entrepreneurs who've transformed their 3D printing hobby into a profitable business
           </p>
@@ -38,13 +53,16 @@ export const BlueprintTestimonials = () => {
           {testimonials.map((testimonial, index) => (
             <Card 
               key={index} 
-              className="group hover:shadow-lg transition-all duration-300 overflow-hidden"
+              className={`group hover:shadow-lg transition-all duration-500 overflow-hidden transform hover:-translate-y-2 ${
+                visibleCards.includes(index) ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
+              }`}
+              style={{ transitionDelay: `${index * 200}ms` }}
             >
               <CardContent className="p-6 text-left relative">
-                <Quote className="absolute top-4 right-4 w-8 h-8 text-primary/10 transform rotate-180" />
+                <Quote className="absolute top-4 right-4 w-8 h-8 text-primary/10 transform rotate-180 group-hover:scale-110 transition-transform duration-300" />
                 <div className="flex mb-4">
                   {[...Array(testimonial.stars)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current group-hover:scale-110 transition-transform duration-300" style={{ transitionDelay: `${i * 50}ms` }} />
                   ))}
                 </div>
                 <p className="text-gray-700 mb-4 relative z-10">"{testimonial.content}"</p>
