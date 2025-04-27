@@ -27,6 +27,7 @@ import Chapter11 from "./pages/Chapter11";
 import EbooksHub from "./pages/EbooksHub";
 import UserDashboard from "./pages/UserDashboard";
 import InsideBlueprint from "./pages/InsideBlueprint";
+import SwankyViewBlueprint from "./pages/SwankyViewBlueprint";
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -135,6 +136,7 @@ const App = () => {
                     <Chapter11 />
                   </ProtectedRoute>
                 } />
+                <Route path="/swankyview" element={<SwankyViewBlueprint />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
