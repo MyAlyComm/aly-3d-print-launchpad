@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from "@/components/ui/card";
 
 export const JourneyTimeline = () => {
@@ -44,35 +45,37 @@ export const JourneyTimeline = () => {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto space-y-8">
-          {timelineItems.map((item, index) => (
-            <div key={index} className="group">
-              <Card className="relative hover:shadow-lg transition-all duration-300">
-                <div className="absolute left-0 top-1/2 -translate-x-3 -translate-y-1/2 w-6 h-6 rounded-full bg-primary z-10" />
-                {index < timelineItems.length - 1 && (
-                  <div className="absolute left-0 top-[50%] -translate-x-3 h-[calc(100%+2rem)] w-[2px] bg-primary/30" />
-                )}
-                <CardContent className="p-0">
-                  <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                    <div className="relative md:w-1/3">
-                      <img 
-                        src={item.image} 
-                        alt={item.title}
-                        className="w-full h-48 md:h-full object-cover"
-                      />
-                      <div className={`absolute top-0 ${index % 2 === 0 ? 'left-0 rounded-br-lg' : 'right-0 rounded-bl-lg'} bg-primary text-white px-4 py-2`}>
-                        {item.date}
+        <div className="max-w-4xl mx-auto relative">
+          {/* Vertical center line */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-primary/30 transform -translate-x-1/2 z-0" />
+
+          <div className="space-y-8 relative">
+            {timelineItems.map((item, index) => (
+              <div key={index} className="group relative">
+                <Card className="hover:shadow-lg transition-all duration-300 relative z-10">
+                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-primary z-20" />
+                  <CardContent className="p-0">
+                    <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                      <div className="relative md:w-1/3">
+                        <img 
+                          src={item.image} 
+                          alt={item.title}
+                          className="w-full h-48 md:h-full object-cover"
+                        />
+                        <div className={`absolute top-0 ${index % 2 === 0 ? 'left-0 rounded-br-lg' : 'right-0 rounded-bl-lg'} bg-primary text-white px-4 py-2`}>
+                          {item.date}
+                        </div>
+                      </div>
+                      <div className="p-6 md:w-2/3 flex flex-col justify-center">
+                        <h3 className="text-2xl font-semibold text-primary mb-3">{item.title}</h3>
+                        <p className="text-gray-600">{item.description}</p>
                       </div>
                     </div>
-                    <div className="p-6 md:w-2/3 flex flex-col justify-center">
-                      <h3 className="text-2xl font-semibold text-primary mb-3">{item.title}</h3>
-                      <p className="text-gray-600">{item.description}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          ))}
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
