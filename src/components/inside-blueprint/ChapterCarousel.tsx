@@ -13,6 +13,7 @@ export const ChapterCarousel = () => {
   return (
     <Card className="bg-white/80 backdrop-blur border-primary/10 shadow-lg">
       <CardContent className="p-6">
+        <h2 className="text-2xl font-bold mb-6 text-center">Complete Chapter Breakdown</h2>
         <Carousel
           opts={{
             align: "start",
