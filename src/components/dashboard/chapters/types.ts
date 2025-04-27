@@ -1,4 +1,3 @@
-
 export interface Chapter {
   number: number;
   title: string;
@@ -35,13 +34,13 @@ export const chapters: Chapter[] = [
     number: 4,
     title: "Market Analysis",
     description: "Understanding market saturation and finding untapped niches.",
-    imageUrl: "/lovable-uploads/9d3b4d8b-3516-44e5-9408-8021aafb2f0f.png"
+    imageUrl: "/lovable-uploads/fc1baf39-e8b0-4bb0-b151-42f879ec5c0d.png"
   },
   {
     number: 5,
     title: "Budget Options",
     description: "Different starting budgets and their potential outcomes.",
-    imageUrl: "/lovable-uploads/fc1baf39-e8b0-4bb0-b151-42f879ec5c0d.png"
+    imageUrl: "/lovable-uploads/9d3b4d8b-3516-44e5-9408-8021aafb2f0f.png"
   },
   {
     number: 6,
