@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { ChapterProgressBar } from "@/components/ebook/ChapterProgress";
@@ -40,17 +39,18 @@ const Chapter7 = () => {
   };
 
   const handleComplete = () => {
-    // Track progress for the final section - using the correct format
+    // Track progress for the final section
     saveResponse(sections[section].id, { 
       checkboxes: { completed: true } 
     });
     
-    // Mark the worksheet as complete - using the correct format
+    // Mark the worksheet as complete
     saveResponse("worksheet", { 
       checkboxes: { completed: true } 
     });
     
     window.scrollTo(0, 0);
+    navigate("/dashboard/3d-blueprint");
   };
 
   const CurrentSection = sections[section].Component;

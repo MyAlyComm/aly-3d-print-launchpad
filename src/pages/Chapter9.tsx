@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { ChapterProgressBar } from "@/components/ebook/ChapterProgress";
@@ -46,6 +45,7 @@ const Chapter9 = () => {
     });
     
     window.scrollTo(0, 0);
+    navigate("/dashboard/3d-blueprint");
   };
 
   const CurrentSection = sections[section].Component;

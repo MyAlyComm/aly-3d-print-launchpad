@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,9 +9,11 @@ import { PersonalAwakening } from "@/components/chapters/chapter2/PersonalAwaken
 import { TheRevelation } from "@/components/chapters/chapter2/TheRevelation";
 import { DecisionTree } from "@/components/chapters/chapter2/DecisionTree";
 import { SelfAssessmentWorksheet } from "@/components/chapters/chapter2/SelfAssessmentWorksheet";
+import { useNavigate } from "react-router-dom";
 
 const Chapter2 = () => {
   const [section, setSection] = useState(0);
+  const navigate = useNavigate();
 
   const sections = [
     {
@@ -54,6 +55,11 @@ const Chapter2 = () => {
       setSection(section - 1);
       window.scrollTo(0, 0);
     }
+  };
+
+  const handleComplete = () => {
+    window.scrollTo(0, 0);
+    navigate("/dashboard/3d-blueprint");
   };
 
   return (

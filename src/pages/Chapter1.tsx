@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { Card, CardContent } from "@/components/ui/card";
@@ -48,11 +47,9 @@ const Chapter1 = () => {
   ];
 
   useEffect(() => {
-    // Prevent duplicate progress updates by using a ref
     if (!progressUpdated.current) {
       progressUpdated.current = true;
       
-      // Update the progress when a new section is viewed
       const currentSection = sections[section];
       if (currentSection) {
         updateProgress.mutate({
@@ -61,10 +58,9 @@ const Chapter1 = () => {
         });
       }
 
-      // Reset the ref after a delay
       const timer = setTimeout(() => {
         progressUpdated.current = false;
-      }, 5000); // 5 second cooldown between progress updates
+      }, 5000);
       
       return () => clearTimeout(timer);
     }
@@ -95,7 +91,7 @@ const Chapter1 = () => {
       description: "Your progress has been saved"
     });
     
-    navigate("/dashboard");
+    navigate("/dashboard/3d-blueprint");
   };
 
   return (
