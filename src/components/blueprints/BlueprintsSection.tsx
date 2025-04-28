@@ -116,7 +116,16 @@ const BlueprintsSection = ({ onCheckout, open, setOpen }: BlueprintsSectionProps
         {blueprints.map((blueprint) => (
           <div key={blueprint.id}>
             {blueprint.id === 4 ? (
-              <div className="blueprint-card">
+              <div className="blueprint-card relative overflow-hidden">
+                {blueprint.image && (
+                  <div className="mb-4 w-full h-32 overflow-hidden rounded-t-lg">
+                    <img 
+                      src={blueprint.image} 
+                      alt={blueprint.title} 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
                 <div className="mb-4">
                   <h3 className="text-xl font-bold mb-1">{blueprint.title}</h3>
                   <p className="text-gray-600 text-sm mb-4">{blueprint.description}</p>
