@@ -11,12 +11,19 @@ const ProductDesignEngine = () => {
   };
 
   const prevStep = () => {
-    setStep(step - 1);
+    setStep(Math.max(1, step - 1));
   };
 
   return (
     <DashboardLayout title="Product Design Engine">
       <div className="max-w-5xl mx-auto py-6">
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold">3D Product Design Engine</h1>
+          <p className="text-gray-600 mt-1">
+            Design your next profitable 3D printed product with AI assistance.
+            Follow the steps below to create a complete product plan.
+          </p>
+        </div>
         <ProductDesignStepper 
           currentStep={step}
           onNext={nextStep}

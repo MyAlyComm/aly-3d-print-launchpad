@@ -1,11 +1,41 @@
 
 import { Button } from "@/components/ui/button";
+import { useProductDesign } from "../ProductDesignContext";
 
 interface MarketingStrategyProps {
   onPrev: () => void;
 }
 
 export const MarketingStrategy = ({ onPrev }: MarketingStrategyProps) => {
+  const { marketing, productVisualization } = useProductDesign();
+
+  const handleDownload = () => {
+    const content = {
+      productName: productVisualization.productName,
+      productDescription: productVisualization.productDescription,
+      keyFeatures: productVisualization.features,
+      primaryAudience: "Tech-savvy professionals aged 25-40",
+      secondaryAudience: "Remote workers aged 30-55",
+      tertiaryAudience: "Students aged 18-24",
+      marketingPlatforms: marketing.platforms.map(p => `${p.name}: ${p.match}`).join(", "),
+      valueProposition: marketing.valueProposition,
+      keySellingPoints: marketing.keySellingPoints.join(", "),
+      pricing: `Standard: ${marketing.pricing.standard}, Premium: ${marketing.pricing.premium}, Bundle: ${marketing.pricing.bundle}`
+    };
+    
+    const jsonString = JSON.stringify(content, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${productVisualization.productName.replace(/\s+/g, '-')}-marketing-plan.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+  
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Marketing Strategy</h2>
@@ -16,12 +46,7 @@ export const MarketingStrategy = ({ onPrev }: MarketingStrategyProps) => {
           <h3 className="font-bold text-gray-800 mb-4">Recommended Platforms</h3>
           
           <div className="space-y-4">
-            {[
-              { name: "Etsy", match: "High Match", percent: "90%", color: "green" },
-              { name: "Your Own Website", match: "High Match", percent: "85%", color: "green" },
-              { name: "Amazon Handmade", match: "Medium Match", percent: "65%", color: "yellow" },
-              { name: "eBay", match: "Low Match", percent: "40%", color: "red" }
-            ].map((platform, index) => (
+            {marketing.platforms.map((platform, index) => (
               <div key={index} className="flex items-center">
                 <div className={`w-12 h-12 bg-${platform.color}-100 rounded-md flex items-center justify-center text-${platform.color}-600 mr-4`}>
                   <span className="font-bold">{platform.name.charAt(0)}</span>
@@ -95,25 +120,19 @@ export const MarketingStrategy = ({ onPrev }: MarketingStrategyProps) => {
           <div>
             <h4 className="font-medium text-gray-700 mb-2">Primary Value Proposition</h4>
             <div className="bg-gray-50 p-3 rounded-md border border-gray-200">
-              <p className="text-gray-800">"Transform your cluttered workspace into a minimalist productivity zone with our modular desk organizer - designed by creators for creators."</p>
+              <p className="text-gray-800">{marketing.valueProposition}</p>
             </div>
           </div>
           
           <div>
             <h4 className="font-medium text-gray-700 mb-2">Key Selling Points</h4>
             <ul className="space-y-2 text-sm">
-              <li className="flex items-start">
-                <span className="text-green-500 mr-2">✓</span>
-                <span>Customizable modules that adapt to your workflow</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-green-500 mr-2">✓</span>
-                <span>Integrated cable management to eliminate desk tangling</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-green-500 mr-2">✓</span>
-                <span>Space-saving design that maximizes limited desk areas</span>
-              </li>
+              {marketing.keySellingPoints.map((point, index) => (
+                <li key={index} className="flex items-start">
+                  <span className="text-green-500 mr-2">✓</span>
+                  <span>{point}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -125,19 +144,19 @@ export const MarketingStrategy = ({ onPrev }: MarketingStrategyProps) => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-white rounded-md p-3 border border-gray-200">
             <h4 className="font-medium text-gray-800 mb-2">Standard Pricing</h4>
-            <p className="text-2xl font-bold text-primary mb-1">$29.99</p>
+            <p className="text-2xl font-bold text-primary mb-1">{marketing.pricing.standard}</p>
             <p className="text-sm text-gray-600">Recommended retail price</p>
           </div>
           
           <div className="bg-white rounded-md p-3 border border-gray-200">
             <h4 className="font-medium text-gray-800 mb-2">Premium Option</h4>
-            <p className="text-2xl font-bold text-primary mb-1">$39.99</p>
+            <p className="text-2xl font-bold text-primary mb-1">{marketing.pricing.premium}</p>
             <p className="text-sm text-gray-600">Enhanced version</p>
           </div>
           
           <div className="bg-white rounded-md p-3 border border-gray-200">
             <h4 className="font-medium text-gray-800 mb-2">Bundle Pricing</h4>
-            <p className="text-2xl font-bold text-primary mb-1">$49.99</p>
+            <p className="text-2xl font-bold text-primary mb-1">{marketing.pricing.bundle}</p>
             <p className="text-sm text-gray-600">Complete set with accessories</p>
           </div>
         </div>
@@ -150,7 +169,7 @@ export const MarketingStrategy = ({ onPrev }: MarketingStrategyProps) => {
         >
           Back
         </Button>
-        <Button variant="default">
+        <Button variant="default" onClick={handleDownload}>
           Download Complete Report
         </Button>
       </div>

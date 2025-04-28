@@ -1,5 +1,6 @@
 
 import { Button } from "@/components/ui/button";
+import { useProductDesign } from "../ProductDesignContext";
 
 interface DemographicsProps {
   onNext: () => void;
@@ -7,6 +8,8 @@ interface DemographicsProps {
 }
 
 export const Demographics = ({ onNext, onPrev }: DemographicsProps) => {
+  const { demographics, productDetails } = useProductDesign();
+  
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Target Customer Demographics</h2>
@@ -25,23 +28,23 @@ export const Demographics = ({ onNext, onPrev }: DemographicsProps) => {
                 </svg>
               </div>
               <div>
-                <h4 className="font-bold">Professional Organizers</h4>
-                <p className="text-sm text-gray-600">Tech-savvy professionals aged 25-40</p>
+                <h4 className="font-bold">{demographics.primaryAudience.title}</h4>
+                <p className="text-sm text-gray-600">Tech-savvy professionals aged {demographics.primaryAudience.ageRange}</p>
               </div>
             </div>
             
             <div className="space-y-3 text-sm">
               <div>
                 <span className="block text-gray-500">Location</span>
-                <span className="font-medium">Urban centers, tech hubs</span>
+                <span className="font-medium">{demographics.primaryAudience.location}</span>
               </div>
               <div>
                 <span className="block text-gray-500">Income Level</span>
-                <span className="font-medium">$60,000 - $120,000</span>
+                <span className="font-medium">{demographics.primaryAudience.income}</span>
               </div>
               <div>
                 <span className="block text-gray-500">Pain Points</span>
-                <span className="font-medium">Desk clutter, cable management, workspace efficiency</span>
+                <span className="font-medium">{demographics.primaryAudience.painPoints}</span>
               </div>
             </div>
           </div>
@@ -60,23 +63,23 @@ export const Demographics = ({ onNext, onPrev }: DemographicsProps) => {
                 </svg>
               </div>
               <div>
-                <h4 className="font-bold">Home Office Workers</h4>
-                <p className="text-sm text-gray-600">Remote workers aged 30-55</p>
+                <h4 className="font-bold">{demographics.secondaryAudience.title}</h4>
+                <p className="text-sm text-gray-600">Remote workers aged {demographics.secondaryAudience.ageRange}</p>
               </div>
             </div>
             
             <div className="space-y-3 text-sm">
               <div>
                 <span className="block text-gray-500">Location</span>
-                <span className="font-medium">Suburban areas</span>
+                <span className="font-medium">{demographics.secondaryAudience.location}</span>
               </div>
               <div>
                 <span className="block text-gray-500">Income Level</span>
-                <span className="font-medium">$45,000 - $90,000</span>
+                <span className="font-medium">{demographics.secondaryAudience.income}</span>
               </div>
               <div>
                 <span className="block text-gray-500">Pain Points</span>
-                <span className="font-medium">Home/work separation, limited space</span>
+                <span className="font-medium">{demographics.secondaryAudience.painPoints}</span>
               </div>
             </div>
           </div>
@@ -95,23 +98,23 @@ export const Demographics = ({ onNext, onPrev }: DemographicsProps) => {
                 </svg>
               </div>
               <div>
-                <h4 className="font-bold">College Students</h4>
-                <p className="text-sm text-gray-600">Students aged 18-24</p>
+                <h4 className="font-bold">{demographics.tertiaryAudience.title}</h4>
+                <p className="text-sm text-gray-600">Students aged {demographics.tertiaryAudience.ageRange}</p>
               </div>
             </div>
             
             <div className="space-y-3 text-sm">
               <div>
                 <span className="block text-gray-500">Location</span>
-                <span className="font-medium">College towns, dorms</span>
+                <span className="font-medium">{demographics.tertiaryAudience.location}</span>
               </div>
               <div>
                 <span className="block text-gray-500">Income Level</span>
-                <span className="font-medium">$0 - $30,000</span>
+                <span className="font-medium">{demographics.tertiaryAudience.income}</span>
               </div>
               <div>
                 <span className="block text-gray-500">Pain Points</span>
-                <span className="font-medium">Limited space, budget constraints</span>
+                <span className="font-medium">{demographics.tertiaryAudience.painPoints}</span>
               </div>
             </div>
           </div>
