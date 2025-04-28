@@ -1,8 +1,8 @@
+
 import AIHub from "@/pages/AIHub";
 import ProductIdeaGenerator from "@/pages/ai-hub/ProductIdeaGenerator";
 import BackgroundRemover from "@/pages/ai-hub/BackgroundRemover";
 import ProductDescriptionGenerator from "@/pages/ai-hub/ProductDescriptionGenerator";
-import ProductListing from "@/pages/ai-hub/ProductListing";
 import MarketValidator from "@/pages/ai-hub/product-development/MarketValidator";
 import SpecBuilder from "@/pages/ai-hub/product-development/SpecBuilder";
 import SocialMediaHub from "@/pages/ai-hub/social-media/SocialMediaHub";
@@ -34,11 +34,7 @@ export const aiHubRoutes = [
     element: <ProtectedRoute><ProductDescriptionGenerator /></ProtectedRoute>
   },
   {
-    path: "/ai-hub/product-listing",
-    element: <ProtectedRoute><ProductListing /></ProtectedRoute>
-  },
-  {
-    path: "/ai-hub/social-media",
+    path: "/ai-hub/social-media/*",
     element: <ProtectedRoute><SocialMediaHub /></ProtectedRoute>
   }
 ];

@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -6,11 +7,11 @@ import {
   SparkleIcon, 
   Tag, 
   Image, 
-  Users, 
-  MessageSquare, 
-  Folder, 
+  MessageSquare,
   Home,
-  Settings
+  CalendarRange,
+  Hash,
+  MessagesSquare
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
@@ -26,23 +27,17 @@ const menuItems = [
     icon: SparkleIcon,
     path: "/ai-hub/product-development",
     subItems: [
-      { label: "Idea Generator", path: "/ai-hub/product-development/idea-generator", isNew: true },
+      { label: "Idea Generator", path: "/ai-hub/product-development/idea-generator" },
       { label: "Market Validator", path: "/ai-hub/product-development/market-validator" },
-      { label: "Specification Builder", path: "/ai-hub/product-development/spec-builder" },
-      { label: "3D Model Assistant", path: "/ai-hub/product-development/model-generator" },
-      { label: "Feedback Analyzer", path: "/ai-hub/product-development/feedback-analyzer" }
+      { label: "Specification Builder", path: "/ai-hub/product-development/spec-builder" }
     ]
   },
   {
     label: "Product Listing",
     icon: Tag,
-    path: "/ai-hub/product-listing",
+    path: "/ai-hub/listing-creator",
     subItems: [
-      { label: "Title Generator", path: "/ai-hub/listing-creator/title" },
-      { label: "Description Writer", path: "/ai-hub/listing-creator/description", isNew: true },
-      { label: "Tag & Keyword Research", path: "/ai-hub/listing-creator/keywords" },
-      { label: "Pricing Calculator", path: "/ai-hub/listing-creator/pricing" },
-      { label: "Variation Suggestions", path: "/ai-hub/listing-creator/variations" }
+      { label: "Description Writer", path: "/ai-hub/listing-creator/description" }
     ]
   },
   {
@@ -50,23 +45,7 @@ const menuItems = [
     icon: Image,
     path: "/ai-hub/visual-marketing",
     subItems: [
-      { label: "Image Enhancer", path: "/ai-hub/visual-marketing/image-enhancer" },
-      { label: "Background Remover", path: "/ai-hub/visual-marketing/background-remover" },
-      { label: "Lifestyle Generator", path: "/ai-hub/visual-marketing/lifestyle-generator", isNew: true },
-      { label: "Platform Resizer", path: "/ai-hub/visual-marketing/image-resizer" },
-      { label: "Social Graphics", path: "/ai-hub/visual-marketing/social-graphics" }
-    ]
-  },
-  {
-    label: "Customer Engagement",
-    icon: Users,
-    path: "/ai-hub/customer-engagement",
-    subItems: [
-      { label: "Response Templates", path: "/ai-hub/customer-engagement/response-templates" },
-      { label: "Review Responses", path: "/ai-hub/customer-engagement/review-responses" },
-      { label: "Follow-up Messages", path: "/ai-hub/customer-engagement/follow-up" },
-      { label: "FAQ Builder", path: "/ai-hub/customer-engagement/faq-builder" },
-      { label: "Feedback Analyzer", path: "/ai-hub/customer-engagement/feedback-analyzer" }
+      { label: "Background Remover", path: "/ai-hub/visual-marketing/background-remover" }
     ]
   },
   {
@@ -74,22 +53,11 @@ const menuItems = [
     icon: MessageSquare,
     path: "/ai-hub/social-media",
     subItems: [
-      { label: "Content Calendar", path: "/ai-hub/social-media/content-calendar" },
-      { label: "Post Creator", path: "/ai-hub/social-media/post-creator" },
-      { label: "Hashtag Research", path: "/ai-hub/social-media/hashtag-research" },
-      { label: "Engagement Helper", path: "/ai-hub/social-media/engagement-helper" },
-      { label: "Performance Predictor", path: "/ai-hub/social-media/performance-predictor" }
+      { label: "Content Calendar", path: "/ai-hub/social-media/content-calendar", icon: CalendarRange },
+      { label: "Post Creator", path: "/ai-hub/social-media/post-creator", icon: MessagesSquare },
+      { label: "Hashtag Research", path: "/ai-hub/social-media/hashtag-research", icon: Hash },
+      { label: "Engagement Helper", path: "/ai-hub/social-media/engagement-helper", icon: MessageSquare }
     ]
-  },
-  {
-    label: "My Projects",
-    icon: Folder,
-    path: "/ai-hub/my-projects"
-  },
-  {
-    label: "Settings",
-    icon: Settings,
-    path: "/ai-hub/settings"
   }
 ];
 
@@ -176,10 +144,8 @@ export const AIHubSidebar = ({ className, isCollapsed = false }: AIHubSidebarPro
                       )}
                       onClick={() => navigate(subItem.path)}
                     >
+                      {subItem.icon && <subItem.icon className="mr-2 h-4 w-4" />}
                       <span>{subItem.label}</span>
-                      {subItem.isNew && (
-                        <Badge variant="outline" className="ml-2 text-xs bg-green-100 text-green-800 border-green-300">New</Badge>
-                      )}
                     </Button>
                   ))}
                 </div>
