@@ -22,10 +22,14 @@ export default function MagicLinkAuth() {
     setIsLoading(true);
 
     try {
+      // Get the current origin for the redirect URL
+      const origin = window.location.origin;
+      
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          emailRedirectTo: window.location.origin + '/auth',
+          // Set redirect to the dashboard path on the current domain
+          emailRedirectTo: `${origin}/dashboard`,
         }
       });
 

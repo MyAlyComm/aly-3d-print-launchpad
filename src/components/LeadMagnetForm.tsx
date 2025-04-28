@@ -42,10 +42,14 @@ const LeadMagnetForm = ({
     try {
       localStorage.setItem("lead_capture_name", name);
       
+      // Get the current origin for the redirect URL
+      const origin = window.location.origin;
+      
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          emailRedirectTo: window.location.origin,
+          // Ensure we redirect to the dashboard after verification
+          emailRedirectTo: `${origin}/dashboard`,
           data: {
             name: name,
             requestType: requestType,
