@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Book, Layout, BookOpen, BookText, ClipboardList } from "lucide-react";
+import { Book, Layout, BookOpen, BookText, ClipboardList, Box } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const DashboardNav = () => {
@@ -134,6 +134,14 @@ export const DashboardNav = () => {
       >
         <ClipboardList className="mr-2 h-4 w-4" />
         My Submissions
+      </Button>
+      <Button 
+        variant="ghost" 
+        className="w-full justify-start"
+        onClick={() => navigate("/dashboard/3d-blueprint/product-design")}
+      >
+        <Box className="mr-2 h-4 w-4" />
+        Product Design Engine
       </Button>
     </nav>
   );

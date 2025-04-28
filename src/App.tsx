@@ -31,6 +31,7 @@ import SwankyViewBlueprint from "./pages/SwankyViewBlueprint";
 import FAQDashboard from "./pages/FAQDashboard";
 import MiniBlueprint from "./pages/MiniBlueprint";
 import MySubmissions from "./pages/MySubmissions";
+import ProductDesignEngine from "./pages/ProductDesignEngine";
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -156,6 +157,11 @@ const App = () => {
                 <Route path="/dashboard/3d-blueprint/submissions" element={
                   <ProtectedRoute>
                     <MySubmissions />
+                  </ProtectedRoute>
+                } />
+                <Route path="/dashboard/3d-blueprint/product-design" element={
+                  <ProtectedRoute>
+                    <ProductDesignEngine />
                   </ProtectedRoute>
                 } />
                 <Route path="*" element={<NotFound />} />
