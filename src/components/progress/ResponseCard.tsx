@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
@@ -42,7 +43,11 @@ export const ChapterSubmissionCard = ({
                     <div className="pl-4">
                       {Object.entries(sectionData.checkboxes).map(([key, value]) => (
                         <div key={key} className="flex items-center space-x-2">
-                          <Checkbox id={`checkbox-${sectionId}-${key}`} checked={value} disabled />
+                          <Checkbox 
+                            id={`checkbox-${sectionId}-${key}`} 
+                            checked={Boolean(value)} 
+                            disabled 
+                          />
                           <Label htmlFor={`checkbox-${sectionId}-${key}`}>{formatKey(key)}</Label>
                         </div>
                       ))}
