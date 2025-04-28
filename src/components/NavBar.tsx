@@ -1,15 +1,8 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "react-router-dom";
 import LeadMagnetDialog from "./FreeGuideDialog";
-import { FileText, ChevronDown } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { FileText } from "lucide-react";
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -59,81 +52,18 @@ const NavBar = () => {
           </div>
 
           <div className="hidden md:flex items-center space-x-8">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild className="focus:outline-none">
-                <Button variant="ghost" className="flex items-center gap-1 px-2 py-1">
-                  Home
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-white shadow-lg rounded-md p-1 z-[100]">
-                <DropdownMenuItem asChild>
-                  <a href="/" className="cursor-pointer">Home</a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="#features" className="cursor-pointer">Features</a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="#benefits" className="cursor-pointer">Benefits</a>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild className="focus:outline-none">
-                <Button variant="ghost" className="flex items-center gap-1 px-2 py-1">
-                  About <ChevronDown className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-white shadow-lg rounded-md p-1 z-[100]">
-                <DropdownMenuItem asChild>
-                  <a href="/about" className="cursor-pointer">Our Story</a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/about#team" className="cursor-pointer">Team</a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/about#mission" className="cursor-pointer">Mission</a>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild className="focus:outline-none">
-                <Button variant="ghost" className="flex items-center gap-1 px-2 py-1">
-                  Blueprints <ChevronDown className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-white shadow-lg rounded-md p-1 z-[100]">
-                <DropdownMenuItem asChild>
-                  <a href="#blueprints" className="cursor-pointer">All Blueprints</a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="#featured" className="cursor-pointer">Featured</a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="#new" className="cursor-pointer">New Releases</a>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild className="focus:outline-none">
-                <Button variant="ghost" className="flex items-center gap-1 px-2 py-1">
-                  Testimonials <ChevronDown className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-white shadow-lg rounded-md p-1 z-[100]">
-                <DropdownMenuItem asChild>
-                  <a href="#testimonials" className="cursor-pointer">Customer Reviews</a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="#case-studies" className="cursor-pointer">Case Studies</a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="#success-stories" className="cursor-pointer">Success Stories</a>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <a href="/" className="text-gray-700 hover:text-primary font-medium">
+              Home
+            </a>
+            <a href="/about" className="text-gray-700 hover:text-primary font-medium">
+              About
+            </a>
+            <a href="#blueprints" className="text-gray-700 hover:text-primary font-medium">
+              Blueprints
+            </a>
+            <a href="#testimonials" className="text-gray-700 hover:text-primary font-medium">
+              Testimonials
+            </a>
           </div>
 
           <div className="hidden md:block">
