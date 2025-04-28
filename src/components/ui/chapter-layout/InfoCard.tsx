@@ -1,21 +1,24 @@
 
 import { cn } from "@/lib/utils";
+import { ReactNode } from "react";
 
 interface InfoCardProps {
   title: string;
-  points: string[];
+  children: ReactNode;
   className?: string;
+  icon?: ReactNode;
 }
 
-export const InfoCard = ({ title, points, className }: InfoCardProps) => {
+export const InfoCard = ({ title, children, className, icon }: InfoCardProps) => {
   return (
-    <div className={cn("bg-muted p-4 rounded-lg", className)}>
-      <h4 className="font-bold mb-2">{title}</h4>
-      <ul className="list-disc pl-6 space-y-1 text-gray-700">
-        {points.map((point, index) => (
-          <li key={index}>{point}</li>
-        ))}
-      </ul>
+    <div className={cn("p-6 rounded-lg transition-all duration-300 hover:shadow-md", className)}>
+      <div className="flex items-start gap-3 mb-4">
+        {icon}
+        <h4 className="font-bold text-lg">{title}</h4>
+      </div>
+      <div className="space-y-4 text-gray-700">
+        {children}
+      </div>
     </div>
   );
 };
