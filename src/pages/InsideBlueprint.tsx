@@ -10,7 +10,7 @@ import { CallToAction } from "@/components/inside-blueprint/CallToAction";
 import { SampleChapterPreview } from "@/components/inside-blueprint/SampleChapterPreview";
 import { ChapterPreviews } from "@/components/inside-blueprint/ChapterPreviews";
 import { ChapterCarousel } from "@/components/inside-blueprint/ChapterCarousel";
-import { FreeResourceCards } from "@/components/resources/FreeResourceCards";
+import FreeResourceCards from "@/components/resources/FreeResourceCards";
 import { useEffect, lazy, Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
