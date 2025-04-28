@@ -2,6 +2,7 @@
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { FilamentManufacturers } from "@/components/filament-guide/FilamentManufacturers";
 import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const FilamentGuide = () => {
   return (
@@ -33,7 +34,39 @@ const FilamentGuide = () => {
                 <p className="text-sm text-purple-600">Most filaments are tested and compatible with high-speed printing</p>
               </div>
             </div>
-            <FilamentManufacturers />
+
+            <Tabs defaultValue="premium" className="space-y-4">
+              <TabsList className="grid w-full grid-cols-1 md:grid-cols-4 gap-4">
+                <TabsTrigger value="premium" className="text-base">
+                  Premium Brands
+                </TabsTrigger>
+                <TabsTrigger value="professional" className="text-base">
+                  Professional Grade
+                </TabsTrigger>
+                <TabsTrigger value="budget" className="text-base">
+                  Budget Friendly
+                </TabsTrigger>
+                <TabsTrigger value="industrial" className="text-base">
+                  Industrial Grade
+                </TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="premium">
+                <FilamentManufacturers category="premium" />
+              </TabsContent>
+
+              <TabsContent value="professional">
+                <FilamentManufacturers category="professional" />
+              </TabsContent>
+
+              <TabsContent value="budget">
+                <FilamentManufacturers category="budget" />
+              </TabsContent>
+
+              <TabsContent value="industrial">
+                <FilamentManufacturers category="industrial" />
+              </TabsContent>
+            </Tabs>
           </CardContent>
         </Card>
       </div>
