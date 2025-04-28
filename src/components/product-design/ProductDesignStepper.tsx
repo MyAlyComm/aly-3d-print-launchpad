@@ -1,4 +1,5 @@
 
+import React from 'react';
 import { ProductDetails } from "./steps/ProductDetails";
 import { ProductVisualization } from "./steps/ProductVisualization";
 import { Demographics } from "./steps/Demographics";
