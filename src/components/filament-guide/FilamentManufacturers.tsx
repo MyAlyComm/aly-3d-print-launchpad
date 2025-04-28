@@ -1,6 +1,6 @@
-
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Factory, Flag, Warehouse, Package, Zap, Store, FileText } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 const manufacturers = [
   {
@@ -97,49 +97,49 @@ const manufacturers = [
 
 export const FilamentManufacturers = () => {
   return (
-    <div className="rounded-lg border shadow-sm">
+    <div className="rounded-lg border shadow-sm overflow-hidden">
       <Table>
-        <TableHeader>
+        <TableHeader className="bg-gray-50">
           <TableRow>
-            <TableHead>
+            <TableHead className="font-semibold">
               <span className="flex items-center gap-2">
-                <Factory className="h-4 w-4" />
+                <Factory className="h-4 w-4 text-primary" />
                 Manufacturer
               </span>
             </TableHead>
-            <TableHead>
+            <TableHead className="font-semibold">
               <span className="flex items-center gap-2">
-                <Flag className="h-4 w-4" />
+                <Flag className="h-4 w-4 text-primary" />
                 Origin
               </span>
             </TableHead>
-            <TableHead>
+            <TableHead className="font-semibold">
               <span className="flex items-center gap-2">
-                <Warehouse className="h-4 w-4" />
+                <Warehouse className="h-4 w-4 text-primary" />
                 Warehouses
               </span>
             </TableHead>
-            <TableHead>
+            <TableHead className="font-semibold">
               <span className="flex items-center gap-2">
-                <Package className="h-4 w-4" />
+                <Package className="h-4 w-4 text-primary" />
                 Specialty
               </span>
             </TableHead>
-            <TableHead>
+            <TableHead className="font-semibold">
               <span className="flex items-center gap-2">
-                <Zap className="h-4 w-4" />
+                <Zap className="h-4 w-4 text-primary" />
                 High Speed
               </span>
             </TableHead>
-            <TableHead>
+            <TableHead className="font-semibold">
               <span className="flex items-center gap-2">
-                <Store className="h-4 w-4" />
+                <Store className="h-4 w-4 text-primary" />
                 Store
               </span>
             </TableHead>
-            <TableHead>
+            <TableHead className="font-semibold">
               <span className="flex items-center gap-2">
-                <FileText className="h-4 w-4" />
+                <FileText className="h-4 w-4 text-primary" />
                 Notes
               </span>
             </TableHead>
@@ -147,16 +147,24 @@ export const FilamentManufacturers = () => {
         </TableHeader>
         <TableBody>
           {manufacturers.map((manufacturer) => (
-            <TableRow key={manufacturer.name}>
+            <TableRow key={manufacturer.name} className="hover:bg-gray-50 transition-colors">
               <TableCell className="font-medium">{manufacturer.name}</TableCell>
-              <TableCell>{manufacturer.origin}</TableCell>
-              <TableCell>{manufacturer.warehouses}</TableCell>
-              <TableCell>{manufacturer.specialty}</TableCell>
+              <TableCell>
+                <Badge variant="outline" className="bg-gray-50">
+                  {manufacturer.origin}
+                </Badge>
+              </TableCell>
+              <TableCell>{manufacturer.warehouses || "—"}</TableCell>
+              <TableCell>
+                <Badge variant="secondary" className="font-medium">
+                  {manufacturer.specialty}
+                </Badge>
+              </TableCell>
               <TableCell>
                 {manufacturer.highSpeed ? (
-                  <span className="text-green-600">✓</span>
+                  <Badge variant="default" className="bg-green-500">✓ Compatible</Badge>
                 ) : (
-                  <span className="text-red-600">✗</span>
+                  <Badge variant="destructive">✗ Limited</Badge>
                 )}
               </TableCell>
               <TableCell>
@@ -164,12 +172,15 @@ export const FilamentManufacturers = () => {
                   href={manufacturer.store} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-primary hover:underline"
+                  className="text-primary hover:underline inline-flex items-center gap-1"
                 >
+                  <Store className="h-4 w-4" />
                   Visit Store
                 </a>
               </TableCell>
-              <TableCell className="max-w-md">{manufacturer.notes}</TableCell>
+              <TableCell className="max-w-md text-sm text-gray-600">
+                {manufacturer.notes}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
