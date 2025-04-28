@@ -1,4 +1,3 @@
-
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Brain, Compass, Clock, BookText, Package } from "lucide-react";
@@ -34,7 +33,7 @@ const FilamentGuide = () => {
   ];
 
   return (
-    <DashboardLayout title="Mini Blueprint Highlights">
+    <DashboardLayout title="3D Blueprint Quick Start Guide">
       <div className="max-w-7xl mx-auto py-6 space-y-8">
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
