@@ -1,4 +1,3 @@
-
 import { Trophy, BookOpen, Rocket } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { useChapterProgress } from "@/hooks/useChapterProgress";
@@ -7,20 +6,20 @@ export const StatsCards = () => {
   const { chapterProgresses, calculateOverallProgress } = useChapterProgress();
   const progress = calculateOverallProgress();
   const completedChapters = chapterProgresses?.filter(p => p.completed_at).length || 0;
-  // Now we have 11 total chapters (10 main chapters + introduction)
-  const totalChapters = 11;
+  // Now we have 12 total chapters (Introduction + 11 chapters)
+  const totalChapters = 12;
   
   // Find the next incomplete chapter number
-  const nextChapter = () => {
+  const getNextIncompleteChapter = () => {
     if (!chapterProgresses) return 0;
     
-    for (let i = 0; i <= 10; i++) {
+    for (let i = 0; i <= 11; i++) {
       const chapterComplete = chapterProgresses.some(
         p => p.chapter_number === i && p.completed_at
       );
       if (!chapterComplete) return i;
     }
-    return 10; // Return last chapter if all are complete
+    return 11; // Return last chapter if all are complete
   };
 
   return (
@@ -61,14 +60,14 @@ export const StatsCards = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          {nextChapter() === 0 ? (
+          {getNextIncompleteChapter() === 0 ? (
             <>
               <div className="text-2xl font-bold">Introduction</div>
               <p className="text-sm text-muted-foreground">Begin your journey</p>
             </>
           ) : (
             <>
-              <div className="text-2xl font-bold">Chapter {nextChapter()}</div>
+              <div className="text-2xl font-bold">Chapter {getNextIncompleteChapter()}</div>
               <p className="text-sm text-muted-foreground">Continue your journey</p>
             </>
           )}
