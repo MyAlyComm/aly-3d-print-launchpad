@@ -1,13 +1,17 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import LeadMagnetDialog from "./FreeGuideDialog";
 import { FileText } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,6 +35,14 @@ const NavBar = () => {
         top: 0,
         behavior: "smooth"
       });
+    }
+  };
+
+  const handleDashboardClick = () => {
+    if (user) {
+      navigate("/dashboard");
+    } else {
+      navigate("/auth");
     }
   };
 
@@ -66,8 +78,14 @@ const NavBar = () => {
             </a>
           </div>
 
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center space-x-4">
             <LeadMagnetDialog />
+            <Button 
+              onClick={handleDashboardClick}
+              variant="outline"
+            >
+              {user ? 'Dashboard' : 'Sign In'}
+            </Button>
           </div>
 
           <button
@@ -128,6 +146,13 @@ const NavBar = () => {
                   Free Guide
                 </Button>
               </LeadMagnetDialog>
+              <Button 
+                onClick={handleDashboardClick}
+                variant="outline"
+                className="w-full"
+              >
+                {user ? 'Dashboard' : 'Sign In'}
+              </Button>
             </div>
           </div>
         )}

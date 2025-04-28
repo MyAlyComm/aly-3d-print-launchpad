@@ -1,8 +1,7 @@
-
 import React, { ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { LogOut, Award, Layout, Book, BookText, BookOpen, Menu, SparkleIcon } from "lucide-react";
+import { LogOut, Award, Layout, Book, BookText, BookOpen, Menu, SparkleIcon, User } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -55,31 +54,21 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
               <Button 
                 variant="ghost" 
                 size="sm"
-                onClick={() => navigate("/dashboard/3d-blueprint")}
+                onClick={() => navigate("/")}
                 className="text-gray-700 hover:text-gray-900"
               >
                 <Layout className="mr-2 h-4 w-4" />
-                Dashboard
+                Home
               </Button>
               
               <Button 
                 variant="ghost" 
                 size="sm"
-                onClick={() => navigate("/dashboard/3d-blueprint/new-chapter")}
+                onClick={() => navigate("/account")}
                 className="text-gray-700 hover:text-gray-900"
               >
-                <Book className="mr-2 h-4 w-4" />
-                Introduction
-              </Button>
-              
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => navigate("/dashboard/3d-blueprint/chapter-1")}
-                className="text-gray-700 hover:text-gray-900"
-              >
-                <BookText className="mr-2 h-4 w-4" />
-                Chapter 1
+                <User className="mr-2 h-4 w-4" />
+                My Account
               </Button>
               
               <Button 
@@ -113,17 +102,13 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-52 bg-white">
-                <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint")} className="text-gray-800">
+                <DropdownMenuItem onClick={() => navigate("/")} className="text-gray-800">
                   <Layout className="mr-2 h-4 w-4" />
-                  Dashboard
+                  Home
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint/new-chapter")} className="text-gray-800">
-                  <Book className="mr-2 h-4 w-4" />
-                  Introduction
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint/chapter-1")} className="text-gray-800">
-                  <BookText className="mr-2 h-4 w-4" />
-                  Chapter 1
+                <DropdownMenuItem onClick={() => navigate("/account")} className="text-gray-800">
+                  <User className="mr-2 h-4 w-4" />
+                  My Account
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint/resources")} className="text-gray-800">
                   <BookOpen className="mr-2 h-4 w-4" />

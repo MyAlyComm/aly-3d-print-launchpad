@@ -13,7 +13,8 @@ const resources = [
     buttonText: "Get FAQ Guide",
     type: "faq",
     gradient: "from-blue-500/20 to-purple-500/20",
-    badgeText: "Most Popular"
+    badgeText: "Most Popular",
+    image: "/lovable-uploads/19e3fb35-7a5c-4b4a-9d7e-46bee87b38c7.png"
   },
   {
     title: "Mini Blueprint Guide",
@@ -22,7 +23,8 @@ const resources = [
     buttonText: "Get Mini Guide",
     type: "blueprint",
     gradient: "from-orange-500/20 to-red-500/20",
-    badgeText: "Essential"
+    badgeText: "Essential",
+    image: "/lovable-uploads/573b21db-fd6b-4fe9-ba36-ae007133ace1.png"
   },
   {
     title: "Used Printer Buying Guide",
@@ -31,7 +33,8 @@ const resources = [
     buttonText: "Get Buying Guide",
     type: "printer",
     gradient: "from-green-500/20 to-emerald-500/20",
-    badgeText: "Equipment"
+    badgeText: "Equipment",
+    image: "/lovable-uploads/907a1f7c-21b9-423f-b210-51baa4e27c3c.png"
   },
   {
     title: "AI Tool Mastery Guide",
@@ -40,7 +43,8 @@ const resources = [
     buttonText: "Get AI Guide",
     type: "ai",
     gradient: "from-purple-500/20 to-pink-500/20",
-    badgeText: "Advanced"
+    badgeText: "Advanced",
+    image: "/lovable-uploads/0f08439b-373a-474c-971a-ae51de7a6701.png"
   }
 ];
 
@@ -63,6 +67,16 @@ const FreeResourceCards = () => {
               key={index} 
               className={`relative bg-gradient-to-br ${resource.gradient} hover:shadow-lg transition-all duration-300 group backdrop-blur-sm border-0`}
             >
+              {resource.image && (
+                <div className="relative w-full h-40 overflow-hidden rounded-t-lg">
+                  <img 
+                    src={resource.image} 
+                    alt={resource.title}
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                </div>
+              )}
               <div className="absolute top-2 right-2">
                 <Badge variant="secondary" className="bg-white/80 text-gray-700 font-medium">
                   {resource.badgeText}
