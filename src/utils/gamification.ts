@@ -18,22 +18,21 @@ export const calculatePoints = (chapterNumber: number, sectionsCompleted: number
   return basePoints + chapterBonus;
 };
 
-// Update the function to handle different response_data types
 export const getBadgesForProgress = (progress: any[]): Badge[] => {
   const badges: Badge[] = [];
   
-  // First chapter badge
+  // First milestone - Starting the journey
   if (progress.some(p => p.completed_at)) {
     badges.push({
-      id: 'first-chapter',
-      title: 'Journey Begins',
-      description: 'Completed your first chapter',
+      id: 'entrepreneur-start',
+      title: '3D Pioneer',
+      description: 'Started your entrepreneurial journey',
       icon: 'Rocket',
       color: 'text-primary'
     });
   }
 
-  // Quick learner badge (complete chapter within 24h of starting)
+  // Fast learner badge
   const quickLearner = progress.some(p => {
     if (!p.completed_at) return false;
     const completionDate = new Date(p.completed_at);
@@ -42,67 +41,84 @@ export const getBadgesForProgress = (progress: any[]): Badge[] => {
 
   if (quickLearner) {
     badges.push({
-      id: 'quick-learner',
-      title: 'Quick Learner',
-      description: 'Completed a chapter in under 24 hours',
-      icon: 'Flag',
+      id: 'rapid-prototyper',
+      title: 'Rapid Prototyper',
+      description: 'Mastering content at impressive speed',
+      icon: 'Medal',
       color: 'text-secondary'
     });
   }
 
-  // Achievement badge (complete 3 chapters)
-  const completedChapters = progress.filter(p => p.completed_at).length;
-  if (completedChapters >= 3) {
+  // Core system mastery (complete chapters 1-3)
+  const earlyChaptersComplete = progress.filter(p => 
+    p.completed_at && p.chapter_number <= 3
+  ).length >= 3;
+
+  if (earlyChaptersComplete) {
     badges.push({
-      id: 'achiever',
-      title: 'Rising Star',
-      description: 'Completed three full chapters',
-      icon: 'Star',
+      id: 'foundation-builder',
+      title: 'Foundation Builder',
+      description: 'Mastered the core business concepts',
+      icon: 'Trophy',
       color: 'text-accent'
     });
   }
 
-  // New badges
-  if (completedChapters >= 5) {
+  // Product mastery (chapters 4-6)
+  const productChaptersComplete = progress.filter(p => 
+    p.completed_at && (p.chapter_number >= 4 && p.chapter_number <= 6)
+  ).length >= 3;
+
+  if (productChaptersComplete) {
     badges.push({
-      id: '3d-master',
-      title: '3D Printing Master',
-      description: 'Completed five full chapters',
-      icon: 'Trophy',
+      id: 'product-master',
+      title: 'Product Strategist',
+      description: 'Mastered product selection and setup',
+      icon: 'Star',
       color: 'text-amber-500'
     });
   }
 
-  // Speed badge
-  const fastLearner = progress.filter(p => {
-    if (!p.completed_at) return false;
-    const completionDate = new Date(p.completed_at);
-    const now = new Date();
-    // Completed within the past week
-    return (now.getTime() - completionDate.getTime()) < 7 * 24 * 60 * 60 * 1000;
-  }).length >= 3;
+  // Business scaling (chapters 7-9)
+  const scalingChaptersComplete = progress.filter(p => 
+    p.completed_at && (p.chapter_number >= 7 && p.chapter_number <= 9)
+  ).length >= 3;
 
-  if (fastLearner) {
+  if (scalingChaptersComplete) {
     badges.push({
-      id: 'speed-demon',
-      title: 'Speed Demon',
-      description: 'Completed 3 chapters in less than a week',
-      icon: 'Medal',
-      color: 'text-blue-500'
-    });
-  }
-
-  // First response badge
-  const hasResponses = progress.some(p => p.response_data && Object.keys(p.response_data).length > 0);
-  if (hasResponses) {
-    badges.push({
-      id: 'active-participant',
-      title: 'Active Participant',
-      description: 'Submitted your first worksheet response',
+      id: 'business-scaler',
+      title: 'Business Architect',
+      description: 'Mastered scaling and systems',
       icon: 'Star',
       color: 'text-green-500'
     });
   }
 
+  // Complete journey (all chapters)
+  const allChaptersComplete = progress.filter(p => p.completed_at).length >= 12;
+
+  if (allChaptersComplete) {
+    badges.push({
+      id: 'blueprint-master',
+      title: 'Blueprint Master',
+      description: 'Completed the entire business blueprint',
+      icon: 'Trophy',
+      color: 'text-blue-500'
+    });
+  }
+
+  // Active participant - responds to worksheets
+  const hasResponses = progress.some(p => p.response_data && Object.keys(p.response_data).length > 0);
+  if (hasResponses) {
+    badges.push({
+      id: 'action-taker',
+      title: 'Action Taker',
+      description: 'Actively engaging with business exercises',
+      icon: 'Flag',
+      color: 'text-purple-500'
+    });
+  }
+
   return badges;
 };
+
