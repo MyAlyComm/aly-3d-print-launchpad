@@ -30,6 +30,7 @@ import InsideBlueprint from "./pages/InsideBlueprint";
 import SwankyViewBlueprint from "./pages/SwankyViewBlueprint";
 import FAQDashboard from "./pages/FAQDashboard";
 import MiniBlueprint from "./pages/MiniBlueprint";
+import MySubmissions from "./pages/MySubmissions";
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -150,6 +151,11 @@ const App = () => {
                 <Route path="/dashboard/3d-mini" element={
                   <ProtectedRoute>
                     <MiniBlueprint />
+                  </ProtectedRoute>
+                } />
+                <Route path="/dashboard/3d-blueprint/submissions" element={
+                  <ProtectedRoute>
+                    <MySubmissions />
                   </ProtectedRoute>
                 } />
                 <Route path="*" element={<NotFound />} />
