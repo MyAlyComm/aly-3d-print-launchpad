@@ -42,6 +42,8 @@ const NavBar = () => {
     if (user) {
       navigate("/dashboard");
     } else {
+      // Always navigate to the auth page without any parameters
+      // This ensures consistent behavior regardless of scroll position
       navigate("/auth");
     }
   };

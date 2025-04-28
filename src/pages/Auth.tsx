@@ -2,16 +2,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthForm } from '@/components/auth/AuthForm';
-import MagicLinkAuth from '@/components/auth/MagicLinkAuth';
 import { useAuth } from '@/hooks/useAuth';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { toast } from 'sonner';
 
 const Auth = () => {
   const { user, isLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const [processingGuide, setProcessingGuide] = useState(false);
   
   useEffect(() => {
     // Don't do anything while auth is still loading
@@ -34,18 +30,7 @@ const Auth = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <Tabs defaultValue="password" className="max-w-md mx-auto">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="password">Email & Password</TabsTrigger>
-          <TabsTrigger value="magic">Magic Link</TabsTrigger>
-        </TabsList>
-        <TabsContent value="password">
-          <AuthForm />
-        </TabsContent>
-        <TabsContent value="magic">
-          <MagicLinkAuth />
-        </TabsContent>
-      </Tabs>
+      <AuthForm />
     </div>
   );
 };
