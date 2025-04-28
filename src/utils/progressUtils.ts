@@ -68,6 +68,11 @@ export const getSectionName = (sectionId: string): string => {
   return sectionNames[sectionId] || sectionId;
 };
 
+// Adding the missing formatSectionId function
+export const formatSectionId = (sectionId: string): string => {
+  return getSectionName(sectionId);
+};
+
 export const getQuestionText = (questionId: string): string => {
   // Loop through all chapters and find the question
   for (const [_, questions] of Object.entries(chapterQuestions)) {
@@ -143,6 +148,12 @@ export const formatFrameworkScore = (score: string | undefined): string => {
   return `${score}/100`;
 };
 
+// Adding the missing formatAssessmentValue function
+export const formatAssessmentValue = (value: string | undefined): string => {
+  if (!value || value.trim() === '') return 'Not provided';
+  return value;
+};
+
 // Helper to get assessment selection label
 export const getAssessmentSelectionLabel = (field: string, value: string): string => {
   if (field === 'budget') {
@@ -156,3 +167,4 @@ export const getAssessmentSelectionLabel = (field: string, value: string): strin
   }
   return value;
 };
+
