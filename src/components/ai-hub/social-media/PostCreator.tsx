@@ -31,10 +31,10 @@ export function PostCreator() {
   const [showSuccess, setShowSuccess] = useState(false);
 
   const platforms = [
-    { name: "Instagram", icon: Instagram, color: "bg-gradient-to-r from-purple-500 to-pink-500", characterLimit: 2200 },
-    { name: "Facebook", icon: Facebook, color: "bg-blue-600", characterLimit: 63206 },
-    { name: "Twitter", icon: Twitter, color: "bg-blue-400", characterLimit: 280 },
-    { name: "LinkedIn", icon: Linkedin, color: "bg-blue-700", characterLimit: 3000 },
+    { name: "Instagram", icon: <Instagram className="h-4 w-4" />, color: "bg-gradient-to-r from-purple-500 to-pink-500", characterLimit: 2200 },
+    { name: "Facebook", icon: <Facebook className="h-4 w-4" />, color: "bg-blue-600", characterLimit: 63206 },
+    { name: "Twitter", icon: <Twitter className="h-4 w-4" />, color: "bg-blue-400", characterLimit: 280 },
+    { name: "LinkedIn", icon: <Linkedin className="h-4 w-4" />, color: "bg-blue-700", characterLimit: 3000 },
   ];
 
   const handlePlatformToggle = (platform: string) => {
@@ -140,6 +140,12 @@ export function PostCreator() {
   const characterLimitExceeded = contentCharCount > getCurrentPlatformCharLimit();
   const charactersRemaining = getCurrentPlatformCharLimit() - contentCharCount;
 
+  // Function to get the icon for a platform
+  const getPlatformIcon = (platformName: string) => {
+    const platform = platforms.find(p => p.name === platformName);
+    return platform ? platform.icon : null;
+  };
+
   return (
     <div className="space-y-6">
       <Tabs defaultValue="create">
@@ -170,7 +176,7 @@ export function PostCreator() {
                         className={`flex items-center gap-2 ${selectedPlatforms.includes(platform.name) ? platform.color : ""}`}
                         onClick={() => handlePlatformToggle(platform.name)}
                       >
-                        <platform.icon className="h-4 w-4" />
+                        {platform.icon}
                         {platform.name}
                       </Button>
                     ))}
@@ -326,21 +332,8 @@ export function PostCreator() {
                     </>
                   ) : (
                     <>
-                      {isScheduling ? (
-                        <>
-                          <Calendar className="mr-2 h-4 w-4" />
-                          Schedule Post
-                        </>
-                      ) : (
-                        <>
-                          {selectedPlatforms.length === 1 && (
-                            platforms.find(p => p.name === selectedPlatforms[0])?.icon({
-                              className: "mr-2 h-4 w-4"
-                            })
-                          )}
-                          Post Now
-                        </>
-                      )}
+                      {selectedPlatforms.length === 1 && getPlatformIcon(selectedPlatforms[0])}
+                      {isScheduling ? " Schedule Post" : " Post Now"}
                     </>
                   )}
                 </Button>
