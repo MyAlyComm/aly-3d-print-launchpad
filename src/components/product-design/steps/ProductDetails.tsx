@@ -1,8 +1,13 @@
+
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useProductDesign } from "../ProductDesignContext";
 import { toast } from "sonner";
+import { CategorySelect } from './form-sections/CategorySelect';
+import { ProblemDescription } from './form-sections/ProblemDescription';
+import { StyleSelector } from './form-sections/StyleSelector';
+import { DimensionsInput } from './form-sections/DimensionsInput';
+import { MaterialsSelect } from './form-sections/MaterialsSelect';
 
 export const ProductDetails = ({ onNext }: { onNext: () => void }) => {
   const { productDetails, setProductDetails, generateProductContent, isGenerating: contextIsGenerating } = useProductDesign();
@@ -68,7 +73,7 @@ export const ProductDetails = ({ onNext }: { onNext: () => void }) => {
       
       setProductDetails(updatedDetails);
       
-      await generateProductContent();
+      await generateProductContent('3D Blueprint Runware');
       toast.success("Product design generated successfully!");
       onNext();
     } catch (error) {
@@ -84,91 +89,16 @@ export const ProductDetails = ({ onNext }: { onNext: () => void }) => {
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Define Your Product</h2>
       
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label className="block text-gray-700 font-medium mb-2">Product Category</label>
-          <select 
-            className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-            value={category}
-            onChange={handleCategoryChange}
-          >
-            <option value="">Select a category</option>
-            <option value="homeDecor">Home Decor</option>
-            <option value="organization">Organization & Storage</option>
-            <option value="gaming">Gaming Accessories</option>
-            <option value="gadgets">Tech Gadgets</option>
-            <option value="kitchenware">Kitchenware</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-gray-700 font-medium mb-2">What problem does your product solve?</label>
-          <textarea 
-            className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-            rows={3}
-            placeholder="Describe the problem your product solves..."
-            value={problem}
-            onChange={handleProblemChange}
-          />
-        </div>
-
-        <div>
-          <label className="block text-gray-700 font-medium mb-2">Design Style</label>
-          <div className="grid grid-cols-3 gap-4">
-            {["minimalist", "modern", "organic"].map((styleOption) => (
-              <div 
-                key={styleOption}
-                className={`border rounded-md p-4 text-center cursor-pointer ${
-                  style === styleOption ? 'border-primary bg-primary/5' : 'border-gray-200'
-                }`}
-                onClick={() => handleStyleChange(styleOption)}
-              >
-                <div className="bg-gray-100 h-24 mb-2 rounded flex items-center justify-center">
-                  <span className="text-4xl">
-                    {styleOption === "minimalist" ? "◯" : styleOption === "modern" ? "⬡" : "∿"}
-                  </span>
-                </div>
-                <span className="capitalize">{styleOption}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-gray-700 font-medium mb-2">Dimensions</label>
-          <div className="grid grid-cols-3 gap-4">
-            {[
-              { name: "Width", key: "width" as const }, 
-              { name: "Height", key: "height" as const }, 
-              { name: "Depth", key: "depth" as const }
-            ].map((dimension) => (
-              <div key={dimension.name}>
-                <label className="text-sm text-gray-600">{dimension.name} (cm)</label>
-                <Input 
-                  type="number" 
-                  value={dimension.key === 'width' ? width : dimension.key === 'height' ? height : depth}
-                  onChange={(e) => handleDimensionChange(dimension.key, e.target.value)}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-gray-700 font-medium mb-2">Material Preferences</label>
-          <div className="grid grid-cols-4 gap-3">
-            {["PLA", "PETG", "TPU", "ABS"].map((material) => (
-              <label key={material} className="flex items-center space-x-2">
-                <input 
-                  type="checkbox" 
-                  className="form-checkbox h-4 w-4 text-primary"
-                  checked={materials.includes(material)}
-                  onChange={(e) => handleMaterialChange(material, e.target.checked)}
-                />
-                <span>{material}</span>
-              </label>
-            ))}
-          </div>
-        </div>
+        <CategorySelect category={category} onCategoryChange={handleCategoryChange} />
+        <ProblemDescription problem={problem} onProblemChange={handleProblemChange} />
+        <StyleSelector selectedStyle={style} onStyleChange={handleStyleChange} />
+        <DimensionsInput
+          width={width}
+          height={height}
+          depth={depth}
+          onDimensionChange={handleDimensionChange}
+        />
+        <MaterialsSelect materials={materials} onMaterialChange={handleMaterialChange} />
 
         <div className="mt-8 flex justify-end">
           <Button 
