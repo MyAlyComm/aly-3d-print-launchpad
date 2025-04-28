@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -24,22 +23,21 @@ const UserDashboard = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="flex items-center gap-4 mb-8">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => navigate("/dashboard")}
-            className="text-gray-700 hover:text-gray-900"
-          >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Dashboard
-          </Button>
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">My Account</h1>
-            <p className="text-gray-500 mt-2">
-              Manage your profile, subscriptions, and purchases
-            </p>
-          </div>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigate("/dashboard")}
+          className="text-gray-700 hover:text-gray-900 mb-8"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Dashboard
+        </Button>
+        
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold tracking-tight">My Account</h1>
+          <p className="text-gray-500 mt-2">
+            Manage your profile, subscriptions, and purchases
+          </p>
         </div>
         
         <Card className="border-none shadow-sm">
