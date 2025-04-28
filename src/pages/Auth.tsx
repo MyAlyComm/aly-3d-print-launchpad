@@ -12,61 +12,17 @@ const Auth = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [processingGuide, setProcessingGuide] = useState(false);
-
+  
   useEffect(() => {
     // Don't do anything while auth is still loading
     if (isLoading) return;
     
     if (user) {
-      // Check if the user came here from a guide request
-      const name = localStorage.getItem('lead_capture_name');
-      const isGuideRequest = user.user_metadata?.requestType === 'guide' || (name && !user.app_metadata?.provider);
-      
-      if (isGuideRequest && !processingGuide) {
-        setProcessingGuide(true);
-        
-        // Handle guide email sending
-        const sendGuideEmail = async () => {
-          try {
-            const response = await fetch('https://gnzudunkcgbnmipshadn.functions.supabase.co/send-email', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ 
-                name: name || user.user_metadata?.name || 'there', 
-                email: user.email 
-              }),
-            });
-            
-            if (!response.ok) throw new Error('Failed to send guide email');
-            
-            toast.success("Your guide has been sent to your email!", {
-              description: "Check your inbox (and spam folder) for the download link.",
-            });
-            
-            // Clean up
-            localStorage.removeItem('lead_capture_name');
-            
-            // After processing, go to dashboard or home
-            navigate("/");
-          } catch (error) {
-            console.error('Error sending guide email:', error);
-            toast.error("We couldn't send your guide email", {
-              description: "Please try again or contact support.",
-            });
-            navigate("/");
-          } finally {
-            setProcessingGuide(false);
-          }
-        };
-        
-        sendGuideEmail();
-      } else if (!processingGuide) {
-        // If they came from somewhere specific, go back there
-        const from = location.state?.from?.pathname || "/dashboard";
-        navigate(from);
-      }
+      // If they came from somewhere specific, go back there
+      const from = location.state?.from?.pathname || "/dashboard";
+      navigate(from);
     }
-  }, [user, navigate, location, processingGuide, isLoading]);
+  }, [user, navigate, location, isLoading]);
 
   if (isLoading) {
     return (

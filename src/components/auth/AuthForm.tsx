@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Card } from '@/components/ui/card';
@@ -14,14 +14,6 @@ export const AuthForm = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-
-  // Check if user has paid already
-  useEffect(() => {
-    const hasAccess = localStorage.getItem("hasAccessToEbook") === "true";
-    if (hasAccess) {
-      toast.info("You've already purchased access. Sign in to continue.");
-    }
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,53 +38,37 @@ export const AuthForm = () => {
           options: {
             data: {
               created_at: new Date().toISOString(),
-              // If they've already paid, mark them as having access
-              has_access: localStorage.getItem("hasAccessToEbook") === "true"
             }
           }
         });
         
-        if (error) {
-          // More specific error handling
-          if (error.message.includes('already in use')) {
-            toast.error('This email is already registered. Try logging in instead.');
-          } else {
-            toast.error(error.message || 'Sign up failed');
-          }
-          throw error;
-        }
+        if (error) throw error;
         
         if (data?.user) {
           toast.success('Account created successfully! Logging you in...');
-          // Redirect after successful sign-up
           const from = location.state?.from?.pathname || "/dashboard";
           navigate(from);
         } else {
           toast.success('Account created! Please check your email to confirm sign up.');
-          setIsSignUp(false); // Switch to login mode
+          setIsSignUp(false);
         }
       } else {
         const { data, error } = await supabase.auth.signInWithPassword({ email, password });
         
-        if (error) {
-          // More specific error handling
-          if (error.message.includes('Invalid login credentials')) {
-            toast.error('Incorrect email or password. Please try again.');
-          } else {
-            toast.error(error.message || 'Login failed');
-          }
-          throw error;
-        }
+        if (error) throw error;
         
         if (data?.user) {
           toast.success('Logged in successfully!');
-          
-          // Check if they were redirected from somewhere
           const from = location.state?.from?.pathname || "/dashboard";
           navigate(from);
         }
       }
-    } catch (error) {
+    } catch (error: any) {
+      if (error.message.includes('Invalid login credentials')) {
+        toast.error('Incorrect email or password. Please try again.');
+      } else {
+        toast.error(error.message || 'Authentication failed');
+      }
       console.error('Authentication error:', error);
     } finally {
       setLoading(false);
@@ -105,12 +81,6 @@ export const AuthForm = () => {
         <h2 className="text-2xl font-bold mb-2 text-center">
           {isSignUp ? 'Create Account' : 'Sign In'}
         </h2>
-        
-        {localStorage.getItem("hasAccessToEbook") === "true" && (
-          <div className="mb-6 p-3 bg-green-50 border border-green-100 rounded-md text-green-800 text-sm">
-            We've confirmed your purchase! Create an account or sign in to access your ebook.
-          </div>
-        )}
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
