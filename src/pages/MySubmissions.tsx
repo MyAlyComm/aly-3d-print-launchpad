@@ -16,10 +16,14 @@ const MySubmissions = () => {
 
   // Parse the stored JSON data
   const getChapter4Data = () => {
-    if (!chapter4Data?.response_data?.worksheet?.textInputs) return null;
+    if (!chapter4Data?.response_data) return null;
 
     try {
-      const textInputs = chapter4Data.response_data.worksheet.textInputs;
+      // Check if response_data has worksheet property
+      const responseData = chapter4Data.response_data as Record<string, any>;
+      if (!responseData.worksheet || !responseData.worksheet.textInputs) return null;
+      
+      const textInputs = responseData.worksheet.textInputs;
       return {
         productNames: JSON.parse(textInputs.productNames || '{}'),
         profitsScores: JSON.parse(textInputs.profitsScores || '{}'),
