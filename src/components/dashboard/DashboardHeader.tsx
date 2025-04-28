@@ -64,16 +64,6 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
               <Button 
                 variant="ghost" 
                 size="sm"
-                onClick={() => navigate("/dashboard/3d-blueprint")}
-                className="text-gray-700 hover:text-gray-900"
-              >
-                <Book className="mr-2 h-4 w-4" />
-                Dashboard
-              </Button>
-              
-              <Button 
-                variant="ghost" 
-                size="sm"
                 onClick={() => navigate("/account")}
                 className="text-gray-700 hover:text-gray-900"
               >
@@ -115,10 +105,6 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
                 <DropdownMenuItem onClick={() => navigate("/")} className="text-gray-800">
                   <Layout className="mr-2 h-4 w-4" />
                   Home
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint")} className="text-gray-800">
-                  <Book className="mr-2 h-4 w-4" />
-                  Dashboard
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => navigate("/account")} className="text-gray-800">
                   <User className="mr-2 h-4 w-4" />
