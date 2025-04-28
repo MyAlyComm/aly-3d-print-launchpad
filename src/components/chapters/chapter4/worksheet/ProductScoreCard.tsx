@@ -1,33 +1,7 @@
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-
-interface ScoreInputProps {
-  id: string;
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
-  max: number;
-}
-
-const ScoreInput = ({ id, label, value, onChange, max }: ScoreInputProps) => (
-  <div className="space-y-2">
-    <Label htmlFor={id}>{label}:</Label>
-    <div className="flex items-center gap-2">
-      <Input 
-        id={id}
-        className="w-20" 
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        type="number"
-        min="0"
-        max={max}
-      />
-      <span>/ {max}</span>
-    </div>
-  </div>
-);
+import { ScoreSection } from "./components/ScoreSection";
+import { TotalScore } from "./components/TotalScore";
 
 interface ProductScoreCardProps {
   productNumber: number;
@@ -66,6 +40,24 @@ export const ProductScoreCard = ({
   onProfitsChange,
   onMatchChange
 }: ProductScoreCardProps) => {
+  const profitsInputs = [
+    { id: `p${productNumber}-problem`, label: "P - Problem-solving", value: profitsScores.p, max: 15, onChange: (value: string) => onProfitsChange('p', value) },
+    { id: `p${productNumber}-roi`, label: "R - Return on Investment", value: profitsScores.r, max: 15, onChange: (value: string) => onProfitsChange('r', value) },
+    { id: `p${productNumber}-opportunity`, label: "O - Opportunity", value: profitsScores.o, max: 15, onChange: (value: string) => onProfitsChange('o', value) },
+    { id: `p${productNumber}-feasibility`, label: "F - Feasibility", value: profitsScores.f, max: 15, onChange: (value: string) => onProfitsChange('f', value) },
+    { id: `p${productNumber}-demand`, label: "I - In-demand", value: profitsScores.i, max: 25, onChange: (value: string) => onProfitsChange('i', value) },
+    { id: `p${productNumber}-time`, label: "T - Time-to-Money", value: profitsScores.t, max: 15, onChange: (value: string) => onProfitsChange('t', value) },
+    { id: `p${productNumber}-staying`, label: "S - Staying Power", value: profitsScores.s, max: 15, onChange: (value: string) => onProfitsChange('s', value) }
+  ];
+
+  const matchInputs = [
+    { id: `p${productNumber}-maker`, label: "M - Maker Skills", value: matchScores.m, max: 25, onChange: (value: string) => onMatchChange('m', value) },
+    { id: `p${productNumber}-artistic`, label: "A - Artistic Alignment", value: matchScores.a, max: 25, onChange: (value: string) => onMatchChange('a', value) },
+    { id: `p${productNumber}-time-avail`, label: "T - Time Available", value: matchScores.t, max: 10, onChange: (value: string) => onMatchChange('t', value) },
+    { id: `p${productNumber}-competition`, label: "C - Competition Analysis", value: matchScores.c, max: 25, onChange: (value: string) => onMatchChange('c', value) },
+    { id: `p${productNumber}-home`, label: "H - Home Location", value: matchScores.h, max: 15, onChange: (value: string) => onMatchChange('h', value) }
+  ];
+
   return (
     <div className="space-y-6 border border-gray-200 rounded-lg p-6">
       <div className="flex items-center gap-2">
@@ -78,145 +70,23 @@ export const ProductScoreCard = ({
         />
       </div>
       
-      <Card className="bg-blue-50">
-        <CardHeader>
-          <CardTitle>PROFITS Score</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <ScoreInput
-              id={`p${productNumber}-problem`}
-              label="P - Problem-solving"
-              value={profitsScores.p}
-              onChange={(value) => onProfitsChange('p', value)}
-              max={15}
-            />
-            <ScoreInput
-              id={`p${productNumber}-roi`}
-              label="R - Return on Investment"
-              value={profitsScores.r}
-              onChange={(value) => onProfitsChange('r', value)}
-              max={15}
-            />
-            <ScoreInput
-              id={`p${productNumber}-opportunity`}
-              label="O - Opportunity"
-              value={profitsScores.o}
-              onChange={(value) => onProfitsChange('o', value)}
-              max={15}
-            />
-            <ScoreInput
-              id={`p${productNumber}-feasibility`}
-              label="F - Feasibility"
-              value={profitsScores.f}
-              onChange={(value) => onProfitsChange('f', value)}
-              max={15}
-            />
-            <ScoreInput
-              id={`p${productNumber}-demand`}
-              label="I - In-demand"
-              value={profitsScores.i}
-              onChange={(value) => onProfitsChange('i', value)}
-              max={25}
-            />
-            <ScoreInput
-              id={`p${productNumber}-time`}
-              label="T - Time-to-Money"
-              value={profitsScores.t}
-              onChange={(value) => onProfitsChange('t', value)}
-              max={15}
-            />
-            <ScoreInput
-              id={`p${productNumber}-staying`}
-              label="S - Staying Power"
-              value={profitsScores.s}
-              onChange={(value) => onProfitsChange('s', value)}
-              max={15}
-            />
-          </div>
-          
-          <div className="pt-4 border-t border-blue-200 font-bold">
-            <div className="flex items-center gap-2">
-              <span>TOTAL PROFITS SCORE:</span>
-              <Input 
-                className="w-20 font-bold" 
-                value={profitsScores.total}
-                readOnly
-              />
-              <span>/ 100</span>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      <ScoreSection
+        title="PROFITS Score"
+        scores={profitsInputs}
+        total={profitsScores.total}
+        bgColor="bg-blue-50"
+        borderColor="border-blue-200"
+      />
       
-      <Card className="bg-purple-50">
-        <CardHeader>
-          <CardTitle>MATCH Score</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <ScoreInput
-              id={`p${productNumber}-maker`}
-              label="M - Maker Skills"
-              value={matchScores.m}
-              onChange={(value) => onMatchChange('m', value)}
-              max={25}
-            />
-            <ScoreInput
-              id={`p${productNumber}-artistic`}
-              label="A - Artistic Alignment"
-              value={matchScores.a}
-              onChange={(value) => onMatchChange('a', value)}
-              max={25}
-            />
-            <ScoreInput
-              id={`p${productNumber}-time-avail`}
-              label="T - Time Available"
-              value={matchScores.t}
-              onChange={(value) => onMatchChange('t', value)}
-              max={10}
-            />
-            <ScoreInput
-              id={`p${productNumber}-competition`}
-              label="C - Competition Analysis"
-              value={matchScores.c}
-              onChange={(value) => onMatchChange('c', value)}
-              max={25}
-            />
-            <ScoreInput
-              id={`p${productNumber}-home`}
-              label="H - Home Location"
-              value={matchScores.h}
-              onChange={(value) => onMatchChange('h', value)}
-              max={15}
-            />
-          </div>
-          
-          <div className="pt-4 border-t border-purple-200 font-bold">
-            <div className="flex items-center gap-2">
-              <span>TOTAL MATCH SCORE:</span>
-              <Input 
-                className="w-20 font-bold" 
-                value={matchScores.total}
-                readOnly
-              />
-              <span>/ 100</span>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      <ScoreSection
+        title="MATCH Score"
+        scores={matchInputs}
+        total={matchScores.total}
+        bgColor="bg-purple-50"
+        borderColor="border-purple-200"
+      />
       
-      <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
-        <div className="flex items-center gap-2 font-bold">
-          <span>FINAL SCORE:</span>
-          <Input 
-            className="w-20 font-bold" 
-            value={finalScore} 
-            readOnly
-          />
-          <span>/ 100</span>
-        </div>
-      </div>
+      <TotalScore finalScore={finalScore} />
     </div>
   );
 };
