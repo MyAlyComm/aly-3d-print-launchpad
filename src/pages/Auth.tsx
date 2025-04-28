@@ -1,5 +1,4 @@
-
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthForm } from '@/components/auth/AuthForm';
 import { useAuth } from '@/hooks/useAuth';
@@ -15,6 +14,7 @@ const Auth = () => {
     
     if (user) {
       // If they came from somewhere specific, go back there
+      // Otherwise redirect to dashboard by default
       const from = location.state?.from?.pathname || "/dashboard";
       navigate(from);
     }

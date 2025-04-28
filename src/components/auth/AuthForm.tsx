@@ -46,8 +46,8 @@ export const AuthForm = () => {
         
         if (data?.user) {
           toast.success('Account created successfully! Logging you in...');
-          const from = location.state?.from?.pathname || "/dashboard";
-          navigate(from);
+          // Always redirect to dashboard after successful signup
+          navigate("/dashboard");
         } else {
           toast.success('Account created! Please check your email to confirm sign up.');
           setIsSignUp(false);
@@ -59,8 +59,8 @@ export const AuthForm = () => {
         
         if (data?.user) {
           toast.success('Logged in successfully!');
-          const from = location.state?.from?.pathname || "/dashboard";
-          navigate(from);
+          // Always redirect to dashboard after successful login
+          navigate("/dashboard");
         }
       }
     } catch (error: any) {
