@@ -20,7 +20,7 @@ Deno.serve(async (req) => {
     const { name, email } = await req.json()
 
     // TODO: Replace with actual guide download link
-    const downloadLink = 'https://alys3dstudio.com/downloads/3d-printing-guide.pdf'
+    const downloadLink = 'https://3dstudio.com/downloads/3d-printing-guide.pdf'
 
     const html = await renderAsync(
       React.createElement(GuideEmail, {
@@ -30,7 +30,7 @@ Deno.serve(async (req) => {
     )
 
     const { error } = await resend.emails.send({
-      from: 'Aly\'s 3D Studio <onboarding@resend.dev>',
+      from: '3D Printing Blueprint <onboarding@resend.dev>',
       to: [email],
       subject: 'Your 3D Printing Guide is Ready!',
       html,

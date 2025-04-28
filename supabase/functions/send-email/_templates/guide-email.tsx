@@ -42,7 +42,7 @@ export const GuideEmail = ({
         </Link>
         <Text style={footer}>
           Best regards,<br />
-          Aly's 3D Studio Team
+          3D Printing Blueprint Team
         </Text>
       </Container>
     </Body>
