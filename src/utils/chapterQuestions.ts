@@ -15,7 +15,7 @@ export const chapterQuestions: Record<number, ChapterQuestion[]> = {
   1: [
     { id: 'skills', section: 'assessment', question: 'What existing skills do you have that most people in the 3D printing industry lack?' },
     { id: 'misconceptions', section: 'assessment', question: 'What misconceptions about 3D printing did you previously hold?' },
-    { id: 'phase', section: 'assessment', question: 'Which phase of the industry's evolution do you find most interesting?' },
+    { id: 'phase', section: 'assessment', question: 'Which phase of the industry\'s evolution do you find most interesting?' },
     { id: 'niche', section: 'assessment', question: 'What specific niche or application of 3D printing excites you the most?' }
   ],
   2: [
