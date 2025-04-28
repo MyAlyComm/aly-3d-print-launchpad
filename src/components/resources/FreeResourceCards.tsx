@@ -44,7 +44,7 @@ const resources = [
   }
 ];
 
-export const FreeResourceCards = () => {
+const FreeResourceCards = () => {
   return (
     <div className="py-16 bg-gradient-to-b from-white via-gray-50/50 to-white">
       <div className="container mx-auto px-4">
@@ -96,3 +96,5 @@ export const FreeResourceCards = () => {
     </div>
   );
 };
+
+export default FreeResourceCards;
