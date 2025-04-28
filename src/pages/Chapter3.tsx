@@ -16,7 +16,7 @@ const Chapter3 = () => {
   const sections = [
     { id: "beyond", title: "Beyond Traditional Value Creation", Component: Beyond },
     { id: "core-system", title: "The Core System Explained", Component: CoreSystem },
-    { id: "implementation", title: "Implementing the System", Component: Implementation },
+    { id: "implementation", title: "Implementation & Strategy", Component: Implementation },
     { id: "worksheet", title: "Chapter 3 Self-Assessment", Component: SystemWorksheet },
   ];
 

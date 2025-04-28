@@ -2,11 +2,13 @@ import { ChapterSection } from "@/components/ui/chapter-layout/ChapterSection";
 import { InfoCard } from "@/components/ui/chapter-layout/InfoCard";
 import { ChapterGrid } from "@/components/ui/chapter-layout/ChapterGrid";
 import { Calendar, LineChart, Target, Rocket, Clock, Settings, BarChart, Brain } from "lucide-react";
+import { SwapStrategy } from "./SwapStrategy";
 
 export const Implementation = () => {
   return (
-    <ChapterSection title="Implementing the System ⚡️">
-      <div className="space-y-8">
+    <>
+      <ChapterSection title="Implementing the System ⚡️">
+        <div className="space-y-8">
         <div className="bg-gradient-to-br from-accent/5 to-transparent p-6 rounded-lg border border-accent/10">
           <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
             <Calendar className="h-5 w-5 text-accent" />
@@ -124,98 +126,9 @@ export const Implementation = () => {
             improve, or replace in your lineup.
           </p>
         </div>
-
-        <div className="mb-8">
-          <h3 className="text-xl font-semibold mb-4">The "Swap Strategy"</h3>
-          <p>
-            At the end of each monthly cycle, you'll evaluate your three core products and your Plus 1 innovation. 
-            Based on the data, you'll implement changes in Week 1 of the following month:
-          </p>
-          
-          <ul className="list-disc pl-6 space-y-2 mt-3">
-            <li>
-              <span className="font-medium">If all core products are performing well:</span> Continue optimizing 
-              them while developing your Plus 1.
-            </li>
-            <li>
-              <span className="font-medium">If one core product is underperforming:</span> Consider replacing it 
-              with your Plus 1 (if ready) or with a new product from your research.
-            </li>
-            <li>
-              <span className="font-medium">If your Plus 1 shows exceptional promise:</span> Promote it to your core 
-              lineup by replacing your weakest performer, then select a new Plus 1 to develop.
-            </li>
-            <li>
-              <span className="font-medium">If your Plus 1 isn't working out:</span> Abandon it and select a new 
-              innovation project based on market research or customer feedback.
-            </li>
-          </ul>
         </div>
-
-        <div>
-          <h3 className="text-xl font-semibold mb-4">Adapting the System to Your Decision Tree Path</h3>
-          <p>
-            The beauty of the 3 Plus 1 system is its flexibility. It can be adapted to any situation identified 
-            by your Decision Tree path from Chapter 2:
-          </p>
-          
-          <div className="space-y-4 mt-4">
-            <div className="bg-primary/5 p-4 rounded-lg">
-              <h4 className="font-semibold">For $0 Budget Paths</h4>
-              <p>Even without funds for your own printer, you can apply the 3 Plus 1 approach:</p>
-              <ul className="list-disc pl-6 space-y-1 mt-2">
-                <li>Your "3" might be: Three service offerings (design services, brokering between clients and printing services, print management)</li>
-                <li>Your "80%" focus: Perfecting your process, building relationships with suppliers, creating portfolio examples</li>
-                <li>Your "Plus 1" could be: Developing a product design you could eventually manufacture once you acquire a printer</li>
-                <li>Implementation: Use the monthly cycle to evaluate which services are most profitable and which relationships are most valuable</li>
-              </ul>
-            </div>
-            
-            <div className="bg-primary/5 p-4 rounded-lg">
-              <h4 className="font-semibold">For Limited Time Availability</h4>
-              <p>If you only have 5-15 hours weekly to dedicate to your business:</p>
-              <ul className="list-disc pl-6 space-y-1 mt-2">
-                <li>Your "3" should be: Products with longer print times but less oversight (let them print while you're at work or asleep)</li>
-                <li>Your "80%" focus: Creating systems that maximize automation and minimize hands-on time</li>
-                <li>Your "Plus 1" could be: Developed in concentrated weekend sessions</li>
-                <li>Implementation: Consider a modified two-week cycle if weekly is too frequent for your schedule</li>
-              </ul>
-            </div>
-            
-            <div className="bg-primary/5 p-4 rounded-lg">
-              <h4 className="font-semibold">For Different Skill Profiles</h4>
-              <div className="mt-2 space-y-3">
-                <div>
-                  <h5 className="font-medium">Design-Focused:</h5>
-                  <ul className="list-disc pl-6 space-y-1 mt-1">
-                    <li>Your "3" should include: Products that showcase your design capabilities</li>
-                    <li>Your "80%" focus: Perfecting aesthetics and functionality, creating distinctive brand identity</li>
-                    <li>Your "Plus 1" could be: Exploring new design techniques or software to expand your capabilities</li>
-                  </ul>
-                </div>
-                
-                <div>
-                  <h5 className="font-medium">Marketing-Focused:</h5>
-                  <ul className="list-disc pl-6 space-y-1 mt-1">
-                    <li>Your "3" could be: Products with strong visual appeal and viral potential</li>
-                    <li>Your "80%" focus: Creating exceptional content and building audience relationships</li>
-                    <li>Your "Plus 1" might be: Exploring a different platform or marketing approach</li>
-                  </ul>
-                </div>
-                
-                <div>
-                  <h5 className="font-medium">Technical-Focused:</h5>
-                  <ul className="list-disc pl-6 space-y-1 mt-1">
-                    <li>Your "3" should include: Products that benefit from precision engineering</li>
-                    <li>Your "80%" focus: Optimizing print settings, creating perfect finishes, solving complex production challenges</li>
-                    <li>Your "Plus 1" could be: Experimenting with new materials or printing techniques</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </ChapterSection>
+      </ChapterSection>
+      <SwapStrategy />
+    </>
   );
 };
