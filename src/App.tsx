@@ -32,6 +32,7 @@ import FAQDashboard from "./pages/FAQDashboard";
 import MiniBlueprint from "./pages/MiniBlueprint";
 import MySubmissions from "./pages/MySubmissions";
 import ProductDesignEngine from "./pages/ProductDesignEngine";
+import FilamentGuide from "./pages/FilamentGuide";
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -69,7 +70,14 @@ const App = () => {
                   </ProtectedRoute>
                 } />
 
-                {/* 3D Blueprint Ebook routes - nested under /dashboard/3d-blueprint */}
+                {/* Add the new Filament Guide route */}
+                <Route path="/dashboard/3d-blueprint/filament-guide" element={
+                  <ProtectedRoute>
+                    <FilamentGuide />
+                  </ProtectedRoute>
+                } />
+
+                {/* 3D Blueprint Ebook routes */}
                 <Route path="/dashboard/3d-blueprint" element={
                   <ProtectedRoute>
                     <Dashboard />

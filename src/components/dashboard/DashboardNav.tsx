@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Book, Layout, BookOpen, BookText, ClipboardList, Box } from "lucide-react";
+import { Book, Layout, BookOpen, BookText, ClipboardList, Box, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const DashboardNav = () => {
@@ -142,6 +142,14 @@ export const DashboardNav = () => {
       >
         <Box className="mr-2 h-4 w-4" />
         Product Design Engine
+      </Button>
+      <Button 
+        variant="ghost" 
+        className="w-full justify-start"
+        onClick={() => navigate("/dashboard/3d-blueprint/filament-guide")}
+      >
+        <Package className="mr-2 h-4 w-4" />
+        Filament Guide
       </Button>
     </nav>
   );
