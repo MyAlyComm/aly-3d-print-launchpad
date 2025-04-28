@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
-import { Facebook, Instagram, Twitter, Linkedin, Image, Calendar, Sparkles, CheckCircle } from "lucide-react";
+import { Facebook, Instagram, Twitter, Linkedin, Image, Calendar, Sparkles, CheckCircle, ThumbsUp, MessageSquare } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";

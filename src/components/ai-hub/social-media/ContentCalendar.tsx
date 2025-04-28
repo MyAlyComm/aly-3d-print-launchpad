@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -10,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { CalendarPlus, Edit, Trash2, Instagram, Facebook, Twitter, Linkedin } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 // Type definitions
 type Platform = "Instagram" | "Facebook" | "Twitter" | "LinkedIn";
