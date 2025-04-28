@@ -8,7 +8,7 @@ export const BlueprintPreview = () => {
   
   const chapterHighlights = [
     {
-      title: "The Product Trinity",
+      title: "Finding Profitable Products to Sell",
       description: "Finding Your First Three Winning Products. Learn how to identify and validate profitable product opportunities.",
       icon: <Book className="w-5 h-5 text-primary hover:scale-110 transition-transform duration-300" />,
       bgColor: "bg-gradient-to-br from-primary/10 to-primary/5",
