@@ -11,6 +11,12 @@ interface ScoreSectionProps {
     value: string;
     max: number;
     onChange: (value: string) => void;
+    type?: 'numeric' | 'choice';
+    choices?: Array<{
+      value: string;
+      label: string;
+      score: number;
+    }>;
   }>;
   total: string;
   bgColor: string;
@@ -30,7 +36,7 @@ export const ScoreSection = ({
     </CardHeader>
     <CardContent className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {scores.map(({ id, label, value, max, onChange }) => (
+        {scores.map(({ id, label, value, max, onChange, type, choices }) => (
           <ScoreInput
             key={id}
             id={id}
@@ -38,6 +44,8 @@ export const ScoreSection = ({
             value={value}
             onChange={onChange}
             max={max}
+            type={type}
+            choices={choices}
           />
         ))}
       </div>

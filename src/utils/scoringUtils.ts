@@ -1,4 +1,6 @@
 
+import { type Dispatch, type SetStateAction } from 'react';
+
 // Calculate PROFITS total score
 export const calculateProfitsTotal = (scores: {
   p: string;
@@ -8,14 +10,27 @@ export const calculateProfitsTotal = (scores: {
   i: string;
   t: string;
   s: string;
+}, choices?: {
+  [key: string]: Array<{
+    value: string;
+    label: string;
+    score: number;
+  }>;
 }) => {
-  const p = parseInt(scores.p) || 0;
-  const r = parseInt(scores.r) || 0;
-  const o = parseInt(scores.o) || 0;
-  const f = parseInt(scores.f) || 0;
-  const i = parseInt(scores.i) || 0;
-  const t = parseInt(scores.t) || 0;
-  const s = parseInt(scores.s) || 0;
+  const calculateScore = (value: string, key: string) => {
+    if (choices && choices[key]) {
+      return choices[key].find(c => c.value === value)?.score || 0;
+    }
+    return parseInt(value) || 0;
+  };
+
+  const p = calculateScore(scores.p, 'p');
+  const r = calculateScore(scores.r, 'r');
+  const o = calculateScore(scores.o, 'o');
+  const f = calculateScore(scores.f, 'f');
+  const i = calculateScore(scores.i, 'i');
+  const t = calculateScore(scores.t, 't');
+  const s = calculateScore(scores.s, 's');
   
   return p + r + o + f + i + t + s;
 };
@@ -27,12 +42,25 @@ export const calculateMatchTotal = (scores: {
   t: string;
   c: string;
   h: string;
+}, choices?: {
+  [key: string]: Array<{
+    value: string;
+    label: string;
+    score: number;
+  }>;
 }) => {
-  const m = parseInt(scores.m) || 0;
-  const a = parseInt(scores.a) || 0;
-  const t = parseInt(scores.t) || 0;
-  const c = parseInt(scores.c) || 0;
-  const h = parseInt(scores.h) || 0;
+  const calculateScore = (value: string, key: string) => {
+    if (choices && choices[key]) {
+      return choices[key].find(c => c.value === value)?.score || 0;
+    }
+    return parseInt(value) || 0;
+  };
+
+  const m = calculateScore(scores.m, 'm');
+  const a = calculateScore(scores.a, 'a');
+  const t = calculateScore(scores.t, 't');
+  const c = calculateScore(scores.c, 'c');
+  const h = calculateScore(scores.h, 'h');
   
   return m + a + t + c + h;
 };
@@ -42,7 +70,7 @@ export const calculateFinalScore = (
   product: string,
   profitsTotal: string,
   matchTotal: string,
-  setFinalScores: React.Dispatch<React.SetStateAction<{ [key: string]: string }>>
+  setFinalScores: Dispatch<SetStateAction<{ [key: string]: string }>>
 ) => {
   const profits = parseInt(profitsTotal) || 0;
   const match = parseInt(matchTotal) || 0;
