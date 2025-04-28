@@ -1,86 +1,98 @@
-
-import { useState } from "react";
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useProductDesign } from "../ProductDesignContext";
-import { AIImageGenerator } from "@/components/AIImageGenerator";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
-interface ProductDetailsProps {
-  onNext: () => void;
-}
-
-export const ProductDetails = ({ onNext }: ProductDetailsProps) => {
+export const ProductDetails = ({ onNext }: { onNext: () => void }) => {
   const { productDetails, setProductDetails, generateProductContent, isGenerating } = useProductDesign();
-  const [apiKey, setApiKey] = useState("");
-  const [showApiInput, setShowApiInput] = useState(false);
-  
+  const [category, setCategory] = useState(productDetails.category);
+  const [problem, setProblem] = useState(productDetails.problem);
+  const [style, setStyle] = useState(productDetails.style);
+  const [width, setWidth] = useState(productDetails.dimensions.width);
+  const [height, setHeight] = useState(productDetails.dimensions.height);
+  const [depth, setDepth] = useState(productDetails.dimensions.depth);
+  const [materials, setMaterials] = useState(productDetails.materials);
+  const [isGenerating, setIsGenerating] = useState(false);
+
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setProductDetails({
-      ...productDetails,
-      category: e.target.value
-    });
+    setCategory(e.target.value);
   };
-  
+
   const handleProblemChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setProductDetails({
-      ...productDetails,
-      problem: e.target.value
-    });
+    setProblem(e.target.value);
   };
-  
+
   const handleStyleChange = (style: string) => {
-    setProductDetails({
-      ...productDetails,
-      style
-    });
+    setStyle(style);
   };
-  
+
   const handleDimensionChange = (dimension: 'width' | 'height' | 'depth', value: string) => {
-    setProductDetails({
-      ...productDetails,
-      dimensions: {
-        ...productDetails.dimensions,
-        [dimension]: value
-      }
-    });
+    if (dimension === 'width') setWidth(value);
+    if (dimension === 'height') setHeight(value);
+    if (dimension === 'depth') setDepth(value);
   };
-  
+
   const handleMaterialChange = (material: string, checked: boolean) => {
-    let updatedMaterials = [...productDetails.materials];
+    let updatedMaterials = [...materials];
     if (checked) {
       updatedMaterials.push(material);
     } else {
       updatedMaterials = updatedMaterials.filter(m => m !== material);
     }
-    
-    setProductDetails({
-      ...productDetails,
-      materials: updatedMaterials
-    });
+    setMaterials(updatedMaterials);
   };
 
-  const handleSubmit = async () => {
-    if (!productDetails.category) {
-      toast.error("Please select a product category");
-      return;
-    }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     
-    if (!productDetails.style) {
-      toast.error("Please select a design style");
+    if (!category || !style) {
+      toast.error("Please select a product category and style");
       return;
     }
 
+    setIsGenerating(true);
     try {
-      if (!apiKey) {
-        setShowApiInput(true);
-        return;
-      }
+      const { data, error } = await supabase.functions.invoke('generate-product', {
+        body: { 
+          productDetails: {
+            category,
+            style,
+            problem,
+            materials,
+            dimensions: {
+              width,
+              height,
+              depth
+            }
+          }
+        }
+      });
+
+      if (error) throw error;
+
+      setProductDetails({
+        ...productDetails,
+        category,
+        style,
+        problem,
+        materials,
+        dimensions: {
+          width,
+          height,
+          depth
+        }
+      });
       
-      await generateProductContent(apiKey);
+      await generateProductContent(data);
+      toast.success("Product design generated successfully!");
       onNext();
     } catch (error) {
-      console.error("Error generating product:", error);
+      console.error('Error generating product:', error);
+      toast.error("Failed to generate product design. Please try again.");
+    } finally {
+      setIsGenerating(false);
     }
   };
 
@@ -88,12 +100,12 @@ export const ProductDetails = ({ onNext }: ProductDetailsProps) => {
     <div className="bg-white rounded-lg shadow-md p-6">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Define Your Product</h2>
       
-      <div className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <label className="block text-gray-700 font-medium mb-2">Product Category</label>
           <select 
             className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-            value={productDetails.category}
+            value={category}
             onChange={handleCategoryChange}
           >
             <option value="">Select a category</option>
@@ -111,7 +123,7 @@ export const ProductDetails = ({ onNext }: ProductDetailsProps) => {
             className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
             rows={3}
             placeholder="Describe the problem your product solves..."
-            value={productDetails.problem}
+            value={problem}
             onChange={handleProblemChange}
           />
         </div>
@@ -123,7 +135,7 @@ export const ProductDetails = ({ onNext }: ProductDetailsProps) => {
               <div 
                 key={styleOption}
                 className={`border rounded-md p-4 text-center cursor-pointer ${
-                  productDetails.style === styleOption ? 'border-primary bg-primary/5' : 'border-gray-200'
+                  style === styleOption ? 'border-primary bg-primary/5' : 'border-gray-200'
                 }`}
                 onClick={() => handleStyleChange(styleOption)}
               >
@@ -150,7 +162,7 @@ export const ProductDetails = ({ onNext }: ProductDetailsProps) => {
                 <label className="text-sm text-gray-600">{dimension.name} (cm)</label>
                 <Input 
                   type="number" 
-                  value={productDetails.dimensions[dimension.key]}
+                  value={dimension.key === 'width' ? width : dimension.key === 'height' ? height : depth}
                   onChange={(e) => handleDimensionChange(dimension.key, e.target.value)}
                 />
               </div>
@@ -166,7 +178,7 @@ export const ProductDetails = ({ onNext }: ProductDetailsProps) => {
                 <input 
                   type="checkbox" 
                   className="form-checkbox h-4 w-4 text-primary"
-                  checked={productDetails.materials.includes(material)}
+                  checked={materials.includes(material)}
                   onChange={(e) => handleMaterialChange(material, e.target.checked)}
                 />
                 <span>{material}</span>
@@ -175,26 +187,9 @@ export const ProductDetails = ({ onNext }: ProductDetailsProps) => {
           </div>
         </div>
 
-        {showApiInput && (
-          <div className="border border-primary/20 bg-primary/5 p-4 rounded-lg">
-            <h3 className="font-medium mb-2">Enter Runware API Key</h3>
-            <p className="text-sm mb-2">We need an API key to generate AI-powered product designs.</p>
-            <Input
-              type="password"
-              placeholder="Enter your Runware API key"
-              value={apiKey}
-              onChange={(e) => setApiKey(e.target.value)}
-              className="mb-2"
-            />
-            <p className="text-xs text-gray-500">
-              Get your API key from <a href="https://runware.ai" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Runware.ai</a>
-            </p>
-          </div>
-        )}
-
         <div className="mt-8 flex justify-end">
           <Button 
-            onClick={handleSubmit}
+            type="submit"
             className="flex items-center gap-2"
             disabled={isGenerating}
           >
@@ -211,7 +206,7 @@ export const ProductDetails = ({ onNext }: ProductDetailsProps) => {
             )}
           </Button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { useProductDesign } from "../ProductDesignContext";
 import { useState } from "react";
@@ -26,7 +25,7 @@ export const ProductVisualization = ({ onNext, onPrev }: ProductVisualizationPro
                 className="max-h-full max-w-full object-contain"
               />
             ) : (
-              <p className="text-gray-500">Preview image will appear here</p>
+              <p className="text-gray-500">Loading preview...</p>
             )}
           </div>
           <div className="grid grid-cols-4 gap-2">
@@ -38,25 +37,19 @@ export const ProductVisualization = ({ onNext, onPrev }: ProductVisualizationPro
                 }`}
                 onClick={() => setSelectedImage(index)}
               >
-                {imageUrl ? (
-                  <img 
-                    src={imageUrl} 
-                    alt={`View ${index + 1}`} 
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <span className="text-gray-500 text-xs">View {index + 1}</span>
-                )}
+                <img 
+                  src={imageUrl} 
+                  alt={`View ${index + 1}`} 
+                  className="w-full h-full object-cover"
+                />
               </div>
             ))}
           </div>
         </div>
         
         <div>
-          <h3 className="font-bold text-lg mb-3">{productVisualization.productName || "Product Details"}</h3>
-          <p className="text-gray-600 mb-4">
-            {productVisualization.productDescription || "Your product details will appear here based on the information provided in the previous step."}
-          </p>
+          <h3 className="font-bold text-lg mb-3">{productVisualization.productName}</h3>
+          <p className="text-gray-600 mb-4">{productVisualization.productDescription}</p>
           
           <div className="mb-4">
             <h4 className="font-medium text-gray-700 mb-2">Key Features</h4>
