@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 export default function MagicLinkAuth() {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isSent, setIsSent] = useState(false);
 
   const handleMagicLink = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,11 +31,10 @@ export default function MagicLinkAuth() {
 
       if (error) throw error;
 
+      setIsSent(true);
       toast.success('Check your email for the magic link!', {
         description: "We've sent you a link to sign in. Please check your spam folder if you don't see it."
       });
-
-      setEmail('');
     } catch (error: any) {
       toast.error('Failed to send magic link', {
         description: error.message
@@ -43,6 +43,28 @@ export default function MagicLinkAuth() {
       setIsLoading(false);
     }
   };
+
+  if (isSent) {
+    return (
+      <Card className="w-full max-w-md mx-auto">
+        <CardHeader>
+          <CardTitle>Check Your Email</CardTitle>
+          <CardDescription>
+            We've sent a magic link to <strong>{email}</strong>
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="text-center space-y-4">
+          <p>Click the link in the email to sign in automatically.</p>
+          <p className="text-sm text-muted-foreground">
+            Can't find the email? Check your spam folder or try again.
+          </p>
+          <Button variant="outline" onClick={() => setIsSent(false)}>
+            Try Again
+          </Button>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="w-full max-w-md mx-auto">

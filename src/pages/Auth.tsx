@@ -8,12 +8,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 
 const Auth = () => {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [processingGuide, setProcessingGuide] = useState(false);
 
   useEffect(() => {
+    // Don't do anything while auth is still loading
+    if (isLoading) return;
+    
     if (user) {
       // Check if the user came here from a guide request
       const name = localStorage.getItem('lead_capture_name');
@@ -63,7 +66,15 @@ const Auth = () => {
         navigate(from);
       }
     }
-  }, [user, navigate, location, processingGuide]);
+  }, [user, navigate, location, processingGuide, isLoading]);
+
+  if (isLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">

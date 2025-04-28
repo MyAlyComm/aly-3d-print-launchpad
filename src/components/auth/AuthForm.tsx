@@ -25,11 +25,22 @@ export const AuthForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!email || !password) {
+      toast.error('Please fill in all fields');
+      return;
+    }
+    
+    if (password.length < 6) {
+      toast.error('Password must be at least 6 characters');
+      return;
+    }
+    
     setLoading(true);
 
     try {
       if (isSignUp) {
-        const { error } = await supabase.auth.signUp({ 
+        const { data, error } = await supabase.auth.signUp({ 
           email, 
           password,
           options: {
@@ -51,10 +62,17 @@ export const AuthForm = () => {
           throw error;
         }
         
-        toast.success('Account created successfully! You can now log in.');
-        setIsSignUp(false); // Switch to login mode
+        if (data?.user) {
+          toast.success('Account created successfully! Logging you in...');
+          // Redirect after successful sign-up
+          const from = location.state?.from?.pathname || "/dashboard";
+          navigate(from);
+        } else {
+          toast.success('Account created! Please check your email to confirm sign up.');
+          setIsSignUp(false); // Switch to login mode
+        }
       } else {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
         
         if (error) {
           // More specific error handling
@@ -66,11 +84,13 @@ export const AuthForm = () => {
           throw error;
         }
         
-        toast.success('Logged in successfully!');
-        
-        // Check if they were redirected from somewhere
-        const from = location.state?.from?.pathname || "/dashboard";
-        navigate(from);
+        if (data?.user) {
+          toast.success('Logged in successfully!');
+          
+          // Check if they were redirected from somewhere
+          const from = location.state?.from?.pathname || "/dashboard";
+          navigate(from);
+        }
       }
     } catch (error) {
       console.error('Authentication error:', error);

@@ -8,14 +8,31 @@ import { supabase } from '@/integrations/supabase/client';
 interface AuthContextType {
   user: User | null;
   session: Session | null;
+  isLoading: boolean;  // Add loading state
+  signOut: () => Promise<void>; // Add signOut method for convenience
 }
 
-const AuthContext = createContext<AuthContextType>({ user: null, session: null });
+const AuthContext = createContext<AuthContextType>({ 
+  user: null, 
+  session: null,
+  isLoading: true,
+  signOut: async () => {} 
+});
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   // Explicitly use React.useState to avoid any potential reference issues
   const [user, setUser] = React.useState<User | null>(null);
   const [session, setSession] = React.useState<Session | null>(null);
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  // Sign out helper method
+  const signOut = async () => {
+    try {
+      await supabase.auth.signOut();
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
 
   React.useEffect(() => {
     // Set up auth state listener
@@ -24,6 +41,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         // Handle auth state changes
         setSession(session);
         setUser(session?.user ?? null);
+        setIsLoading(false);
         
         // For debugging
         if (event) {
@@ -36,13 +54,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
+      setIsLoading(false);
     });
 
     return () => subscription.unsubscribe();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, session }}>
+    <AuthContext.Provider value={{ user, session, isLoading, signOut }}>
       {children}
     </AuthContext.Provider>
   );
