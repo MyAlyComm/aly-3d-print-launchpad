@@ -50,7 +50,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   useEffect(() => {
     if (!checkingAccess && !hasShownToast) {
       if (!user) {
-        toast.error("You need to be logged in to view this content");
+        toast.error("Please sign in to access this content");
         setHasShownToast(true);
       } else if (!hasAccess) {
         toast.error("You need to purchase access to view this content");
