@@ -1,4 +1,6 @@
-import { toast } from "sonner";
+
+// Remove the toast import from the client-side library
+// and implement a simple console logging function instead
 
 const API_ENDPOINT = "wss://ws-api.runware.ai/v1";
 
@@ -51,7 +53,7 @@ export class RunwareService {
         if (response.error || response.errors) {
           console.error("WebSocket error response:", response);
           const errorMessage = response.errorMessage || response.errors?.[0]?.message || "An error occurred";
-          toast.error(errorMessage);
+          console.error(errorMessage); // Replace toast with console.error
           return;
         }
 
@@ -74,7 +76,7 @@ export class RunwareService {
 
       this.ws.onerror = (error) => {
         console.error("WebSocket error:", error);
-        toast.error("Connection error. Please try again.");
+        console.error("Connection error. Please try again."); // Replace toast with console.error
         reject(error);
       };
 
