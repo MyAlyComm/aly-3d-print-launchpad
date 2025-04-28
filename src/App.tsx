@@ -1,224 +1,29 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "@/hooks/useAuth";
-import React from "react";
-import Index from "./pages/Index";
-import Auth from "./pages/Auth";
-import NotFound from "./pages/NotFound";
-import PaymentSuccess from "./pages/PaymentSuccess";
-import Dashboard from "./pages/Dashboard";
-import NewEbookChapter from "./pages/NewEbookChapter";
-import Resources from "./pages/Resources";
-import ProtectedRoute from "./components/ProtectedRoute";
-import Chapter1 from "./pages/Chapter1";
-import Chapter2 from "./pages/Chapter2";
-import Chapter3 from "./pages/Chapter3";
-import Chapter4 from "./pages/Chapter4";
-import Chapter5 from "./pages/Chapter5";
-import Chapter6 from "./pages/Chapter6";
-import Chapter7 from "./pages/Chapter7";
-import Chapter8 from "./pages/Chapter8";
-import Chapter9 from "./pages/Chapter9";
-import Chapter10 from "./pages/Chapter10";
-import Chapter11 from "./pages/Chapter11";
-import EbooksHub from "./pages/EbooksHub";
-import UserDashboard from "./pages/UserDashboard";
-import InsideBlueprint from "./pages/InsideBlueprint";
-import SwankyViewBlueprint from "./pages/SwankyViewBlueprint";
-import FAQDashboard from "./pages/FAQDashboard";
-import MiniBlueprint from "./pages/MiniBlueprint";
-import MySubmissions from "./pages/MySubmissions";
-import ProductDesignEngine from "./pages/ProductDesignEngine";
-import FilamentGuide from "./pages/FilamentGuide";
 
-// Import AI Hub pages
-import AIHub from "./pages/AIHub";
-import ProductIdeaGenerator from "./pages/ai-hub/ProductIdeaGenerator";
-import BackgroundRemover from "./pages/ai-hub/BackgroundRemover";
-import ProductDescriptionGenerator from "./pages/ai-hub/ProductDescriptionGenerator";
-import MarketValidator from "./pages/ai-hub/product-development/MarketValidator";
-import SpecBuilder from "./pages/ai-hub/product-development/SpecBuilder";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AppProviders } from "@/components/AppProviders";
+import { mainRoutes } from "@/routes/mainRoutes";
+import { ebookRoutes } from "@/routes/ebookRoutes";
+import { aiHubRoutes } from "@/routes/aiHubRoutes";
 
 const App = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: 1000 * 60 * 5,
-        retry: 1,
-      },
-    }
-  });
-  
   return (
     <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/inside-blueprint" element={<InsideBlueprint />} />
-                <Route path="/auth" element={<Auth />} />
-                <Route path="/payment-success" element={<PaymentSuccess />} />
-                <Route path="/account" element={
-                  <ProtectedRoute>
-                    <UserDashboard />
-                  </ProtectedRoute>
-                } />
-                
-                {/* Ebooks Hub route */}
-                <Route path="/dashboard" element={
-                  <ProtectedRoute>
-                    <EbooksHub />
-                  </ProtectedRoute>
-                } />
-
-                {/* Add the new Filament Guide route */}
-                <Route path="/dashboard/3d-blueprint/filament-guide" element={
-                  <ProtectedRoute>
-                    <FilamentGuide />
-                  </ProtectedRoute>
-                } />
-
-                {/* 3D Blueprint Ebook routes */}
-                <Route path="/dashboard/3d-blueprint" element={
-                  <ProtectedRoute>
-                    <Dashboard />
-                  </ProtectedRoute>
-                } />
-                <Route path="/dashboard/3d-blueprint/new-chapter" element={
-                  <ProtectedRoute>
-                    <NewEbookChapter />
-                  </ProtectedRoute>
-                } />
-                <Route path="/dashboard/3d-blueprint/resources" element={
-                  <ProtectedRoute>
-                    <Resources />
-                  </ProtectedRoute>
-                } />
-                <Route path="/dashboard/3d-blueprint/chapter-1" element={
-                  <ProtectedRoute>
-                    <Chapter1 />
-                  </ProtectedRoute>
-                } />
-                <Route path="/dashboard/3d-blueprint/chapter-2" element={
-                  <ProtectedRoute>
-                    <Chapter2 />
-                  </ProtectedRoute>
-                } />
-                <Route path="/dashboard/3d-blueprint/chapter-3" element={
-                  <ProtectedRoute>
-                    <Chapter3 />
-                  </ProtectedRoute>
-                } />
-                <Route path="/dashboard/3d-blueprint/chapter-4" element={
-                  <ProtectedRoute>
-                    <Chapter4 />
-                  </ProtectedRoute>
-                } />
-                <Route path="/dashboard/3d-blueprint/chapter-5" element={
-                  <ProtectedRoute>
-                    <Chapter5 />
-                  </ProtectedRoute>
-                } />
-                <Route path="/dashboard/3d-blueprint/chapter-6" element={
-                  <ProtectedRoute>
-                    <Chapter6 />
-                  </ProtectedRoute>
-                } />
-                <Route path="/dashboard/3d-blueprint/chapter-7" element={
-                  <ProtectedRoute>
-                    <Chapter7 />
-                  </ProtectedRoute>
-                } />
-                <Route path="/dashboard/3d-blueprint/chapter-8" element={
-                  <ProtectedRoute>
-                    <Chapter8 />
-                  </ProtectedRoute>
-                } />
-                <Route path="/dashboard/3d-blueprint/chapter-9" element={
-                  <ProtectedRoute>
-                    <Chapter9 />
-                  </ProtectedRoute>
-                } />
-                <Route path="/dashboard/3d-blueprint/chapter-10" element={
-                  <ProtectedRoute>
-                    <Chapter10 />
-                  </ProtectedRoute>
-                } />
-                <Route path="/dashboard/3d-blueprint/chapter-11" element={
-                  <ProtectedRoute>
-                    <Chapter11 />
-                  </ProtectedRoute>
-                } />
-                
-                {/* 3D FAQ Ebook routes */}
-                <Route path="/dashboard/3d-faq" element={
-                  <ProtectedRoute>
-                    <FAQDashboard />
-                  </ProtectedRoute>
-                } />
-                
-                <Route path="/swankyview" element={<SwankyViewBlueprint />} />
-                <Route path="/dashboard/3d-mini" element={
-                  <ProtectedRoute>
-                    <MiniBlueprint />
-                  </ProtectedRoute>
-                } />
-                <Route path="/dashboard/3d-blueprint/submissions" element={
-                  <ProtectedRoute>
-                    <MySubmissions />
-                  </ProtectedRoute>
-                } />
-                <Route path="/dashboard/3d-blueprint/product-design" element={
-                  <ProtectedRoute>
-                    <ProductDesignEngine />
-                  </ProtectedRoute>
-                } />
-                
-                {/* AI Hub routes */}
-                <Route path="/ai-hub" element={
-                  <ProtectedRoute>
-                    <AIHub />
-                  </ProtectedRoute>
-                } />
-                <Route path="/ai-hub/product-development/idea-generator" element={
-                  <ProtectedRoute>
-                    <ProductIdeaGenerator />
-                  </ProtectedRoute>
-                } />
-                <Route path="/ai-hub/product-development/market-validator" element={
-                  <ProtectedRoute>
-                    <MarketValidator />
-                  </ProtectedRoute>
-                } />
-                <Route path="/ai-hub/product-development/spec-builder" element={
-                  <ProtectedRoute>
-                    <SpecBuilder />
-                  </ProtectedRoute>
-                } />
-                <Route path="/ai-hub/visual-marketing/background-remover" element={
-                  <ProtectedRoute>
-                    <BackgroundRemover />
-                  </ProtectedRoute>
-                } />
-                <Route path="/ai-hub/listing-creator/description" element={
-                  <ProtectedRoute>
-                    <ProductDescriptionGenerator />
-                  </ProtectedRoute>
-                } />
-                
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </TooltipProvider>
-        </AuthProvider>
-      </QueryClientProvider>
+      <AppProviders>
+        <BrowserRouter>
+          <Routes>
+            {mainRoutes.map((route, index) => (
+              <Route key={index} path={route.path} element={route.element} />
+            ))}
+            {ebookRoutes.map((route, index) => (
+              <Route key={`ebook-${index}`} path={route.path} element={route.element} />
+            ))}
+            {aiHubRoutes.map((route, index) => (
+              <Route key={`ai-${index}`} path={route.path} element={route.element} />
+            ))}
+          </Routes>
+        </BrowserRouter>
+      </AppProviders>
     </React.StrictMode>
   );
 };
