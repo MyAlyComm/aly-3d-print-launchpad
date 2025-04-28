@@ -16,7 +16,7 @@ export const getSectionName = (sectionId: string): string => {
     'book-structure': 'Book Structure',
     'chapters-overview': 'Chapters Overview',
     'story': 'My Story',
-    'journey': Your Journey',
+    'journey': 'Your Journey',
     'business': 'Your Business',
     'conclusion': 'Conclusion',
     
