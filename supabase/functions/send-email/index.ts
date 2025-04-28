@@ -24,10 +24,11 @@ Deno.serve(async (req) => {
     const protocol = host.includes('localhost') ? 'http' : 'https'
     const baseUrl = `${protocol}://${host}`
 
-    // Set download link based on request type
-    let downloadLink = `${baseUrl}/dashboard`
+    // Always direct people straight to the dashboard
+    const downloadLink = `${baseUrl}/dashboard`
     let emailSubject = 'Your 3D Printing Guide is Ready!'
 
+    // Set email subject based on request type
     if (requestType === 'commercial_license') {
       emailSubject = 'Your Commercial License Access'
     }
@@ -36,6 +37,7 @@ Deno.serve(async (req) => {
       React.createElement(GuideEmail, {
         name,
         downloadLink,
+        requestType,
       })
     )
 

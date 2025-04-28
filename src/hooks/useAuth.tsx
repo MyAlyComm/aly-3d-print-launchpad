@@ -47,11 +47,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         if (event) {
           console.log('Auth event:', event);
           
-          // Redirect to dashboard after email verification
-          if (event === 'SIGNED_IN') {
+          // Redirect to dashboard after email verification or any sign in
+          if (event === 'SIGNED_IN' || event === 'USER_UPDATED') {
             const currentPath = window.location.pathname;
-            // Only redirect if not already on the dashboard
-            if (currentPath !== '/dashboard') {
+            
+            // Check if we're on a non-dashboard page with a token in the URL
+            if (currentPath !== '/dashboard' && window.location.search.includes('token=')) {
+              // Redirect to dashboard if we detect a token parameter in URL
+              console.log('Token detected in URL, redirecting to dashboard');
+              window.location.href = '/dashboard';
+            }
+            // Or if we're just not on the dashboard already
+            else if (currentPath !== '/dashboard') {
+              console.log('User signed in, redirecting to dashboard');
               window.location.href = '/dashboard';
             }
           }

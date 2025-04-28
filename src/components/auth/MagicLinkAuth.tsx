@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -27,7 +28,7 @@ export default function MagicLinkAuth() {
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          // Set redirect to the dashboard path on the current domain
+          // Ensure we always redirect directly to the dashboard
           emailRedirectTo: `${origin}/dashboard`,
         }
       });

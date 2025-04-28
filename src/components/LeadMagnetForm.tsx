@@ -48,7 +48,7 @@ const LeadMagnetForm = ({
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          // Ensure we redirect to the dashboard after verification
+          // Direct straight to dashboard after verification
           emailRedirectTo: `${origin}/dashboard`,
           data: {
             name: name,
@@ -84,7 +84,7 @@ const LeadMagnetForm = ({
           <p className="text-gray-600 text-lg mb-2">We've sent a verification link to:</p>
           <p className="font-medium text-gray-800">{submittedEmail}</p>
           <p className="text-gray-600">
-            Click the link in the email to verify your address<br />and access the guide.
+            Click the link in the email to verify your address<br />and access the dashboard.
           </p>
           <p className="text-sm text-gray-500 mt-4">
             Can't find the email? Check your spam folder.
