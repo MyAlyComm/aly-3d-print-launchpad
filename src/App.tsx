@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -33,6 +34,12 @@ import MiniBlueprint from "./pages/MiniBlueprint";
 import MySubmissions from "./pages/MySubmissions";
 import ProductDesignEngine from "./pages/ProductDesignEngine";
 import FilamentGuide from "./pages/FilamentGuide";
+
+// Import AI Hub pages
+import AIHub from "./pages/AIHub";
+import ProductIdeaGenerator from "./pages/ai-hub/ProductIdeaGenerator";
+import BackgroundRemover from "./pages/ai-hub/BackgroundRemover";
+import ProductDescriptionGenerator from "./pages/ai-hub/ProductDescriptionGenerator";
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -172,6 +179,29 @@ const App = () => {
                     <ProductDesignEngine />
                   </ProtectedRoute>
                 } />
+                
+                {/* AI Hub routes */}
+                <Route path="/ai-hub" element={
+                  <ProtectedRoute>
+                    <AIHub />
+                  </ProtectedRoute>
+                } />
+                <Route path="/ai-hub/product-development/idea-generator" element={
+                  <ProtectedRoute>
+                    <ProductIdeaGenerator />
+                  </ProtectedRoute>
+                } />
+                <Route path="/ai-hub/visual-marketing/background-remover" element={
+                  <ProtectedRoute>
+                    <BackgroundRemover />
+                  </ProtectedRoute>
+                } />
+                <Route path="/ai-hub/listing-creator/description" element={
+                  <ProtectedRoute>
+                    <ProductDescriptionGenerator />
+                  </ProtectedRoute>
+                } />
+                
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>

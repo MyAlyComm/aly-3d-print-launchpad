@@ -2,7 +2,7 @@
 import React, { ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { LogOut, Award, Layout, Book, BookText, BookOpen, Menu } from "lucide-react";
+import { LogOut, Award, Layout, Book, BookText, BookOpen, Menu, SparkleIcon } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -15,6 +15,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
+import { Badge } from "@/components/ui/badge";
 
 type DashboardHeaderProps = {
   title: string;
@@ -90,6 +91,17 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
                 <BookOpen className="mr-2 h-4 w-4" />
                 Resources
               </Button>
+              
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => navigate("/ai-hub")}
+                className="text-primary hover:text-primary/80 flex items-center"
+              >
+                <SparkleIcon className="mr-2 h-4 w-4" />
+                AI Hub
+                <Badge className="ml-1 bg-green-500 text-white text-xs">New</Badge>
+              </Button>
             </nav>
           )}
 
@@ -116,6 +128,11 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
                 <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint/resources")} className="text-gray-800">
                   <BookOpen className="mr-2 h-4 w-4" />
                   Resources
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate("/ai-hub")} className="text-primary">
+                  <SparkleIcon className="mr-2 h-4 w-4" />
+                  AI Hub
+                  <Badge className="ml-2 bg-green-500 text-white text-xs">New</Badge>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
