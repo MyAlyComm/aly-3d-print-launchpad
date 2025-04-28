@@ -1,9 +1,7 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useProductDesign } from "../ProductDesignContext";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 export const ProductDetails = ({ onNext }: { onNext: () => void }) => {
@@ -55,25 +53,7 @@ export const ProductDetails = ({ onNext }: { onNext: () => void }) => {
 
     setIsGenerating(true);
     try {
-      const { data, error } = await supabase.functions.invoke('generate-product', {
-        body: { 
-          productDetails: {
-            category,
-            style,
-            problem,
-            materials,
-            dimensions: {
-              width,
-              height,
-              depth
-            }
-          }
-        }
-      });
-
-      if (error) throw error;
-
-      setProductDetails({
+      const updatedDetails = {
         ...productDetails,
         category,
         style,
@@ -84,9 +64,11 @@ export const ProductDetails = ({ onNext }: { onNext: () => void }) => {
           height,
           depth
         }
-      });
+      };
       
-      await generateProductContent(data);
+      setProductDetails(updatedDetails);
+      
+      await generateProductContent();
       toast.success("Product design generated successfully!");
       onNext();
     } catch (error) {
@@ -194,7 +176,7 @@ export const ProductDetails = ({ onNext }: { onNext: () => void }) => {
             className="flex items-center gap-2"
             disabled={isGenerating || contextIsGenerating}
           >
-            {isGenerating ? (
+            {isGenerating || contextIsGenerating ? (
               <>
                 <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
