@@ -1,14 +1,14 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { User, Settings, BookOpen, CreditCard } from "lucide-react";
+import { User, Settings, BookOpen, CreditCard, ArrowLeft } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { UserProfile } from "@/components/user-dashboard/UserProfile";
 import { UserSubscriptions } from "@/components/user-dashboard/UserSubscriptions";
 import { UserPurchases } from "@/components/user-dashboard/UserPurchases";
 import { UserSettings } from "@/components/user-dashboard/UserSettings";
+import { Button } from "@/components/ui/button";
 
 const UserDashboard = () => {
   const navigate = useNavigate();
@@ -23,12 +23,22 @@ const UserDashboard = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-12">
-        <header className="mb-8">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigate("/dashboard")}
+          className="text-gray-700 hover:text-gray-900 mb-8"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Dashboard
+        </Button>
+        
+        <div className="mb-8">
           <h1 className="text-3xl font-bold tracking-tight">My Account</h1>
           <p className="text-gray-500 mt-2">
             Manage your profile, subscriptions, and purchases
           </p>
-        </header>
+        </div>
         
         <Card className="border-none shadow-sm">
           <CardHeader className="bg-white border-b border-gray-100 rounded-t-lg">

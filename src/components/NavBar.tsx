@@ -38,7 +38,7 @@ const NavBar = () => {
     }
   };
 
-  const handleAuthClick = () => {
+  const handleDashboardClick = () => {
     if (user) {
       navigate("/dashboard");
     } else {
@@ -81,7 +81,7 @@ const NavBar = () => {
           <div className="hidden md:flex items-center space-x-4">
             <LeadMagnetDialog />
             <Button 
-              onClick={handleAuthClick}
+              onClick={handleDashboardClick}
               variant="outline"
             >
               {user ? 'Dashboard' : 'Sign In'}
@@ -147,7 +147,7 @@ const NavBar = () => {
                 </Button>
               </LeadMagnetDialog>
               <Button 
-                onClick={handleAuthClick}
+                onClick={handleDashboardClick}
                 variant="outline"
                 className="w-full"
               >

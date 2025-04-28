@@ -11,21 +11,6 @@ import { ChevronDown, Check } from "lucide-react";
 const blueprints = [
   {
     id: 1,
-    title: "Free Mini Blueprint",
-    price: "FREE",
-    popular: false,
-    isFree: true,
-    description: "FAQ & Quickstart Guide to get you started",
-    features: [
-      "Basic 3D printing concepts",
-      "Frequently asked questions",
-      "Initial setup checklist",
-      "Resource recommendations",
-    ],
-    image: "/lovable-uploads/6356c68c-e0f8-4cae-a628-a5c3d4a3b0f6.png"
-  },
-  {
-    id: 2,
     title: "Facebook Marketplace Secrets",
     price: "$19",
     popular: false,
@@ -40,34 +25,49 @@ const blueprints = [
     image: "/lovable-uploads/80580729-6d4e-4bd0-a66c-dff6d0d890e1.png"
   },
   {
+    id: 2,
+    title: "3D Blueprint",
+    price: "$47",
+    popular: false,
+    isFree: false,
+    description: "The essential roadmap to 3D printing profits",
+    features: [
+      "Business setup guide",
+      "Basic marketing strategy",
+      "Product research templates",
+      "Optimization techniques",
+    ],
+    image: "/lovable-uploads/b1236689-73b3-4e92-9e4d-b466a948bcb1.png"
+  },
+  {
     id: 3,
-    title: "3D Blueprint: Ultimate Edition",
+    title: "3D Blueprint Ultimate Edition",
     price: "$97",
     popular: true,
     isFree: false,
-    description: "The complete roadmap to 3D printing profits",
+    description: "AI-powered roadmap to 3D printing success",
     features: [
       "Comprehensive business setup",
-      "Marketing strategy blueprint",
-      "Pricing calculator & templates",
-      "Advanced optimization techniques",
+      "AI-powered marketing strategies",
+      "Advanced pricing calculator",
+      "Premium templates & tools",
       "Private community access",
     ],
     image: "/lovable-uploads/b1236689-73b3-4e92-9e4d-b466a948bcb1.png"
   },
   {
     id: 4,
-    title: "Enterprise Solutions",
-    price: "From $297",
+    title: "Business in a Box",
+    price: "From $4,997",
     popular: false,
     isFree: false,
-    description: "Tailored solutions for serious entrepreneurs",
+    description: "Complete 'Done for You' business solution",
     features: [
-      "Custom-tailored blueprint",
-      "1-month PrintProfit.io membership",
-      "Product design services",
-      "Full business setup available",
-      "Premium support options",
+      "Custom website development",
+      "Product design consultancy",
+      "Hands-on MyAly team mentoring",
+      "Complete business setup",
+      "Premium support package",
     ],
     image: "/lovable-uploads/89d9a445-0513-4c2a-84d6-673d5cc8ef79.png"
   }
@@ -75,22 +75,22 @@ const blueprints = [
 
 const enterpriseOptions = [
   {
-    id: 4,
-    title: "Custom Tailored 3D Blueprint",
-    price: "$297",
-    description: "Personalized guidance for your success",
-  },
-  {
     id: 5,
-    title: "Product Design Bundle",
-    price: "$997",
-    description: "Full product design service",
+    title: "Business in a Box - Standard",
+    price: "$4,997",
+    description: "Custom website + basic mentoring",
   },
   {
     id: 6,
-    title: "Complete Business Bundle",
-    price: "$1,997",
-    description: "Your entire business, built for you",
+    title: "Business in a Box - Premium",
+    price: "$7,997",
+    description: "Full setup + extended mentoring",
+  },
+  {
+    id: 7,
+    title: "Business in a Box - Elite",
+    price: "$9,997",
+    description: "Everything + 6 months mentoring",
   }
 ];
 
@@ -116,7 +116,16 @@ const BlueprintsSection = ({ onCheckout, open, setOpen }: BlueprintsSectionProps
         {blueprints.map((blueprint) => (
           <div key={blueprint.id}>
             {blueprint.id === 4 ? (
-              <div className="blueprint-card">
+              <div className="blueprint-card relative overflow-hidden">
+                {blueprint.image && (
+                  <div className="mb-4 w-full h-32 overflow-hidden rounded-t-lg">
+                    <img 
+                      src={blueprint.image} 
+                      alt={blueprint.title} 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
                 <div className="mb-4">
                   <h3 className="text-xl font-bold mb-1">{blueprint.title}</h3>
                   <p className="text-gray-600 text-sm mb-4">{blueprint.description}</p>
