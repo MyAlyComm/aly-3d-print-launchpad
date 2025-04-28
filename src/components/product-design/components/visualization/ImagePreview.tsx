@@ -1,18 +1,22 @@
 
 import React from 'react';
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 
 interface ImagePreviewProps {
   images: string[];
   selectedImage: number;
   isGenerating: boolean;
   onImageSelect: (index: number) => void;
+  onGoBack?: () => void;
 }
 
 export const ImagePreview: React.FC<ImagePreviewProps> = ({ 
   images, 
   selectedImage, 
   isGenerating,
-  onImageSelect 
+  onImageSelect,
+  onGoBack
 }) => {
   return (
     <div>
@@ -32,7 +36,14 @@ export const ImagePreview: React.FC<ImagePreviewProps> = ({
             className="max-h-full max-w-full object-contain"
           />
         ) : (
-          <p className="text-gray-500">No preview available. Please go back and generate a product design.</p>
+          <div className="flex flex-col items-center justify-center text-center p-4">
+            <p className="text-gray-500 mb-4">No preview available. Please go back and generate a product design.</p>
+            {onGoBack && (
+              <Button onClick={onGoBack} variant="outline" size="sm" className="flex items-center gap-2">
+                <ArrowLeft className="w-4 h-4" /> Go to Product Details
+              </Button>
+            )}
+          </div>
         )}
       </div>
       {!isGenerating && images && images.length > 0 && (

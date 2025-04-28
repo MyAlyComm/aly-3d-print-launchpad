@@ -24,6 +24,7 @@ export const ProductVisualization = ({ onNext, onPrev }: ProductVisualizationPro
           selectedImage={selectedImage}
           isGenerating={isGenerating}
           onImageSelect={setSelectedImage}
+          onGoBack={onPrev}
         />
         
         <ProductDetails 
@@ -39,7 +40,7 @@ export const ProductVisualization = ({ onNext, onPrev }: ProductVisualizationPro
         >
           Back
         </Button>
-        <Button onClick={onNext}>
+        <Button onClick={onNext} disabled={!productVisualization.images || productVisualization.images.length === 0}>
           Next: Demographics
         </Button>
       </div>
