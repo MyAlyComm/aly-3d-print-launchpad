@@ -33,8 +33,25 @@ export const aiHubRoutes = [
     path: "/ai-hub/listing-creator/description",
     element: <ProtectedRoute><ProductDescriptionGenerator /></ProtectedRoute>
   },
+  // Social media routes - maintain the root path and add specific tool paths
   {
-    path: "/ai-hub/social-media/*",
+    path: "/ai-hub/social-media",
+    element: <ProtectedRoute><SocialMediaHub /></ProtectedRoute>
+  },
+  {
+    path: "/ai-hub/social-media/content-calendar",
+    element: <ProtectedRoute><SocialMediaHub /></ProtectedRoute>
+  },
+  {
+    path: "/ai-hub/social-media/post-creator",
+    element: <ProtectedRoute><SocialMediaHub /></ProtectedRoute>
+  },
+  {
+    path: "/ai-hub/social-media/hashtag-research",
+    element: <ProtectedRoute><SocialMediaHub /></ProtectedRoute>
+  },
+  {
+    path: "/ai-hub/social-media/engagement-helper",
     element: <ProtectedRoute><SocialMediaHub /></ProtectedRoute>
   }
 ];

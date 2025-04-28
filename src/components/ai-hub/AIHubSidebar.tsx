@@ -87,13 +87,17 @@ export const AIHubSidebar = ({ className, isCollapsed = false }: AIHubSidebarPro
   };
   
   const isSubItemActive = (path: string) => {
-    return location.pathname === path;
+    return location.pathname === path || 
+           (path.includes('/social-media/') && location.pathname.includes(path));
   };
 
   React.useEffect(() => {
     // Auto-expand the section containing the active path
     menuItems.forEach(item => {
-      if (item.subItems && item.subItems.some(subItem => location.pathname === subItem.path)) {
+      if (item.subItems && item.subItems.some(subItem => 
+        location.pathname === subItem.path || 
+        (location.pathname.includes('/social-media/') && subItem.path.includes('/social-media/'))
+      )) {
         if (!expandedItems.includes(item.path)) {
           setExpandedItems(prev => [...prev, item.path]);
         }
@@ -146,6 +150,10 @@ export const AIHubSidebar = ({ className, isCollapsed = false }: AIHubSidebarPro
                     >
                       {subItem.icon && <subItem.icon className="mr-2 h-4 w-4" />}
                       <span>{subItem.label}</span>
+                      {subItem.path.includes("/social-media") && 
+                       subItem.path.endsWith("engagement-helper") && (
+                        <Badge variant="default" className="ml-auto text-xs">New</Badge>
+                      )}
                     </Button>
                   ))}
                 </div>
@@ -156,4 +164,4 @@ export const AIHubSidebar = ({ className, isCollapsed = false }: AIHubSidebarPro
       </div>
     </div>
   );
-};
+}
