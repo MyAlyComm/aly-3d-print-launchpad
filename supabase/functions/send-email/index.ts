@@ -17,10 +17,20 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { name, email } = await req.json()
+    const { name, email, requestType } = await req.json()
 
-    // TODO: Replace with actual guide download link
-    const downloadLink = 'https://3dstudio.com/downloads/3d-printing-guide.pdf'
+    // Get host from request or use default
+    const host = req.headers.get('host') || 'yourdomain.com'
+    const protocol = host.includes('localhost') ? 'http' : 'https'
+    const baseUrl = `${protocol}://${host}`
+
+    // Set download link based on request type
+    let downloadLink = `${baseUrl}/dashboard`
+    let emailSubject = 'Your 3D Printing Guide is Ready!'
+
+    if (requestType === 'commercial_license') {
+      emailSubject = 'Your Commercial License Access'
+    }
 
     const html = await renderAsync(
       React.createElement(GuideEmail, {
@@ -32,7 +42,7 @@ Deno.serve(async (req) => {
     const { error } = await resend.emails.send({
       from: '3D Printing Blueprint <onboarding@resend.dev>',
       to: [email],
-      subject: 'Your 3D Printing Guide is Ready!',
+      subject: emailSubject,
       html,
     })
 
