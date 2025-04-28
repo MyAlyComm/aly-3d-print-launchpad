@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { 
@@ -9,7 +8,7 @@ import {
   CardHeader, 
   CardTitle 
 } from "@/components/ui/card";
-import { BookOpen, ArrowRight, Clock, Bookmark, User } from "lucide-react";
+import { BookOpen, ArrowRight, Clock, Bookmark, User, FileText } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 
 const EbooksHub = () => {
@@ -17,6 +16,16 @@ const EbooksHub = () => {
   const { user } = useAuth();
 
   const availableEbooks = [
+    {
+      id: "3d-mini",
+      title: "Quick Start Guide",
+      description: "Get started with 3D printing business essentials in under an hour",
+      chaptersCount: 1,
+      estimatedTime: "45 mins",
+      lastRead: null,
+      progress: 0,
+      coverImage: "/lovable-uploads/cf54e8e5-7d73-4081-8494-a864ec2169e8.png"
+    },
     {
       id: "3d-blueprint",
       title: "3D Printing Blueprint",
@@ -81,7 +90,7 @@ const EbooksHub = () => {
                     alt={ebook.title} 
                     className="w-full h-full object-cover transition-transform group-hover:scale-105"
                   />
-                  {!ebook.disabled && ebook.progress && (
+                  {!ebook.disabled && ebook.progress > 0 && (
                     <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-200">
                       <div 
                         className="h-full bg-primary" 
@@ -123,7 +132,7 @@ const EbooksHub = () => {
                   disabled={ebook.disabled}
                   className="w-full"
                 >
-                  {ebook.disabled ? 'Coming Soon' : 'Continue Reading'}
+                  {ebook.disabled ? 'Coming Soon' : 'Start Reading'}
                   {!ebook.disabled && <ArrowRight className="ml-2 h-4 w-4" />}
                 </Button>
               </CardFooter>
