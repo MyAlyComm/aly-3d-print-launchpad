@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -40,6 +39,8 @@ import AIHub from "./pages/AIHub";
 import ProductIdeaGenerator from "./pages/ai-hub/ProductIdeaGenerator";
 import BackgroundRemover from "./pages/ai-hub/BackgroundRemover";
 import ProductDescriptionGenerator from "./pages/ai-hub/ProductDescriptionGenerator";
+import MarketValidator from "./pages/ai-hub/product-development/MarketValidator";
+import SpecBuilder from "./pages/ai-hub/product-development/SpecBuilder";
 
 const App = () => {
   const queryClient = new QueryClient({
