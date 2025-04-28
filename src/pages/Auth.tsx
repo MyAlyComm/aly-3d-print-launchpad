@@ -11,6 +11,7 @@ const Auth = () => {
   const { user, isLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [processingGuide, setProcessingGuide] = useState(false);
   
   useEffect(() => {
     // Don't do anything while auth is still loading

@@ -63,15 +63,6 @@ export const DashboardSidebarContent = () => {
           All Ebooks
         </Button>
 
-        <Button 
-          variant="ghost" 
-          className="w-full"
-          onClick={() => navigate("/account")}
-        >
-          <User className="mr-2 h-4 w-4" />
-          My Account
-        </Button>
-
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="w-full justify-start bg-primary/5 hover:bg-primary/10">
@@ -94,6 +85,15 @@ export const DashboardSidebarContent = () => {
             )}
           </DropdownMenuContent>
         </DropdownMenu>
+
+        <Button 
+          variant="ghost" 
+          className="w-full"
+          onClick={() => navigate("/account")}
+        >
+          <User className="mr-2 h-4 w-4" />
+          My Account
+        </Button>
 
         <Button 
           variant="ghost" 

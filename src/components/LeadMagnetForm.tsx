@@ -42,16 +42,14 @@ const LeadMagnetForm = ({
     try {
       localStorage.setItem("lead_capture_name", name);
       
-      // Determine the proper redirect URL
-      // For production, use the actual domain; for development, use localhost
-      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-      const baseUrl = isLocalhost ? window.location.origin : 'https://3dprintingblueprint.com';
-      const redirectUrl = `${baseUrl}/dashboard`;
+      // Get the current origin for the redirect URL
+      const origin = window.location.origin;
       
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          emailRedirectTo: redirectUrl,
+          // Ensure we redirect to the dashboard after verification
+          emailRedirectTo: `${origin}/dashboard`,
           data: {
             name: name,
             requestType: requestType,
@@ -86,7 +84,7 @@ const LeadMagnetForm = ({
           <p className="text-gray-600 text-lg mb-2">We've sent a verification link to:</p>
           <p className="font-medium text-gray-800">{submittedEmail}</p>
           <p className="text-gray-600">
-            Click the link in the email to verify your address<br />and access the dashboard.
+            Click the link in the email to verify your address<br />and access the guide.
           </p>
           <p className="text-sm text-gray-500 mt-4">
             Can't find the email? Check your spam folder.

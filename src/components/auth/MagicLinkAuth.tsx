@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -21,17 +22,14 @@ export default function MagicLinkAuth() {
     setIsLoading(true);
 
     try {
-      // Get the absolute URL for redirection
-      // In production, we want to use the actual website domain
-      // For local development, we'll use the current origin
-      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-      const baseUrl = isLocalhost ? window.location.origin : 'https://3dprintingblueprint.com';
-      const redirectUrl = `${baseUrl}/dashboard`;
+      // Get the current origin for the redirect URL
+      const origin = window.location.origin;
       
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          emailRedirectTo: redirectUrl,
+          // Set redirect to the dashboard path on the current domain
+          emailRedirectTo: `${origin}/dashboard`,
         }
       });
 
