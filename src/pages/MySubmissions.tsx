@@ -1,4 +1,3 @@
-
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { useChapterProgress } from "@/hooks/useChapterProgress";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,17 +12,14 @@ const MySubmissions = () => {
   const { chapterProgresses } = useChapterProgress();
   const [selectedChapter, setSelectedChapter] = useState<string>("all");
 
-  // Find Chapter 4 worksheet responses
   const chapter4Data = chapterProgresses?.find(
     (progress) => progress.chapter_number === 4 && progress.section_id === 'worksheet'
   );
 
-  // Parse the stored JSON data for Chapter 4
   const getChapter4Data = () => {
     if (!chapter4Data?.response_data) return null;
 
     try {
-      // Check if response_data has worksheet property
       const responseData = chapter4Data.response_data as Record<string, any>;
       if (!responseData.worksheet || !responseData.worksheet.textInputs) return null;
       
@@ -41,7 +37,6 @@ const MySubmissions = () => {
     }
   };
 
-  // Group responses by chapter for filtering
   const responsesByChapter = chapterProgresses?.reduce((acc, progress) => {
     if (!acc[progress.chapter_number]) {
       acc[progress.chapter_number] = [];
@@ -50,9 +45,10 @@ const MySubmissions = () => {
     return acc;
   }, {} as Record<number, typeof chapterProgresses>) || {};
 
-  // Filter chapters based on selection
   const chaptersToDisplay = selectedChapter === "all" 
-    ? Object.keys(responsesByChapter).map(Number) 
+    ? Object.keys(responsesByChapter)
+        .map(Number)
+        .sort((a, b) => a - b)
     : [parseInt(selectedChapter)];
 
   const chapter4ParsedData = getChapter4Data();
@@ -90,6 +86,26 @@ const MySubmissions = () => {
         </div>
 
         <div className="space-y-8">
+          {chaptersToDisplay.includes(1) && (
+            <Card>
+              <CardHeader>
+                <CardTitle>Chapter 1: Getting Started</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {responsesByChapter[1]?.map(response => (
+                    <div key={response.section_id} className="border p-4 rounded-md">
+                      <h3 className="font-medium mb-2">{formatSectionId(response.section_id)}</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Completed on {formatDate(response.completed_at)}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
           {chaptersToDisplay.includes(2) && (
             <Card>
               <CardHeader>
@@ -142,7 +158,6 @@ const MySubmissions = () => {
   );
 };
 
-// Helper function to render Chapter 2 assessment data
 const renderChapter2Data = (responses: any[] | undefined) => {
   if (!responses) return <p className="text-center text-muted-foreground">No data available</p>;
 
@@ -213,27 +228,22 @@ const renderChapter2Data = (responses: any[] | undefined) => {
   );
 };
 
-// Helper to format assessment values in a readable way
 const formatAssessmentValue = (value: string) => {
   if (!value) return "Not specified";
   
-  // Format budget values
   if (value === "low") return "Low Budget (Under $500)";
   if (value === "medium") return "Medium Budget ($500-$1500)";
   if (value === "high") return "High Budget ($1500+)";
   
-  // Format experience values
   if (value === "none") return "No Experience";
   if (value === "beginner") return "Beginner (Some 3D knowledge)";
   if (value === "intermediate") return "Intermediate (Created prints before)";
   if (value === "advanced") return "Advanced (Regular printing experience)";
   
-  // Format time values
   if (value === "minimal") return "Minimal (5-10 hours/week)";
   if (value === "moderate") return "Moderate (10-20 hours/week)";
   if (value === "substantial") return "Substantial (20+ hours/week)";
   
-  // Format location values
   if (value === "local") return "Local Markets";
   if (value === "regional") return "Regional Markets";
   if (value === "global") return "Global Markets";
@@ -241,9 +251,8 @@ const formatAssessmentValue = (value: string) => {
   return value;
 };
 
-// Helper function to render other chapters
 const renderOtherChapters = (chaptersToDisplay: number[], responsesByChapter: Record<number, any[]>) => {
-  const otherChapters = chaptersToDisplay.filter(chapter => chapter !== 2 && chapter !== 4);
+  const otherChapters = chaptersToDisplay.filter(chapter => ![1, 2, 4].includes(chapter));
   
   if (otherChapters.length === 0) return null;
   
@@ -261,7 +270,6 @@ const renderOtherChapters = (chaptersToDisplay: number[], responsesByChapter: Re
         <CardContent>
           <div className="space-y-4">
             {responses.map(response => {
-              // Skip worksheet sections as they need special handling
               if (response.section_id === 'worksheet') {
                 return renderWorksheetSummary(chapterNum, response);
               }
@@ -282,7 +290,6 @@ const renderOtherChapters = (chaptersToDisplay: number[], responsesByChapter: Re
   });
 };
 
-// Helper to format section IDs to be more readable
 const formatSectionId = (sectionId: string) => {
   return sectionId
     .split('-')
@@ -290,7 +297,6 @@ const formatSectionId = (sectionId: string) => {
     .join(' ');
 };
 
-// Format dates in a user-friendly way
 const formatDate = (dateString: string | null) => {
   if (!dateString) return "Not completed";
   
@@ -304,7 +310,6 @@ const formatDate = (dateString: string | null) => {
   });
 };
 
-// Render worksheet summary for chapters other than 2 and 4
 const renderWorksheetSummary = (chapterNum: number, response: any) => {
   if (!response.response_data) return null;
   
