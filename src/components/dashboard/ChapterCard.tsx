@@ -22,6 +22,15 @@ export function ChapterCard({
 }: ChapterCardProps) {
   const navigate = useNavigate();
 
+  const handleNavigation = () => {
+    // If it's chapter 0 (introduction), use the new-chapter route
+    const path = number === 0 
+      ? "/dashboard/3d-blueprint/new-chapter"
+      : `/dashboard/3d-blueprint/chapter-${number}`;
+    
+    navigate(path);
+  };
+
   return (
     <Card className={cn(
       "transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative overflow-hidden grid md:grid-cols-[1fr_250px]",
@@ -44,7 +53,7 @@ export function ChapterCard({
             {description}
           </p>
           <Button 
-            onClick={() => navigate(`/dashboard/chapter-${number}`)}
+            onClick={handleNavigation}
             variant={isCompleted ? "secondary" : "default"}
             className="w-full"
           >
