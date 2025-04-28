@@ -1,6 +1,6 @@
 
 import React from 'npm:react@18.3.1'
-import { Resend } from 'npm:resend@0.0.0'
+import { Resend } from 'npm:resend@2.0.0'
 import { renderAsync } from 'npm:@react-email/components@0.0.22'
 import { GuideEmail } from './_templates/guide-email.tsx'
 
