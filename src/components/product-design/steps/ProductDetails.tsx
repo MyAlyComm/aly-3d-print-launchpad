@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 export const ProductDetails = ({ onNext }: { onNext: () => void }) => {
-  const { productDetails, setProductDetails, generateProductContent, isGenerating } = useProductDesign();
+  const { productDetails, setProductDetails, generateProductContent, isGenerating: contextIsGenerating } = useProductDesign();
   const [category, setCategory] = useState(productDetails.category);
   const [problem, setProblem] = useState(productDetails.problem);
   const [style, setStyle] = useState(productDetails.style);
@@ -191,7 +192,7 @@ export const ProductDetails = ({ onNext }: { onNext: () => void }) => {
           <Button 
             type="submit"
             className="flex items-center gap-2"
-            disabled={isGenerating}
+            disabled={isGenerating || contextIsGenerating}
           >
             {isGenerating ? (
               <>
