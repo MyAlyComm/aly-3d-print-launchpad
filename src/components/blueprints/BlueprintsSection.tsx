@@ -69,7 +69,7 @@ const blueprints = [
       "Full business setup available",
       "Premium support options",
     ],
-    image: "/lovable-uploads/d75c7095-dce2-4ec8-af3e-e696226cc41f.png"
+    image: "/lovable-uploads/5acc4361-8db3-421d-b837-4498e71155d9.png"
   }
 ];
 
