@@ -191,6 +191,16 @@ const App = () => {
                     <ProductIdeaGenerator />
                   </ProtectedRoute>
                 } />
+                <Route path="/ai-hub/product-development/market-validator" element={
+                  <ProtectedRoute>
+                    <MarketValidator />
+                  </ProtectedRoute>
+                } />
+                <Route path="/ai-hub/product-development/spec-builder" element={
+                  <ProtectedRoute>
+                    <SpecBuilder />
+                  </ProtectedRoute>
+                } />
                 <Route path="/ai-hub/visual-marketing/background-remover" element={
                   <ProtectedRoute>
                     <BackgroundRemover />
