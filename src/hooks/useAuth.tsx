@@ -1,4 +1,3 @@
-
 // Make sure React is explicitly imported
 import * as React from 'react';
 import { createContext, useContext, useEffect, useState } from 'react';
@@ -37,7 +36,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   React.useEffect(() => {
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      async (event, session) => {
         // Handle auth state changes
         setSession(session);
         setUser(session?.user ?? null);
@@ -46,6 +45,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         // For debugging
         if (event) {
           console.log('Auth event:', event);
+          
+          // Redirect to dashboard after email verification
+          if (event === 'SIGNED_IN') {
+            const currentPath = window.location.pathname;
+            // Only redirect if not already on the dashboard
+            if (currentPath !== '/dashboard') {
+              window.location.href = '/dashboard';
+            }
+          }
         }
       }
     );
