@@ -106,10 +106,11 @@ const HeroSection = () => {
                       alt="3D Printing Blueprint by Aly Yu" 
                       className={`w-full h-auto transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                       onLoad={() => setImageLoaded(true)}
-                      loading="lazy"
+                      loading="eager" // Changed to eager since this is above the fold
                       decoding="async"
                       width={isMobile ? 400 : 600}
                       height={isMobile ? 300 : 450}
+                      fetchPriority="high" // Added high priority fetching
                     />
                   </div>
                 </div>
