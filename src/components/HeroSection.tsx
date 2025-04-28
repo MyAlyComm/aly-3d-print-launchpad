@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import LeadMagnetForm from "./LeadMagnetForm";
@@ -7,6 +6,14 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Star } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import TrustedCompanies from "./TrustedCompanies";
+import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+
+const LoadingFallback = () => (
+  <div className="w-full h-48 flex items-center justify-center">
+    <Skeleton className="w-full h-32" />
+  </div>
+);
 
 const HeroSection = () => {
   const [open, setOpen] = useState(false);
@@ -15,9 +22,15 @@ const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Delay loading non-critical elements
-    const timer = setTimeout(() => setIsVisible(true), 1000);
+    const timer = setTimeout(() => setIsVisible(true), 500); // Reduced delay for critical content
     return () => clearTimeout(timer);
+  }, []);
+
+  // Preload critical image
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/lovable-uploads/20fb5ec7-9362-4ced-aa5c-42d3a7c41f92.png";
+    img.onload = () => setImageLoaded(true);
   }, []);
 
   return (
@@ -58,7 +71,7 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Non-critical content loaded after delay */}
+        {/* Non-critical content with loading state */}
         {isVisible && (
           <>
             <div className="mt-8 md:mt-12 flex flex-col items-center space-y-2">
@@ -106,18 +119,20 @@ const HeroSection = () => {
                       alt="3D Printing Blueprint by Aly Yu" 
                       className={`w-full h-auto transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                       onLoad={() => setImageLoaded(true)}
-                      loading="eager" // Changed to eager since this is above the fold
+                      loading="eager"
                       decoding="async"
                       width={isMobile ? 400 : 600}
                       height={isMobile ? 300 : 450}
-                      fetchPriority="high" // Added high priority fetching
+                      fetchPriority="high"
                     />
                   </div>
                 </div>
               </div>
             </div>
 
-            <TrustedCompanies />
+            <Suspense fallback={<LoadingFallback />}>
+              <TrustedCompanies />
+            </Suspense>
           </>
         )}
       </div>
