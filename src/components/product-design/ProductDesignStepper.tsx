@@ -25,7 +25,7 @@ export const ProductDesignStepper = ({ currentStep, onNext, onPrev }: ProductDes
         {/* Progress Indicator */}
         <div className="flex items-center justify-between mb-8">
           {steps.map((step, index) => (
-            <>
+            <React.Fragment key={step.number}>
               <div className="flex flex-col items-center">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center 
                   ${currentStep >= step.number ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500'}`}>
@@ -36,7 +36,7 @@ export const ProductDesignStepper = ({ currentStep, onNext, onPrev }: ProductDes
               {index < steps.length - 1 && (
                 <div className={`h-1 flex-1 mx-2 ${currentStep > step.number ? 'bg-primary' : 'bg-gray-200'}`} />
               )}
-            </>
+            </React.Fragment>
           ))}
         </div>
 

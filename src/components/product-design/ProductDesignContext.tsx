@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import { RunwareService, GeneratedImage, GenerateImageParams } from '@/services/runwareService';
+import { toast } from 'sonner';
 
 interface ProductDetails {
   category: string;
@@ -236,12 +237,14 @@ export const ProductDesignProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const generateProductContent = async (apiKey: string) => {
     if (!productDetails.category || !productDetails.style) {
-      alert("Please complete the product details first");
+      toast.error("Please complete the product details first");
       return;
     }
     
     setIsGenerating(true);
     try {
+      console.log("Starting product generation...");
+      
       // Generate product name and description
       const productName = generateProductName(productDetails.category, productDetails.style);
       const productDescription = generateDescription(productDetails.category, productDetails.problem, productDetails.style);
@@ -250,6 +253,8 @@ export const ProductDesignProvider: React.FC<{ children: React.ReactNode }> = ({
       // Generate image using Runware API
       const runwareService = new RunwareService(apiKey);
       const prompt = generateProductPrompt(productDetails);
+      
+      console.log("Generating images with prompt:", prompt);
       
       // Get multiple variations
       const imagePromises = [];
@@ -262,8 +267,12 @@ export const ProductDesignProvider: React.FC<{ children: React.ReactNode }> = ({
         );
       }
       
+      console.log("Image promises created, waiting for results...");
       const generatedImages = await Promise.all(imagePromises);
+      console.log("Images generated:", generatedImages);
+      
       const imageUrls = generatedImages.map(img => img.imageURL);
+      console.log("Image URLs:", imageUrls);
       
       setProductVisualization({
         images: imageUrls,
@@ -273,12 +282,14 @@ export const ProductDesignProvider: React.FC<{ children: React.ReactNode }> = ({
         features,
       });
       
+      console.log("Product visualization set successfully");
+      
       // We'll keep the default demographics and marketing data for now
-      // In a real implementation, you'd want to adjust these based on the product details too
       
     } catch (error) {
       console.error("Error generating product content:", error);
-      alert("Failed to generate product content. Please check your API key and try again.");
+      toast.error("Failed to generate product content. Please check your API key and try again.");
+      throw error; // Rethrow the error to let the component handle it
     } finally {
       setIsGenerating(false);
     }

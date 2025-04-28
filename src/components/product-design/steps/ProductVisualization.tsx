@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { useProductDesign } from "../ProductDesignContext";
 import { useState } from "react";
@@ -8,7 +9,7 @@ interface ProductVisualizationProps {
 }
 
 export const ProductVisualization = ({ onNext, onPrev }: ProductVisualizationProps) => {
-  const { productVisualization, productDetails } = useProductDesign();
+  const { productVisualization, productDetails, isGenerating } = useProductDesign();
   const [selectedImage, setSelectedImage] = useState<number>(0);
 
   return (
@@ -18,46 +19,60 @@ export const ProductVisualization = ({ onNext, onPrev }: ProductVisualizationPro
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
           <div className="bg-gray-100 rounded-md h-80 flex items-center justify-center mb-4 overflow-hidden">
-            {productVisualization.mainImage ? (
+            {isGenerating ? (
+              <div className="flex flex-col items-center justify-center">
+                <svg className="animate-spin h-8 w-8 text-primary mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <p className="text-gray-500">Generating preview...</p>
+              </div>
+            ) : productVisualization.images && productVisualization.images.length > 0 ? (
               <img 
                 src={productVisualization.images[selectedImage]} 
                 alt="Product visualization" 
                 className="max-h-full max-w-full object-contain"
               />
             ) : (
-              <p className="text-gray-500">Loading preview...</p>
+              <p className="text-gray-500">No preview available. Please go back and generate a product design.</p>
             )}
           </div>
-          <div className="grid grid-cols-4 gap-2">
-            {productVisualization.images.map((imageUrl, index) => (
-              <div 
-                key={index}
-                className={`bg-gray-100 rounded-md aspect-square flex items-center justify-center cursor-pointer overflow-hidden ${
-                  selectedImage === index ? 'ring-2 ring-primary' : ''
-                }`}
-                onClick={() => setSelectedImage(index)}
-              >
-                <img 
-                  src={imageUrl} 
-                  alt={`View ${index + 1}`} 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
+          {!isGenerating && productVisualization.images && productVisualization.images.length > 0 && (
+            <div className="grid grid-cols-4 gap-2">
+              {productVisualization.images.map((imageUrl, index) => (
+                <div 
+                  key={index}
+                  className={`bg-gray-100 rounded-md aspect-square flex items-center justify-center cursor-pointer overflow-hidden ${
+                    selectedImage === index ? 'ring-2 ring-primary' : ''
+                  }`}
+                  onClick={() => setSelectedImage(index)}
+                >
+                  <img 
+                    src={imageUrl} 
+                    alt={`View ${index + 1}`} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         
         <div>
-          <h3 className="font-bold text-lg mb-3">{productVisualization.productName}</h3>
-          <p className="text-gray-600 mb-4">{productVisualization.productDescription}</p>
+          <h3 className="font-bold text-lg mb-3">{productVisualization.productName || "Product Name"}</h3>
+          <p className="text-gray-600 mb-4">{productVisualization.productDescription || "Product description will appear here after generation."}</p>
           
           <div className="mb-4">
             <h4 className="font-medium text-gray-700 mb-2">Key Features</h4>
-            <ul className="list-disc pl-5 text-gray-600">
-              {productVisualization.features.map((feature, index) => (
-                <li key={index}>{feature}</li>
-              ))}
-            </ul>
+            {productVisualization.features && productVisualization.features.length > 0 ? (
+              <ul className="list-disc pl-5 text-gray-600">
+                {productVisualization.features.map((feature, index) => (
+                  <li key={index}>{feature}</li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-gray-500">Features will be listed here.</p>
+            )}
           </div>
           
           <div className="mb-4">
