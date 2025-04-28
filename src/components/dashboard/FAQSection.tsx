@@ -7,7 +7,6 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 
-// FAQ section type definition
 export interface FAQSectionType {
   id: string;
   title: string;
@@ -24,35 +23,43 @@ interface FAQSectionProps {
 
 export const FAQSection = ({ sections }: FAQSectionProps) => {
   return (
-    <Card>
-      <CardContent className="p-6 space-y-4">
+    <Card className="backdrop-blur-sm">
+      <CardContent className="p-6 space-y-6">
         {sections.map((section) => (
-          <Collapsible key={section.id} className="space-y-2">
-            <Card className={`bg-gradient-to-r ${section.gradient} transition-colors duration-300`}>
-              <div className="p-4">
-                <div className="flex items-start gap-4">
-                  <img 
-                    src={section.image} 
-                    alt={section.title}
-                    className="w-16 h-16 object-cover rounded-lg flex-shrink-0 shadow-md"
-                  />
+          <Collapsible key={section.id} className="space-y-3">
+            <Card className={`bg-gradient-to-r ${section.gradient} hover:shadow-lg transition-all duration-300 group`}>
+              <div className="p-5">
+                <div className="flex items-start gap-5">
+                  <div className="w-20 h-20 rounded-xl overflow-hidden shadow-lg transform group-hover:scale-105 transition-transform duration-300">
+                    <img 
+                      src={section.image} 
+                      alt={section.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                   <div className="flex-1 min-w-0">
                     <CollapsibleTrigger className="flex items-center justify-between w-full text-left group">
-                      <div className="flex items-center gap-2">
-                        <section.icon className="h-5 w-5 text-gray-600" />
-                        <div>
-                          <h3 className="font-medium text-sm md:text-base text-gray-900 group-hover:text-gray-700 transition-colors break-words">{section.title}</h3>
-                          <p className="text-xs md:text-sm text-gray-600 break-words">{section.description}</p>
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-3">
+                          <section.icon className="h-6 w-6 text-primary/80" />
+                          <h3 className="font-semibold text-lg md:text-xl text-gray-800 group-hover:text-primary transition-colors break-words">
+                            {section.title}
+                          </h3>
                         </div>
+                        <p className="text-sm md:text-base text-gray-600 break-words leading-relaxed">
+                          {section.description}
+                        </p>
                       </div>
-                      <ChevronDown className="h-4 w-4 shrink-0 text-gray-600 transition-transform duration-200" />
+                      <ChevronDown className="h-5 w-5 shrink-0 text-gray-500 transition-transform duration-300 group-hover:text-primary" />
                     </CollapsibleTrigger>
                   </div>
                 </div>
-                <CollapsibleContent className="mt-4">
-                  <div className="prose prose-sm max-w-none">
-                    <div className="whitespace-pre-line text-sm text-gray-600 pl-20">
-                      {section.content}
+                <CollapsibleContent className="mt-6">
+                  <div className="pl-24">
+                    <div className="prose prose-sm max-w-none">
+                      <div className="text-gray-600 leading-relaxed whitespace-pre-line">
+                        {section.content}
+                      </div>
                     </div>
                   </div>
                 </CollapsibleContent>
