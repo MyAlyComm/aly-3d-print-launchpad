@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { AIHubLayout } from "@/components/ai-hub/AIHubLayout";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Check, Copy, Edit, Download, RefreshCw, Loader, BookText, Zap, Heart } from "lucide-react";
+import { Check, Copy, Edit, Download, RefreshCw, Loader, BookText, Zap, Heart, ImageIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -84,7 +83,6 @@ const ProductDescriptionGenerator = () => {
     setProgress(0);
     setActiveTab("generating");
     
-    // Simulate AI processing with progress updates
     const interval = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
@@ -95,7 +93,6 @@ const ProductDescriptionGenerator = () => {
       });
     }, 100);
     
-    // In a real implementation, this would be an API call to an AI service
     setTimeout(() => {
       const generatedDescriptions: GeneratedDescription[] = [
         {
@@ -143,7 +140,6 @@ const ProductDescriptionGenerator = () => {
         d.id === id ? { ...d, copied: true } : d
       ));
       
-      // Reset "copied" status after 2 seconds
       setTimeout(() => {
         setDescriptions(descriptions.map(d => 
           d.id === id ? { ...d, copied: false } : d
@@ -158,7 +154,6 @@ const ProductDescriptionGenerator = () => {
     setActiveTab("generating");
     setProgress(0);
     
-    // Simulate AI processing with progress updates
     const interval = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
@@ -169,7 +164,6 @@ const ProductDescriptionGenerator = () => {
       });
     }, 100);
     
-    // In a real implementation, this would be an API call to an AI service
     setTimeout(() => {
       const existingDescriptionIndex = descriptions.findIndex(d => d.type === type);
       
@@ -641,7 +635,7 @@ const ProductDescriptionGenerator = () => {
                       <div className="border rounded-md p-4">
                         <div className="flex items-center mb-4">
                           <div className="w-16 h-16 bg-gray-200 rounded flex items-center justify-center">
-                            <Image className="h-8 w-8 text-gray-400" />
+                            <ImageIcon className="h-8 w-8 text-gray-400" />
                           </div>
                           <div className="ml-4">
                             <h3 className="font-bold">{formData.productName}</h3>
