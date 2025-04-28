@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -35,9 +34,9 @@ const menuItems = [
     ]
   },
   {
-    label: "Listing Creator",
+    label: "Product Listing",
     icon: Tag,
-    path: "/ai-hub/listing-creator",
+    path: "/ai-hub/product-listing",
     subItems: [
       { label: "Title Generator", path: "/ai-hub/listing-creator/title" },
       { label: "Description Writer", path: "/ai-hub/listing-creator/description", isNew: true },
