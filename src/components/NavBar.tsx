@@ -52,16 +52,16 @@ const NavBar = () => {
           </div>
 
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-gray-700 hover:text-primary font-medium">
+            <a href="/" className="text-gray-700 hover:text-primary font-medium">
               Home
             </a>
-            <a href="#" className="text-gray-700 hover:text-primary font-medium">
+            <a href="/about" className="text-gray-700 hover:text-primary font-medium">
               About
             </a>
-            <a href="#" className="text-gray-700 hover:text-primary font-medium">
+            <a href="#blueprints" className="text-gray-700 hover:text-primary font-medium">
               Blueprints
             </a>
-            <a href="#" className="text-gray-700 hover:text-primary font-medium">
+            <a href="#testimonials" className="text-gray-700 hover:text-primary font-medium">
               Testimonials
             </a>
           </div>
@@ -111,16 +111,16 @@ const NavBar = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 pt-4 pb-4 border-t border-gray-200">
             <div className="flex flex-col space-y-4">
-              <a href="#" className="text-gray-700 hover:text-primary py-2">
+              <a href="/" className="text-gray-700 hover:text-primary py-2">
                 Home
               </a>
-              <a href="#" className="text-gray-700 hover:text-primary py-2">
+              <a href="/about" className="text-gray-700 hover:text-primary py-2">
                 About
               </a>
-              <a href="#" className="text-gray-700 hover:text-primary py-2">
+              <a href="#blueprints" className="text-gray-700 hover:text-primary py-2">
                 Blueprints
               </a>
-              <a href="#" className="text-gray-700 hover:text-primary py-2">
+              <a href="#testimonials" className="text-gray-700 hover:text-primary py-2">
                 Testimonials
               </a>
               <LeadMagnetDialog>
