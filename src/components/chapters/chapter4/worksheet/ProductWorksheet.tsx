@@ -3,15 +3,18 @@ import { useToast } from "@/components/ui/use-toast";
 import { useChapterForm } from "@/hooks/useChapterForm";
 import { ProductScoreCard } from "./ProductScoreCard";
 import { ProductTrinitySelection } from "./ProductTrinitySelection";
-import { SaveButton } from "../../../chapters/chapter3/worksheet/SaveButton";
-import { WorksheetFooter } from "../../../chapters/chapter3/worksheet/WorksheetFooter";
-import { calculateFinalScore, calculateMatchTotal, calculateProfitsTotal } from "@/utils/scoringUtils";
+import { SaveButton } from "../../chapter3/worksheet/SaveButton";
+import { WorksheetFooter } from "../../chapter3/worksheet/WorksheetFooter";
+import { 
+  calculateProfitsTotal, 
+  calculateMatchTotal, 
+  calculateFinalScore 
+} from "@/utils/scoringUtils";
 
 export const ProductWorksheet = () => {
   const { toast } = useToast();
   const { formState, saveResponse, isLoading } = useChapterForm(4, 'worksheet');
   
-  // PROFITS score state for each product
   const [profitsScores, setProfitsScores] = useState<{
     [key: string]: {
       p: string;
@@ -31,7 +34,6 @@ export const ProductWorksheet = () => {
     product5: { p: '', r: '', o: '', f: '', i: '', t: '', s: '', total: '' },
   });
 
-  // MATCH score state for each product
   const [matchScores, setMatchScores] = useState<{
     [key: string]: {
       m: string;
@@ -49,7 +51,6 @@ export const ProductWorksheet = () => {
     product5: { m: '', a: '', t: '', c: '', h: '', total: '' },
   });
 
-  // Product names and final scores state
   const [productNames, setProductNames] = useState({
     product1: '',
     product2: '',
@@ -66,7 +67,6 @@ export const ProductWorksheet = () => {
     product5: '',
   });
 
-  // Trinity selections
   const [trinity, setTrinity] = useState({
     safeBet: '',
     profitMaximizer: '',
@@ -74,13 +74,10 @@ export const ProductWorksheet = () => {
     plusOne: '',
   });
 
-  // Initialize form state from saved data if available
   useEffect(() => {
     if (!isLoading && formState) {
-      // Extract saved data from the formState
       const savedData = formState.worksheet?.textInputs || {};
       
-      // Initialize product names if they exist in saved data
       if (savedData.productNames) {
         try {
           const parsedProductNames = JSON.parse(savedData.productNames);
@@ -92,7 +89,6 @@ export const ProductWorksheet = () => {
         }
       }
 
-      // Initialize profits scores if they exist in saved data
       if (savedData.profitsScores) {
         try {
           const parsedProfitsScores = JSON.parse(savedData.profitsScores);
@@ -104,7 +100,6 @@ export const ProductWorksheet = () => {
         }
       }
 
-      // Initialize match scores if they exist in saved data
       if (savedData.matchScores) {
         try {
           const parsedMatchScores = JSON.parse(savedData.matchScores);
@@ -116,7 +111,6 @@ export const ProductWorksheet = () => {
         }
       }
 
-      // Initialize final scores if they exist in saved data
       if (savedData.finalScores) {
         try {
           const parsedFinalScores = JSON.parse(savedData.finalScores);
@@ -128,7 +122,6 @@ export const ProductWorksheet = () => {
         }
       }
 
-      // Initialize trinity selections if they exist in saved data
       if (savedData.trinity) {
         try {
           const parsedTrinity = JSON.parse(savedData.trinity);
@@ -142,7 +135,6 @@ export const ProductWorksheet = () => {
     }
   }, [isLoading, formState]);
 
-  // Handle product name change
   const handleProductNameChange = (product: string, value: string) => {
     setProductNames(prev => ({
       ...prev,
@@ -150,7 +142,6 @@ export const ProductWorksheet = () => {
     }));
   };
 
-  // Handle PROFITS score change
   const handleProfitsChange = (product: string, factor: string, value: string) => {
     setProfitsScores(prev => ({
       ...prev,
@@ -160,7 +151,6 @@ export const ProductWorksheet = () => {
       }
     }));
     
-    // Recalculate total
     setTimeout(() => {
       const total = calculateProfitsTotal(profitsScores[product]);
       setProfitsScores(prev => ({
@@ -172,12 +162,10 @@ export const ProductWorksheet = () => {
         }
       }));
       
-      // Update final score
       calculateFinalScore(product, total.toString(), matchScores[product].total, setFinalScores);
     }, 100);
   };
 
-  // Handle MATCH score change
   const handleMatchChange = (product: string, factor: string, value: string) => {
     setMatchScores(prev => ({
       ...prev,
@@ -187,7 +175,6 @@ export const ProductWorksheet = () => {
       }
     }));
     
-    // Recalculate total
     setTimeout(() => {
       const total = calculateMatchTotal(matchScores[product]);
       setMatchScores(prev => ({
@@ -199,12 +186,10 @@ export const ProductWorksheet = () => {
         }
       }));
       
-      // Update final score
       calculateFinalScore(product, profitsScores[product].total, total.toString(), setFinalScores);
     }, 100);
   };
 
-  // Handle trinity selection changes
   const handleTrinityChange = (type: string, value: string) => {
     setTrinity(prev => ({
       ...prev,
@@ -212,9 +197,7 @@ export const ProductWorksheet = () => {
     }));
   };
 
-  // Save all worksheet responses
   const handleSave = () => {
-    // Convert state objects to JSON strings for storage in textInputs
     saveResponse('worksheet', {
       textInputs: {
         productNames: JSON.stringify(productNames),
@@ -225,7 +208,7 @@ export const ProductWorksheet = () => {
       }
     }, true);
   };
-  
+
   return (
     <div className="space-y-8">
       <h2 className="text-2xl font-bold">Chapter 4 Worksheet: Evaluating Your First Products</h2>
