@@ -42,7 +42,7 @@ const NavBar = () => {
     if (user) {
       navigate("/dashboard");
     } else {
-      navigate("/auth");
+      navigate("/auth", { state: { from: location } });
     }
   };
 
