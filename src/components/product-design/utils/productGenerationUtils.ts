@@ -1,3 +1,4 @@
+import { ProductDetails } from '../types/productDesignTypes';
 
 export const generateProductName = (category: string, style: string): string => {
   const stylePrefix = {
