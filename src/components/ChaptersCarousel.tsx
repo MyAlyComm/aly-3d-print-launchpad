@@ -1,5 +1,5 @@
 
-import { Book, Printer3d, Megaphone, Trophy } from "lucide-react";
+import { Book, Printer, Megaphone, Trophy } from "lucide-react";
 import { PhotoCarousel } from "./photo-carousel/PhotoCarousel";
 import { motion } from "framer-motion";
 
@@ -19,7 +19,7 @@ const ChaptersCarousel = () => {
       hoverImage: "/lovable-uploads/c846a9eb-c5c7-4610-b64a-bef92497f7a2.png",
       month: "Chapter 5",
       description: "Choosing Your Production Tools. A comprehensive guide to selecting the right 3D printers and essential equipment for your business needs.",
-      icon: <Printer3d className="w-5 h-5 text-purple-500 hover:scale-110 transition-transform duration-300" />,
+      icon: <Printer className="w-5 h-5 text-purple-500 hover:scale-110 transition-transform duration-300" />,
       bgColor: "bg-gradient-to-br from-purple-500/10 to-purple-500/5",
       emoji: "🖨️"
     },
