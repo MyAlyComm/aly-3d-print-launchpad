@@ -91,10 +91,13 @@ export function useChapterProgress() {
 
   const isChapterCompleted = (chapterNumber: number) => {
     const requiredSections = getRequiredSectionsForChapter(chapterNumber);
+    
+    // Get completed sections for this chapter
     const completedSections = chapterProgresses?.filter(
       (progress) => progress.chapter_number === chapterNumber && progress.completed_at
     ) || [];
 
+    // Check if all required sections are completed
     return requiredSections.every((section) =>
       completedSections.some((completed) => completed.section_id === section)
     );
@@ -116,7 +119,9 @@ export function useChapterProgress() {
   };
 
   const calculateOverallProgress = () => {
-    const totalChapters = 11; // Introduction (0) + 10 chapters
+    const totalChapters = 12; // Introduction (0) + 11 chapters
+    
+    // Count unique completed chapters
     const completedChapters = Array.from({ length: totalChapters }, (_, i) => i)
       .filter(isChapterCompleted)
       .length;
@@ -162,6 +167,8 @@ export function useChapterProgress() {
         return [...commonSections, 'scaling-mindset', 'production-scaling', 'market-expansion', 'team-building'];
       case 10:
         return [...commonSections, 'future-value', 'competitive-moat', 'future-strategy'];
+      case 11:
+        return [...commonSections, 'final-assessment', 'implementation-plan', 'conclusion'];
       default:
         return commonSections;
     }

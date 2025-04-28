@@ -1,11 +1,17 @@
+
 import { Trophy, BookOpen, Rocket } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { useChapterProgress } from "@/hooks/useChapterProgress";
 
 export const StatsCards = () => {
-  const { chapterProgresses, calculateOverallProgress } = useChapterProgress();
+  const { chapterProgresses, calculateOverallProgress, isChapterCompleted } = useChapterProgress();
   const progress = calculateOverallProgress();
-  const completedChapters = chapterProgresses?.filter(p => p.completed_at).length || 0;
+  
+  // Count unique completed chapters using isChapterCompleted helper
+  const completedChapters = Array.from({ length: 12 }, (_, i) => i)
+    .filter(isChapterCompleted)
+    .length;
+    
   // Now we have 12 total chapters (Introduction + 11 chapters)
   const totalChapters = 12;
   
@@ -14,10 +20,7 @@ export const StatsCards = () => {
     if (!chapterProgresses) return 0;
     
     for (let i = 0; i <= 11; i++) {
-      const chapterComplete = chapterProgresses.some(
-        p => p.chapter_number === i && p.completed_at
-      );
-      if (!chapterComplete) return i;
+      if (!isChapterCompleted(i)) return i;
     }
     return 11; // Return last chapter if all are complete
   };
