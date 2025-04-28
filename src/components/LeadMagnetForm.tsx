@@ -42,14 +42,16 @@ const LeadMagnetForm = ({
     try {
       localStorage.setItem("lead_capture_name", name);
       
-      // Get the current origin for the redirect URL
-      const origin = window.location.origin;
+      // Determine the proper redirect URL
+      // For production, use the actual domain; for development, use localhost
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      const baseUrl = isLocalhost ? window.location.origin : 'https://3dprintingblueprint.com';
+      const redirectUrl = `${baseUrl}/dashboard`;
       
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          // Direct straight to dashboard after verification
-          emailRedirectTo: `${origin}/dashboard`,
+          emailRedirectTo: redirectUrl,
           data: {
             name: name,
             requestType: requestType,

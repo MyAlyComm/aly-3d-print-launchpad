@@ -1,6 +1,6 @@
 
 import React from 'npm:react@18.3.1'
-import { Resend } from 'npm:resend@4.0.0'
+import { Resend } from 'npm:resend@0.0.0'
 import { renderAsync } from 'npm:@react-email/components@0.0.22'
 import { GuideEmail } from './_templates/guide-email.tsx'
 
@@ -19,13 +19,12 @@ Deno.serve(async (req) => {
   try {
     const { name, email, requestType } = await req.json()
 
-    // Get host from request or use default
-    const host = req.headers.get('host') || 'yourdomain.com'
-    const protocol = host.includes('localhost') ? 'http' : 'https'
-    const baseUrl = `${protocol}://${host}`
-
-    // Always direct people straight to the dashboard
-    const downloadLink = `${baseUrl}/dashboard`
+    // Get the base URL from the request origin or a configurable environment variable
+    // This ensures we always use absolute URLs that match where the request came from
+    const origin = req.headers.get('origin') || Deno.env.get('BASE_URL') || 'https://3dprintingblueprint.com'
+    
+    // Always direct people straight to the dashboard with absolute URL
+    const downloadLink = `${origin}/dashboard`
     let emailSubject = 'Your 3D Printing Guide is Ready!'
 
     // Set email subject based on request type
