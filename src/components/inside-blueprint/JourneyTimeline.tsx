@@ -1,37 +1,68 @@
+
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowDown } from "lucide-react";
 
 export const JourneyTimeline = () => {
   const timelineItems = [
     {
-      date: "August 2024",
-      title: "The Beginning",
-      description: "Started with one Ender 3 printer and a $500 budget. Made my first sale within two weeks.",
-      image: "/lovable-uploads/fcd13ba4-e265-4001-804e-b98d30cf751b.png"
-    },
-    {
-      date: "October 2024",
-      title: "First Milestone",
-      description: "Reached $1,000 in monthly revenue and expanded to two printers.",
-      image: "/lovable-uploads/441f796f-981b-4951-a495-ee188b79a2f3.jpg"
-    },
-    {
-      date: "December 2024",
-      title: "Holiday Season Success",
-      description: "Hit $3,000 in monthly sales during peak season. Added custom designs to the catalog.",
+      date: "Month 1",
+      title: "Starting Small",
+      description: "Started with a $300 printer and $200 in supplies. Within the first month, profits from keychains, cat masks, and planters funded 8 more printers.",
       image: "/lovable-uploads/511b02f5-662b-4442-ada4-7d79753c2d2d.jpg"
     },
     {
-      date: "February 2025",
-      title: "Scaling Up",
-      description: "Expanded to 5 printers and hit consistent $5,000 monthly revenue. Developed the PROFITS framework.",
+      date: "Month 2",
+      title: "Rapid Growth",
+      description: "While attending university full-time, scaled the business to over $10K monthly through website and Amazon sales.",
+      image: "/lovable-uploads/0f08439b-373a-474c-971a-ae51de7a6701.png"
+    },
+    {
+      date: "Month 3",
+      title: "Scaling Production",
+      description: "Transformed living room into a production facility with industrial shelving and over 30 printers to increase capacity.",
+      image: "/lovable-uploads/04fa3465-1dd4-4878-bde7-ee7d0398b515.png"
+    },
+    {
+      date: "Month 4",
+      title: "Systems Development",
+      description: "Established efficient systems for fulfilling bulk orders and running a successful business.",
+      image: "/lovable-uploads/1dadb0e8-cc5d-4b6f-955b-cb6f463eab22.png"
+    },
+    {
+      date: "Month 5",
+      title: "Product Innovation",
+      description: "Created a viral 5-in-1 phone stand downloaded thousands of times. Started complex custom work and began building AI company.",
       image: "/lovable-uploads/5146c83e-374b-41f6-b521-c13fb2db3347.jpg"
     },
     {
-      date: "April 2025",
-      title: "Current Success",
-      description: "Reaching $10,000/month with automated systems. Started teaching others the blueprint.",
+      date: "Month 6",
+      title: "Industry Analysis",
+      description: "Developed advanced algorithms to predict market trends and map key variables in the 3D printing industry.",
+      image: "/lovable-uploads/1273d951-6c16-4a5d-a99a-d233f5e92918.png"
+    },
+    {
+      date: "Month 7",
+      title: "Academic Achievement",
+      description: "Completed the Axiogenetic Theorem - a mathematical model for predicting value outcomes based on Innovation and Time.",
       image: "/lovable-uploads/b74ec2ed-9df1-4e07-9f9e-9beed5099f9f.jpg"
+    },
+    {
+      date: "Month 8",
+      title: "Global Expansion",
+      description: "Started expanding globally and establishing partnerships with international distributors.",
+      image: "/lovable-uploads/e3c4d94e-63ee-4200-8ca7-63cd8f397489.png"
+    },
+    {
+      date: "Month 9",
+      title: "AI Integration",
+      description: "Launched proprietary AI models to optimize 3D printing processes and predict market trends.",
+      image: "/lovable-uploads/fe8adce5-b909-4430-a057-0e0da07b26cf.png"
+    },
+    {
+      date: "Month 10",
+      title: "Advanced Automation",
+      description: "Developed advanced automation systems and expanded AI capabilities to revolutionize the industry.",
+      image: "/lovable-uploads/fe8adce5-b909-4430-a057-0e0da07b26cf.png"
     }
   ];
 
@@ -41,7 +72,7 @@ export const JourneyTimeline = () => {
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl font-bold mb-4">My Journey to Success</h2>
           <p className="text-gray-600 text-lg mb-8">
-            From a single printer to a thriving business—here's how it happened
+            A month-by-month breakdown of how I built my 3D printing empire
           </p>
           <ArrowDown className="w-8 h-8 mx-auto text-primary animate-bounce" />
         </div>
