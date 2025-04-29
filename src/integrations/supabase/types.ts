@@ -20,6 +20,7 @@ export type Database = {
           relevance_score: number | null
           source_ids: string[] | null
           updated_at: string | null
+          user_id: string | null
         }
         Insert: {
           agent_team: string
@@ -31,6 +32,7 @@ export type Database = {
           relevance_score?: number | null
           source_ids?: string[] | null
           updated_at?: string | null
+          user_id?: string | null
         }
         Update: {
           agent_team?: string
@@ -42,6 +44,7 @@ export type Database = {
           relevance_score?: number | null
           source_ids?: string[] | null
           updated_at?: string | null
+          user_id?: string | null
         }
         Relationships: []
       }
@@ -90,6 +93,7 @@ export type Database = {
           platform: string
           post_id: string | null
           scraped_at: string | null
+          user_id: string | null
         }
         Insert: {
           author_id?: string | null
@@ -102,6 +106,7 @@ export type Database = {
           platform: string
           post_id?: string | null
           scraped_at?: string | null
+          user_id?: string | null
         }
         Update: {
           author_id?: string | null
@@ -114,6 +119,7 @@ export type Database = {
           platform?: string
           post_id?: string | null
           scraped_at?: string | null
+          user_id?: string | null
         }
         Relationships: [
           {
@@ -138,6 +144,7 @@ export type Database = {
           post_id: string
           post_url: string | null
           scraped_at: string | null
+          user_id: string | null
         }
         Insert: {
           author_id?: string | null
@@ -151,6 +158,7 @@ export type Database = {
           post_id: string
           post_url?: string | null
           scraped_at?: string | null
+          user_id?: string | null
         }
         Update: {
           author_id?: string | null
@@ -164,6 +172,31 @@ export type Database = {
           post_id?: string
           post_url?: string | null
           scraped_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      configuration_notes: {
+        Row: {
+          created_at: string | null
+          id: number
+          issue: string
+          needs_manual_action: boolean | null
+          recommendation: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          issue: string
+          needs_manual_action?: boolean | null
+          recommendation: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          issue?: string
+          needs_manual_action?: boolean | null
+          recommendation?: string
         }
         Relationships: []
       }
@@ -179,6 +212,7 @@ export type Database = {
           source_ids: string[] | null
           source_type: string
           type: string
+          user_id: string | null
         }
         Insert: {
           first_seen_at?: string | null
@@ -191,6 +225,7 @@ export type Database = {
           source_ids?: string[] | null
           source_type: string
           type: string
+          user_id?: string | null
         }
         Update: {
           first_seen_at?: string | null
@@ -203,6 +238,7 @@ export type Database = {
           source_ids?: string[] | null
           source_type?: string
           type?: string
+          user_id?: string | null
         }
         Relationships: []
       }
@@ -215,6 +251,7 @@ export type Database = {
           sentiment: number | null
           source_id: string
           source_type: string
+          user_id: string | null
         }
         Insert: {
           context?: string | null
@@ -224,6 +261,7 @@ export type Database = {
           sentiment?: number | null
           source_id: string
           source_type: string
+          user_id?: string | null
         }
         Update: {
           context?: string | null
@@ -233,6 +271,7 @@ export type Database = {
           sentiment?: number | null
           source_id?: string
           source_type?: string
+          user_id?: string | null
         }
         Relationships: [
           {
@@ -483,6 +522,7 @@ export type Database = {
           tags: string[] | null
           title: string | null
           url: string
+          user_id: string | null
         }
         Insert: {
           categories?: string[] | null
@@ -500,6 +540,7 @@ export type Database = {
           tags?: string[] | null
           title?: string | null
           url: string
+          user_id?: string | null
         }
         Update: {
           categories?: string[] | null
@@ -517,6 +558,7 @@ export type Database = {
           tags?: string[] | null
           title?: string | null
           url?: string
+          user_id?: string | null
         }
         Relationships: []
       }
@@ -602,6 +644,7 @@ export type Database = {
           title: string | null
           transcript: string | null
           url: string
+          user_id: string | null
           video_id: string
         }
         Insert: {
@@ -616,6 +659,7 @@ export type Database = {
           title?: string | null
           transcript?: string | null
           url: string
+          user_id?: string | null
           video_id: string
         }
         Update: {
@@ -630,6 +674,7 @@ export type Database = {
           title?: string | null
           transcript?: string | null
           url?: string
+          user_id?: string | null
           video_id?: string
         }
         Relationships: []
