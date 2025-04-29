@@ -6,12 +6,14 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import { Mail } from 'lucide-react';
 
 export const AuthForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const [signupComplete, setSignupComplete] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -45,12 +47,8 @@ export const AuthForm = () => {
         if (error) throw error;
         
         if (data?.user) {
-          toast.success('Account created successfully! Logging you in...');
-          // Always redirect to dashboard after successful signup
-          navigate("/dashboard");
-        } else {
+          setSignupComplete(true);
           toast.success('Account created! Please check your email to confirm sign up.');
-          setIsSignUp(false);
         }
       } else {
         const { data, error } = await supabase.auth.signInWithPassword({ email, password });
@@ -74,6 +72,36 @@ export const AuthForm = () => {
       setLoading(false);
     }
   };
+
+  if (signupComplete) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <Card className="w-full max-w-md p-6">
+          <div className="text-center">
+            <div className="mx-auto bg-green-50 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+              <Mail className="h-8 w-8 text-green-600" />
+            </div>
+            <h2 className="text-2xl font-bold mb-4">Check Your Email</h2>
+            <p className="mb-4 text-gray-600">
+              We've sent a verification link to <span className="font-medium">{email}</span>
+            </p>
+            <p className="mb-6 text-gray-600">
+              Please click the link in the email to verify your account and complete the sign up process.
+            </p>
+            <div className="text-sm text-gray-500 mt-4">
+              <p className="mb-2">Didn't receive an email?</p>
+              <p>Check your spam folder or <button 
+                onClick={() => setSignupComplete(false)} 
+                className="text-primary hover:underline"
+              >
+                try again with a different email
+              </button></p>
+            </div>
+          </div>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
