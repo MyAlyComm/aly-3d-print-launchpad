@@ -3,7 +3,6 @@ import { Home, BookOpen, User, Award, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { DashboardNav } from "./DashboardNav";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import {
   DropdownMenu,
@@ -13,16 +12,17 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useChapterProgress } from "@/hooks/useChapterProgress";
 import { getBadgesForProgress } from "@/utils/gamification";
+import { useAuth } from "@/hooks/useAuth";
 
 export const DashboardSidebarContent = () => {
   const navigate = useNavigate();
+  const { signOut } = useAuth();
   const { chapterProgresses } = useChapterProgress();
   const badges = getBadgesForProgress(chapterProgresses as any[] || []);
 
   const handleSignOut = async () => {
     try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
+      await signOut();
       
       // Clear any local storage related to authentication
       localStorage.removeItem("hasAccessToEbook");
@@ -31,7 +31,9 @@ export const DashboardSidebarContent = () => {
       navigate("/");
     } catch (error) {
       console.error("Error signing out:", error);
-      toast.error("Failed to sign out");
+      // User might already be signed out, so just redirect them anyway
+      toast.info("Redirecting to home page...");
+      navigate("/");
     }
   };
 

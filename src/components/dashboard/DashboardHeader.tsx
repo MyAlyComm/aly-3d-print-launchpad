@@ -2,7 +2,6 @@ import React, { ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { LogOut, Award, Layout, Book, BookText, BookOpen, Menu, SparkleIcon, User } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useChapterProgress } from "@/hooks/useChapterProgress";
@@ -22,7 +21,7 @@ type DashboardHeaderProps = {
 };
 
 export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const { chapterProgresses } = useChapterProgress();
   const badges = getBadgesForProgress(chapterProgresses as any[] || []);
@@ -30,16 +29,14 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
 
   const handleSignOut = async () => {
     try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
-      
-      localStorage.removeItem("hasAccessToEbook");
-      
+      await signOut();
       toast.success("Signed out successfully");
       navigate("/");
     } catch (error) {
       console.error("Error signing out:", error);
-      toast.error("Failed to sign out");
+      // User might already be signed out, so just redirect them anyway
+      toast.info("Redirecting to home page...");
+      navigate("/");
     }
   };
 

@@ -31,6 +31,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       await supabase.auth.signOut();
     } catch (error) {
       console.error('Error signing out:', error);
+      // Reset state even if there's an error with signOut
+      setUser(null);
+      setSession(null);
     }
   };
 
