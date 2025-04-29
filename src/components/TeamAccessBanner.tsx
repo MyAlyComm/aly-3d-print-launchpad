@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 export const TeamAccessBanner = () => {
   const { isTeamBypassActive } = useTeamBypass();
   const [showHint, setShowHint] = useState(false);
+  const [bannerDismissed, setBannerDismissed] = useState(false);
   
   // Show hint briefly for new visitors
   useEffect(() => {
@@ -22,15 +23,33 @@ export const TeamAccessBanner = () => {
       
       return () => clearTimeout(timer);
     }
+    
+    // Check if banner was previously dismissed
+    const accessBannerDismissed = localStorage.getItem('access_banner_dismissed');
+    if (accessBannerDismissed === 'true') {
+      setBannerDismissed(true);
+    }
   }, []);
+  
+  const dismissBanner = () => {
+    setBannerDismissed(true);
+    localStorage.setItem('access_banner_dismissed', 'true');
+  };
 
   return (
     <>
-      {isTeamBypassActive && (
-        <div className="bg-amber-500 text-white py-2 px-4 fixed top-0 left-0 right-0 z-[100] flex items-center justify-center">
+      {isTeamBypassActive && !bannerDismissed && (
+        <div className="bg-amber-500 text-white py-2 px-4 fixed top-0 left-0 right-0 z-[100] flex items-center justify-between">
           <div>
             <span className="font-semibold">🔓 Full Access Mode</span> - All pages accessible
           </div>
+          <button 
+            className="text-white hover:bg-amber-600 ml-2 flex-shrink-0 p-1 rounded" 
+            onClick={dismissBanner}
+            aria-label="Dismiss banner"
+          >
+            ✕
+          </button>
         </div>
       )}
       

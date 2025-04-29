@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AppProviders } from "@/components/AppProviders";
 import { mainRoutes } from "@/routes/mainRoutes";
@@ -10,13 +10,32 @@ import { TeamAccessBanner } from "@/components/TeamAccessBanner";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 const App = () => {
+  const [bannerDismissed, setBannerDismissed] = useState(false);
+  
+  useEffect(() => {
+    const checkBannerState = () => {
+      const dismissed = localStorage.getItem('access_banner_dismissed') === 'true';
+      setBannerDismissed(dismissed);
+    };
+    
+    // Check on initial load
+    checkBannerState();
+    
+    // Set up event listener for localStorage changes
+    window.addEventListener('storage', checkBannerState);
+    
+    return () => {
+      window.removeEventListener('storage', checkBannerState);
+    };
+  }, []);
+
   return (
     <React.StrictMode>
       <AppProviders>
         <BrowserRouter>
           <TeamBypassProvider>
             <TeamAccessBanner />
-            <div className="pt-10"> {/* Add padding for the banner */}
+            <div className={`${bannerDismissed ? 'pt-0' : 'pt-10'} transition-all duration-300`}>
               <Breadcrumbs />
               <Routes>
                 {mainRoutes.map((route, index) => (
