@@ -10,11 +10,13 @@ import { NavBarUserDropdown } from "./NavBarUserDropdown";
 interface NavBarMobileMenuProps {
   isOpen: boolean;
   handleDashboardClick: () => void;
+  onLinkClick: () => void; // Close menu callback
 }
 
 export const NavBarMobileMenu = ({ 
   isOpen, 
-  handleDashboardClick 
+  handleDashboardClick,
+  onLinkClick
 }: NavBarMobileMenuProps) => {
   const { user } = useAuth();
   const { isTeamBypassActive } = useTeamBypass();
@@ -27,6 +29,7 @@ export const NavBarMobileMenu = ({
         <NavBarLinks 
           vertical={true} 
           itemClassName="text-gray-700 hover:text-primary py-2"
+          onClick={onLinkClick} // Close menu when link is clicked
         />
         
         {isTeamBypassActive && (
@@ -44,7 +47,10 @@ export const NavBarMobileMenu = ({
         {user || isTeamBypassActive ? (
           <div className="flex flex-col space-y-4">
             <Button 
-              onClick={handleDashboardClick}
+              onClick={() => {
+                handleDashboardClick();
+                onLinkClick(); // Close menu when dashboard is clicked
+              }}
               variant="outline"
               className="w-full"
             >
@@ -57,7 +63,10 @@ export const NavBarMobileMenu = ({
           </div>
         ) : (
           <Button 
-            onClick={handleDashboardClick}
+            onClick={() => {
+              handleDashboardClick();
+              onLinkClick(); // Close menu when sign in is clicked
+            }}
             variant="outline"
             className="w-full"
           >

@@ -18,6 +18,11 @@ const NavBar = () => {
   const { user } = useAuth();
   const { isTeamBypassActive, activateTeamBypass } = useTeamBypass();
 
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -59,6 +64,10 @@ const NavBar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const handleMobileLinkClick = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -77,7 +86,7 @@ const NavBar = () => {
             
             {/* All Pages Dropdown - Only visible when team access is active */}
             {isTeamBypassActive && (
-              <div className="ml-4">
+              <div className="ml-4 hidden md:block">
                 <NavBarAllPagesDropdown />
               </div>
             )}
@@ -97,7 +106,8 @@ const NavBar = () => {
 
         <NavBarMobileMenu 
           isOpen={isMobileMenuOpen} 
-          handleDashboardClick={handleDashboardClick} 
+          handleDashboardClick={handleDashboardClick}
+          onLinkClick={handleMobileLinkClick}
         />
       </div>
     </nav>

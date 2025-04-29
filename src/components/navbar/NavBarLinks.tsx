@@ -1,4 +1,5 @@
-
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useTeamBypass } from "@/hooks/useTeamBypass";
 
 export interface NavLinkItem {
@@ -33,6 +34,7 @@ export const NavBarLinks = ({
   links = defaultLinks
 }: NavBarLinksProps) => {
   const { isTeamBypassActive } = useTeamBypass();
+  const location = useLocation();
   
   return (
     <div className={`${vertical ? 'flex flex-col space-y-4' : 'flex items-center space-x-8'} ${className}`}>
@@ -42,15 +44,32 @@ export const NavBarLinks = ({
           return null;
         }
 
-        return (
+        // For anchor links (like #blueprints), keep using regular <a> tags
+        const isAnchorLink = link.href.startsWith('#');
+        const isActivePage = location.pathname === link.href;
+        
+        const linkClassName = `${link.isPrimary ? "text-primary hover:text-primary/80 font-medium" : itemClassName} ${
+          isActivePage && !isAnchorLink ? "underline decoration-2 underline-offset-4" : ""
+        }`;
+        
+        return isAnchorLink ? (
           <a 
             key={`${link.href}-${index}`}
             href={link.href} 
-            className={link.isPrimary ? "text-primary hover:text-primary/80 font-medium" : itemClassName}
+            className={linkClassName}
             onClick={onClick}
           >
             {link.label}
           </a>
+        ) : (
+          <Link 
+            key={`${link.href}-${index}`}
+            to={link.href} 
+            className={linkClassName}
+            onClick={onClick}
+          >
+            {link.label}
+          </Link>
         );
       })}
     </div>

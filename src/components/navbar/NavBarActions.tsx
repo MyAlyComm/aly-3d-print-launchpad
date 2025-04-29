@@ -4,6 +4,7 @@ import LeadMagnetDialog from "@/components/FreeGuideDialog";
 import { useAuth } from "@/hooks/useAuth";
 import { useTeamBypass } from "@/hooks/useTeamBypass";
 import { NavBarUserDropdown } from "./NavBarUserDropdown";
+import { useNavigate } from "react-router-dom";
 
 interface NavBarActionsProps {
   handleDashboardClick: () => void;
