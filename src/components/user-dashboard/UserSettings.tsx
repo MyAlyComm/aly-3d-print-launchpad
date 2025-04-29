@@ -90,7 +90,10 @@ export const UserSettings = ({ user }: UserSettingsProps) => {
 
     try {
       // Delete the user account - this will cascade to all related data
-      const { error } = await supabase.rpc('delete_user');
+      // Use Supabase Functions.invoke instead of rpc
+      const { error } = await supabase.functions.invoke('delete_user', {
+        method: 'POST'
+      });
       
       if (error) throw error;
       
