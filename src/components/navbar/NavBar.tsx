@@ -83,7 +83,7 @@ const NavBar = () => {
             )}
           </div>
 
-          <NavBarLinks className="hidden md:flex items-center space-x-8" />
+          <NavBarLinks className="hidden md:flex" />
           <NavBarActions 
             handleDashboardClick={handleDashboardClick}
             className="hidden md:flex"
