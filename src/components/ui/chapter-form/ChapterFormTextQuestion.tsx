@@ -2,6 +2,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Save, CheckCircle } from "lucide-react";
+import { SaveIndicator } from "@/components/ui/save-indicator/SaveIndicator";
 
 interface ChapterFormTextQuestionProps {
   id: string;
@@ -9,6 +10,7 @@ interface ChapterFormTextQuestionProps {
   value: string;
   index?: number;
   isSaved?: boolean;
+  saveStatus?: "idle" | "saving" | "saved" | "error";
   onChange: (value: string) => void;
   onSave: () => void;
 }
@@ -19,6 +21,7 @@ export function ChapterFormTextQuestion({
   value,
   index,
   isSaved = false,
+  saveStatus = "idle",
   onChange,
   onSave
 }: ChapterFormTextQuestionProps) {
@@ -28,12 +31,13 @@ export function ChapterFormTextQuestion({
         <label htmlFor={id} className="text-sm font-medium text-gray-700">
           {index !== undefined ? `Question ${index + 1}:` : ""}
         </label>
-        {isSaved && (
+        {isSaved && saveStatus !== "saving" && (
           <span className="flex items-center text-green-500 text-sm">
             <CheckCircle className="h-4 w-4 mr-1" />
             Saved
           </span>
         )}
+        {!isSaved && <SaveIndicator status={saveStatus} />}
       </div>
       <p className="font-medium mb-2">{question}</p>
       <textarea
@@ -48,11 +52,20 @@ export function ChapterFormTextQuestion({
           size="sm"
           variant="outline"
           onClick={onSave}
-          disabled={!value?.trim()}
+          disabled={!value?.trim() || saveStatus === "saving"}
           className="mt-2"
         >
-          <Save className="h-4 w-4 mr-2" />
-          Save Answer
+          {saveStatus === "saving" ? (
+            <>
+              <span className="animate-spin mr-2">◌</span>
+              Saving...
+            </>
+          ) : (
+            <>
+              <Save className="h-4 w-4 mr-2" />
+              Save Answer
+            </>
+          )}
         </Button>
       </div>
     </div>

@@ -18,10 +18,18 @@ export function useWindowBeforeUnload(isDirty: boolean, message: string = 'You h
 
     if (isDirty) {
       window.addEventListener('beforeunload', handleBeforeUnload);
+      
+      // For debugging purposes
+      console.log('Unsaved changes detected - navigation warning enabled');
     }
 
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
+      
+      // For debugging purposes
+      if (isDirty) {
+        console.log('Navigation warning removed');
+      }
     };
   }, [isDirty, message]);
 }

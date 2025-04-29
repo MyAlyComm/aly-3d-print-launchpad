@@ -1,6 +1,6 @@
 
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AppProviders } from "@/components/AppProviders";
 import { mainRoutes } from "@/routes/mainRoutes";
 import { ebookRoutes } from "@/routes/ebookRoutes";
@@ -28,6 +28,12 @@ const App = () => {
                 {aiHubRoutes.map((route, index) => (
                   <Route key={`ai-${index}`} path={route.path} element={route.element} />
                 ))}
+                
+                {/* Redirect /ebooks to /dashboard for backward compatibility */}
+                <Route path="/ebooks" element={<Navigate to="/dashboard" replace />} />
+                
+                {/* Catch-all route for 404s */}
+                <Route path="*" element={<Navigate to="/not-found" replace />} />
               </Routes>
             </div>
           </TeamBypassProvider>

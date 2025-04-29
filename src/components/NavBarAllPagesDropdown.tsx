@@ -10,11 +10,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, FileText, BookOpen, SparkleIcon } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { mainRoutes } from "@/routes/mainRoutes";
 import { ebookRoutes } from "@/routes/ebookRoutes";
 import { aiHubRoutes } from "@/routes/aiHubRoutes";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Helper function to get clean page title from route path
 const getPageTitle = (path: string): string => {
@@ -34,15 +34,23 @@ const getPageTitle = (path: string): string => {
 
 export function NavBarAllPagesDropdown() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  
+  // Close dropdown on location change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
   
   const handleNavigate = (path: string) => {
     navigate(path);
     setIsOpen(false);  // Close dropdown after navigation
   };
 
-  // Filter out catch-all (*) routes
-  const filteredMainRoutes = mainRoutes.filter(route => route.path !== "*");
+  // Filter out catch-all (*) routes and ensure all routes have valid paths
+  const filteredMainRoutes = mainRoutes.filter(route => route.path !== "*" && typeof route.path === "string");
+  const filteredEbookRoutes = ebookRoutes.filter(route => typeof route.path === "string");
+  const filteredAIHubRoutes = aiHubRoutes.filter(route => typeof route.path === "string");
   
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
@@ -53,7 +61,7 @@ export function NavBarAllPagesDropdown() {
           <ChevronDown className="h-3 w-3 opacity-60" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 bg-white" align="start">
+      <DropdownMenuContent className="w-56 bg-white z-50" align="start">
         <DropdownMenuLabel>Main Pages</DropdownMenuLabel>
         <DropdownMenuGroup>
           {filteredMainRoutes.map((route, index) => (
@@ -72,7 +80,14 @@ export function NavBarAllPagesDropdown() {
         
         <DropdownMenuLabel>Ebooks</DropdownMenuLabel>
         <DropdownMenuGroup>
-          {ebookRoutes.slice(0, 5).map((route, index) => (
+          <DropdownMenuItem 
+            className="cursor-pointer"
+            onClick={() => handleNavigate("/dashboard")}
+          >
+            <BookOpen className="mr-2 h-4 w-4" />
+            <span>All Ebooks</span>
+          </DropdownMenuItem>
+          {filteredEbookRoutes.slice(2, 7).map((route, index) => (
             <DropdownMenuItem 
               key={`ebook-${index}`} 
               className="cursor-pointer"
@@ -82,12 +97,12 @@ export function NavBarAllPagesDropdown() {
               <span>{getPageTitle(route.path)}</span>
             </DropdownMenuItem>
           ))}
-          {ebookRoutes.length > 5 && (
+          {filteredEbookRoutes.length > 7 && (
             <DropdownMenuItem 
-              className="italic text-sm text-gray-500"
+              className="italic text-sm text-gray-500 cursor-pointer"
               onClick={() => handleNavigate("/dashboard")}
             >
-              + {ebookRoutes.length - 5} more pages...
+              + {filteredEbookRoutes.length - 7} more pages...
             </DropdownMenuItem>
           )}
         </DropdownMenuGroup>
@@ -96,7 +111,14 @@ export function NavBarAllPagesDropdown() {
         
         <DropdownMenuLabel>AI Hub</DropdownMenuLabel>
         <DropdownMenuGroup>
-          {aiHubRoutes.slice(0, 5).map((route, index) => (
+          <DropdownMenuItem 
+            className="cursor-pointer"
+            onClick={() => handleNavigate("/ai-hub")}
+          >
+            <SparkleIcon className="mr-2 h-4 w-4" />
+            <span>AI Hub Home</span>
+          </DropdownMenuItem>
+          {filteredAIHubRoutes.slice(1, 5).map((route, index) => (
             <DropdownMenuItem 
               key={`ai-${index}`} 
               className="cursor-pointer"
@@ -106,12 +128,12 @@ export function NavBarAllPagesDropdown() {
               <span>{getPageTitle(route.path)}</span>
             </DropdownMenuItem>
           ))}
-          {aiHubRoutes.length > 5 && (
+          {filteredAIHubRoutes.length > 5 && (
             <DropdownMenuItem 
-              className="italic text-sm text-gray-500"
+              className="italic text-sm text-gray-500 cursor-pointer"
               onClick={() => handleNavigate("/ai-hub")}
             >
-              + {aiHubRoutes.length - 5} more tools...
+              + {filteredAIHubRoutes.length - 5} more tools...
             </DropdownMenuItem>
           )}
         </DropdownMenuGroup>

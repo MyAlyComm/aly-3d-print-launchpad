@@ -22,6 +22,7 @@ import FilamentGuide from "@/pages/FilamentGuide";
 
 export const ebookRoutes = [
   { path: "/dashboard", element: <EbooksHub /> },
+  { path: "/ebooks", element: <EbooksHub /> }, // Add direct route to ebooks
   { path: "/dashboard/3d-blueprint", element: <Dashboard /> },
   { path: "/dashboard/3d-blueprint/new-chapter", element: <NewEbookChapter /> },
   { path: "/dashboard/3d-blueprint/resources", element: <Resources /> },

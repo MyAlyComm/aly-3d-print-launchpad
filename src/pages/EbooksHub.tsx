@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { 
@@ -10,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { BookOpen, ArrowRight, Clock, Bookmark, User, FileText } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import DashboardLayout from "@/components/dashboard/DashboardLayout";
 
 const EbooksHub = () => {
   const navigate = useNavigate();
@@ -58,21 +60,14 @@ const EbooksHub = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <header className="mb-12 flex justify-between items-center">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">My Ebooks</h1>
-            <p className="text-gray-500 mt-2">Access all your purchased ebooks and resources</p>
-          </div>
-          <Button
-            variant="outline"
-            onClick={() => navigate("/account")}
-            className="hidden sm:flex"
-          >
-            <User className="mr-2 h-4 w-4" />
-            My Account
-          </Button>
+    <DashboardLayout 
+      title="My Ebooks" 
+      isDashboardPage={true}
+    >
+      <div className="py-8">
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold tracking-tight">My Ebooks</h1>
+          <p className="text-gray-500 mt-2">Access all your purchased ebooks and resources</p>
         </header>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -151,7 +146,7 @@ const EbooksHub = () => {
           </Button>
         </div>
       </div>
-    </div>
+    </DashboardLayout>
   );
 };
 

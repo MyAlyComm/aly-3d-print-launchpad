@@ -1,13 +1,15 @@
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useChapterForm } from './useChapterForm';
 import { useWindowBeforeUnload } from './useWindowBeforeUnload';
 import { useToast } from '@/hooks/use-toast';
+import { debounce } from '@/lib/utils';
 
 export function useFormState(
   chapterNumber: number, 
   sectionId: string,
-  initialFields: Record<string, string> = {}
+  initialFields: Record<string, string> = {},
+  autoSaveDelay: number = 1000
 ) {
   const { formState, saveResponse, isLoading, saveStatus, hasUnsavedChanges } = useChapterForm(chapterNumber, sectionId);
   const [saved, setSaved] = useState<Record<string, boolean>>({});
@@ -20,6 +22,19 @@ export function useFormState(
   const getValue = (field: string): string => {
     return formState?.[sectionId]?.textInputs?.[field] || initialFields[field] || '';
   };
+
+  // Auto save with debounce
+  const debouncedSave = useCallback(
+    debounce((field: string, value: string) => {
+      if (value?.trim()) {
+        saveResponse(sectionId, { 
+          checkboxes: {}, 
+          textInputs: { [field]: value } 
+        }, false);
+      }
+    }, autoSaveDelay),
+    [sectionId, saveResponse]
+  );
 
   const saveValue = (field: string, value: string) => {
     if (value?.trim()) {
@@ -41,6 +56,9 @@ export function useFormState(
       checkboxes: {}, 
       textInputs: { [field]: value } 
     });
+    
+    // Auto save after delay
+    debouncedSave(field, value);
     
     // Remove saved indicator when editing
     if (saved[field]) {
