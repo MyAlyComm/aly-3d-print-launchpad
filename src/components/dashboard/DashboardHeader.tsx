@@ -1,3 +1,4 @@
+
 import React, { ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
@@ -18,9 +19,10 @@ import { Badge } from "@/components/ui/badge";
 type DashboardHeaderProps = {
   title: string;
   children?: ReactNode;
+  isDashboardPage?: boolean;
 };
 
-export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
+export const DashboardHeader = ({ title, children, isDashboardPage = false }: DashboardHeaderProps) => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const { chapterProgresses } = useChapterProgress();
@@ -48,15 +50,17 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
         <div className="flex items-center gap-2">
           {!isMobile && (
             <nav className="flex items-center gap-2 mr-4">
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => navigate("/")}
-                className="text-gray-700 hover:text-gray-900"
-              >
-                <Layout className="mr-2 h-4 w-4" />
-                Home
-              </Button>
+              {!isDashboardPage && (
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => navigate("/dashboard")}
+                  className="text-gray-700 hover:text-gray-900"
+                >
+                  <Layout className="mr-2 h-4 w-4" />
+                  Dashboard
+                </Button>
+              )}
               
               <Button 
                 variant="ghost" 
@@ -99,10 +103,12 @@ export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-52 bg-white">
-                <DropdownMenuItem onClick={() => navigate("/")} className="text-gray-800">
-                  <Layout className="mr-2 h-4 w-4" />
-                  Home
-                </DropdownMenuItem>
+                {!isDashboardPage && (
+                  <DropdownMenuItem onClick={() => navigate("/dashboard")} className="text-gray-800">
+                    <Layout className="mr-2 h-4 w-4" />
+                    Dashboard
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuItem onClick={() => navigate("/account")} className="text-gray-800">
                   <User className="mr-2 h-4 w-4" />
                   My Account

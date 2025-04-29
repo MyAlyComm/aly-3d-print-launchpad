@@ -8,17 +8,22 @@ type DashboardLayoutProps = {
   title?: string;
   extraContent?: ReactNode;
   className?: string;
+  isDashboardPage?: boolean;
 };
 
 const DashboardLayout = ({ 
   children, 
   title = "Dashboard", 
   extraContent,
-  className 
+  className,
+  isDashboardPage = false
 }: DashboardLayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col bg-gray-100 w-full overflow-hidden">
-      <DashboardHeader title={title}>
+      <DashboardHeader 
+        title={title}
+        isDashboardPage={isDashboardPage}
+      >
         {extraContent}
       </DashboardHeader>
       

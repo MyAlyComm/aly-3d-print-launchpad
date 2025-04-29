@@ -13,6 +13,7 @@ const Dashboard = () => {
   return (
     <DashboardLayout 
       title={`Welcome${user?.email ? ', ' + user.email.split('@')[0] : ''}`}
+      isDashboardPage={true}
     >
       <DashboardHero />
       <div className="max-w-7xl mx-auto">
