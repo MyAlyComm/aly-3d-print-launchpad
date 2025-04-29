@@ -2,10 +2,7 @@
 import { Button } from "@/components/ui/button";
 import LeadMagnetDialog from "@/components/FreeGuideDialog";
 import { NavBarLinks } from "./NavBarLinks";
-import { useAuth } from "@/hooks/useAuth";
-import { useTeamBypass } from "@/hooks/useTeamBypass";
 import { NavBarAllPagesDropdown } from "../NavBarAllPagesDropdown";
-import { NavBarUserDropdown } from "./NavBarUserDropdown";
 
 interface NavBarMobileMenuProps {
   isOpen: boolean;
@@ -18,9 +15,6 @@ export const NavBarMobileMenu = ({
   handleDashboardClick,
   onLinkClick
 }: NavBarMobileMenuProps) => {
-  const { user } = useAuth();
-  const { isTeamBypassActive } = useTeamBypass();
-  
   if (!isOpen) return null;
   
   return (
@@ -43,35 +37,16 @@ export const NavBarMobileMenu = ({
           </Button>
         </LeadMagnetDialog>
         
-        {user || isTeamBypassActive ? (
-          <div className="flex flex-col space-y-4">
-            <Button 
-              onClick={() => {
-                handleDashboardClick();
-                onLinkClick(); // Close menu when dashboard is clicked
-              }}
-              variant="outline"
-              className="w-full"
-            >
-              Dashboard
-            </Button>
-            <div className="flex items-center justify-between px-2 py-2">
-              <span className="text-sm text-gray-600">Account Options</span>
-              <NavBarUserDropdown />
-            </div>
-          </div>
-        ) : (
-          <Button 
-            onClick={() => {
-              handleDashboardClick();
-              onLinkClick(); // Close menu when sign in is clicked
-            }}
-            variant="outline"
-            className="w-full"
-          >
-            Sign In
-          </Button>
-        )}
+        <Button 
+          onClick={() => {
+            handleDashboardClick();
+            onLinkClick(); // Close menu when dashboard is clicked
+          }}
+          variant="outline"
+          className="w-full"
+        >
+          Dashboard
+        </Button>
       </div>
     </div>
   );

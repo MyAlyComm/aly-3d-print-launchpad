@@ -1,8 +1,6 @@
 
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "@/hooks/useAuth";
-import { useTeamBypass } from "@/hooks/useTeamBypass";
 import { NavBarAllPagesDropdown } from "../NavBarAllPagesDropdown";
 import { NavBarLogo } from "./NavBarLogo";
 import { NavBarLinks } from "./NavBarLinks";
@@ -15,8 +13,6 @@ const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { user } = useAuth();
-  const { isTeamBypassActive } = useTeamBypass();
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -49,11 +45,7 @@ const NavBar = () => {
   };
 
   const handleDashboardClick = () => {
-    if (user || isTeamBypassActive) {
-      navigate("/dashboard");
-    } else {
-      navigate("/auth");
-    }
+    navigate("/dashboard");
   };
 
   const handleLogoDoubleClick = () => {

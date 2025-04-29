@@ -1,6 +1,4 @@
-
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { useLocation } from 'react-router-dom';
 
 interface TeamBypassContextType {
   isTeamBypassActive: boolean;
@@ -9,32 +7,20 @@ interface TeamBypassContextType {
 }
 
 const TeamBypassContext = createContext<TeamBypassContextType>({
-  isTeamBypassActive: false,
+  isTeamBypassActive: true, // Default to true
   activateTeamBypass: () => {},
   deactivateTeamBypass: () => {},
 });
 
 export const TeamBypassProvider = ({ children }: { children: ReactNode }) => {
-  const [isTeamBypassActive, setIsTeamBypassActive] = useState(true); // Default to true
-  const location = useLocation();
+  // Always set to true by default for full access
+  const [isTeamBypassActive, setIsTeamBypassActive] = useState(true);
 
+  // Always ensure team bypass is active on mount
   useEffect(() => {
-    // Always set team access to active by default
     setIsTeamBypassActive(true);
     localStorage.setItem('team_bypass_active', 'true');
-    
-    // Still check for parameters in case they want to explicitly disable it
-    const queryParams = new URLSearchParams(location.search);
-    const teamBypassParam = queryParams.get('team_access');
-
-    if (teamBypassParam === 'false') {
-      setIsTeamBypassActive(false);
-      localStorage.removeItem('team_bypass_active');
-      // Remove the parameter from URL for cleaner navigation
-      const newUrl = window.location.pathname;
-      window.history.replaceState({}, '', newUrl);
-    }
-  }, [location.search]);
+  }, []);
 
   const activateTeamBypass = () => {
     setIsTeamBypassActive(true);
@@ -42,8 +28,9 @@ export const TeamBypassProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const deactivateTeamBypass = () => {
-    setIsTeamBypassActive(false);
-    localStorage.removeItem('team_bypass_active');
+    // This function is kept for API compatibility but effectively does nothing
+    // as we want to keep access open at all times
+    console.log("Team bypass deactivation attempted but ignored - keeping full access");
   };
 
   return (

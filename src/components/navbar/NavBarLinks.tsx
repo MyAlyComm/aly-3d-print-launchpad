@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { useTeamBypass } from "@/hooks/useTeamBypass";
 
 export interface NavLinkItem {
   href: string;
   label: string;
-  isTeamAccess?: boolean;
   isPrimary?: boolean;
 }
 
@@ -14,8 +12,8 @@ const defaultLinks: NavLinkItem[] = [
   { href: "/about", label: "About" },
   { href: "#blueprints", label: "Blueprints" },
   { href: "#testimonials", label: "Testimonials" },
-  { href: "/dashboard", label: "Dashboard", isTeamAccess: true, isPrimary: true },
-  { href: "/account", label: "Account", isTeamAccess: true, isPrimary: true }
+  { href: "/dashboard", label: "Dashboard", isPrimary: true },
+  { href: "/account", label: "Account", isPrimary: true }
 ];
 
 interface NavBarLinksProps {
@@ -33,17 +31,11 @@ export const NavBarLinks = ({
   onClick,
   links = defaultLinks
 }: NavBarLinksProps) => {
-  const { isTeamBypassActive } = useTeamBypass();
   const location = useLocation();
   
   return (
     <div className={`${vertical ? 'flex flex-col space-y-4' : 'flex items-center space-x-8'} ${className}`}>
       {links.map((link, index) => {
-        // Skip team access links if team bypass is not active
-        if (link.isTeamAccess && !isTeamBypassActive) {
-          return null;
-        }
-
         // For anchor links (like #blueprints), keep using regular <a> tags
         const isAnchorLink = link.href.startsWith('#');
         const isActivePage = location.pathname === link.href;

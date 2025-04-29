@@ -1,11 +1,10 @@
 
 import { useTeamBypass } from "@/hooks/useTeamBypass";
-import { X, Info } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Info } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export const TeamAccessBanner = () => {
-  const { isTeamBypassActive, deactivateTeamBypass } = useTeamBypass();
+  const { isTeamBypassActive } = useTeamBypass();
   const [showHint, setShowHint] = useState(false);
   
   // Show hint briefly for new visitors
@@ -28,35 +27,25 @@ export const TeamAccessBanner = () => {
   return (
     <>
       {isTeamBypassActive && (
-        <div className="bg-amber-500 text-white py-2 px-4 fixed top-0 left-0 right-0 z-[100] flex items-center justify-between">
+        <div className="bg-amber-500 text-white py-2 px-4 fixed top-0 left-0 right-0 z-[100] flex items-center justify-center">
           <div>
-            <span className="font-semibold">🔓 Full Access Mode Active</span> - All pages accessible
+            <span className="font-semibold">🔓 Full Access Mode</span> - All pages accessible
           </div>
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="text-white hover:bg-amber-600" 
-            onClick={deactivateTeamBypass}
-          >
-            <X className="h-4 w-4" />
-          </Button>
         </div>
       )}
       
-      {showHint && !isTeamBypassActive && (
+      {showHint && (
         <div className="bg-blue-500 text-white py-2 px-4 fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-80 z-[100] rounded-md shadow-lg flex items-center justify-between">
           <div className="flex items-center">
             <Info className="h-4 w-4 mr-2 flex-shrink-0" />
             <span className="text-sm">Use the Pages dropdown in the navigation bar to access all content.</span>
           </div>
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="text-white hover:bg-blue-600 ml-2 flex-shrink-0" 
+          <button 
+            className="text-white hover:bg-blue-600 ml-2 flex-shrink-0 p-1 rounded" 
             onClick={() => setShowHint(false)}
           >
-            <X className="h-4 w-4" />
-          </Button>
+            ✕
+          </button>
         </div>
       )}
     </>
