@@ -14,9 +14,12 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const [hasShownToast, setHasShownToast] = useState(false);
   
   useEffect(() => {
-    // Show toast only once per component mount
+    // Show toast only once per component mount and when authentication check completes
     if (!isLoading && !user && !hasShownToast) {
-      toast.error("Please sign in to access this content");
+      toast.error("Please sign in to access this content", {
+        description: "You need to be logged in to view this page",
+        duration: 4000,
+      });
       setHasShownToast(true);
     }
   }, [user, isLoading, hasShownToast]);
@@ -30,7 +33,8 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   }
 
   if (!user) {
-    return <Navigate to="/auth" state={{ from: location }} replace />;
+    // Redirect to auth page and store the current location
+    return <Navigate to="/auth" state={{ from: location.pathname }} replace />;
   }
 
   return <>{children}</>;
