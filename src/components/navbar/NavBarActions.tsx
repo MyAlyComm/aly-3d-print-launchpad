@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import LeadMagnetDialog from "@/components/FreeGuideDialog";
 import { useAuth } from "@/hooks/useAuth";
 import { useTeamBypass } from "@/hooks/useTeamBypass";
+import { NavBarUserDropdown } from "./NavBarUserDropdown";
 
 interface NavBarActionsProps {
   handleDashboardClick: () => void;
@@ -19,12 +20,24 @@ export const NavBarActions = ({
   return (
     <div className={`flex items-center space-x-4 ${className}`}>
       <LeadMagnetDialog />
-      <Button 
-        onClick={handleDashboardClick}
-        variant="outline"
-      >
-        {user || isTeamBypassActive ? 'Dashboard' : 'Sign In'}
-      </Button>
+      {user || isTeamBypassActive ? (
+        <>
+          <Button 
+            onClick={handleDashboardClick}
+            variant="outline"
+          >
+            Dashboard
+          </Button>
+          <NavBarUserDropdown />
+        </>
+      ) : (
+        <Button 
+          onClick={handleDashboardClick}
+          variant="outline"
+        >
+          Sign In
+        </Button>
+      )}
     </div>
   );
 };

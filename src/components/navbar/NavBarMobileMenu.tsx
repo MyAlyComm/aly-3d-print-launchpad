@@ -5,6 +5,7 @@ import { NavBarLinks } from "./NavBarLinks";
 import { useAuth } from "@/hooks/useAuth";
 import { useTeamBypass } from "@/hooks/useTeamBypass";
 import { NavBarAllPagesDropdown } from "../NavBarAllPagesDropdown";
+import { NavBarUserDropdown } from "./NavBarUserDropdown";
 
 interface NavBarMobileMenuProps {
   isOpen: boolean;
@@ -40,13 +41,29 @@ export const NavBarMobileMenu = ({
           </Button>
         </LeadMagnetDialog>
         
-        <Button 
-          onClick={handleDashboardClick}
-          variant="outline"
-          className="w-full"
-        >
-          {user || isTeamBypassActive ? 'Dashboard' : 'Sign In'}
-        </Button>
+        {user || isTeamBypassActive ? (
+          <div className="flex flex-col space-y-4">
+            <Button 
+              onClick={handleDashboardClick}
+              variant="outline"
+              className="w-full"
+            >
+              Dashboard
+            </Button>
+            <div className="flex items-center justify-between px-2 py-2">
+              <span className="text-sm text-gray-600">Account Options</span>
+              <NavBarUserDropdown />
+            </div>
+          </div>
+        ) : (
+          <Button 
+            onClick={handleDashboardClick}
+            variant="outline"
+            className="w-full"
+          >
+            Sign In
+          </Button>
+        )}
       </div>
     </div>
   );
