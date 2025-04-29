@@ -1,41 +1,15 @@
 
+import { useChapterForm } from "@/hooks/useChapterForm";
+import { ChapterFormContainer } from "@/components/ui/chapter-form/ChapterFormContainer";
+import { ChapterFormTextQuestion } from "@/components/ui/chapter-form/ChapterFormTextQuestion";
 import { useState } from "react";
-import { WorksheetSection } from "./worksheet/WorksheetSection";
-import { SaveButton } from "./worksheet/SaveButton";
-import { WorksheetFooter } from "./worksheet/WorksheetFooter";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 
 export const SystemWorksheet = () => {
   const { toast } = useToast();
-  const [responses, setResponses] = useState({
-    safeBet: "",
-    strengthAligner: "",
-    valueMaximizer: "",
-    plusOne: "",
-    metrics: "",
-    monthlyCycle: "",
-    marketing: "",
-    challenges: "",
-    strategies: "",
-    revenueGoal: ""
-  });
+  const { formState, saveResponse, isLoading } = useChapterForm(3, "worksheet");
+  const [saved, setSaved] = useState<Record<string, boolean>>({});
   
-  const handleChange = (field: string, value: string) => {
-    setResponses(prev => ({
-      ...prev,
-      [field]: value
-    }));
-  };
-  
-  const handleSave = () => {
-    localStorage.setItem('chapter3Worksheet', JSON.stringify(responses));
-    toast({
-      title: "Progress Saved",
-      description: "Your responses have been saved successfully.",
-      duration: 3000,
-    });
-  };
-
   const sections = [
     {
       field: "safeBet",
@@ -89,31 +63,56 @@ export const SystemWorksheet = () => {
     }
   ];
   
+  // Get answer from formState or return empty string
+  const getAnswer = (field: string): string => {
+    return formState?.worksheet?.textInputs?.[field] || "";
+  };
+
+  const saveAnswer = (field: string, value: string) => {
+    if (value?.trim()) {
+      saveResponse("worksheet", { 
+        checkboxes: {}, 
+        textInputs: { [field]: value } 
+      }, true);
+      
+      setSaved(prev => ({ ...prev, [field]: true }));
+      toast({
+        title: "Answer saved!",
+        description: "Your response has been recorded."
+      });
+    }
+  };
+
+  const handleAnswerChange = (field: string, value: string) => {
+    saveResponse("worksheet", { 
+      checkboxes: {}, 
+      textInputs: { [field]: value } 
+    });
+    
+    // Remove saved indicator when editing
+    if (saved[field]) {
+      setSaved(prev => ({ ...prev, [field]: false }));
+    }
+  };
+  
   return (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold mb-6">Chapter 3 Self-Assessment: Your 3 Plus 1 Plan</h2>
-      
-      <p>
-        Based on your Decision Tree path from Chapter 2, now it's time to create your personalized 3 Plus 1 plan:
-      </p>
-      
-      <div className="space-y-6 mt-8">
-        {sections.map((section) => (
-          <WorksheetSection
-            key={section.field}
-            title={section.title}
-            value={responses[section.field as keyof typeof responses]}
-            placeholder={section.placeholder}
-            onChange={(value) => handleChange(section.field, value)}
-          />
-        ))}
-      </div>
-      
-      <div className="flex justify-end mt-8">
-        <SaveButton onSave={handleSave} />
-      </div>
-      
-      <WorksheetFooter />
-    </div>
+    <ChapterFormContainer
+      chapterNumber={3}
+      sectionId="worksheet"
+      title="Chapter 3 Self-Assessment: Your 3 Plus 1 Plan"
+      description="Based on your Decision Tree path from Chapter 2, now it's time to create your personalized 3 Plus 1 plan:"
+    >
+      {sections.map((section) => (
+        <ChapterFormTextQuestion
+          key={section.field}
+          id={section.field}
+          question={section.title}
+          value={getAnswer(section.field)}
+          isSaved={saved[section.field]}
+          onChange={(value) => handleAnswerChange(section.field, value)}
+          onSave={() => saveAnswer(section.field, getAnswer(section.field))}
+        />
+      ))}
+    </ChapterFormContainer>
   );
 };

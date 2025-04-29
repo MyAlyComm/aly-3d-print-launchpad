@@ -1,10 +1,11 @@
+
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { useChapterForm } from "@/hooks/useChapterForm";
 import { ProductScoreCard } from "./ProductScoreCard";
 import { ProductTrinitySelection } from "./ProductTrinitySelection";
-import { SaveButton } from "../../chapter3/worksheet/SaveButton";
-import { WorksheetFooter } from "../../chapter3/worksheet/WorksheetFooter";
+import { SaveIndicator } from "@/components/ui/save-indicator/SaveIndicator";
 import { 
   calculateProfitsTotal, 
   calculateMatchTotal, 
@@ -13,7 +14,7 @@ import {
 
 export const ProductWorksheet = () => {
   const { toast } = useToast();
-  const { formState, saveResponse, isLoading } = useChapterForm(4, 'worksheet');
+  const { formState, saveResponse, isLoading, saveStatus } = useChapterForm(4, 'worksheet');
   
   const [profitsScores, setProfitsScores] = useState<{
     [key: string]: {
@@ -74,10 +75,13 @@ export const ProductWorksheet = () => {
     plusOne: '',
   });
 
+  // Initialize form state from saved data if available
   useEffect(() => {
     if (!isLoading && formState) {
+      // Extract saved data from the formState
       const savedData = formState.worksheet?.textInputs || {};
       
+      // Initialize product names if they exist in saved data
       if (savedData.productNames) {
         try {
           const parsedProductNames = JSON.parse(savedData.productNames);
@@ -89,6 +93,7 @@ export const ProductWorksheet = () => {
         }
       }
 
+      // Initialize profits scores if they exist in saved data
       if (savedData.profitsScores) {
         try {
           const parsedProfitsScores = JSON.parse(savedData.profitsScores);
@@ -100,6 +105,7 @@ export const ProductWorksheet = () => {
         }
       }
 
+      // Initialize match scores if they exist in saved data
       if (savedData.matchScores) {
         try {
           const parsedMatchScores = JSON.parse(savedData.matchScores);
@@ -111,6 +117,7 @@ export const ProductWorksheet = () => {
         }
       }
 
+      // Initialize final scores if they exist in saved data
       if (savedData.finalScores) {
         try {
           const parsedFinalScores = JSON.parse(savedData.finalScores);
@@ -122,6 +129,7 @@ export const ProductWorksheet = () => {
         }
       }
 
+      // Initialize trinity selections if they exist in saved data
       if (savedData.trinity) {
         try {
           const parsedTrinity = JSON.parse(savedData.trinity);
@@ -135,13 +143,27 @@ export const ProductWorksheet = () => {
     }
   }, [isLoading, formState]);
 
+  // Handle product name change
   const handleProductNameChange = (product: string, value: string) => {
     setProductNames(prev => ({
       ...prev,
       [product]: value
     }));
+
+    // Auto-save the product names
+    const newProductNames = {
+      ...productNames,
+      [product]: value
+    };
+
+    saveResponse('worksheet', {
+      textInputs: {
+        productNames: JSON.stringify(newProductNames)
+      }
+    });
   };
 
+  // Handle PROFITS score change
   const handleProfitsChange = (product: string, factor: string, value: string) => {
     setProfitsScores(prev => ({
       ...prev,
@@ -151,21 +173,40 @@ export const ProductWorksheet = () => {
       }
     }));
     
+    // Recalculate total
     setTimeout(() => {
-      const total = calculateProfitsTotal(profitsScores[product]);
-      setProfitsScores(prev => ({
-        ...prev,
+      const updatedScores = {
+        ...profitsScores[product],
+        [factor]: value
+      };
+      
+      const total = calculateProfitsTotal(updatedScores);
+      
+      const newProfitsScores = {
+        ...profitsScores,
         [product]: {
-          ...prev[product],
-          ...profitsScores[product],
+          ...updatedScores,
           total: total.toString()
         }
-      }));
+      };
       
+      setProfitsScores(newProfitsScores);
       calculateFinalScore(product, total.toString(), matchScores[product].total, setFinalScores);
+      
+      // Auto-save the profits scores
+      saveResponse('worksheet', {
+        textInputs: {
+          profitsScores: JSON.stringify(newProfitsScores),
+          finalScores: JSON.stringify({
+            ...finalScores,
+            [product]: Math.round((total + (parseInt(matchScores[product].total) || 0)) / 2).toString()
+          })
+        }
+      });
     }, 100);
   };
 
+  // Handle MATCH score change
   const handleMatchChange = (product: string, factor: string, value: string) => {
     setMatchScores(prev => ({
       ...prev,
@@ -175,29 +216,59 @@ export const ProductWorksheet = () => {
       }
     }));
     
+    // Recalculate total
     setTimeout(() => {
-      const total = calculateMatchTotal(matchScores[product]);
-      setMatchScores(prev => ({
-        ...prev,
+      const updatedScores = {
+        ...matchScores[product],
+        [factor]: value
+      };
+      
+      const total = calculateMatchTotal(updatedScores);
+      
+      const newMatchScores = {
+        ...matchScores,
         [product]: {
-          ...prev[product],
-          ...matchScores[product],
+          ...updatedScores,
           total: total.toString()
         }
-      }));
+      };
       
+      setMatchScores(newMatchScores);
       calculateFinalScore(product, profitsScores[product].total, total.toString(), setFinalScores);
+      
+      // Auto-save the match scores
+      saveResponse('worksheet', {
+        textInputs: {
+          matchScores: JSON.stringify(newMatchScores),
+          finalScores: JSON.stringify({
+            ...finalScores,
+            [product]: Math.round(((parseInt(profitsScores[product].total) || 0) + total) / 2).toString()
+          })
+        }
+      });
     }, 100);
   };
 
+  // Handle trinity selection changes
   const handleTrinityChange = (type: string, value: string) => {
-    setTrinity(prev => ({
-      ...prev,
+    const newTrinity = {
+      ...trinity,
       [type]: value
-    }));
+    };
+    
+    setTrinity(newTrinity);
+    
+    // Auto-save trinity selection
+    saveResponse('worksheet', {
+      textInputs: {
+        trinity: JSON.stringify(newTrinity)
+      }
+    });
   };
 
+  // Save all worksheet responses
   const handleSave = () => {
+    // Convert state objects to JSON strings for storage in textInputs
     saveResponse('worksheet', {
       textInputs: {
         productNames: JSON.stringify(productNames),
@@ -205,13 +276,31 @@ export const ProductWorksheet = () => {
         matchScores: JSON.stringify(matchScores),
         finalScores: JSON.stringify(finalScores),
         trinity: JSON.stringify(trinity)
-      }
+      },
+      checkboxes: { completed: true }
     }, true);
   };
 
+  // Generate product options with names for the trinity selection
+  const productOptions = Object.entries(productNames).map(([key, name]) => ({
+    value: key,
+    label: name || `Product ${key.replace('product', '')}`
+  }));
+  
+  if (isLoading) {
+    return (
+      <div className="flex justify-center p-6">
+        <div className="animate-pulse text-primary">Loading your product evaluation data...</div>
+      </div>
+    );
+  }
+  
   return (
     <div className="space-y-8">
-      <h2 className="text-2xl font-bold">Chapter 4 Worksheet: Evaluating Your First Products</h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-bold">Chapter 4 Worksheet: Evaluating Your First Products</h2>
+        <SaveIndicator status={saveStatus} />
+      </div>
       
       <p className="text-lg">
         Based on the PROFITS MATCH framework, evaluate at least five potential products to identify 
@@ -238,13 +327,18 @@ export const ProductWorksheet = () => {
       <ProductTrinitySelection
         trinity={trinity}
         onTrinityChange={handleTrinityChange}
+        productOptions={productOptions}
       />
 
-      <WorksheetFooter>
-        <div className="flex justify-end mt-8">
-          <SaveButton onSave={handleSave} />
-        </div>
-      </WorksheetFooter>
+      <div className="flex justify-end mt-8">
+        <Button 
+          onClick={handleSave} 
+          size="lg"
+          className="px-8"
+        >
+          Complete Product Evaluation
+        </Button>
+      </div>
     </div>
   );
 };

@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+
+import React, { useState, useRef } from "react";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChapterProgressBar } from "@/components/ebook/ChapterProgress";
@@ -46,7 +47,7 @@ const Chapter1 = () => {
     }
   ];
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!progressUpdated.current) {
       progressUpdated.current = true;
       

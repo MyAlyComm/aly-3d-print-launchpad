@@ -1,7 +1,7 @@
 
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface ProductTrinitySelectionProps {
   trinity: {
@@ -11,73 +11,104 @@ interface ProductTrinitySelectionProps {
     plusOne: string;
   };
   onTrinityChange: (type: string, value: string) => void;
+  productOptions?: { value: string; label: string }[];
 }
 
 export const ProductTrinitySelection = ({ 
   trinity, 
-  onTrinityChange 
+  onTrinityChange,
+  productOptions = [] 
 }: ProductTrinitySelectionProps) => {
-  return (
-    <>
-      <div className="mt-12 p-6 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg">
-        <h3 className="text-xl font-bold mb-6">MY PRODUCT TRINITY:</h3>
-        
-        <div className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="safe-bet">
-              My "Safe Bet" (highest overall score):
-            </Label>
-            <Input 
-              id="safe-bet"
-              className="max-w-lg" 
-              value={trinity.safeBet}
-              onChange={(e) => onTrinityChange('safeBet', e.target.value)}
-              placeholder="Enter your safe bet product"
-            />
-          </div>
-          
-          <div className="space-y-2">
-            <Label htmlFor="profit-maximizer">
-              My "Profit Maximizer" (highest PROFITS score):
-            </Label>
-            <Input 
-              id="profit-maximizer"
-              className="max-w-lg" 
-              value={trinity.profitMaximizer}
-              onChange={(e) => onTrinityChange('profitMaximizer', e.target.value)}
-              placeholder="Enter your profit maximizer product"
-            />
-          </div>
-          
-          <div className="space-y-2">
-            <Label htmlFor="strength-showcase">
-              My "Strength Showcase" (highest MATCH score):
-            </Label>
-            <Input 
-              id="strength-showcase"
-              className="max-w-lg" 
-              value={trinity.strengthShowcase}
-              onChange={(e) => onTrinityChange('strengthShowcase', e.target.value)}
-              placeholder="Enter your strength showcase product"
-            />
-          </div>
-        </div>
-      </div>
+  const defaultOptions = [
+    { value: "product1", label: "Product 1" },
+    { value: "product2", label: "Product 2" },
+    { value: "product3", label: "Product 3" },
+    { value: "product4", label: "Product 4" },
+    { value: "product5", label: "Product 5" },
+  ];
 
-      <div className="p-6 bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg">
-        <div className="space-y-2">
-          <Label htmlFor="plus-one">
-            MY FIRST PLUS 1 INNOVATION:
-          </Label>
-          <Textarea 
-            id="plus-one"
-            className="min-h-20" 
-            value={trinity.plusOne}
-            onChange={(e) => onTrinityChange('plusOne', e.target.value)}
-            placeholder="Describe your first Plus 1 innovation project"
-          />
+  const options = productOptions.length > 0 ? productOptions : defaultOptions;
+
+  return (
+    <Card>
+      <CardHeader className="bg-gray-50">
+        <CardTitle>Your Product Trinity Selection</CardTitle>
+      </CardHeader>
+      <CardContent className="p-6 space-y-6">
+        <p>
+          Based on your product scoring, select which product will fulfill each role in your Product Trinity:
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <Label htmlFor="safeBet">Safe Bet Product:</Label>
+            <Select value={trinity.safeBet} onValueChange={(value) => onTrinityChange("safeBet", value)}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select a product" />
+              </SelectTrigger>
+              <SelectContent>
+                {options.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <p className="text-xs text-gray-500">Choose your most reliable seller with the lowest risk</p>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="profitMaximizer">Profit Maximizer Product:</Label>
+            <Select value={trinity.profitMaximizer} onValueChange={(value) => onTrinityChange("profitMaximizer", value)}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select a product" />
+              </SelectTrigger>
+              <SelectContent>
+                {options.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <p className="text-xs text-gray-500">Choose your highest margin product</p>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="strengthShowcase">Strength Showcase Product:</Label>
+            <Select value={trinity.strengthShowcase} onValueChange={(value) => onTrinityChange("strengthShowcase", value)}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select a product" />
+              </SelectTrigger>
+              <SelectContent>
+                {options.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <p className="text-xs text-gray-500">Choose the product that best showcases your skills</p>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="plusOne">Plus One (Innovative) Product:</Label>
+            <Select value={trinity.plusOne} onValueChange={(value) => onTrinityChange("plusOne", value)}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select a product" />
+              </SelectTrigger>
+              <SelectContent>
+                {options.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <p className="text-xs text-gray-500">Choose your most innovative or experimental product</p>
+          </div>
         </div>
-      </div>
-    </>
+      </CardContent>
+    </Card>
   );
 };
