@@ -1,5 +1,4 @@
 
-// Make sure React is explicitly imported
 import * as React from 'react';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
@@ -8,22 +7,24 @@ import { supabase } from '@/integrations/supabase/client';
 interface AuthContextType {
   user: User | null;
   session: Session | null;
-  isLoading: boolean;  // Add loading state
-  signOut: () => Promise<void>; // Add signOut method for convenience
+  isLoading: boolean;
+  authError: Error | null;
+  signOut: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({ 
   user: null, 
   session: null,
   isLoading: true,
+  authError: null,
   signOut: async () => {} 
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  // Explicitly use React.useState to avoid any potential reference issues
   const [user, setUser] = React.useState<User | null>(null);
   const [session, setSession] = React.useState<Session | null>(null);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [authError, setAuthError] = React.useState<Error | null>(null);
 
   // Sign out helper method
   const signOut = async () => {
@@ -54,17 +55,32 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     );
 
     // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setIsLoading(false);
-    });
+    const checkSession = async () => {
+      try {
+        const { data, error } = await supabase.auth.getSession();
+        if (error) {
+          console.error("Session retrieval error:", error);
+          setAuthError(error);
+        } else {
+          setSession(data.session);
+          setUser(data.session?.user ?? null);
+        }
+      } catch (error) {
+        console.error("Unexpected auth error:", error);
+        setAuthError(error instanceof Error ? error : new Error("Unknown authentication error"));
+      } finally {
+        // Always set loading to false regardless of outcome
+        setIsLoading(false);
+      }
+    };
+
+    checkSession();
 
     return () => subscription.unsubscribe();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, session, isLoading, signOut }}>
+    <AuthContext.Provider value={{ user, session, isLoading, authError, signOut }}>
       {children}
     </AuthContext.Provider>
   );

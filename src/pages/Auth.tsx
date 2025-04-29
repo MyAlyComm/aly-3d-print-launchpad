@@ -1,14 +1,34 @@
+
 import { useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { AuthForm } from '@/components/auth/AuthForm';
 import { useAuth } from '@/hooks/useAuth';
+import { toast } from 'sonner';
 
 const Auth = () => {
-  const { user, isLoading } = useAuth();
+  const { user, isLoading, authError } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchParams] = useSearchParams();
+  const errorParam = searchParams.get('error');
   
   useEffect(() => {
+    // Handle error parameter from URL
+    if (errorParam) {
+      toast.error("Authentication Error", {
+        description: errorParam === 'session_error' ? 
+          "There was a problem with your session. Please sign in again." :
+          "There was a problem with authentication. Please try again.",
+      });
+    }
+    
+    // Handle auth errors
+    if (authError) {
+      toast.error("Authentication Error", {
+        description: authError.message || "There was a problem signing in. Please try again.",
+      });
+    }
+    
     // Don't do anything while auth is still loading
     if (isLoading) return;
     
@@ -18,7 +38,7 @@ const Auth = () => {
       const from = location.state?.from?.pathname || "/dashboard";
       navigate(from);
     }
-  }, [user, navigate, location, isLoading]);
+  }, [user, navigate, location, isLoading, authError, errorParam]);
 
   if (isLoading) {
     return (
