@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import LeadMagnetDialog from "./FreeGuideDialog";
 import { FileText } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useTeamBypass } from "@/hooks/useTeamBypass";
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -12,6 +13,7 @@ const NavBar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { isTeamBypassActive, activateTeamBypass } = useTeamBypass();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,13 +41,18 @@ const NavBar = () => {
   };
 
   const handleDashboardClick = () => {
-    if (user) {
+    if (user || isTeamBypassActive) {
       navigate("/dashboard");
     } else {
       // Always navigate to the auth page without any parameters
       // This ensures consistent behavior regardless of scroll position
       navigate("/auth");
     }
+  };
+
+  // Double-click handler for team access activation
+  const handleLogoDoubleClick = () => {
+    activateTeamBypass();
   };
 
   return (
@@ -59,8 +66,16 @@ const NavBar = () => {
       <div className="container">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <FileText className="h-6 w-6 text-primary" />
-            <a href="/" onClick={handleTitleClick} className="text-xl font-bold logo-gradient">
+            <FileText 
+              className="h-6 w-6 text-primary cursor-pointer" 
+              onDoubleClick={handleLogoDoubleClick}
+            />
+            <a 
+              href="/" 
+              onClick={handleTitleClick} 
+              onDoubleClick={handleLogoDoubleClick}
+              className="text-xl font-bold logo-gradient"
+            >
               3DBlueprint.io
             </a>
           </div>
@@ -78,6 +93,16 @@ const NavBar = () => {
             <a href="#testimonials" className="text-gray-700 hover:text-primary font-medium">
               Testimonials
             </a>
+            {isTeamBypassActive && (
+              <>
+                <a href="/dashboard" className="text-primary hover:text-primary/80 font-medium">
+                  Dashboard
+                </a>
+                <a href="/account" className="text-primary hover:text-primary/80 font-medium">
+                  Account
+                </a>
+              </>
+            )}
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
@@ -86,7 +111,7 @@ const NavBar = () => {
               onClick={handleDashboardClick}
               variant="outline"
             >
-              {user ? 'Dashboard' : 'Sign In'}
+              {user || isTeamBypassActive ? 'Dashboard' : 'Sign In'}
             </Button>
           </div>
 
@@ -143,6 +168,16 @@ const NavBar = () => {
               <a href="#testimonials" className="text-gray-700 hover:text-primary py-2">
                 Testimonials
               </a>
+              {isTeamBypassActive && (
+                <>
+                  <a href="/dashboard" className="text-primary hover:text-primary/80 py-2">
+                    Dashboard
+                  </a>
+                  <a href="/account" className="text-primary hover:text-primary/80 py-2">
+                    Account
+                  </a>
+                </>
+              )}
               <LeadMagnetDialog>
                 <Button className="bg-secondary hover:bg-secondary-dark text-white w-full">
                   Free Guide
@@ -153,7 +188,7 @@ const NavBar = () => {
                 variant="outline"
                 className="w-full"
               >
-                {user ? 'Dashboard' : 'Sign In'}
+                {user || isTeamBypassActive ? 'Dashboard' : 'Sign In'}
               </Button>
             </div>
           </div>

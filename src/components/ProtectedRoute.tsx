@@ -3,6 +3,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
+import { useTeamBypass } from "@/hooks/useTeamBypass";
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -11,18 +12,26 @@ interface ProtectedRouteProps {
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const location = useLocation();
   const { user, isLoading, authError } = useAuth();
+  const { isTeamBypassActive } = useTeamBypass();
   const [hasShownToast, setHasShownToast] = useState(false);
   
   useEffect(() => {
     // Show toast only once per component mount and when authentication check completes
-    if (!isLoading && !user && !hasShownToast && !authError) {
+    // Don't show toast if we're in team bypass mode
+    if (!isLoading && !user && !hasShownToast && !authError && !isTeamBypassActive) {
       toast.error("Please sign in to access this content", {
         description: "You need to be logged in to view this page",
         duration: 4000,
       });
       setHasShownToast(true);
     }
-  }, [user, isLoading, hasShownToast, authError]);
+  }, [user, isLoading, hasShownToast, authError, isTeamBypassActive]);
+
+  // Allow access if team bypass is active
+  if (isTeamBypassActive) {
+    console.log("Team bypass active, allowing access to protected route");
+    return <>{children}</>;
+  }
 
   if (isLoading) {
     return (
