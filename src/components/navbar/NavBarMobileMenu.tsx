@@ -32,11 +32,10 @@ export const NavBarMobileMenu = ({
           onClick={onLinkClick} // Close menu when link is clicked
         />
         
-        {isTeamBypassActive && (
-          <div className="py-2">
-            <NavBarAllPagesDropdown />
-          </div>
-        )}
+        {/* Always show the Pages dropdown */}
+        <div className="py-2">
+          <NavBarAllPagesDropdown />
+        </div>
         
         <LeadMagnetDialog>
           <Button className="bg-secondary hover:bg-secondary-dark text-white w-full">

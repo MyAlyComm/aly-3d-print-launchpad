@@ -16,7 +16,7 @@ const NavBar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { isTeamBypassActive, activateTeamBypass } = useTeamBypass();
+  const { isTeamBypassActive } = useTeamBypass();
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -57,7 +57,7 @@ const NavBar = () => {
   };
 
   const handleLogoDoubleClick = () => {
-    activateTeamBypass();
+    // Kept for backward compatibility but no longer needed
   };
 
   const toggleMobileMenu = () => {
@@ -84,12 +84,10 @@ const NavBar = () => {
               handleLogoDoubleClick={handleLogoDoubleClick} 
             />
             
-            {/* All Pages Dropdown - Only visible when team access is active */}
-            {isTeamBypassActive && (
-              <div className="ml-4 hidden md:block">
-                <NavBarAllPagesDropdown />
-              </div>
-            )}
+            {/* Always show the Pages Dropdown */}
+            <div className="ml-4 hidden md:block">
+              <NavBarAllPagesDropdown />
+            </div>
           </div>
 
           <NavBarLinks className="hidden md:flex" />

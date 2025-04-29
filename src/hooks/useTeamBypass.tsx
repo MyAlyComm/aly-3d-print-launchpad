@@ -15,23 +15,21 @@ const TeamBypassContext = createContext<TeamBypassContextType>({
 });
 
 export const TeamBypassProvider = ({ children }: { children: ReactNode }) => {
-  const [isTeamBypassActive, setIsTeamBypassActive] = useState(false);
+  const [isTeamBypassActive, setIsTeamBypassActive] = useState(true); // Default to true
   const location = useLocation();
 
   useEffect(() => {
-    // Check for bypass token in localStorage first
-    const storedBypass = localStorage.getItem('team_bypass_active');
-    if (storedBypass === 'true') {
-      setIsTeamBypassActive(true);
-    }
+    // Always set team access to active by default
+    setIsTeamBypassActive(true);
+    localStorage.setItem('team_bypass_active', 'true');
     
-    // Then check for bypass parameter in URL
+    // Still check for parameters in case they want to explicitly disable it
     const queryParams = new URLSearchParams(location.search);
     const teamBypassParam = queryParams.get('team_access');
 
-    if (teamBypassParam === 'true') {
-      setIsTeamBypassActive(true);
-      localStorage.setItem('team_bypass_active', 'true');
+    if (teamBypassParam === 'false') {
+      setIsTeamBypassActive(false);
+      localStorage.removeItem('team_bypass_active');
       // Remove the parameter from URL for cleaner navigation
       const newUrl = window.location.pathname;
       window.history.replaceState({}, '', newUrl);
