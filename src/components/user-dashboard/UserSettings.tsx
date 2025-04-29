@@ -13,21 +13,40 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
-import { toast } from "@/components/ui/sonner";
-import { AlertCircle } from "lucide-react";
+import { toast } from "sonner";
+import { AlertCircle, Trash } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { useAuth } from "@/hooks/useAuth";
 
 interface UserSettingsProps {
   user: User;
 }
 
 export const UserSettings = ({ user }: UserSettingsProps) => {
+  const navigate = useNavigate();
+  const { signOut } = useAuth();
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [emailNotifications, setEmailNotifications] = useState(true);
   
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  
+  // Account deletion states
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleteConfirmation, setDeleteConfirmation] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
   
   const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,6 +77,33 @@ export const UserSettings = ({ user }: UserSettingsProps) => {
       console.error("Error updating password:", error);
     } finally {
       setIsChangingPassword(false);
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    if (deleteConfirmation !== user.email) {
+      toast.error("Email confirmation does not match");
+      return;
+    }
+
+    setIsDeleting(true);
+
+    try {
+      // Delete the user account - this will cascade to all related data
+      const { error } = await supabase.rpc('delete_user');
+      
+      if (error) throw error;
+      
+      // Sign out the user
+      await signOut();
+      
+      // Show success message and redirect
+      toast.success("Your account has been deleted successfully");
+      navigate("/");
+    } catch (error) {
+      console.error("Error deleting account:", error);
+      toast.error("Failed to delete account. Please try again later.");
+      setIsDeleting(false);
     }
   };
   
@@ -161,16 +207,56 @@ export const UserSettings = ({ user }: UserSettingsProps) => {
               Permanently delete your account and all associated data
             </CardDescription>
           </CardHeader>
-          <CardFooter>
+          <CardContent>
+            <p className="text-sm text-gray-600 mb-4">
+              This action is irreversible. All your data will be permanently removed.
+            </p>
             <Button 
               variant="destructive"
-              onClick={() => toast.error("This functionality is not implemented in this demo")}
+              onClick={() => setShowDeleteConfirm(true)}
+              className="flex gap-2 items-center"
             >
+              <Trash className="h-4 w-4" />
               Delete Account
             </Button>
-          </CardFooter>
+          </CardContent>
         </Card>
       </div>
+
+      {/* Delete confirmation dialog */}
+      <AlertDialog open={showDeleteConfirm} onOpenChange={setShowDeleteConfirm}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your account
+              and remove all your data from our servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <div className="py-4">
+            <Label htmlFor="delete-confirmation" className="text-sm font-medium">
+              Type your email <span className="font-semibold">{user.email}</span> to confirm:
+            </Label>
+            <Input 
+              id="delete-confirmation"
+              className="mt-2"
+              placeholder={user.email}
+              value={deleteConfirmation}
+              onChange={(e) => setDeleteConfirmation(e.target.value)}
+            />
+          </div>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteAccount}
+              disabled={deleteConfirmation !== user.email || isDeleting}
+              className="bg-red-600 hover:bg-red-700 text-white"
+            >
+              {isDeleting ? "Deleting..." : "Delete Account"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
