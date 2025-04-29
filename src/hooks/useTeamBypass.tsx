@@ -19,12 +19,15 @@ export const TeamBypassProvider = ({ children }: { children: ReactNode }) => {
   const location = useLocation();
 
   useEffect(() => {
-    // Check for bypass parameter in URL
+    // Check for bypass token in localStorage first
+    const storedBypass = localStorage.getItem('team_bypass_active');
+    if (storedBypass === 'true') {
+      setIsTeamBypassActive(true);
+    }
+    
+    // Then check for bypass parameter in URL
     const queryParams = new URLSearchParams(location.search);
     const teamBypassParam = queryParams.get('team_access');
-
-    // Check for bypass token in localStorage
-    const storedBypass = localStorage.getItem('team_bypass_active');
 
     if (teamBypassParam === 'true') {
       setIsTeamBypassActive(true);
@@ -32,8 +35,6 @@ export const TeamBypassProvider = ({ children }: { children: ReactNode }) => {
       // Remove the parameter from URL for cleaner navigation
       const newUrl = window.location.pathname;
       window.history.replaceState({}, '', newUrl);
-    } else if (storedBypass === 'true') {
-      setIsTeamBypassActive(true);
     }
   }, [location.search]);
 
