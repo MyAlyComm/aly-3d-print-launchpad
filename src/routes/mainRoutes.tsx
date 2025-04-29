@@ -5,7 +5,6 @@ import About from "@/pages/About";
 import NotFound from "@/pages/NotFound";
 import PaymentSuccess from "@/pages/PaymentSuccess";
 import UserDashboard from "@/pages/UserDashboard";
-import Dashboard from "@/pages/Dashboard";
 import ProtectedRoute from "@/components/ProtectedRoute";
 
 export const mainRoutes = [
@@ -18,8 +17,5 @@ export const mainRoutes = [
     path: "/account", 
     element: <ProtectedRoute><UserDashboard /></ProtectedRoute> 
   },
-  { 
-    path: "/dashboard", 
-    element: <ProtectedRoute><Dashboard /></ProtectedRoute> 
-  },
+  // Removed the conflicting /dashboard route from here
 ];
