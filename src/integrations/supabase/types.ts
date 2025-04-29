@@ -709,6 +709,10 @@ export type Database = {
         Args: { "": string } | { "": unknown }
         Returns: unknown
       }
+      delete_user: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
       halfvec_avg: {
         Args: { "": number[] }
         Returns: unknown
