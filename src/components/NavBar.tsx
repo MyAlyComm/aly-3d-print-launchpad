@@ -6,6 +6,7 @@ import LeadMagnetDialog from "./FreeGuideDialog";
 import { FileText } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useTeamBypass } from "@/hooks/useTeamBypass";
+import { NavBarAllPagesDropdown } from "./NavBarAllPagesDropdown";
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -78,6 +79,13 @@ const NavBar = () => {
             >
               3DBlueprint.io
             </a>
+            
+            {/* All Pages Dropdown - Only visible when team access is active */}
+            {isTeamBypassActive && (
+              <div className="ml-4">
+                <NavBarAllPagesDropdown />
+              </div>
+            )}
           </div>
 
           <div className="hidden md:flex items-center space-x-8">
@@ -170,6 +178,10 @@ const NavBar = () => {
               </a>
               {isTeamBypassActive && (
                 <>
+                  {/* Show All Pages dropdown in mobile menu when team access is active */}
+                  <div className="py-2">
+                    <NavBarAllPagesDropdown />
+                  </div>
                   <a href="/dashboard" className="text-primary hover:text-primary/80 py-2">
                     Dashboard
                   </a>
