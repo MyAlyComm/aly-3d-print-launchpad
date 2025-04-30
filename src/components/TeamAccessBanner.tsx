@@ -8,8 +8,15 @@ export const TeamAccessBanner = () => {
   const [showHint, setShowHint] = useState(false);
   const [bannerDismissed, setBannerDismissed] = useState(false);
   
-  // Show hint briefly for new visitors
+  // Show hint briefly for new visitors and check banner status
   useEffect(() => {
+    // Check if banner was previously dismissed first
+    const accessBannerDismissed = localStorage.getItem('access_banner_dismissed');
+    if (accessBannerDismissed === 'true') {
+      setBannerDismissed(true);
+    }
+    
+    // Then check for hint display
     const hasSeenHint = localStorage.getItem('has_seen_nav_hint');
     
     if (!hasSeenHint) {
@@ -23,17 +30,14 @@ export const TeamAccessBanner = () => {
       
       return () => clearTimeout(timer);
     }
-    
-    // Check if banner was previously dismissed
-    const accessBannerDismissed = localStorage.getItem('access_banner_dismissed');
-    if (accessBannerDismissed === 'true') {
-      setBannerDismissed(true);
-    }
   }, []);
   
   const dismissBanner = () => {
     setBannerDismissed(true);
     localStorage.setItem('access_banner_dismissed', 'true');
+    
+    // Dispatch storage event for other tabs/windows
+    window.dispatchEvent(new Event('storage'));
   };
 
   return (
