@@ -8,6 +8,7 @@ import { aiHubRoutes } from "@/routes/aiHubRoutes";
 import { TeamBypassProvider } from "@/hooks/useTeamBypass";
 import { TeamAccessBanner } from "@/components/TeamAccessBanner";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
 const App = () => {
   const [bannerDismissed, setBannerDismissed] = useState(false);
@@ -30,33 +31,35 @@ const App = () => {
   }, []);
 
   return (
-    <AppProviders>
-      <BrowserRouter>
-        <TeamBypassProvider>
-          <TeamAccessBanner />
-          <div className={`${bannerDismissed ? 'pt-0' : 'pt-10'} transition-all duration-300`}>
-            <Breadcrumbs />
-            <Routes>
-              {mainRoutes.map((route, index) => (
-                <Route key={index} path={route.path} element={route.element} />
-              ))}
-              {ebookRoutes.map((route, index) => (
-                <Route key={`ebook-${index}`} path={route.path} element={route.element} />
-              ))}
-              {aiHubRoutes.map((route, index) => (
-                <Route key={`ai-${index}`} path={route.path} element={route.element} />
-              ))}
-              
-              {/* Redirect /ebooks to /dashboard for backward compatibility */}
-              <Route path="/ebooks" element={<Navigate to="/dashboard" replace />} />
-              
-              {/* Catch-all route for 404s */}
-              <Route path="*" element={<Navigate to="/not-found" replace />} />
-            </Routes>
-          </div>
-        </TeamBypassProvider>
-      </BrowserRouter>
-    </AppProviders>
+    <ErrorBoundary>
+      <AppProviders>
+        <BrowserRouter>
+          <TeamBypassProvider>
+            <TeamAccessBanner />
+            <div className={`${bannerDismissed ? 'pt-0' : 'pt-10'} transition-all duration-300`}>
+              <Breadcrumbs />
+              <Routes>
+                {mainRoutes.map((route, index) => (
+                  <Route key={index} path={route.path} element={route.element} />
+                ))}
+                {ebookRoutes.map((route, index) => (
+                  <Route key={`ebook-${index}`} path={route.path} element={route.element} />
+                ))}
+                {aiHubRoutes.map((route, index) => (
+                  <Route key={`ai-${index}`} path={route.path} element={route.element} />
+                ))}
+                
+                {/* Redirect /ebooks to /dashboard for backward compatibility */}
+                <Route path="/ebooks" element={<Navigate to="/dashboard" replace />} />
+                
+                {/* Catch-all route for 404s */}
+                <Route path="*" element={<Navigate to="/not-found" replace />} />
+              </Routes>
+            </div>
+          </TeamBypassProvider>
+        </BrowserRouter>
+      </AppProviders>
+    </ErrorBoundary>
   );
 };
 
