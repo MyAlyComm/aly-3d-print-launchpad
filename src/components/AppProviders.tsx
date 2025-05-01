@@ -16,13 +16,17 @@ export const AppProviders = ({ children }: AppProvidersProps) => {
       queries: {
         staleTime: 1000 * 60 * 5,
         retry: 1,
-        onError: (error) => {
-          console.error('Query error:', error);
+        meta: {
+          onError: (error: Error) => {
+            console.error('Query error:', error);
+          }
         }
       },
       mutations: {
-        onError: (error) => {
-          console.error('Mutation error:', error);
+        meta: {
+          onError: (error: Error) => {
+            console.error('Mutation error:', error);
+          }
         }
       }
     }
