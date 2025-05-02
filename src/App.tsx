@@ -32,6 +32,12 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
+const RouteWithErrorBoundary = ({ element }: { element: React.ReactNode }) => (
+  <ErrorBoundary>
+    {element}
+  </ErrorBoundary>
+);
+
 const AppRoutes = () => {
   const [bannerDismissed, setBannerDismissed] = useState(false);
   
@@ -69,13 +75,23 @@ const AppRoutes = () => {
                 <Route 
                   key={index} 
                   path={route.path} 
-                  element={<ProtectedRoute>{route.element}</ProtectedRoute>} 
+                  element={
+                    <ErrorBoundary>
+                      <ProtectedRoute>
+                        {route.element}
+                      </ProtectedRoute>
+                    </ErrorBoundary>
+                  } 
                 />
               );
             }
             
             return (
-              <Route key={index} path={route.path} element={route.element} />
+              <Route 
+                key={index} 
+                path={route.path} 
+                element={<RouteWithErrorBoundary element={route.element} />} 
+              />
             );
           })}
           
@@ -84,7 +100,13 @@ const AppRoutes = () => {
             <Route 
               key={`ebook-${index}`} 
               path={route.path} 
-              element={<ProtectedRoute>{route.element}</ProtectedRoute>} 
+              element={
+                <ErrorBoundary>
+                  <ProtectedRoute>
+                    {route.element}
+                  </ProtectedRoute>
+                </ErrorBoundary>
+              } 
             />
           ))}
           
@@ -93,7 +115,13 @@ const AppRoutes = () => {
             <Route 
               key={`ai-${index}`} 
               path={route.path} 
-              element={<ProtectedRoute>{route.element}</ProtectedRoute>} 
+              element={
+                <ErrorBoundary>
+                  <ProtectedRoute>
+                    {route.element}
+                  </ProtectedRoute>
+                </ErrorBoundary>
+              } 
             />
           ))}
           

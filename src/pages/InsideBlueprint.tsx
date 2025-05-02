@@ -1,4 +1,5 @@
 
+import { useEffect } from 'react';
 import { BackToTop } from "@/components/ui/back-to-top";
 import { HeroStory } from "@/components/inside-blueprint/HeroStory";
 import { ValueProposition } from "@/components/inside-blueprint/ValueProposition";
@@ -11,11 +12,17 @@ import { SampleChapterPreview } from "@/components/inside-blueprint/SampleChapte
 import { ChapterPreviews } from "@/components/inside-blueprint/ChapterPreviews";
 import { ChapterCarousel } from "@/components/inside-blueprint/ChapterCarousel";
 import FreeResourceCards from "@/components/resources/FreeResourceCards";
-import { useEffect, lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
-// Make sure we're using a component that has a default export
-const FAQPageCTA = lazy(() => import("@/components/dashboard/FAQPageCTA"));
+// Only lazy-load this component as it's less critical
+const FAQPageCTA = lazy(() => 
+  import("@/components/dashboard/FAQPageCTA")
+    .catch(err => {
+      console.error("Failed to load FAQPageCTA:", err);
+      return { default: () => null };
+    })
+);
 
 const InsideBlueprint = () => {
   useEffect(() => {
@@ -58,20 +65,17 @@ const InsideBlueprint = () => {
       <main className="space-y-1">
         <HeroStory />
         <ValueProposition />
-        
-        {/* Add FreeResourceCards before the lazy loaded components */}
         <FreeResourceCards />
+        <DashboardPreview />
+        <BlueprintPreview />
+        <ChapterCarousel />
+        <JourneyTimeline />
+        <BlueprintTestimonials />
+        <CallToAction />
+        <SampleChapterPreview />
+        <ChapterPreviews />
         
-        {/* Lazy load components that are not immediately visible */}
-        <Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
-          <DashboardPreview />
-          <BlueprintPreview />
-          <ChapterCarousel />
-          <JourneyTimeline />
-          <BlueprintTestimonials />
-          <CallToAction />
-          <SampleChapterPreview />
-          <ChapterPreviews />
+        <Suspense fallback={<Skeleton className="h-16 w-full" />}>
           <FAQPageCTA />
         </Suspense>
       </main>
