@@ -31,11 +31,12 @@ const Auth = () => {
       });
     }
     
-    // Don't do anything while auth is still loading
+    // Don't redirect while auth is still loading
     if (isLoading) return;
     
     if (user) {
       // If user is already authenticated, redirect them to dashboard
+      console.log("User is authenticated, redirecting to:", from);
       navigate(from, { replace: true });
     }
   }, [user, navigate, location, isLoading, authError, errorParam, from]);

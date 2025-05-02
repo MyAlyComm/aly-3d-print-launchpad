@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { AppProviders } from "@/components/AppProviders";
 import { mainRoutes } from "@/routes/mainRoutes";
 import { ebookRoutes } from "@/routes/ebookRoutes";
@@ -14,6 +14,7 @@ import { useAuth } from "@/hooks/useAuth";
 // Protected route component that checks authentication
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, isLoading } = useAuth();
+  const location = useLocation();
   
   if (isLoading) {
     return (
@@ -24,7 +25,8 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   }
   
   if (!user) {
-    return <Navigate to="/auth" replace />;
+    // Save the location they were trying to access
+    return <Navigate to="/auth" state={{ from: location }} replace />;
   }
   
   return <>{children}</>;

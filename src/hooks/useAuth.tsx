@@ -21,10 +21,10 @@ const AuthContext = createContext<AuthContextType>({
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = React.useState<User | null>(null);
-  const [session, setSession] = React.useState<Session | null>(null);
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [authError, setAuthError] = React.useState<Error | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [authError, setAuthError] = useState<Error | null>(null);
 
   // Sign out helper method
   const signOut = async () => {
@@ -38,30 +38,32 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  React.useEffect(() => {
-    // Set up auth state listener
+  useEffect(() => {
+    console.log("Setting up auth state listener");
+    
+    // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
+        console.log('Auth state changed:', event, session?.user?.email);
+        
         // Handle auth state changes
         setSession(session);
         setUser(session?.user ?? null);
         setIsLoading(false);
-        
-        // For debugging
-        if (event) {
-          console.log('Auth event:', event);
-        }
       }
     );
 
-    // Check for existing session
+    // THEN check for existing session
     const checkSession = async () => {
       try {
+        console.log("Checking for existing session");
         const { data, error } = await supabase.auth.getSession();
+        
         if (error) {
           console.error("Session retrieval error:", error);
           setAuthError(error);
         } else {
+          console.log("Session retrieved:", data.session?.user?.email || "No session");
           setSession(data.session);
           setUser(data.session?.user ?? null);
         }
@@ -76,11 +78,22 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     checkSession();
 
-    return () => subscription.unsubscribe();
+    return () => {
+      console.log("Cleaning up auth state listener");
+      subscription.unsubscribe();
+    };
   }, []);
 
+  const contextValue = {
+    user,
+    session,
+    isLoading,
+    authError,
+    signOut
+  };
+
   return (
-    <AuthContext.Provider value={{ user, session, isLoading, authError, signOut }}>
+    <AuthContext.Provider value={contextValue}>
       {children}
     </AuthContext.Provider>
   );
