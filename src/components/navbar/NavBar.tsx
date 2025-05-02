@@ -7,12 +7,15 @@ import { NavBarLinks } from "./NavBarLinks";
 import { NavBarActions } from "./NavBarActions";
 import { NavBarMobileMenu } from "./NavBarMobileMenu";
 import { NavBarMobileToggle } from "./NavBarMobileToggle";
+import { NavBarUserDropdown } from "./NavBarUserDropdown"; 
+import { useAuth } from "@/hooks/useAuth";
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -83,10 +86,13 @@ const NavBar = () => {
           </div>
 
           <NavBarLinks className="hidden md:flex" />
-          <NavBarActions 
-            handleDashboardClick={handleDashboardClick}
-            className="hidden md:flex"
-          />
+          <div className="hidden md:flex items-center space-x-4">
+            <NavBarActions 
+              handleDashboardClick={handleDashboardClick}
+              className=""
+            />
+            {user && <NavBarUserDropdown />}
+          </div>
 
           <NavBarMobileToggle 
             isOpen={isMobileMenuOpen}

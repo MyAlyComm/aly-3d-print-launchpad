@@ -6,7 +6,8 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
-import { Mail, Eye, EyeOff } from 'lucide-react';
+import { Mail, Eye, EyeOff, AlertCircle } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export const AuthForm = () => {
   const [email, setEmail] = useState('');
@@ -15,19 +16,21 @@ export const AuthForm = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [signupComplete, setSignupComplete] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setAuthError(null);
     
     if (!email || !password) {
-      toast.error('Please fill in all fields');
+      setAuthError('Please fill in all fields');
       return;
     }
     
     if (password.length < 6) {
-      toast.error('Password must be at least 6 characters');
+      setAuthError('Password must be at least 6 characters');
       return;
     }
     
@@ -39,6 +42,7 @@ export const AuthForm = () => {
           email, 
           password,
           options: {
+            emailRedirectTo: `${window.location.origin}/dashboard`,
             data: {
               created_at: new Date().toISOString(),
             }
@@ -57,18 +61,26 @@ export const AuthForm = () => {
         if (error) throw error;
         
         if (data?.user) {
+          if (!data.user.email_confirmed_at && !data.user.confirmed_at) {
+            setAuthError('Please verify your email before signing in.');
+            return;
+          }
+          
           toast.success('Logged in successfully!');
           // Always redirect to dashboard after successful login
           navigate("/dashboard");
         }
       }
     } catch (error: any) {
-      if (error.message.includes('Invalid login credentials')) {
-        toast.error('Incorrect email or password. Please try again.');
-      } else {
-        toast.error(error.message || 'Authentication failed');
-      }
       console.error('Authentication error:', error);
+      
+      if (error.message.includes('Email not confirmed')) {
+        setAuthError('Please verify your email before signing in.');
+      } else if (error.message.includes('Invalid login credentials')) {
+        setAuthError('Incorrect email or password. If you don\'t have an account, please sign up.');
+      } else {
+        setAuthError(error.message || 'Authentication failed');
+      }
     } finally {
       setLoading(false);
     }
@@ -111,6 +123,13 @@ export const AuthForm = () => {
           {isSignUp ? 'Create Account' : 'Sign In'}
         </h2>
         
+        {authError && (
+          <Alert variant="destructive" className="mb-4">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>{authError}</AlertDescription>
+          </Alert>
+        )}
+        
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <Input
@@ -152,7 +171,10 @@ export const AuthForm = () => {
           {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
           <button
             type="button"
-            onClick={() => setIsSignUp(!isSignUp)}
+            onClick={() => {
+              setIsSignUp(!isSignUp);
+              setAuthError(null);
+            }}
             className="text-primary hover:underline"
           >
             {isSignUp ? 'Sign In' : 'Sign Up'}

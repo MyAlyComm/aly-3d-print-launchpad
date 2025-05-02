@@ -4,6 +4,7 @@ import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { AuthForm } from '@/components/auth/AuthForm';
 import { useAuth } from '@/hooks/useAuth';
 import { toast } from 'sonner';
+import NavBar from '@/components/NavBar';
 
 const Auth = () => {
   const { user, isLoading, authError } = useAuth();
@@ -11,6 +12,7 @@ const Auth = () => {
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const errorParam = searchParams.get('error');
+  const from = location.state?.from?.pathname || "/dashboard";
   
   useEffect(() => {
     // Handle error parameter from URL
@@ -33,12 +35,10 @@ const Auth = () => {
     if (isLoading) return;
     
     if (user) {
-      // If they came from somewhere specific, go back there
-      // Otherwise redirect to dashboard by default
-      const from = location.state?.from?.pathname || "/dashboard";
-      navigate(from);
+      // If user is already authenticated, redirect them to dashboard
+      navigate(from, { replace: true });
     }
-  }, [user, navigate, location, isLoading, authError, errorParam]);
+  }, [user, navigate, location, isLoading, authError, errorParam, from]);
 
   if (isLoading) {
     return (
@@ -49,8 +49,11 @@ const Auth = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <AuthForm />
+    <div>
+      <NavBar />
+      <div className="pt-16 container mx-auto px-4 py-8">
+        <AuthForm />
+      </div>
     </div>
   );
 };
