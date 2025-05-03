@@ -27,11 +27,9 @@ export const NavBarUserDropdown = ({ className = "" }: NavBarUserDropdownProps) 
   const handleLogout = async () => {
     try {
       await signOut();
-      toast.success("Signed out successfully");
       navigate("/");
     } catch (error) {
       console.error("Error signing out:", error);
-      toast.info("Redirecting to home page...");
       navigate("/");
     }
     setIsOpen(false);

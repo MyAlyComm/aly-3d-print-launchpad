@@ -1,13 +1,12 @@
-
 import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { supabase } from '@/integrations/supabase/client';
+import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { Mail, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { useLocalAuth } from '@/hooks/useLocalAuth';
 
 export const AuthForm = () => {
   const [email, setEmail] = useState('');
@@ -18,7 +17,7 @@ export const AuthForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
   const navigate = useNavigate();
-  const location = useLocation();
+  const { signIn, signUp } = useLocalAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,49 +37,15 @@ export const AuthForm = () => {
 
     try {
       if (isSignUp) {
-        const { data, error } = await supabase.auth.signUp({ 
-          email, 
-          password,
-          options: {
-            emailRedirectTo: `${window.location.origin}/dashboard`,
-            data: {
-              created_at: new Date().toISOString(),
-            }
-          }
-        });
-        
-        if (error) throw error;
-        
-        if (data?.user) {
-          setSignupComplete(true);
-          toast.success('Account created! Please check your email to confirm sign up.');
-        }
+        await signUp(email, password);
+        setSignupComplete(true);
       } else {
-        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-        
-        if (error) throw error;
-        
-        if (data?.user) {
-          if (!data.user.email_confirmed_at && !data.user.confirmed_at) {
-            setAuthError('Please verify your email before signing in.');
-            return;
-          }
-          
-          toast.success('Logged in successfully!');
-          // Always redirect to dashboard after successful login
-          navigate("/dashboard");
-        }
+        await signIn(email, password);
+        navigate("/dashboard");
       }
     } catch (error: any) {
       console.error('Authentication error:', error);
-      
-      if (error.message.includes('Email not confirmed')) {
-        setAuthError('Please verify your email before signing in.');
-      } else if (error.message.includes('Invalid login credentials')) {
-        setAuthError('Incorrect email or password. If you don\'t have an account, please sign up.');
-      } else {
-        setAuthError(error.message || 'Authentication failed');
-      }
+      setAuthError(error.message || 'Authentication failed');
     } finally {
       setLoading(false);
     }
@@ -94,22 +59,19 @@ export const AuthForm = () => {
             <div className="mx-auto bg-green-50 w-16 h-16 rounded-full flex items-center justify-center mb-4">
               <Mail className="h-8 w-8 text-green-600" />
             </div>
-            <h2 className="text-2xl font-bold mb-4">Check Your Email</h2>
+            <h2 className="text-2xl font-bold mb-4">Account Created!</h2>
             <p className="mb-4 text-gray-600">
-              We've sent a verification link to <span className="font-medium">{email}</span>
+              Your account has been created successfully.
             </p>
-            <p className="mb-6 text-gray-600">
-              Please click the link in the email to verify your account and complete the sign up process.
-            </p>
-            <div className="text-sm text-gray-500 mt-4">
-              <p className="mb-2">Didn't receive an email?</p>
-              <p>Check your spam folder or <button 
-                onClick={() => setSignupComplete(false)} 
-                className="text-primary hover:underline"
-              >
-                try again with a different email
-              </button></p>
-            </div>
+            <Button 
+              onClick={() => {
+                setSignupComplete(false);
+                setIsSignUp(false);
+              }} 
+              className="w-full"
+            >
+              Sign In Now
+            </Button>
           </div>
         </Card>
       </div>
