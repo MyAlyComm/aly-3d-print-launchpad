@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AppProviders } from "@/components/AppProviders";
 import { mainRoutes } from "@/routes/mainRoutes";
 import { ebookRoutes } from "@/routes/ebookRoutes";

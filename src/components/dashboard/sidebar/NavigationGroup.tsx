@@ -26,7 +26,7 @@ interface NavigationGroupProps {
 }
 
 export const NavigationGroup = ({ label, items, onItemClick, className }: NavigationGroupProps) => {
-  if (items.length === 0) return null;
+  if (!items || items.length === 0) return null;
   
   return (
     <SidebarGroup className={className}>
@@ -35,7 +35,7 @@ export const NavigationGroup = ({ label, items, onItemClick, className }: Naviga
         <SidebarMenu>
           {items.map((item) => (
             <SidebarNavItem
-              key={item.path}
+              key={item.path || item.title}
               icon={item.icon}
               title={item.title}
               path={item.path}
