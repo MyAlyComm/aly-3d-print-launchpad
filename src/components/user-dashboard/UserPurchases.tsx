@@ -1,6 +1,5 @@
 
 import { useState, useEffect } from "react";
-import { User } from "@supabase/supabase-js";
 import { 
   Table, 
   TableBody, 
@@ -12,8 +11,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
+// Update to use a more generic User type
 interface UserPurchasesProps {
-  user: User;
+  user: {
+    id?: string;
+    email?: string;
+    [key: string]: any;
+  };
 }
 
 interface Purchase {

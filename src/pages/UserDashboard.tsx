@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -19,6 +20,11 @@ const UserDashboard = () => {
     navigate("/auth");
     return null;
   }
+  
+  // Get the username from the email (everything before the @)
+  const username = user.email?.split('@')[0] || 'there';
+  // Format the date or use current date if not available
+  const memberSince = new Date(user.created_at || Date.now()).toLocaleDateString();
   
   return (
     <div className="min-h-screen bg-gray-50">
@@ -44,9 +50,9 @@ const UserDashboard = () => {
           <CardHeader className="bg-white border-b border-gray-100 rounded-t-lg">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
               <div>
-                <CardTitle>Hello, {user.email?.split('@')[0] || 'there'}</CardTitle>
+                <CardTitle>Hello, {username}</CardTitle>
                 <CardDescription>
-                  Member since {new Date(user.created_at || Date.now()).toLocaleDateString()}
+                  Member since {memberSince}
                 </CardDescription>
               </div>
             </div>

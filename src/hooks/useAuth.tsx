@@ -1,6 +1,6 @@
 
-// Re-export useLocalAuth as useAuth for backwards compatibility
-import { useLocalAuth } from './useLocalAuth';
+// Re-export useLocalAuth and its Provider for backwards compatibility
+import { useLocalAuth, LocalAuthProvider } from './useLocalAuth';
 
 export const useAuth = useLocalAuth;
-export const AuthProvider = useLocalAuth.Provider;
+export const AuthProvider = LocalAuthProvider;

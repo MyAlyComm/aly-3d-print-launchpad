@@ -1,10 +1,15 @@
 
-import { useState } from "react";
-import { User } from "@supabase/supabase-js";
 import { ProfileForm } from "./ProfileForm";
 
+// Update the UserProfileProps to use a more generic User type
 interface UserProfileProps {
-  user: User;
+  user: {
+    id?: string;
+    email?: string;
+    created_at?: string;
+    user_metadata?: Record<string, any>;
+    [key: string]: any;
+  };
 }
 
 export const UserProfile = ({ user }: UserProfileProps) => {
