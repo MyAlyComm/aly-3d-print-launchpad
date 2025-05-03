@@ -9,26 +9,10 @@ import { TeamBypassProvider } from "@/hooks/useTeamBypass";
 import { TeamAccessBanner } from "@/components/TeamAccessBanner";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import { useAuth } from "@/hooks/useAuth";
 
-// Protected route component that checks authentication
+// Modified Protected route component that no longer checks authentication
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { user, isLoading } = useAuth();
-  const location = useLocation();
-  
-  if (isLoading) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-  
-  if (!user) {
-    // Save the location they were trying to access
-    return <Navigate to="/auth" state={{ from: location }} replace />;
-  }
-  
+  // Simply render the children without any authentication checks
   return <>{children}</>;
 };
 
@@ -64,64 +48,30 @@ const AppRoutes = () => {
       <div className={`${bannerDismissed ? 'pt-0' : 'pt-10'} transition-all duration-300`}>
         <Breadcrumbs />
         <Routes>
-          {mainRoutes.map((route, index) => {
-            // Check if this route should be protected
-            const isProtected = route.path === "/dashboard" || 
-                               route.path === "/account" || 
-                               route.path.startsWith("/chapter");
-            
-            if (isProtected) {
-              return (
-                <Route 
-                  key={index} 
-                  path={route.path} 
-                  element={
-                    <ErrorBoundary>
-                      <ProtectedRoute>
-                        {route.element}
-                      </ProtectedRoute>
-                    </ErrorBoundary>
-                  } 
-                />
-              );
-            }
-            
-            return (
-              <Route 
-                key={index} 
-                path={route.path} 
-                element={<RouteWithErrorBoundary element={route.element} />} 
-              />
-            );
-          })}
+          {/* Render all main routes without protection */}
+          {mainRoutes.map((route, index) => (
+            <Route 
+              key={index} 
+              path={route.path} 
+              element={<RouteWithErrorBoundary element={route.element} />} 
+            />
+          ))}
           
-          {/* Protect all ebook routes */}
+          {/* Render all ebook routes without protection */}
           {ebookRoutes.map((route, index) => (
             <Route 
               key={`ebook-${index}`} 
               path={route.path} 
-              element={
-                <ErrorBoundary>
-                  <ProtectedRoute>
-                    {route.element}
-                  </ProtectedRoute>
-                </ErrorBoundary>
-              } 
+              element={<RouteWithErrorBoundary element={route.element} />} 
             />
           ))}
           
-          {/* Protect all AI Hub routes */}
+          {/* Render all AI Hub routes without protection */}
           {aiHubRoutes.map((route, index) => (
             <Route 
               key={`ai-${index}`} 
               path={route.path} 
-              element={
-                <ErrorBoundary>
-                  <ProtectedRoute>
-                    {route.element}
-                  </ProtectedRoute>
-                </ErrorBoundary>
-              } 
+              element={<RouteWithErrorBoundary element={route.element} />} 
             />
           ))}
           

@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -12,77 +12,45 @@ interface AuthContextType {
   signOut: () => Promise<void>;
 }
 
+// Create a default user object for public access
+const defaultUser = {
+  id: 'public-user',
+  email: 'public@example.com',
+  created_at: new Date().toISOString(),
+  app_metadata: {},
+  user_metadata: {},
+  aud: 'authenticated',
+} as User;
+
+// Create a mock session for public access
+const mockSession = {
+  user: defaultUser,
+  access_token: 'mock-token',
+  refresh_token: 'mock-refresh-token',
+  expires_in: 3600,
+  expires_at: Math.floor(Date.now() / 1000) + 3600,
+  token_type: 'bearer'
+} as Session;
+
 const AuthContext = createContext<AuthContextType>({ 
-  user: null, 
-  session: null,
-  isLoading: true,
+  user: defaultUser, 
+  session: mockSession,
+  isLoading: false,
   authError: null,
   signOut: async () => {} 
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [authError, setAuthError] = useState<Error | null>(null);
+  const [user] = useState<User | null>(defaultUser);
+  const [session] = useState<Session | null>(mockSession);
+  const [isLoading] = useState(false);
+  const [authError] = useState<Error | null>(null);
 
-  // Sign out helper method
+  // Mock sign out function that does nothing
   const signOut = async () => {
-    try {
-      await supabase.auth.signOut();
-    } catch (error) {
-      console.error('Error signing out:', error);
-      // Reset state even if there's an error with signOut
-      setUser(null);
-      setSession(null);
-    }
+    console.log('Sign out attempted, but authentication is disabled');
+    // No actual sign out happens
   };
-
-  useEffect(() => {
-    console.log("Setting up auth state listener");
-    
-    // Set up auth state listener FIRST
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        console.log('Auth state changed:', event, session?.user?.email);
-        
-        // Handle auth state changes
-        setSession(session);
-        setUser(session?.user ?? null);
-        setIsLoading(false);
-      }
-    );
-
-    // THEN check for existing session
-    const checkSession = async () => {
-      try {
-        console.log("Checking for existing session");
-        const { data, error } = await supabase.auth.getSession();
-        
-        if (error) {
-          console.error("Session retrieval error:", error);
-          setAuthError(error);
-        } else {
-          console.log("Session retrieved:", data.session?.user?.email || "No session");
-          setSession(data.session);
-          setUser(data.session?.user ?? null);
-        }
-      } catch (error) {
-        console.error("Unexpected auth error:", error);
-        setAuthError(error instanceof Error ? error : new Error("Unknown authentication error"));
-      } finally {
-        // Always set loading to false regardless of outcome
-        setIsLoading(false);
-      }
-    };
-
-    checkSession();
-
-    return () => {
-      console.log("Cleaning up auth state listener");
-      subscription.unsubscribe();
-    };
-  }, []);
 
   const contextValue = {
     user,

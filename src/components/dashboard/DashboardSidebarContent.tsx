@@ -3,7 +3,6 @@ import { Home, BookOpen, User, Award, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { DashboardNav } from "./DashboardNav";
-import { toast } from "sonner";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,30 +11,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useChapterProgress } from "@/hooks/useChapterProgress";
 import { getBadgesForProgress } from "@/utils/gamification";
-import { useAuth } from "@/hooks/useAuth";
 
 export const DashboardSidebarContent = () => {
   const navigate = useNavigate();
-  const { signOut } = useAuth();
   const { chapterProgresses } = useChapterProgress();
   const badges = getBadgesForProgress(chapterProgresses as any[] || []);
-
-  const handleSignOut = async () => {
-    try {
-      await signOut();
-      
-      // Clear any local storage related to authentication
-      localStorage.removeItem("hasAccessToEbook");
-      
-      toast.success("Signed out successfully");
-      navigate("/");
-    } catch (error) {
-      console.error("Error signing out:", error);
-      // User might already be signed out, so just redirect them anyway
-      toast.info("Redirecting to home page...");
-      navigate("/");
-    }
-  };
 
   return (
     <div className="flex h-full flex-col">
@@ -96,14 +76,6 @@ export const DashboardSidebarContent = () => {
             )}
           </DropdownMenuContent>
         </DropdownMenu>
-
-        <Button 
-          variant="ghost" 
-          className="w-full text-red-600 hover:text-red-700 hover:bg-red-50"
-          onClick={handleSignOut}
-        >
-          Sign Out
-        </Button>
       </div>
     </div>
   );

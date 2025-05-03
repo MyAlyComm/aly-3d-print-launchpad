@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import LeadMagnetDialog from "@/components/FreeGuideDialog";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/hooks/useAuth";
 
 interface NavBarActionsProps {
   handleDashboardClick: () => void;
@@ -14,16 +13,10 @@ export const NavBarActions = ({
   className = "" 
 }: NavBarActionsProps) => {
   const navigate = useNavigate();
-  const { user } = useAuth();
   
+  // Always go directly to dashboard without authentication check
   const handleDashboardButtonClick = () => {
-    if (user) {
-      // User is authenticated, go to dashboard
-      handleDashboardClick();
-    } else {
-      // User is not authenticated, go to auth page
-      navigate('/auth');
-    }
+    handleDashboardClick();
   };
   
   return (
