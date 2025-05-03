@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import LeadMagnetDialog from "@/components/FreeGuideDialog";
 import { NavBarLinks } from "./NavBarLinks";
-import { NavBarAllPagesDropdown } from "../NavBarAllPagesDropdown";
 
 interface NavBarMobileMenuProps {
   isOpen: boolean;
@@ -25,11 +24,6 @@ export const NavBarMobileMenu = ({
           itemClassName="text-gray-700 hover:text-primary py-2"
           onClick={onLinkClick} // Close menu when link is clicked
         />
-        
-        {/* Always show the Pages dropdown */}
-        <div className="py-2">
-          <NavBarAllPagesDropdown />
-        </div>
         
         <LeadMagnetDialog>
           <Button className="bg-secondary hover:bg-secondary-dark text-white w-full">

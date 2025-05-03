@@ -51,7 +51,8 @@ export function NavBarAllPagesDropdown() {
     route.path !== "*" && 
     typeof route.path === "string" && 
     !route.path.startsWith("/dashboard") &&
-    route.path !== "/" // Exclude home page as it's already in main nav
+    route.path !== "/" && // Exclude home page as it's already in main nav
+    route.path !== "/inside-blueprint" // Exclude Inside Blueprint as it's already in main nav
   );
   
   const filteredEbookRoutes = ebookRoutes.filter(route => 
@@ -69,24 +70,8 @@ export function NavBarAllPagesDropdown() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 bg-white z-50" align="start">
-        <DropdownMenuLabel>Main Pages</DropdownMenuLabel>
+        <DropdownMenuLabel>Other Pages</DropdownMenuLabel>
         <DropdownMenuGroup>
-          <DropdownMenuItem 
-            key="home-page"
-            className="cursor-pointer"
-            onClick={() => handleNavigate("/")}
-          >
-            <FileText className="mr-2 h-4 w-4" />
-            <span>Home</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem 
-            key="inside-blueprint"
-            className="cursor-pointer"
-            onClick={() => handleNavigate("/inside-blueprint")}
-          >
-            <FileText className="mr-2 h-4 w-4" />
-            <span>Inside Blueprint</span>
-          </DropdownMenuItem>
           {filteredMainRoutes.map((route, index) => (
             <DropdownMenuItem 
               key={`main-${index}`}
@@ -103,13 +88,6 @@ export function NavBarAllPagesDropdown() {
         
         <DropdownMenuLabel>Blueprint Content</DropdownMenuLabel>
         <DropdownMenuGroup>
-          <DropdownMenuItem 
-            className="cursor-pointer"
-            onClick={() => handleNavigate("/dashboard")}
-          >
-            <BookOpen className="mr-2 h-4 w-4" />
-            <span>Dashboard</span>
-          </DropdownMenuItem>
           {filteredEbookRoutes.map((route, index) => (
             <DropdownMenuItem 
               key={`ebook-${index}`} 

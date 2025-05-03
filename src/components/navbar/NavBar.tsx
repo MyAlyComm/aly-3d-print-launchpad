@@ -51,10 +51,6 @@ const NavBar = () => {
     navigate("/dashboard");
   };
 
-  const handleLogoDoubleClick = () => {
-    // Kept for backward compatibility but no longer needed
-  };
-
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -76,7 +72,6 @@ const NavBar = () => {
           <div className="flex items-center gap-2">
             <NavBarLogo 
               handleTitleClick={handleTitleClick} 
-              handleLogoDoubleClick={handleLogoDoubleClick} 
             />
             <NavBarAllPagesDropdown />
           </div>

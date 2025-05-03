@@ -8,12 +8,7 @@ import { TeamBypassProvider } from "@/hooks/useTeamBypass";
 import { TeamAccessBanner } from "@/components/TeamAccessBanner";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import ErrorBoundary from "@/components/ErrorBoundary";
-
-// Modified Protected route component that no longer checks authentication
-const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  // Simply render the children without any authentication checks
-  return <>{children}</>;
-};
+import InsideBlueprintPage from "@/components/inside-blueprint/InsideBlueprintPage";
 
 const RouteWithErrorBoundary = ({ element }: { element: React.ReactNode }) => (
   <ErrorBoundary>
@@ -47,7 +42,13 @@ const AppRoutes = () => {
       <div className={`${bannerDismissed ? 'pt-0' : 'pt-10'} transition-all duration-300`}>
         <Breadcrumbs />
         <Routes>
-          {/* Render all main routes without protection */}
+          {/* Add the explicit inside-blueprint route */}
+          <Route 
+            path="/inside-blueprint" 
+            element={<RouteWithErrorBoundary element={<InsideBlueprintPage />} />} 
+          />
+          
+          {/* Render all main routes */}
           {mainRoutes.map((route, index) => (
             <Route 
               key={index} 
@@ -56,7 +57,7 @@ const AppRoutes = () => {
             />
           ))}
           
-          {/* Render all ebook routes without protection */}
+          {/* Render all ebook routes */}
           {ebookRoutes.map((route, index) => (
             <Route 
               key={`ebook-${index}`} 

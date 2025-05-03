@@ -10,8 +10,6 @@ export interface NavLinkItem {
 const defaultLinks: NavLinkItem[] = [
   { href: "/", label: "Home" },
   { href: "/inside-blueprint", label: "Inside Blueprint" },
-  { href: "#blueprints", label: "Blueprints" },
-  { href: "#testimonials", label: "Testimonials" },
   { href: "/dashboard", label: "Dashboard", isPrimary: true }
 ];
 

@@ -14,8 +14,6 @@ import FreeResourceCards from "@/components/resources/FreeResourceCards";
 import { Skeleton } from "@/components/ui/skeleton";
 import JourneySection from "@/components/JourneySection";
 import PersonalMessage from "@/components/PersonalMessage";
-import InsideBlueprintPage from "@/components/inside-blueprint/InsideBlueprintPage";
-import { useParams } from "react-router-dom";
 
 // These components can still be lazy-loaded as they're not critical
 import { lazy, Suspense } from 'react';
@@ -31,17 +29,11 @@ const LoadingFallback = () => (
 const Index = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const { viewType } = useParams();
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 500);
     return () => clearTimeout(timer);
   }, []);
-
-  // Render Inside Blueprint view if specified in URL parameter
-  if (viewType === "inside") {
-    return <InsideBlueprintPage />;
-  }
 
   return (
     <div className="min-h-screen flex flex-col">
