@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AppProviders } from "@/components/AppProviders";
 import { mainRoutes } from "@/routes/mainRoutes";
@@ -10,7 +10,6 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import InsideBlueprintPage from "@/components/inside-blueprint/InsideBlueprintPage";
 import { toast } from "sonner";
-import NavBar from "@/components/NavBar";  // Fixed import
 
 const RouteWithErrorBoundary = ({ element }: { element: React.ReactNode }) => (
   <ErrorBoundary>
@@ -19,10 +18,10 @@ const RouteWithErrorBoundary = ({ element }: { element: React.ReactNode }) => (
 );
 
 const AppRoutes = () => {
-  const [bannerDismissed, setBannerDismissed] = React.useState(false);
-  const [routeError, setRouteError] = React.useState<string | null>(null);
+  const [bannerDismissed, setBannerDismissed] = useState(false);
+  const [routeError, setRouteError] = useState<string | null>(null);
   
-  React.useEffect(() => {
+  useEffect(() => {
     const checkBannerState = () => {
       const dismissed = localStorage.getItem('access_banner_dismissed') === 'true';
       setBannerDismissed(dismissed);
@@ -39,12 +38,17 @@ const AppRoutes = () => {
     };
   }, []);
 
+  // Handle route errors
+  const handleRouteError = (error: Error) => {
+    console.error("Routing error:", error);
+    setRouteError(error.message);
+    toast.error("Navigation error. Please try again.");
+  };
+  
   return (
     <>
       <TeamAccessBanner />
       <div className={`${bannerDismissed ? 'pt-0' : 'pt-10'} transition-all duration-300`}>
-        <NavBar /> {/* Ensure NavBar is always rendered */}
-        
         {/* Only render breadcrumbs on main site pages, not on dashboard/ebooks routes */}
         <div className="relative">
           <Breadcrumbs />

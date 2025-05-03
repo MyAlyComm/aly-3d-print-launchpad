@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-// Remove NavBar import since it's now handled at App level
+import NavBar from "@/components/NavBar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import DetailedStorySection from "@/components/DetailedStorySection";
@@ -83,7 +83,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* NavBar removed from here as it's now handled at the App level */}
+      {/* Critical path components loaded immediately */}
+      <NavBar />
       <HeroSection />
 
       {/* Main content sections */}
