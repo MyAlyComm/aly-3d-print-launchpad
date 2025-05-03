@@ -61,7 +61,7 @@ export const DashboardSidebarContent = () => {
               Achievements
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56">
+          <DropdownMenuContent align="end" className="w-56 bg-white">
             {badges.length === 0 ? (
               <DropdownMenuItem disabled>
                 <span className="text-muted-foreground">No achievements yet</span>

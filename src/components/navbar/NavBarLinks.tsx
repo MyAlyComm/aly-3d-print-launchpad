@@ -12,8 +12,7 @@ const defaultLinks: NavLinkItem[] = [
   { href: "/inside-blueprint", label: "Inside Blueprint" },
   { href: "#blueprints", label: "Blueprints" },
   { href: "#testimonials", label: "Testimonials" },
-  { href: "/dashboard", label: "Dashboard", isPrimary: true },
-  { href: "/account", label: "Account", isPrimary: true }
+  { href: "/dashboard", label: "Dashboard", isPrimary: true }
 ];
 
 interface NavBarLinksProps {

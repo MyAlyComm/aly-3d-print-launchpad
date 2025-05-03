@@ -78,6 +78,7 @@ const NavBar = () => {
               handleTitleClick={handleTitleClick} 
               handleLogoDoubleClick={handleLogoDoubleClick} 
             />
+            <NavBarAllPagesDropdown />
           </div>
 
           <NavBarLinks className="hidden md:flex" />

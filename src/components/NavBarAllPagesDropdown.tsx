@@ -47,8 +47,17 @@ export function NavBarAllPagesDropdown() {
   };
 
   // Filter out catch-all (*) routes and ensure all routes have valid paths
-  const filteredMainRoutes = mainRoutes.filter(route => route.path !== "*" && typeof route.path === "string");
-  const filteredEbookRoutes = ebookRoutes.filter(route => typeof route.path === "string");
+  const filteredMainRoutes = mainRoutes.filter(route => 
+    route.path !== "*" && 
+    typeof route.path === "string" && 
+    !route.path.startsWith("/dashboard") &&
+    route.path !== "/" // Exclude home page as it's already in main nav
+  );
+  
+  const filteredEbookRoutes = ebookRoutes.filter(route => 
+    typeof route.path === "string" && 
+    route.path.includes("/dashboard/3d-blueprint")
+  ).slice(0, 5); // Limit to first 5 chapters
   
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
@@ -62,6 +71,22 @@ export function NavBarAllPagesDropdown() {
       <DropdownMenuContent className="w-56 bg-white z-50" align="start">
         <DropdownMenuLabel>Main Pages</DropdownMenuLabel>
         <DropdownMenuGroup>
+          <DropdownMenuItem 
+            key="home-page"
+            className="cursor-pointer"
+            onClick={() => handleNavigate("/")}
+          >
+            <FileText className="mr-2 h-4 w-4" />
+            <span>Home</span>
+          </DropdownMenuItem>
+          <DropdownMenuItem 
+            key="inside-blueprint"
+            className="cursor-pointer"
+            onClick={() => handleNavigate("/inside-blueprint")}
+          >
+            <FileText className="mr-2 h-4 w-4" />
+            <span>Inside Blueprint</span>
+          </DropdownMenuItem>
           {filteredMainRoutes.map((route, index) => (
             <DropdownMenuItem 
               key={`main-${index}`}
@@ -76,16 +101,16 @@ export function NavBarAllPagesDropdown() {
         
         <DropdownMenuSeparator />
         
-        <DropdownMenuLabel>Ebooks</DropdownMenuLabel>
+        <DropdownMenuLabel>Blueprint Content</DropdownMenuLabel>
         <DropdownMenuGroup>
           <DropdownMenuItem 
             className="cursor-pointer"
             onClick={() => handleNavigate("/dashboard")}
           >
             <BookOpen className="mr-2 h-4 w-4" />
-            <span>All Ebooks</span>
+            <span>Dashboard</span>
           </DropdownMenuItem>
-          {filteredEbookRoutes.slice(2, 7).map((route, index) => (
+          {filteredEbookRoutes.map((route, index) => (
             <DropdownMenuItem 
               key={`ebook-${index}`} 
               className="cursor-pointer"
@@ -95,12 +120,12 @@ export function NavBarAllPagesDropdown() {
               <span>{getPageTitle(route.path)}</span>
             </DropdownMenuItem>
           ))}
-          {filteredEbookRoutes.length > 7 && (
+          {ebookRoutes.length > 5 && (
             <DropdownMenuItem 
               className="italic text-sm text-gray-500 cursor-pointer"
               onClick={() => handleNavigate("/dashboard")}
             >
-              + {filteredEbookRoutes.length - 7} more pages...
+              + More chapters in dashboard...
             </DropdownMenuItem>
           )}
         </DropdownMenuGroup>

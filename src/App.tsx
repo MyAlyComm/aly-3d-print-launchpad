@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-route
 import { AppProviders } from "@/components/AppProviders";
 import { mainRoutes } from "@/routes/mainRoutes";
 import { ebookRoutes } from "@/routes/ebookRoutes";
-import { aiHubRoutes } from "@/routes/aiHubRoutes";
 import { TeamBypassProvider } from "@/hooks/useTeamBypass";
 import { TeamAccessBanner } from "@/components/TeamAccessBanner";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -61,15 +60,6 @@ const AppRoutes = () => {
           {ebookRoutes.map((route, index) => (
             <Route 
               key={`ebook-${index}`} 
-              path={route.path} 
-              element={<RouteWithErrorBoundary element={route.element} />} 
-            />
-          ))}
-          
-          {/* Render all AI Hub routes without protection */}
-          {aiHubRoutes.map((route, index) => (
-            <Route 
-              key={`ai-${index}`} 
               path={route.path} 
               element={<RouteWithErrorBoundary element={route.element} />} 
             />

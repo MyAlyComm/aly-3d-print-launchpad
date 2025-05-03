@@ -2,7 +2,7 @@
 import React, { ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { LogOut, Award, Layout, Book, BookText, BookOpen, Menu, SparkleIcon, User } from "lucide-react";
+import { LogOut, Award, Layout, Book, BookOpen, Menu, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useChapterProgress } from "@/hooks/useChapterProgress";
@@ -81,17 +81,6 @@ export const DashboardHeader = ({ title, children, isDashboardPage = false }: Da
                 <BookOpen className="mr-2 h-4 w-4" />
                 Resources
               </Button>
-              
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => navigate("/ai-hub")}
-                className="text-primary hover:text-primary/80 flex items-center"
-              >
-                <SparkleIcon className="mr-2 h-4 w-4" />
-                AI Hub
-                <Badge className="ml-1 bg-green-500 text-white text-xs">New</Badge>
-              </Button>
             </nav>
           )}
 
@@ -116,11 +105,6 @@ export const DashboardHeader = ({ title, children, isDashboardPage = false }: Da
                 <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint/resources")} className="text-gray-800">
                   <BookOpen className="mr-2 h-4 w-4" />
                   Resources
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate("/ai-hub")} className="text-primary">
-                  <SparkleIcon className="mr-2 h-4 w-4" />
-                  AI Hub
-                  <Badge className="ml-2 bg-green-500 text-white text-xs">New</Badge>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
