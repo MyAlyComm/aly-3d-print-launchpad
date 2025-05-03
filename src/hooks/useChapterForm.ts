@@ -42,7 +42,11 @@ export function useChapterForm(chapterNumber: number, sectionId: string) {
         .eq('section_id', sectionId)
         .maybeSingle();
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error loading responses:', error);
+        throw error;
+      }
+      
       if (data) {
         // Parse the response_data as ChapterFormState to ensure type safety
         const responseData = data.response_data as ChapterFormState;
@@ -112,7 +116,10 @@ export function useChapterForm(chapterNumber: number, sectionId: string) {
         .eq('section_id', sectionId)
         .maybeSingle();
         
-      if (checkError) throw checkError;
+      if (checkError) {
+        console.error('Error checking existing record:', checkError);
+        throw checkError;
+      }
       
       let error;
       const currentTime = new Date().toISOString();
@@ -144,7 +151,10 @@ export function useChapterForm(chapterNumber: number, sectionId: string) {
         error = insertError;
       }
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error saving response:', error.message);
+        throw error;
+      }
       
       // After successful save, invalidate the chapter progress query to refresh data
       queryClient.invalidateQueries({ queryKey: ["chapter-progress"] });
@@ -160,12 +170,12 @@ export function useChapterForm(chapterNumber: number, sectionId: string) {
       setTimeout(() => {
         setSaveStatus("idle");
       }, 3000);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error saving response:', error);
       setSaveStatus("error");
       
       if (showToast) {
-        toast.error('Failed to save your response');
+        toast.error(`Failed to save: ${error?.message || 'Unknown error'}`);
       }
     }
   };

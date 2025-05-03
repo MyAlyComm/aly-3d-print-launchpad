@@ -20,18 +20,24 @@ export function useChapterProgress() {
     queryFn: async () => {
       if (!user) return [];
       
-      const { data, error } = await supabase
-        .from("user_chapter_responses")
-        .select("chapter_number, completed_at, section_id, response_data")
-        .eq("user_id", user.id)
-        .order("created_at");
+      try {
+        const { data, error } = await supabase
+          .from("user_chapter_responses")
+          .select("chapter_number, completed_at, section_id, response_data")
+          .eq("user_id", user.id)
+          .order("created_at");
 
-      if (error) {
-        toast.error("Failed to load chapter progress");
-        throw error;
+        if (error) {
+          console.error('Error loading chapter progress:', error);
+          toast.error("Failed to load chapter progress");
+          throw error;
+        }
+
+        return data || [];
+      } catch (error) {
+        console.error('Error in chapter progress query:', error);
+        return [];
       }
-
-      return data;
     },
     enabled: !!user,
   });
@@ -44,48 +50,63 @@ export function useChapterProgress() {
     }) => {
       if (!user) throw new Error("User not authenticated");
 
-      // First check if this section already exists for the user to avoid duplicates
-      const { data: existingEntries } = await supabase
-        .from("user_chapter_responses")
-        .select("id")
-        .eq("user_id", user.id)
-        .eq("chapter_number", chapterNumber)
-        .eq("section_id", sectionId)
-        .single();
-        
-      // If entry exists, update it instead of inserting a new one
-      if (existingEntries) {
-        const { error } = await supabase
+      try {
+        // First check if this section already exists for the user to avoid duplicates
+        const { data: existingEntries, error: checkError } = await supabase
           .from("user_chapter_responses")
-          .update({
-            response_data: responseData,
-            completed_at: new Date().toISOString()
-          })
+          .select("id")
           .eq("user_id", user.id)
           .eq("chapter_number", chapterNumber)
-          .eq("section_id", sectionId);
+          .eq("section_id", sectionId)
+          .maybeSingle();
+          
+        if (checkError) {
+          console.error('Error checking existing entries:', checkError);
+          throw checkError;
+        }
         
-        if (error) throw error;
-      } else {
-        // If no entry exists, insert a new one
-        const { error } = await supabase
-          .from("user_chapter_responses")
-          .insert({
-            user_id: user.id,
-            chapter_number: chapterNumber,
-            section_id: sectionId,
-            response_data: responseData,
-            completed_at: new Date().toISOString(),
-          });
+        // If entry exists, update it instead of inserting a new one
+        if (existingEntries) {
+          const { error } = await supabase
+            .from("user_chapter_responses")
+            .update({
+              response_data: responseData,
+              completed_at: new Date().toISOString()
+            })
+            .eq("id", existingEntries.id);
+          
+          if (error) {
+            console.error('Error updating progress:', error);
+            throw error;
+          }
+        } else {
+          // If no entry exists, insert a new one
+          const { error } = await supabase
+            .from("user_chapter_responses")
+            .insert({
+              user_id: user.id,
+              chapter_number: chapterNumber,
+              section_id: sectionId,
+              response_data: responseData,
+              completed_at: new Date().toISOString(),
+            });
 
-        if (error) throw error;
+          if (error) {
+            console.error('Error inserting progress:', error);
+            throw error;
+          }
+        }
+      } catch (error: any) {
+        console.error('Error in updateProgress mutation:', error);
+        throw new Error(`Failed to update progress: ${error?.message || 'Unknown error'}`);
       }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["chapter-progress"] });
     },
-    onError: () => {
-      toast.error("Failed to update progress");
+    onError: (error: any) => {
+      console.error('Mutation error:', error);
+      toast.error(`Update failed: ${error?.message || 'Unknown error'}`);
     },
   });
 

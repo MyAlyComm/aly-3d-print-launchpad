@@ -12,9 +12,9 @@ interface AuthContextType {
   signOut: () => Promise<void>;
 }
 
-// Create a default user object for public access
+// Create a default user object for public access with a valid UUID format
 const defaultUser = {
-  id: 'public-user',
+  id: '00000000-0000-0000-0000-000000000000', // Valid UUID format
   email: 'public@example.com',
   created_at: new Date().toISOString(),
   app_metadata: {},
