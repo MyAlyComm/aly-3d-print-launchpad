@@ -2,19 +2,32 @@
 import { Button } from "@/components/ui/button";
 import LeadMagnetDialog from "@/components/FreeGuideDialog";
 import { NavBarLinks } from "./NavBarLinks";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 interface NavBarMobileMenuProps {
   isOpen: boolean;
-  handleDashboardClick: () => void;
   onLinkClick: () => void; // Close menu callback
 }
 
 export const NavBarMobileMenu = ({ 
   isOpen, 
-  handleDashboardClick,
   onLinkClick
 }: NavBarMobileMenuProps) => {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  
   if (!isOpen) return null;
+  
+  const handleDashboardClick = () => {
+    navigate("/dashboard");
+    onLinkClick();
+  };
+
+  const handleAccountClick = () => {
+    navigate("/account");
+    onLinkClick();
+  };
   
   return (
     <div className="md:hidden mt-4 pt-4 pb-4 border-t border-gray-200">
@@ -22,7 +35,7 @@ export const NavBarMobileMenu = ({
         <NavBarLinks 
           vertical={true} 
           itemClassName="text-gray-700 hover:text-primary py-2"
-          onClick={onLinkClick} // Close menu when link is clicked
+          onClick={onLinkClick}
         />
         
         <LeadMagnetDialog>
@@ -32,15 +45,22 @@ export const NavBarMobileMenu = ({
         </LeadMagnetDialog>
         
         <Button 
-          onClick={() => {
-            handleDashboardClick();
-            onLinkClick(); // Close menu when dashboard is clicked
-          }}
+          onClick={handleDashboardClick}
           variant="outline"
           className="w-full"
         >
-          Dashboard
+          {user ? "Dashboard" : "Login"}
         </Button>
+        
+        {user && (
+          <Button 
+            onClick={handleAccountClick}
+            variant="ghost"
+            className="w-full"
+          >
+            My Account
+          </Button>
+        )}
       </div>
     </div>
   );

@@ -9,8 +9,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User, Settings, LogOut } from "lucide-react";
+import { User, Settings, LogOut, BookOpen } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 interface NavBarUserDropdownProps {
   className?: string;
@@ -24,8 +25,16 @@ export const NavBarUserDropdown = ({ className = "" }: NavBarUserDropdownProps) 
   if (!user) return null;
 
   const handleLogout = async () => {
-    await signOut();
-    navigate("/");
+    try {
+      await signOut();
+      toast.success("Signed out successfully");
+      navigate("/");
+    } catch (error) {
+      console.error("Error signing out:", error);
+      toast.info("Redirecting to home page...");
+      navigate("/");
+    }
+    setIsOpen(false);
   };
 
   const navigateTo = (path: string) => {
@@ -44,7 +53,7 @@ export const NavBarUserDropdown = ({ className = "" }: NavBarUserDropdownProps) 
             <AvatarFallback>{userInitial}</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56 bg-white" align="end">
+        <DropdownMenuContent className="w-56 bg-white z-50" align="end">
           <div className="py-2 px-3">
             <p className="text-sm font-medium">{user.email}</p>
             <p className="text-xs text-gray-500">
@@ -52,9 +61,13 @@ export const NavBarUserDropdown = ({ className = "" }: NavBarUserDropdownProps) 
             </p>
           </div>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="cursor-pointer" onClick={() => navigateTo("/profile")}>
+          <DropdownMenuItem className="cursor-pointer" onClick={() => navigateTo("/dashboard")}>
+            <BookOpen className="mr-2 h-4 w-4" />
+            <span>Dashboard</span>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer" onClick={() => navigateTo("/account")}>
             <User className="mr-2 h-4 w-4" />
-            <span>Profile</span>
+            <span>My Account</span>
           </DropdownMenuItem>
           <DropdownMenuItem className="cursor-pointer" onClick={() => navigateTo("/account")}>
             <Settings className="mr-2 h-4 w-4" />

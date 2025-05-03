@@ -1,7 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { NavBarAllPagesDropdown } from "../NavBarAllPagesDropdown";
+import { useLocation } from "react-router-dom";
 import { NavBarLogo } from "./NavBarLogo";
 import { NavBarLinks } from "./NavBarLinks";
 import { NavBarActions } from "./NavBarActions";
@@ -14,7 +13,6 @@ const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
   const { user } = useAuth();
 
   // Close mobile menu when route changes
@@ -47,10 +45,6 @@ const NavBar = () => {
     }
   };
 
-  const handleDashboardClick = () => {
-    navigate("/dashboard");
-  };
-
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -69,19 +63,12 @@ const NavBar = () => {
     >
       <div className="container">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <NavBarLogo 
-              handleTitleClick={handleTitleClick} 
-            />
-            <NavBarAllPagesDropdown />
-          </div>
+          <NavBarLogo handleTitleClick={handleTitleClick} />
 
           <NavBarLinks className="hidden md:flex" />
+          
           <div className="hidden md:flex items-center space-x-4">
-            <NavBarActions 
-              handleDashboardClick={handleDashboardClick}
-              className=""
-            />
+            <NavBarActions />
             {user && <NavBarUserDropdown />}
           </div>
 
@@ -93,7 +80,6 @@ const NavBar = () => {
 
         <NavBarMobileMenu 
           isOpen={isMobileMenuOpen} 
-          handleDashboardClick={handleDashboardClick}
           onLinkClick={handleMobileLinkClick}
         />
       </div>
