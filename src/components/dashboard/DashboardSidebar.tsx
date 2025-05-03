@@ -30,7 +30,7 @@ import { toast } from "sonner";
 export function DashboardSidebar() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, signOut } = useAuth();
+  const { signOut } = useAuth();
 
   const handleSignOut = async () => {
     try {
@@ -43,7 +43,7 @@ export function DashboardSidebar() {
     }
   };
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
 
   return (
     <Sidebar>

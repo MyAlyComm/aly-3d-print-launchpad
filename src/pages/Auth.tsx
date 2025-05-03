@@ -11,10 +11,16 @@ const Auth = () => {
   const { user } = useAuth();
   
   useEffect(() => {
+    // Redirect to dashboard if already logged in
     if (user) {
       navigate('/dashboard', { replace: true });
     }
   }, [user, navigate]);
+
+  const handleLogin = () => {
+    // For demo purposes, just navigate to dashboard
+    navigate('/dashboard');
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -39,7 +45,7 @@ const Auth = () => {
           <CardFooter className="flex flex-col gap-4">
             <Button 
               className="w-full" 
-              onClick={() => navigate('/dashboard')}
+              onClick={handleLogin}
             >
               Continue to Dashboard
             </Button>

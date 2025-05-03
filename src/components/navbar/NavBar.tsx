@@ -53,6 +53,12 @@ const NavBar = () => {
     setIsMobileMenuOpen(false);
   };
 
+  // Define simplified navigation links
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/inside-blueprint", label: "Inside Blueprint" },
+  ];
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -65,7 +71,7 @@ const NavBar = () => {
         <div className="flex items-center justify-between">
           <NavBarLogo handleTitleClick={handleTitleClick} />
 
-          <NavBarLinks className="hidden md:flex" />
+          <NavBarLinks className="hidden md:flex" links={navLinks} />
           
           <div className="hidden md:flex items-center space-x-4">
             <NavBarActions />
@@ -81,6 +87,7 @@ const NavBar = () => {
         <NavBarMobileMenu 
           isOpen={isMobileMenuOpen} 
           onLinkClick={handleMobileLinkClick}
+          links={navLinks}
         />
       </div>
     </nav>

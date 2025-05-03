@@ -13,7 +13,7 @@ export const NavBarActions = ({ className = "" }: NavBarActionsProps) => {
   const { user } = useAuth();
   
   const handleDashboardClick = () => {
-    navigate("/dashboard");
+    navigate(user ? "/dashboard" : "/auth");
   };
   
   return (

@@ -1,18 +1,20 @@
 
 import { Button } from "@/components/ui/button";
 import LeadMagnetDialog from "@/components/FreeGuideDialog";
-import { NavBarLinks } from "./NavBarLinks";
+import { NavBarLinks, NavLinkItem } from "./NavBarLinks";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 
 interface NavBarMobileMenuProps {
   isOpen: boolean;
   onLinkClick: () => void; // Close menu callback
+  links?: NavLinkItem[];
 }
 
 export const NavBarMobileMenu = ({ 
   isOpen, 
-  onLinkClick
+  onLinkClick,
+  links
 }: NavBarMobileMenuProps) => {
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -20,7 +22,7 @@ export const NavBarMobileMenu = ({
   if (!isOpen) return null;
   
   const handleDashboardClick = () => {
-    navigate("/dashboard");
+    navigate(user ? "/dashboard" : "/auth");
     onLinkClick();
   };
 
@@ -36,6 +38,7 @@ export const NavBarMobileMenu = ({
           vertical={true} 
           itemClassName="text-gray-700 hover:text-primary py-2"
           onClick={onLinkClick}
+          links={links}
         />
         
         <LeadMagnetDialog>
