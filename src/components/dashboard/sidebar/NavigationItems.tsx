@@ -7,12 +7,16 @@ import {
   ClipboardList, 
   Box, 
   Package,
+  LucideIcon
 } from "lucide-react";
 
 export interface NavigationItem {
   title: string;
   path: string;
-  icon: React.ElementType;
+  icon: LucideIcon;
+  isActive?: boolean;
+  tooltip?: string;
+  className?: string;
 }
 
 export interface NavigationSections {

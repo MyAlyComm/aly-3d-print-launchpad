@@ -14,6 +14,7 @@ export const SidebarNavigation = () => {
 
   return (
     <>
+      {/* Since the NavigationItem interfaces are now compatible, these should work */}
       <NavigationGroup label="Navigation" items={navigationItems.navigation} />
       
       <div className="relative flex w-full min-w-0 flex-col p-2">

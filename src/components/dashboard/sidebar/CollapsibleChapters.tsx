@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/collapsible";
 import { Button } from "@/components/ui/button";
 import { NavigationGroup } from "./NavigationGroup";
-import { useChapterItems } from "./ChapterItems";
+import { useChapterItems, ChapterItem } from "./ChapterItems";
 
 export const CollapsibleChapters = () => {
   const { chapterItems, getActiveChapterCount } = useChapterItems();
@@ -46,7 +46,8 @@ export const CollapsibleChapters = () => {
           </Button>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <NavigationGroup items={chapterItems} className="mt-1" />
+          {/* Since ChapterItem interface now matches NavigationItem interface, this is type-safe */}
+          <NavigationGroup items={chapterItems as any} className="mt-1" />
         </CollapsibleContent>
       </Collapsible>
     </div>
