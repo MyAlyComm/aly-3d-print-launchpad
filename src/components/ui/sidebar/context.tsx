@@ -142,11 +142,6 @@ const SidebarProvider = React.forwardRef<
 )
 SidebarProvider.displayName = "SidebarProvider"
 
-// Utility function for className merging
-function cn(...inputs: (string | undefined)[]) {
-  return inputs.filter(Boolean).join(" ")
-}
-
 export {
   SidebarProvider,
   useSidebar,
