@@ -49,7 +49,11 @@ const AppRoutes = () => {
     <>
       <TeamAccessBanner />
       <div className={`${bannerDismissed ? 'pt-0' : 'pt-10'} transition-all duration-300`}>
-        <Breadcrumbs />
+        {/* Only render breadcrumbs on main site pages, not on dashboard/ebooks routes */}
+        <div className="relative">
+          <Breadcrumbs />
+        </div>
+        
         {routeError ? (
           <div className="p-4 bg-red-50 text-red-700 rounded-md m-4">
             Route error: {routeError}

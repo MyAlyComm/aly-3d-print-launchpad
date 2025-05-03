@@ -15,6 +15,15 @@ const NavBar = () => {
   const location = useLocation();
   const { user } = useAuth();
 
+  // Check if we're on a dashboard route to hide the navbar
+  const isDashboardRoute = location.pathname.includes('/dashboard') || 
+                          location.pathname.includes('/ebooks');
+  
+  // Don't render the navbar at all on dashboard routes
+  if (isDashboardRoute) {
+    return null;
+  }
+
   // Close mobile menu when route changes
   useEffect(() => {
     setIsMobileMenuOpen(false);
