@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { ChapterSection } from "@/components/ui/chapter-layout/ChapterSection";
 import { useChapterForm } from "@/hooks/useChapterForm";
@@ -56,7 +55,7 @@ export const SelfAssessmentWorksheet = () => {
   };
 
   const handleNextChapter = () => {
-    navigate("/dashboard/chapter-3");
+    navigate("/dashboard/3d-blueprint/chapter-3");
   };
 
   if (isLoading) {

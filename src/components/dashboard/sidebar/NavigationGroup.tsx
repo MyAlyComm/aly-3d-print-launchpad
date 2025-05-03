@@ -19,15 +19,18 @@ interface NavigationItem {
 }
 
 interface NavigationGroupProps {
-  label: string;
+  label?: string;
   items: NavigationItem[];
   onItemClick?: () => void;
+  className?: string;
 }
 
-export const NavigationGroup = ({ label, items, onItemClick }: NavigationGroupProps) => {
+export const NavigationGroup = ({ label, items, onItemClick, className }: NavigationGroupProps) => {
+  if (items.length === 0) return null;
+  
   return (
-    <SidebarGroup>
-      <SidebarGroupLabel>{label}</SidebarGroupLabel>
+    <SidebarGroup className={className}>
+      {label && <SidebarGroupLabel>{label}</SidebarGroupLabel>}
       <SidebarGroupContent>
         <SidebarMenu>
           {items.map((item) => (

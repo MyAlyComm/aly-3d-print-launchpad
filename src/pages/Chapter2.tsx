@@ -38,7 +38,8 @@ const Chapter2 = () => {
 
   const handleComplete = () => {
     window.scrollTo(0, 0);
-    navigate("/dashboard/3d-blueprint");
+    // Use consistent route pattern: /dashboard/3d-blueprint/chapter-X
+    navigate("/dashboard/3d-blueprint/chapter-3");
   };
 
   const CurrentSection = sections[section].Component;
