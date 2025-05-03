@@ -41,15 +41,30 @@ const AuthContext = createContext<AuthContextType>({
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user] = useState<User | null>(defaultUser);
-  const [session] = useState<Session | null>(mockSession);
-  const [isLoading] = useState(false);
-  const [authError] = useState<Error | null>(null);
+  const [user, setUser] = useState<User | null>(defaultUser);
+  const [session, setSession] = useState<Session | null>(mockSession);
+  const [isLoading, setIsLoading] = useState(false);
+  const [authError, setAuthError] = useState<Error | null>(null);
+
+  React.useEffect(() => {
+    // Check for Supabase auth errors in console
+    const handleError = (event: ErrorEvent) => {
+      if (event.error?.message?.includes('AuthApiError')) {
+        console.warn('Auth error detected, using default mock user');
+      }
+    };
+
+    window.addEventListener('error', handleError);
+    
+    return () => {
+      window.removeEventListener('error', handleError);
+    };
+  }, []);
 
   // Mock sign out function that does nothing
   const signOut = async () => {
     console.log('Sign out attempted, but authentication is disabled');
-    // No actual sign out happens
+    // For a real implementation, we would use supabase.auth.signOut()
   };
 
   const contextValue = {

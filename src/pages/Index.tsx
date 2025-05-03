@@ -14,6 +14,7 @@ import FreeResourceCards from "@/components/resources/FreeResourceCards";
 import { Skeleton } from "@/components/ui/skeleton";
 import JourneySection from "@/components/JourneySection";
 import PersonalMessage from "@/components/PersonalMessage";
+import TrustedCompanies from "@/components/TrustedCompanies";
 
 // These components can still be lazy-loaded as they're not critical
 import { lazy, Suspense } from 'react';
@@ -29,11 +30,56 @@ const LoadingFallback = () => (
 const Index = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 500);
+    
+    // Set up page loading status
+    try {
+      window.addEventListener('load', () => {
+        setIsLoading(false);
+      });
+      
+      // If page is already loaded, update state immediately
+      if (document.readyState === 'complete') {
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.error('Error during page load:', error);
+      setLoadError('Failed to initialize page components');
+      setIsLoading(false);
+    }
+    
     return () => clearTimeout(timer);
   }, []);
+
+  // If there's a loading error, show simple error message
+  if (loadError) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center p-4">
+        <h2 className="text-2xl font-bold text-red-600 mb-4">Error Loading Page</h2>
+        <p className="text-gray-700 mb-4">{loadError}</p>
+        <button 
+          onClick={() => window.location.reload()} 
+          className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90"
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
+
+  // Show loading state if needed
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center">
+        <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+        <p className="mt-4 text-gray-600">Loading homepage...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -53,6 +99,7 @@ const Index = () => {
           </div>
         </section>
         
+        <TrustedCompanies />
         <OfferSection />
         <HowItWorksSection />
         <DetailedStorySection />
