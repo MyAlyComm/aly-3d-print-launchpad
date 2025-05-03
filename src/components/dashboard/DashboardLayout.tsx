@@ -24,33 +24,31 @@ const DashboardLayout = ({
   const isMobile = useIsMobile();
   
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100 w-full overflow-hidden">
-      <SidebarProvider>
-        <div className="flex min-h-screen w-full">
-          <DashboardSidebar />
-          
-          <SidebarInset className="flex-1 flex flex-col">
-            <header className="sticky top-0 z-30 bg-white border-b w-full">
-              <div className="flex h-16 items-center justify-between px-4">
-                <div className="flex items-center gap-2">
-                  {isMobile && <SidebarTrigger />}
-                  <h1 className="text-lg font-semibold text-gray-800 truncate">{title}</h1>
-                </div>
-                
-                <div className="flex items-center gap-3">
-                  {extraContent}
-                  <NavBarUserDropdown />
-                </div>
+    <SidebarProvider defaultOpen={true}>
+      <div className="flex min-h-screen w-full overflow-hidden bg-gray-100">
+        <DashboardSidebar />
+        
+        <SidebarInset className="flex-1 flex flex-col">
+          <header className="sticky top-0 z-30 bg-white border-b w-full">
+            <div className="flex h-16 items-center justify-between px-4">
+              <div className="flex items-center gap-2">
+                {isMobile && <SidebarTrigger />}
+                <h1 className="text-lg font-semibold text-gray-800 truncate">{title}</h1>
               </div>
-            </header>
-            
-            <main className={cn("flex-1 container mx-auto w-full px-3 sm:px-4 py-4", className)}>
-              {children}
-            </main>
-          </SidebarInset>
-        </div>
-      </SidebarProvider>
-    </div>
+              
+              <div className="flex items-center gap-3">
+                {extraContent}
+                <NavBarUserDropdown />
+              </div>
+            </div>
+          </header>
+          
+          <main className={cn("flex-1 container mx-auto w-full px-3 sm:px-4 py-4", className)}>
+            {children}
+          </main>
+        </SidebarInset>
+      </div>
+    </SidebarProvider>
   );
 };
 
