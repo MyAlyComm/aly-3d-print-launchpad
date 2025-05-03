@@ -1,8 +1,7 @@
 
 import { useNavigate, useLocation } from "react-router-dom";
-import { Book, Layout, BookOpen, BookText, ClipboardList, Box, Package, SparkleIcon } from "lucide-react";
+import { Book, Layout, BookOpen, BookText, ClipboardList, Box, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
 export const DashboardNav = () => {
   const navigate = useNavigate();
@@ -158,17 +157,6 @@ export const DashboardNav = () => {
       >
         <Package className="mr-2 h-4 w-4" />
         Filament Guide
-      </Button>
-      <Button 
-        variant={isActive("/ai-hub") ? "secondary" : "ghost"}
-        className="w-full justify-start bg-primary/5 hover:bg-primary/10"
-        onClick={() => navigate("/ai-hub")}
-      >
-        <SparkleIcon className="mr-2 h-4 w-4 text-primary" />
-        <div className="flex items-center">
-          AI Business Hub
-          <Badge className="ml-2 bg-green-500 text-white text-xs">New</Badge>
-        </div>
       </Button>
     </nav>
   );

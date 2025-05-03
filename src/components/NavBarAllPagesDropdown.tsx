@@ -9,11 +9,10 @@ import {
   DropdownMenuLabel
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, FileText, BookOpen, SparkleIcon } from "lucide-react";
+import { ChevronDown, FileText, BookOpen } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { mainRoutes } from "@/routes/mainRoutes";
 import { ebookRoutes } from "@/routes/ebookRoutes";
-import { aiHubRoutes } from "@/routes/aiHubRoutes";
 import { useState, useEffect } from "react";
 
 // Helper function to get clean page title from route path
@@ -50,7 +49,6 @@ export function NavBarAllPagesDropdown() {
   // Filter out catch-all (*) routes and ensure all routes have valid paths
   const filteredMainRoutes = mainRoutes.filter(route => route.path !== "*" && typeof route.path === "string");
   const filteredEbookRoutes = ebookRoutes.filter(route => typeof route.path === "string");
-  const filteredAIHubRoutes = aiHubRoutes.filter(route => typeof route.path === "string");
   
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
@@ -103,37 +101,6 @@ export function NavBarAllPagesDropdown() {
               onClick={() => handleNavigate("/dashboard")}
             >
               + {filteredEbookRoutes.length - 7} more pages...
-            </DropdownMenuItem>
-          )}
-        </DropdownMenuGroup>
-        
-        <DropdownMenuSeparator />
-        
-        <DropdownMenuLabel>AI Hub</DropdownMenuLabel>
-        <DropdownMenuGroup>
-          <DropdownMenuItem 
-            className="cursor-pointer"
-            onClick={() => handleNavigate("/ai-hub")}
-          >
-            <SparkleIcon className="mr-2 h-4 w-4" />
-            <span>AI Hub Home</span>
-          </DropdownMenuItem>
-          {filteredAIHubRoutes.slice(1, 5).map((route, index) => (
-            <DropdownMenuItem 
-              key={`ai-${index}`} 
-              className="cursor-pointer"
-              onClick={() => handleNavigate(route.path)}
-            >
-              <SparkleIcon className="mr-2 h-4 w-4" />
-              <span>{getPageTitle(route.path)}</span>
-            </DropdownMenuItem>
-          ))}
-          {filteredAIHubRoutes.length > 5 && (
-            <DropdownMenuItem 
-              className="italic text-sm text-gray-500 cursor-pointer"
-              onClick={() => handleNavigate("/ai-hub")}
-            >
-              + {filteredAIHubRoutes.length - 5} more tools...
             </DropdownMenuItem>
           )}
         </DropdownMenuGroup>

@@ -78,11 +78,6 @@ const NavBar = () => {
               handleTitleClick={handleTitleClick} 
               handleLogoDoubleClick={handleLogoDoubleClick} 
             />
-            
-            {/* Always show the Pages Dropdown */}
-            <div className="ml-4 hidden md:block">
-              <NavBarAllPagesDropdown />
-            </div>
           </div>
 
           <NavBarLinks className="hidden md:flex" />

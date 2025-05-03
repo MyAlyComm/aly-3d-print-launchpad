@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
@@ -10,8 +9,7 @@ export interface NavLinkItem {
 
 const defaultLinks: NavLinkItem[] = [
   { href: "/", label: "Home" },
-  { href: "/view/swanky", label: "SwankyView" },
-  { href: "/view/inside", label: "Inside Blueprint" },
+  { href: "/inside-blueprint", label: "Inside Blueprint" },
   { href: "#blueprints", label: "Blueprints" },
   { href: "#testimonials", label: "Testimonials" },
   { href: "/dashboard", label: "Dashboard", isPrimary: true },

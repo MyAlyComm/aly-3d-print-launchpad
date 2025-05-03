@@ -14,7 +14,6 @@ import FreeResourceCards from "@/components/resources/FreeResourceCards";
 import { Skeleton } from "@/components/ui/skeleton";
 import JourneySection from "@/components/JourneySection";
 import PersonalMessage from "@/components/PersonalMessage";
-import SwankyBlueprintPage from "@/components/swanky-blueprint/SwankyBlueprintPage";
 import InsideBlueprintPage from "@/components/inside-blueprint/InsideBlueprintPage";
 import { useParams } from "react-router-dom";
 
@@ -39,11 +38,7 @@ const Index = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Render different content based on URL parameter
-  if (viewType === "swanky") {
-    return <SwankyBlueprintPage />;
-  }
-
+  // Render Inside Blueprint view if specified in URL parameter
   if (viewType === "inside") {
     return <InsideBlueprintPage />;
   }
