@@ -20,7 +20,6 @@ export type Database = {
           relevance_score: number | null
           source_ids: string[] | null
           updated_at: string | null
-          user_id: string | null
         }
         Insert: {
           agent_team: string
@@ -32,7 +31,6 @@ export type Database = {
           relevance_score?: number | null
           source_ids?: string[] | null
           updated_at?: string | null
-          user_id?: string | null
         }
         Update: {
           agent_team?: string
@@ -44,7 +42,6 @@ export type Database = {
           relevance_score?: number | null
           source_ids?: string[] | null
           updated_at?: string | null
-          user_id?: string | null
         }
         Relationships: []
       }
@@ -93,7 +90,6 @@ export type Database = {
           platform: string
           post_id: string | null
           scraped_at: string | null
-          user_id: string | null
         }
         Insert: {
           author_id?: string | null
@@ -106,7 +102,6 @@ export type Database = {
           platform: string
           post_id?: string | null
           scraped_at?: string | null
-          user_id?: string | null
         }
         Update: {
           author_id?: string | null
@@ -119,7 +114,6 @@ export type Database = {
           platform?: string
           post_id?: string | null
           scraped_at?: string | null
-          user_id?: string | null
         }
         Relationships: [
           {
@@ -144,7 +138,6 @@ export type Database = {
           post_id: string
           post_url: string | null
           scraped_at: string | null
-          user_id: string | null
         }
         Insert: {
           author_id?: string | null
@@ -158,7 +151,6 @@ export type Database = {
           post_id: string
           post_url?: string | null
           scraped_at?: string | null
-          user_id?: string | null
         }
         Update: {
           author_id?: string | null
@@ -172,31 +164,6 @@ export type Database = {
           post_id?: string
           post_url?: string | null
           scraped_at?: string | null
-          user_id?: string | null
-        }
-        Relationships: []
-      }
-      configuration_notes: {
-        Row: {
-          created_at: string | null
-          id: number
-          issue: string
-          needs_manual_action: boolean | null
-          recommendation: string
-        }
-        Insert: {
-          created_at?: string | null
-          id?: number
-          issue: string
-          needs_manual_action?: boolean | null
-          recommendation: string
-        }
-        Update: {
-          created_at?: string | null
-          id?: number
-          issue?: string
-          needs_manual_action?: boolean | null
-          recommendation?: string
         }
         Relationships: []
       }
@@ -212,7 +179,6 @@ export type Database = {
           source_ids: string[] | null
           source_type: string
           type: string
-          user_id: string | null
         }
         Insert: {
           first_seen_at?: string | null
@@ -225,7 +191,6 @@ export type Database = {
           source_ids?: string[] | null
           source_type: string
           type: string
-          user_id?: string | null
         }
         Update: {
           first_seen_at?: string | null
@@ -238,7 +203,6 @@ export type Database = {
           source_ids?: string[] | null
           source_type?: string
           type?: string
-          user_id?: string | null
         }
         Relationships: []
       }
@@ -251,7 +215,6 @@ export type Database = {
           sentiment: number | null
           source_id: string
           source_type: string
-          user_id: string | null
         }
         Insert: {
           context?: string | null
@@ -261,7 +224,6 @@ export type Database = {
           sentiment?: number | null
           source_id: string
           source_type: string
-          user_id?: string | null
         }
         Update: {
           context?: string | null
@@ -271,7 +233,6 @@ export type Database = {
           sentiment?: number | null
           source_id?: string
           source_type?: string
-          user_id?: string | null
         }
         Relationships: [
           {
@@ -522,7 +483,6 @@ export type Database = {
           tags: string[] | null
           title: string | null
           url: string
-          user_id: string | null
         }
         Insert: {
           categories?: string[] | null
@@ -540,7 +500,6 @@ export type Database = {
           tags?: string[] | null
           title?: string | null
           url: string
-          user_id?: string | null
         }
         Update: {
           categories?: string[] | null
@@ -558,7 +517,6 @@ export type Database = {
           tags?: string[] | null
           title?: string | null
           url?: string
-          user_id?: string | null
         }
         Relationships: []
       }
@@ -631,27 +589,6 @@ export type Database = {
         }
         Relationships: []
       }
-      user_roles: {
-        Row: {
-          created_at: string | null
-          id: string
-          role: Database["public"]["Enums"]["app_role"]
-          user_id: string
-        }
-        Insert: {
-          created_at?: string | null
-          id?: string
-          role?: Database["public"]["Enums"]["app_role"]
-          user_id: string
-        }
-        Update: {
-          created_at?: string | null
-          id?: string
-          role?: Database["public"]["Enums"]["app_role"]
-          user_id?: string
-        }
-        Relationships: []
-      }
       videos: {
         Row: {
           author_id: string | null
@@ -665,7 +602,6 @@ export type Database = {
           title: string | null
           transcript: string | null
           url: string
-          user_id: string | null
           video_id: string
         }
         Insert: {
@@ -680,7 +616,6 @@ export type Database = {
           title?: string | null
           transcript?: string | null
           url: string
-          user_id?: string | null
           video_id: string
         }
         Update: {
@@ -695,7 +630,6 @@ export type Database = {
           title?: string | null
           transcript?: string | null
           url?: string
-          user_id?: string | null
           video_id?: string
         }
         Relationships: []
@@ -708,10 +642,6 @@ export type Database = {
       binary_quantize: {
         Args: { "": string } | { "": unknown }
         Returns: unknown
-      }
-      delete_user: {
-        Args: Record<PropertyKey, never>
-        Returns: undefined
       }
       halfvec_avg: {
         Args: { "": number[] }
@@ -728,10 +658,6 @@ export type Database = {
       halfvec_typmod_in: {
         Args: { "": unknown[] }
         Returns: number
-      }
-      has_role: {
-        Args: { user_id: string; role: Database["public"]["Enums"]["app_role"] }
-        Returns: boolean
       }
       hnsw_bit_support: {
         Args: { "": unknown }
@@ -807,7 +733,6 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "admin" | "moderator" | "user"
       grant_application_status:
         | "draft"
         | "submitted"
@@ -929,7 +854,6 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "moderator", "user"],
       grant_application_status: [
         "draft",
         "submitted",

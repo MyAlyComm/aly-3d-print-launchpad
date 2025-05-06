@@ -5,12 +5,11 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { CheckCircle, Save } from "lucide-react";
-import { useChapterForm } from "@/hooks/useChapterForm";
 
 export const SelfAssessment = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { formState, saveResponse, isLoading } = useChapterForm(1, "self-assessment");
+  const [answers, setAnswers] = useState<Record<string, string>>({});
   const [saved, setSaved] = useState<Record<string, boolean>>({});
 
   const questions = [
@@ -36,35 +35,13 @@ export const SelfAssessment = () => {
     }
   ];
 
-  // Get answer from formState or return empty string
-  const getAnswer = (id: string): string => {
-    return formState?.["self-assessment"]?.textInputs?.[id] || "";
-  };
-
-  const saveAnswer = (id: string, value: string) => {
-    if (value?.trim()) {
-      saveResponse("self-assessment", { 
-        checkboxes: {}, 
-        textInputs: { [id]: value } 
-      }, true);
-      
+  const saveAnswer = (id: string) => {
+    if (answers[id]?.trim()) {
       setSaved(prev => ({ ...prev, [id]: true }));
       toast({
         title: "Answer saved!",
         description: "Your response has been recorded."
       });
-    }
-  };
-
-  const handleAnswerChange = (id: string, value: string) => {
-    saveResponse("self-assessment", { 
-      checkboxes: {}, 
-      textInputs: { [id]: value } 
-    });
-    
-    // Remove saved indicator when editing
-    if (saved[id]) {
-      setSaved(prev => ({ ...prev, [id]: false }));
     }
   };
 
@@ -82,35 +59,6 @@ export const SelfAssessment = () => {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 }
   };
-
-  const handleComplete = () => {
-    // Mark all current answers as submitted
-    const currentAnswers: Record<string, string> = {};
-    questions.forEach(q => {
-      const answer = getAnswer(q.id);
-      if (answer) currentAnswers[q.id] = answer;
-    });
-    
-    // Save all responses with completed flag
-    saveResponse("self-assessment", { 
-      checkboxes: { completed: true },
-      textInputs: currentAnswers
-    }, true);
-    
-    toast({
-      title: "Chapter 1 Completed!",
-      description: "You're ready to continue to Chapter 2."
-    });
-    navigate("/dashboard");
-  };
-
-  if (isLoading) {
-    return (
-      <div className="flex justify-center p-6">
-        <div className="animate-pulse text-primary">Loading your previous answers...</div>
-      </div>
-    );
-  }
 
   return (
     <div className="space-y-6">
@@ -158,8 +106,8 @@ export const SelfAssessment = () => {
             <p className="font-medium mb-2">{question.question}</p>
             <textarea
               id={question.id}
-              value={getAnswer(question.id)}
-              onChange={(e) => handleAnswerChange(question.id, e.target.value)}
+              value={answers[question.id] || ""}
+              onChange={(e) => setAnswers(prev => ({ ...prev, [question.id]: e.target.value }))}
               className="w-full min-h-[100px] p-3 rounded-md border border-gray-300 focus:border-primary focus:ring-1 focus:ring-primary"
               placeholder="Type your answer here..."
             />
@@ -167,8 +115,8 @@ export const SelfAssessment = () => {
               <Button
                 size="sm"
                 variant="outline"
-                onClick={() => saveAnswer(question.id, getAnswer(question.id))}
-                disabled={!getAnswer(question.id)?.trim()}
+                onClick={() => saveAnswer(question.id)}
+                disabled={!answers[question.id]?.trim() || saved[question.id]}
                 className="mt-2"
               >
                 <Save className="h-4 w-4 mr-2" />
@@ -178,16 +126,6 @@ export const SelfAssessment = () => {
           </motion.div>
         ))}
       </motion.div>
-
-      <div className="flex justify-end pt-6">
-        <Button 
-          onClick={handleComplete}
-          size="lg"
-          className="px-8"
-        >
-          Complete Chapter
-        </Button>
-      </div>
     </div>
   );
 };

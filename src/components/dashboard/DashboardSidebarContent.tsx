@@ -3,6 +3,8 @@ import { Home, BookOpen, User, Award, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { DashboardNav } from "./DashboardNav";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,6 +18,22 @@ export const DashboardSidebarContent = () => {
   const navigate = useNavigate();
   const { chapterProgresses } = useChapterProgress();
   const badges = getBadgesForProgress(chapterProgresses as any[] || []);
+
+  const handleSignOut = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      
+      // Clear any local storage related to authentication
+      localStorage.removeItem("hasAccessToEbook");
+      
+      toast.success("Signed out successfully");
+      navigate("/");
+    } catch (error) {
+      console.error("Error signing out:", error);
+      toast.error("Failed to sign out");
+    }
+  };
 
   return (
     <div className="flex h-full flex-col">
@@ -45,15 +63,6 @@ export const DashboardSidebarContent = () => {
           All Ebooks
         </Button>
 
-        <Button 
-          variant="ghost" 
-          className="w-full"
-          onClick={() => navigate("/account")}
-        >
-          <User className="mr-2 h-4 w-4" />
-          My Account
-        </Button>
-
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="w-full justify-start bg-primary/5 hover:bg-primary/10">
@@ -61,7 +70,7 @@ export const DashboardSidebarContent = () => {
               Achievements
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56 bg-white">
+          <DropdownMenuContent align="end" className="w-56">
             {badges.length === 0 ? (
               <DropdownMenuItem disabled>
                 <span className="text-muted-foreground">No achievements yet</span>
@@ -76,6 +85,23 @@ export const DashboardSidebarContent = () => {
             )}
           </DropdownMenuContent>
         </DropdownMenu>
+
+        <Button 
+          variant="ghost" 
+          className="w-full"
+          onClick={() => navigate("/account")}
+        >
+          <User className="mr-2 h-4 w-4" />
+          My Account
+        </Button>
+
+        <Button 
+          variant="ghost" 
+          className="w-full text-red-600 hover:text-red-700 hover:bg-red-50"
+          onClick={handleSignOut}
+        >
+          Sign Out
+        </Button>
       </div>
     </div>
   );

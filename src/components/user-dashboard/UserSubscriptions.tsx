@@ -1,18 +1,14 @@
 
 import { useState, useEffect } from "react";
+import { User } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 import { CreditCard, Calendar, Check } from "lucide-react";
 
-// Update to use a more generic User type
 interface UserSubscriptionsProps {
-  user: {
-    id?: string;
-    email?: string;
-    [key: string]: any;
-  };
+  user: User;
 }
 
 export const UserSubscriptions = ({ user }: UserSubscriptionsProps) => {

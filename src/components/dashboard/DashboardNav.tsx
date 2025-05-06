@@ -1,21 +1,16 @@
 
-import { useNavigate, useLocation } from "react-router-dom";
-import { Book, Layout, BookOpen, BookText, ClipboardList, Box, Package } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Book, Layout, BookOpen, BookText, ClipboardList, Box, Package, SparkleIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 export const DashboardNav = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  
-  // Helper to check if a route is active
-  const isActive = (path: string) => {
-    return location.pathname === path;
-  };
   
   return (
     <nav className="flex-1 space-y-2">
       <Button 
-        variant={isActive("/dashboard/3d-blueprint") ? "secondary" : "ghost"}
+        variant="ghost" 
         className="w-full justify-start"
         onClick={() => navigate("/dashboard/3d-blueprint")}
       >
@@ -23,7 +18,7 @@ export const DashboardNav = () => {
         Dashboard
       </Button>
       <Button 
-        variant={isActive("/dashboard/3d-blueprint/new-chapter") ? "secondary" : "ghost"}
+        variant="ghost" 
         className="w-full justify-start"
         onClick={() => navigate("/dashboard/3d-blueprint/new-chapter")}
       >
@@ -31,7 +26,7 @@ export const DashboardNav = () => {
         Introduction
       </Button>
       <Button 
-        variant={isActive("/dashboard/3d-blueprint/chapter-1") ? "secondary" : "ghost"}
+        variant="ghost" 
         className="w-full justify-start"
         onClick={() => navigate("/dashboard/3d-blueprint/chapter-1")}
       >
@@ -39,7 +34,7 @@ export const DashboardNav = () => {
         Chapter 1: Arbitrage Windows
       </Button>
       <Button 
-        variant={isActive("/dashboard/3d-blueprint/chapter-2") ? "secondary" : "ghost"}
+        variant="ghost" 
         className="w-full justify-start"
         onClick={() => navigate("/dashboard/3d-blueprint/chapter-2")}
       >
@@ -47,7 +42,7 @@ export const DashboardNav = () => {
         Chapter 2: Knowing Yourself
       </Button>
       <Button 
-        variant={isActive("/dashboard/3d-blueprint/chapter-3") ? "secondary" : "ghost"}
+        variant="ghost" 
         className="w-full justify-start"
         onClick={() => navigate("/dashboard/3d-blueprint/chapter-3")}
       >
@@ -55,7 +50,7 @@ export const DashboardNav = () => {
         Chapter 3: The 3+1=40 System
       </Button>
       <Button 
-        variant={isActive("/dashboard/3d-blueprint/chapter-4") ? "secondary" : "ghost"}
+        variant="ghost" 
         className="w-full justify-start"
         onClick={() => navigate("/dashboard/3d-blueprint/chapter-4")}
       >
@@ -63,7 +58,7 @@ export const DashboardNav = () => {
         Chapter 4: The Product Trinity
       </Button>
       <Button 
-        variant={isActive("/dashboard/3d-blueprint/chapter-5") ? "secondary" : "ghost"}
+        variant="ghost" 
         className="w-full justify-start"
         onClick={() => navigate("/dashboard/3d-blueprint/chapter-5")}
       >
@@ -71,7 +66,7 @@ export const DashboardNav = () => {
         Chapter 5: Production Tools
       </Button>
       <Button 
-        variant={isActive("/dashboard/3d-blueprint/chapter-6") ? "secondary" : "ghost"}
+        variant="ghost" 
         className="w-full justify-start"
         onClick={() => navigate("/dashboard/3d-blueprint/chapter-6")}
       >
@@ -79,7 +74,7 @@ export const DashboardNav = () => {
         Chapter 6: Selling Platforms
       </Button>
       <Button 
-        variant={isActive("/dashboard/3d-blueprint/chapter-7") ? "secondary" : "ghost"}
+        variant="ghost" 
         className="w-full justify-start"
         onClick={() => navigate("/dashboard/3d-blueprint/chapter-7")}
       >
@@ -87,7 +82,7 @@ export const DashboardNav = () => {
         Chapter 7: Setting Up For Success
       </Button>
       <Button 
-        variant={isActive("/dashboard/3d-blueprint/chapter-8") ? "secondary" : "ghost"}
+        variant="ghost" 
         className="w-full justify-start"
         onClick={() => navigate("/dashboard/3d-blueprint/chapter-8")}
       >
@@ -95,7 +90,7 @@ export const DashboardNav = () => {
         Chapter 8: Zero-Cost Marketing That Works
       </Button>
       <Button 
-        variant={isActive("/dashboard/3d-blueprint/chapter-9") ? "secondary" : "ghost"}
+        variant="ghost" 
         className="w-full justify-start"
         onClick={() => navigate("/dashboard/3d-blueprint/chapter-9")}
       >
@@ -103,7 +98,7 @@ export const DashboardNav = () => {
         Chapter 9: Scaling Beyond $5K
       </Button>
       <Button 
-        variant={isActive("/dashboard/3d-blueprint/chapter-10") ? "secondary" : "ghost"}
+        variant="ghost" 
         className="w-full justify-start"
         onClick={() => navigate("/dashboard/3d-blueprint/chapter-10")}
       >
@@ -111,7 +106,7 @@ export const DashboardNav = () => {
         Chapter 10: Future-Proofing Your Business
       </Button>
       <Button 
-        variant={isActive("/dashboard/3d-blueprint/chapter-11") ? "secondary" : "ghost"}
+        variant="ghost" 
         className="w-full justify-start"
         onClick={() => navigate("/dashboard/3d-blueprint/chapter-11")}
       >
@@ -119,7 +114,7 @@ export const DashboardNav = () => {
         Chapter 11: The Journey Ahead
       </Button>
       <Button 
-        variant={isActive("/dashboard/3d-blueprint/resources") ? "secondary" : "ghost"}
+        variant="ghost" 
         className="w-full justify-start"
         onClick={() => navigate("/dashboard/3d-blueprint/resources")}
       >
@@ -127,7 +122,7 @@ export const DashboardNav = () => {
         Resources
       </Button>
       <Button 
-        variant={isActive("/dashboard") ? "secondary" : "ghost"}
+        variant="ghost" 
         className="w-full justify-start text-primary"
         onClick={() => navigate("/dashboard")}
       >
@@ -135,7 +130,7 @@ export const DashboardNav = () => {
         All Ebooks
       </Button>
       <Button 
-        variant={isActive("/dashboard/3d-blueprint/submissions") ? "secondary" : "ghost"}
+        variant="ghost" 
         className="w-full justify-start"
         onClick={() => navigate("/dashboard/3d-blueprint/submissions")}
       >
@@ -143,7 +138,7 @@ export const DashboardNav = () => {
         My Submissions
       </Button>
       <Button 
-        variant={isActive("/dashboard/3d-blueprint/product-design") ? "secondary" : "ghost"}
+        variant="ghost" 
         className="w-full justify-start"
         onClick={() => navigate("/dashboard/3d-blueprint/product-design")}
       >
@@ -151,12 +146,23 @@ export const DashboardNav = () => {
         Product Design Engine
       </Button>
       <Button 
-        variant={isActive("/dashboard/3d-blueprint/filament-guide") ? "secondary" : "ghost"}
+        variant="ghost" 
         className="w-full justify-start"
         onClick={() => navigate("/dashboard/3d-blueprint/filament-guide")}
       >
         <Package className="mr-2 h-4 w-4" />
         Filament Guide
+      </Button>
+      <Button 
+        variant="ghost" 
+        className="w-full justify-start bg-primary/5 hover:bg-primary/10"
+        onClick={() => navigate("/ai-hub")}
+      >
+        <SparkleIcon className="mr-2 h-4 w-4 text-primary" />
+        <div className="flex items-center">
+          AI Business Hub
+          <Badge className="ml-2 bg-green-500 text-white text-xs">New</Badge>
+        </div>
       </Button>
     </nav>
   );

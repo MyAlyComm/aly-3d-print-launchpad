@@ -19,27 +19,87 @@ import MiniBlueprint from "@/pages/MiniBlueprint";
 import MySubmissions from "@/pages/MySubmissions";
 import ProductDesignEngine from "@/pages/ProductDesignEngine";
 import FilamentGuide from "@/pages/FilamentGuide";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 export const ebookRoutes = [
-  { path: "/dashboard", element: <EbooksHub /> },
-  { path: "/ebooks", element: <EbooksHub /> }, // Add direct route to ebooks
-  { path: "/dashboard/3d-blueprint", element: <Dashboard /> },
-  { path: "/dashboard/3d-blueprint/new-chapter", element: <NewEbookChapter /> },
-  { path: "/dashboard/3d-blueprint/resources", element: <Resources /> },
-  { path: "/dashboard/3d-blueprint/chapter-1", element: <Chapter1 /> },
-  { path: "/dashboard/3d-blueprint/chapter-2", element: <Chapter2 /> },
-  { path: "/dashboard/3d-blueprint/chapter-3", element: <Chapter3 /> },
-  { path: "/dashboard/3d-blueprint/chapter-4", element: <Chapter4 /> },
-  { path: "/dashboard/3d-blueprint/chapter-5", element: <Chapter5 /> },
-  { path: "/dashboard/3d-blueprint/chapter-6", element: <Chapter6 /> },
-  { path: "/dashboard/3d-blueprint/chapter-7", element: <Chapter7 /> },
-  { path: "/dashboard/3d-blueprint/chapter-8", element: <Chapter8 /> },
-  { path: "/dashboard/3d-blueprint/chapter-9", element: <Chapter9 /> },
-  { path: "/dashboard/3d-blueprint/chapter-10", element: <Chapter10 /> },
-  { path: "/dashboard/3d-blueprint/chapter-11", element: <Chapter11 /> },
-  { path: "/dashboard/3d-faq", element: <FAQDashboard /> },
-  { path: "/dashboard/3d-mini", element: <MiniBlueprint /> },
-  { path: "/dashboard/3d-blueprint/submissions", element: <MySubmissions /> },
-  { path: "/dashboard/3d-blueprint/product-design", element: <ProductDesignEngine /> },
-  { path: "/dashboard/3d-blueprint/filament-guide", element: <FilamentGuide /> }
+  {
+    path: "/dashboard",
+    element: <ProtectedRoute><EbooksHub /></ProtectedRoute>
+  },
+  {
+    path: "/dashboard/3d-blueprint",
+    element: <ProtectedRoute><Dashboard /></ProtectedRoute>
+  },
+  {
+    path: "/dashboard/3d-blueprint/new-chapter",
+    element: <ProtectedRoute><NewEbookChapter /></ProtectedRoute>
+  },
+  {
+    path: "/dashboard/3d-blueprint/resources",
+    element: <ProtectedRoute><Resources /></ProtectedRoute>
+  },
+  {
+    path: "/dashboard/3d-blueprint/chapter-1",
+    element: <ProtectedRoute><Chapter1 /></ProtectedRoute>
+  },
+  {
+    path: "/dashboard/3d-blueprint/chapter-2",
+    element: <ProtectedRoute><Chapter2 /></ProtectedRoute>
+  },
+  {
+    path: "/dashboard/3d-blueprint/chapter-3",
+    element: <ProtectedRoute><Chapter3 /></ProtectedRoute>
+  },
+  {
+    path: "/dashboard/3d-blueprint/chapter-4",
+    element: <ProtectedRoute><Chapter4 /></ProtectedRoute>
+  },
+  {
+    path: "/dashboard/3d-blueprint/chapter-5",
+    element: <ProtectedRoute><Chapter5 /></ProtectedRoute>
+  },
+  {
+    path: "/dashboard/3d-blueprint/chapter-6",
+    element: <ProtectedRoute><Chapter6 /></ProtectedRoute>
+  },
+  {
+    path: "/dashboard/3d-blueprint/chapter-7",
+    element: <ProtectedRoute><Chapter7 /></ProtectedRoute>
+  },
+  {
+    path: "/dashboard/3d-blueprint/chapter-8",
+    element: <ProtectedRoute><Chapter8 /></ProtectedRoute>
+  },
+  {
+    path: "/dashboard/3d-blueprint/chapter-9",
+    element: <ProtectedRoute><Chapter9 /></ProtectedRoute>
+  },
+  {
+    path: "/dashboard/3d-blueprint/chapter-10",
+    element: <ProtectedRoute><Chapter10 /></ProtectedRoute>
+  },
+  {
+    path: "/dashboard/3d-blueprint/chapter-11",
+    element: <ProtectedRoute><Chapter11 /></ProtectedRoute>
+  },
+  {
+    path: "/dashboard/3d-faq",
+    element: <ProtectedRoute><FAQDashboard /></ProtectedRoute>
+  },
+  {
+    path: "/dashboard/3d-mini",
+    element: <ProtectedRoute><MiniBlueprint /></ProtectedRoute>
+  },
+  {
+    path: "/dashboard/3d-blueprint/submissions",
+    element: <ProtectedRoute><MySubmissions /></ProtectedRoute>
+  },
+  {
+    path: "/dashboard/3d-blueprint/product-design",
+    element: <ProtectedRoute><ProductDesignEngine /></ProtectedRoute>
+  },
+  {
+    path: "/dashboard/3d-blueprint/filament-guide",
+    element: <ProtectedRoute><FilamentGuide /></ProtectedRoute>
+  },
 ];

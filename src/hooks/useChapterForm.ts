@@ -5,8 +5,6 @@ import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { useQueryClient } from '@tanstack/react-query';
 
-export type SaveStatus = "idle" | "saving" | "saved" | "error";
-
 export interface ChapterFormState {
   [key: string]: {
     checkboxes: { [key: string]: boolean };
@@ -17,8 +15,6 @@ export interface ChapterFormState {
 export function useChapterForm(chapterNumber: number, sectionId: string) {
   const [formState, setFormState] = useState<ChapterFormState>({});
   const [isLoading, setIsLoading] = useState(true);
-  const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
-  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const { user } = useAuth();
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const queryClient = useQueryClient();
@@ -28,10 +24,7 @@ export function useChapterForm(chapterNumber: number, sectionId: string) {
   }, [chapterNumber, sectionId]);
 
   const loadSavedResponses = async () => {
-    if (!user) {
-      setIsLoading(false);
-      return;
-    }
+    if (!user) return;
     
     try {
       const { data, error } = await supabase
@@ -42,11 +35,7 @@ export function useChapterForm(chapterNumber: number, sectionId: string) {
         .eq('section_id', sectionId)
         .maybeSingle();
 
-      if (error) {
-        console.error('Error loading responses:', error);
-        throw error;
-      }
-      
+      if (error) throw error;
       if (data) {
         // Parse the response_data as ChapterFormState to ensure type safety
         const responseData = data.response_data as ChapterFormState;
@@ -90,15 +79,12 @@ export function useChapterForm(chapterNumber: number, sectionId: string) {
 
     // Update local state immediately
     setFormState(newState);
-    setHasUnsavedChanges(true);
 
     // For immediate save when user clicks the save button
     if (showToast) {
-      setSaveStatus("saving");
       await saveToDatabase(newState, true);
     } else {
       // Debounce the save to database operation for typing
-      setSaveStatus("saving");
       saveTimeoutRef.current = setTimeout(() => {
         saveToDatabase(newState, false);
       }, 2000); // Wait for 2 seconds of inactivity before saving
@@ -116,10 +102,7 @@ export function useChapterForm(chapterNumber: number, sectionId: string) {
         .eq('section_id', sectionId)
         .maybeSingle();
         
-      if (checkError) {
-        console.error('Error checking existing record:', checkError);
-        throw checkError;
-      }
+      if (checkError) throw checkError;
       
       let error;
       const currentTime = new Date().toISOString();
@@ -151,31 +134,18 @@ export function useChapterForm(chapterNumber: number, sectionId: string) {
         error = insertError;
       }
 
-      if (error) {
-        console.error('Error saving response:', error.message);
-        throw error;
-      }
+      if (error) throw error;
       
       // After successful save, invalidate the chapter progress query to refresh data
       queryClient.invalidateQueries({ queryKey: ["chapter-progress"] });
       
-      setSaveStatus("saved");
-      setHasUnsavedChanges(false);
-      
       if (showToast) {
         toast.success('Progress saved');
       }
-      
-      // Reset save status after a delay
-      setTimeout(() => {
-        setSaveStatus("idle");
-      }, 3000);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error saving response:', error);
-      setSaveStatus("error");
-      
       if (showToast) {
-        toast.error(`Failed to save: ${error?.message || 'Unknown error'}`);
+        toast.error('Failed to save your response');
       }
     }
   };
@@ -192,8 +162,6 @@ export function useChapterForm(chapterNumber: number, sectionId: string) {
   return {
     formState,
     saveResponse,
-    isLoading,
-    saveStatus,
-    hasUnsavedChanges
+    isLoading
   };
 }

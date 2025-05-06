@@ -2,7 +2,8 @@
 import React, { ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { LogOut, Award, Layout, Book, BookOpen, Menu, User } from "lucide-react";
+import { LogOut, Award, Layout, Book, BookText, BookOpen, Menu, SparkleIcon } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useChapterProgress } from "@/hooks/useChapterProgress";
@@ -19,11 +20,10 @@ import { Badge } from "@/components/ui/badge";
 type DashboardHeaderProps = {
   title: string;
   children?: ReactNode;
-  isDashboardPage?: boolean;
 };
 
-export const DashboardHeader = ({ title, children, isDashboardPage = false }: DashboardHeaderProps) => {
-  const { user, signOut } = useAuth();
+export const DashboardHeader = ({ title, children }: DashboardHeaderProps) => {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const { chapterProgresses } = useChapterProgress();
   const badges = getBadgesForProgress(chapterProgresses as any[] || []);
@@ -31,14 +31,16 @@ export const DashboardHeader = ({ title, children, isDashboardPage = false }: Da
 
   const handleSignOut = async () => {
     try {
-      await signOut();
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      
+      localStorage.removeItem("hasAccessToEbook");
+      
       toast.success("Signed out successfully");
       navigate("/");
     } catch (error) {
       console.error("Error signing out:", error);
-      // User might already be signed out, so just redirect them anyway
-      toast.info("Redirecting to home page...");
-      navigate("/");
+      toast.error("Failed to sign out");
     }
   };
 
@@ -50,26 +52,34 @@ export const DashboardHeader = ({ title, children, isDashboardPage = false }: Da
         <div className="flex items-center gap-2">
           {!isMobile && (
             <nav className="flex items-center gap-2 mr-4">
-              {!isDashboardPage && (
-                <Button 
-                  variant="ghost" 
-                  size="sm"
-                  onClick={() => navigate("/dashboard")}
-                  className="text-gray-700 hover:text-gray-900"
-                >
-                  <Layout className="mr-2 h-4 w-4" />
-                  Dashboard
-                </Button>
-              )}
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => navigate("/dashboard/3d-blueprint")}
+                className="text-gray-700 hover:text-gray-900"
+              >
+                <Layout className="mr-2 h-4 w-4" />
+                Dashboard
+              </Button>
               
               <Button 
                 variant="ghost" 
                 size="sm"
-                onClick={() => navigate("/account")}
+                onClick={() => navigate("/dashboard/3d-blueprint/new-chapter")}
                 className="text-gray-700 hover:text-gray-900"
               >
-                <User className="mr-2 h-4 w-4" />
-                My Account
+                <Book className="mr-2 h-4 w-4" />
+                Introduction
+              </Button>
+              
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => navigate("/dashboard/3d-blueprint/chapter-1")}
+                className="text-gray-700 hover:text-gray-900"
+              >
+                <BookText className="mr-2 h-4 w-4" />
+                Chapter 1
               </Button>
               
               <Button 
@@ -80,6 +90,17 @@ export const DashboardHeader = ({ title, children, isDashboardPage = false }: Da
               >
                 <BookOpen className="mr-2 h-4 w-4" />
                 Resources
+              </Button>
+              
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => navigate("/ai-hub")}
+                className="text-primary hover:text-primary/80 flex items-center"
+              >
+                <SparkleIcon className="mr-2 h-4 w-4" />
+                AI Hub
+                <Badge className="ml-1 bg-green-500 text-white text-xs">New</Badge>
               </Button>
             </nav>
           )}
@@ -92,19 +113,26 @@ export const DashboardHeader = ({ title, children, isDashboardPage = false }: Da
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-52 bg-white">
-                {!isDashboardPage && (
-                  <DropdownMenuItem onClick={() => navigate("/dashboard")} className="text-gray-800">
-                    <Layout className="mr-2 h-4 w-4" />
-                    Dashboard
-                  </DropdownMenuItem>
-                )}
-                <DropdownMenuItem onClick={() => navigate("/account")} className="text-gray-800">
-                  <User className="mr-2 h-4 w-4" />
-                  My Account
+                <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint")} className="text-gray-800">
+                  <Layout className="mr-2 h-4 w-4" />
+                  Dashboard
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint/new-chapter")} className="text-gray-800">
+                  <Book className="mr-2 h-4 w-4" />
+                  Introduction
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint/chapter-1")} className="text-gray-800">
+                  <BookText className="mr-2 h-4 w-4" />
+                  Chapter 1
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => navigate("/dashboard/3d-blueprint/resources")} className="text-gray-800">
                   <BookOpen className="mr-2 h-4 w-4" />
                   Resources
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate("/ai-hub")} className="text-primary">
+                  <SparkleIcon className="mr-2 h-4 w-4" />
+                  AI Hub
+                  <Badge className="ml-2 bg-green-500 text-white text-xs">New</Badge>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

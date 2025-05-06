@@ -6,18 +6,52 @@ import ProductDescriptionGenerator from "@/pages/ai-hub/ProductDescriptionGenera
 import MarketValidator from "@/pages/ai-hub/product-development/MarketValidator";
 import SpecBuilder from "@/pages/ai-hub/product-development/SpecBuilder";
 import SocialMediaHub from "@/pages/ai-hub/social-media/SocialMediaHub";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 export const aiHubRoutes = [
-  { path: "/ai-hub", element: <AIHub /> },
-  { path: "/ai-hub/product-development/idea-generator", element: <ProductIdeaGenerator /> },
-  { path: "/ai-hub/product-development/market-validator", element: <MarketValidator /> },
-  { path: "/ai-hub/product-development/spec-builder", element: <SpecBuilder /> },
-  { path: "/ai-hub/visual-marketing/background-remover", element: <BackgroundRemover /> },
-  { path: "/ai-hub/listing-creator/description", element: <ProductDescriptionGenerator /> },
+  {
+    path: "/ai-hub",
+    element: <ProtectedRoute><AIHub /></ProtectedRoute>
+  },
+  {
+    path: "/ai-hub/product-development/idea-generator",
+    element: <ProtectedRoute><ProductIdeaGenerator /></ProtectedRoute>
+  },
+  {
+    path: "/ai-hub/product-development/market-validator",
+    element: <ProtectedRoute><MarketValidator /></ProtectedRoute>
+  },
+  {
+    path: "/ai-hub/product-development/spec-builder",
+    element: <ProtectedRoute><SpecBuilder /></ProtectedRoute>
+  },
+  {
+    path: "/ai-hub/visual-marketing/background-remover",
+    element: <ProtectedRoute><BackgroundRemover /></ProtectedRoute>
+  },
+  {
+    path: "/ai-hub/listing-creator/description",
+    element: <ProtectedRoute><ProductDescriptionGenerator /></ProtectedRoute>
+  },
   // Social media routes - maintain the root path and add specific tool paths
-  { path: "/ai-hub/social-media", element: <SocialMediaHub /> },
-  { path: "/ai-hub/social-media/content-calendar", element: <SocialMediaHub /> },
-  { path: "/ai-hub/social-media/post-creator", element: <SocialMediaHub /> },
-  { path: "/ai-hub/social-media/hashtag-research", element: <SocialMediaHub /> },
-  { path: "/ai-hub/social-media/engagement-helper", element: <SocialMediaHub /> }
+  {
+    path: "/ai-hub/social-media",
+    element: <ProtectedRoute><SocialMediaHub /></ProtectedRoute>
+  },
+  {
+    path: "/ai-hub/social-media/content-calendar",
+    element: <ProtectedRoute><SocialMediaHub /></ProtectedRoute>
+  },
+  {
+    path: "/ai-hub/social-media/post-creator",
+    element: <ProtectedRoute><SocialMediaHub /></ProtectedRoute>
+  },
+  {
+    path: "/ai-hub/social-media/hashtag-research",
+    element: <ProtectedRoute><SocialMediaHub /></ProtectedRoute>
+  },
+  {
+    path: "/ai-hub/social-media/engagement-helper",
+    element: <ProtectedRoute><SocialMediaHub /></ProtectedRoute>
+  }
 ];

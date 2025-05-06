@@ -1,35 +1,38 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
-import { Mail, Eye, EyeOff, AlertCircle } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { useLocalAuth } from '@/hooks/useLocalAuth';
 
 export const AuthForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
-  const [signupComplete, setSignupComplete] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [authError, setAuthError] = useState<string | null>(null);
   const navigate = useNavigate();
-  const { signIn, signUp } = useLocalAuth();
+  const location = useLocation();
+
+  // Check if user has paid already
+  useEffect(() => {
+    const hasAccess = localStorage.getItem("hasAccessToEbook") === "true";
+    if (hasAccess) {
+      toast.info("You've already purchased access. Sign in to continue.");
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setAuthError(null);
     
     if (!email || !password) {
-      setAuthError('Please fill in all fields');
+      toast.error('Please fill in all fields');
       return;
     }
     
     if (password.length < 6) {
-      setAuthError('Password must be at least 6 characters');
+      toast.error('Password must be at least 6 characters');
       return;
     }
     
@@ -37,46 +40,64 @@ export const AuthForm = () => {
 
     try {
       if (isSignUp) {
-        await signUp(email, password);
-        setSignupComplete(true);
+        const { data, error } = await supabase.auth.signUp({ 
+          email, 
+          password,
+          options: {
+            data: {
+              created_at: new Date().toISOString(),
+              // If they've already paid, mark them as having access
+              has_access: localStorage.getItem("hasAccessToEbook") === "true"
+            }
+          }
+        });
+        
+        if (error) {
+          // More specific error handling
+          if (error.message.includes('already in use')) {
+            toast.error('This email is already registered. Try logging in instead.');
+          } else {
+            toast.error(error.message || 'Sign up failed');
+          }
+          throw error;
+        }
+        
+        if (data?.user) {
+          toast.success('Account created successfully! Logging you in...');
+          // Redirect after successful sign-up
+          const from = location.state?.from?.pathname || "/dashboard";
+          navigate(from);
+        } else {
+          toast.success('Account created! Please check your email to confirm sign up.');
+          setIsSignUp(false); // Switch to login mode
+        }
       } else {
-        await signIn(email, password);
-        navigate("/dashboard");
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+        
+        if (error) {
+          // More specific error handling
+          if (error.message.includes('Invalid login credentials')) {
+            toast.error('Incorrect email or password. Please try again.');
+          } else {
+            toast.error(error.message || 'Login failed');
+          }
+          throw error;
+        }
+        
+        if (data?.user) {
+          toast.success('Logged in successfully!');
+          
+          // Check if they were redirected from somewhere
+          const from = location.state?.from?.pathname || "/dashboard";
+          navigate(from);
+        }
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error('Authentication error:', error);
-      setAuthError(error.message || 'Authentication failed');
     } finally {
       setLoading(false);
     }
   };
-
-  if (signupComplete) {
-    return (
-      <div className="min-h-screen flex items-center justify-center p-4">
-        <Card className="w-full max-w-md p-6">
-          <div className="text-center">
-            <div className="mx-auto bg-green-50 w-16 h-16 rounded-full flex items-center justify-center mb-4">
-              <Mail className="h-8 w-8 text-green-600" />
-            </div>
-            <h2 className="text-2xl font-bold mb-4">Account Created!</h2>
-            <p className="mb-4 text-gray-600">
-              Your account has been created successfully.
-            </p>
-            <Button 
-              onClick={() => {
-                setSignupComplete(false);
-                setIsSignUp(false);
-              }} 
-              className="w-full"
-            >
-              Sign In Now
-            </Button>
-          </div>
-        </Card>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
@@ -85,11 +106,10 @@ export const AuthForm = () => {
           {isSignUp ? 'Create Account' : 'Sign In'}
         </h2>
         
-        {authError && (
-          <Alert variant="destructive" className="mb-4">
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription>{authError}</AlertDescription>
-          </Alert>
+        {localStorage.getItem("hasAccessToEbook") === "true" && (
+          <div className="mb-6 p-3 bg-green-50 border border-green-100 rounded-md text-green-800 text-sm">
+            We've confirmed your purchase! Create an account or sign in to access your ebook.
+          </div>
         )}
         
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -102,28 +122,15 @@ export const AuthForm = () => {
               required
             />
           </div>
-          <div className="relative">
+          <div>
             <Input
-              type={showPassword ? "text" : "password"}
+              type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
               minLength={6}
-              className="pr-10"
             />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-              aria-label={showPassword ? "Hide password" : "Show password"}
-            >
-              {showPassword ? (
-                <EyeOff className="h-4 w-4" />
-              ) : (
-                <Eye className="h-4 w-4" />
-              )}
-            </button>
           </div>
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? 'Processing...' : isSignUp ? 'Sign Up' : 'Sign In'}
@@ -133,10 +140,7 @@ export const AuthForm = () => {
           {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
           <button
             type="button"
-            onClick={() => {
-              setIsSignUp(!isSignUp);
-              setAuthError(null);
-            }}
+            onClick={() => setIsSignUp(!isSignUp)}
             className="text-primary hover:underline"
           >
             {isSignUp ? 'Sign In' : 'Sign Up'}

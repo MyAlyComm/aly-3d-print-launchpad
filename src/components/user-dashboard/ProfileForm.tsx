@@ -1,21 +1,16 @@
 
 import { useState, useEffect } from "react";
+import { User } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 import { Globe, Instagram, Upload } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
-// Update to use a more generic User type
 interface ProfileFormProps {
-  user: {
-    id?: string;
-    email?: string;
-    created_at?: string;
-    user_metadata?: Record<string, any>;
-    [key: string]: any;
-  };
+  user: User;
 }
 
 export const ProfileForm = ({ user }: ProfileFormProps) => {
@@ -31,16 +26,23 @@ export const ProfileForm = ({ user }: ProfileFormProps) => {
   });
 
   useEffect(() => {
-    // In a real implementation, we would fetch profile data from Supabase
-    // For now, we'll just simulate it with user_metadata if available
-    const userProfile = {
-      avatar_url: user.user_metadata?.avatar_url || null,
-      business_website: user.user_metadata?.website || null,
-      instagram_handle: user.user_metadata?.instagram_handle || null
-    };
-    
-    setProfile(userProfile);
+    getProfile();
   }, [user]);
+
+  const getProfile = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('avatar_url, business_website, instagram_handle')
+        .eq('id', user.id)
+        .single();
+
+      if (error) throw error;
+      if (data) setProfile(data);
+    } catch (error) {
+      console.error('Error fetching profile:', error);
+    }
+  };
 
   const uploadAvatar = async (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
@@ -48,15 +50,28 @@ export const ProfileForm = ({ user }: ProfileFormProps) => {
       const file = event.target.files?.[0];
       if (!file) return;
 
-      // In a real implementation, we would upload to Supabase storage
-      // For now, we'll just create a data URL for demo purposes
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const avatarUrl = e.target?.result as string;
-        setProfile(prev => ({ ...prev, avatar_url: avatarUrl }));
-        toast.success('Profile photo updated successfully');
-      };
-      reader.readAsDataURL(file);
+      const fileExt = file.name.split('.').pop();
+      const filePath = `${user.id}/${Math.random()}.${fileExt}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('profile-photos')
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('profile-photos')
+        .getPublicUrl(filePath);
+
+      const { error: updateError } = await supabase
+        .from('profiles')
+        .update({ avatar_url: publicUrl })
+        .eq('id', user.id);
+
+      if (updateError) throw updateError;
+
+      setProfile(prev => ({ ...prev, avatar_url: publicUrl }));
+      toast.success('Profile photo updated successfully');
     } catch (error) {
       toast.error('Error uploading profile photo');
       console.error('Error:', error);
@@ -70,10 +85,15 @@ export const ProfileForm = ({ user }: ProfileFormProps) => {
     setLoading(true);
 
     try {
-      // In a real implementation, we would update the profile in Supabase
-      // For now, we'll just simulate it with a delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      const { error } = await supabase
+        .from('profiles')
+        .update({
+          business_website: profile.business_website,
+          instagram_handle: profile.instagram_handle?.replace('@', ''),
+        })
+        .eq('id', user.id);
+
+      if (error) throw error;
       toast.success('Profile updated successfully');
     } catch (error) {
       toast.error('Error updating profile');
@@ -88,7 +108,7 @@ export const ProfileForm = ({ user }: ProfileFormProps) => {
       <div className="flex flex-col items-center space-y-4">
         <Avatar className="w-24 h-24">
           <AvatarImage src={profile.avatar_url || undefined} />
-          <AvatarFallback>{user.email?.[0].toUpperCase() || 'U'}</AvatarFallback>
+          <AvatarFallback>{user.email?.[0].toUpperCase()}</AvatarFallback>
         </Avatar>
         <div>
           <Input

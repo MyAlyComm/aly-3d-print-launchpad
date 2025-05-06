@@ -1,118 +1,230 @@
 
-import { useChapterForm } from "@/hooks/useChapterForm";
-import { ChapterFormContainer } from "@/components/ui/chapter-form/ChapterFormContainer";
-import { ChapterFormTextQuestion } from "@/components/ui/chapter-form/ChapterFormTextQuestion";
 import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent } from "@/components/ui/card";
+import { useToast } from "@/components/ui/use-toast";
 
 export const SystemWorksheet = () => {
   const { toast } = useToast();
-  const { formState, saveResponse, isLoading } = useChapterForm(3, "worksheet");
-  const [saved, setSaved] = useState<Record<string, boolean>>({});
+  const [responses, setResponses] = useState({
+    safeBet: "",
+    strengthAligner: "",
+    valueMaximizer: "",
+    plusOne: "",
+    metrics: "",
+    monthlyCycle: "",
+    marketing: "",
+    challenges: "",
+    strategies: "",
+    revenueGoal: ""
+  });
   
-  const sections = [
-    {
-      field: "safeBet",
-      title: "My \"Safe Bet\" core product will be:",
-      placeholder: "Enter your safe bet product here..."
-    },
-    {
-      field: "strengthAligner",
-      title: "My \"Strength Aligner\" core product based on my skills from Chapter 2 will be:",
-      placeholder: "Enter your strength aligner product here..."
-    },
-    {
-      field: "valueMaximizer",
-      title: "My \"Value Maximizer\" core product with high perceived value will be:",
-      placeholder: "Enter your value maximizer product here..."
-    },
-    {
-      field: "plusOne",
-      title: "My first \"Plus 1\" innovation project will be:",
-      placeholder: "Enter your plus one innovation project here..."
-    },
-    {
-      field: "metrics",
-      title: "The specific metrics I'll track for each product are:",
-      placeholder: "List the metrics you'll track..."
-    },
-    {
-      field: "monthlyCycle",
-      title: "My monthly cycle implementation with my available time will look like:",
-      placeholder: "Week 1: \nWeeks 2-3: \nWeek 4: \nMonthly Review:"
-    },
-    {
-      field: "marketing",
-      title: "My primary zero-cost marketing approaches will be:",
-      placeholder: "List your marketing approaches..."
-    },
-    {
-      field: "challenges",
-      title: "The expected challenges I might face with this system are:",
-      placeholder: "List potential challenges..."
-    },
-    {
-      field: "strategies",
-      title: "My strategies to overcome these challenges:",
-      placeholder: "List your strategies..."
-    },
-    {
-      field: "revenueGoal",
-      title: "My 60-day revenue goal using this system is:",
-      placeholder: "Enter your revenue goal..."
-    }
-  ];
+  const handleChange = (field: string, value: string) => {
+    setResponses(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
   
-  // Get answer from formState or return empty string
-  const getAnswer = (field: string): string => {
-    return formState?.worksheet?.textInputs?.[field] || "";
-  };
-
-  const saveAnswer = (field: string, value: string) => {
-    if (value?.trim()) {
-      saveResponse("worksheet", { 
-        checkboxes: {}, 
-        textInputs: { [field]: value } 
-      }, true);
-      
-      setSaved(prev => ({ ...prev, [field]: true }));
-      toast({
-        title: "Answer saved!",
-        description: "Your response has been recorded."
-      });
-    }
-  };
-
-  const handleAnswerChange = (field: string, value: string) => {
-    saveResponse("worksheet", { 
-      checkboxes: {}, 
-      textInputs: { [field]: value } 
-    });
+  const handleSave = () => {
+    // In a real implementation, this would save to a database
+    localStorage.setItem('chapter3Worksheet', JSON.stringify(responses));
     
-    // Remove saved indicator when editing
-    if (saved[field]) {
-      setSaved(prev => ({ ...prev, [field]: false }));
-    }
+    toast({
+      title: "Progress Saved",
+      description: "Your responses have been saved successfully.",
+      duration: 3000,
+    });
   };
   
   return (
-    <ChapterFormContainer
-      chapterNumber={3}
-      sectionId="worksheet"
-      title="Chapter 3 Self-Assessment: Your 3 Plus 1 Plan"
-      description="Based on your Decision Tree path from Chapter 2, now it's time to create your personalized 3 Plus 1 plan:"
-    >
-      {sections.map((section) => (
-        <ChapterFormTextQuestion
-          key={section.field}
-          id={section.field}
-          question={section.title}
-          value={getAnswer(section.field)}
-          isSaved={saved[section.field]}
-          onChange={(value) => handleAnswerChange(section.field, value)}
-          onSave={() => saveAnswer(section.field, getAnswer(section.field))}
-        />
-      ))}
-    </ChapterFormContainer>
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold mb-6">Chapter 3 Self-Assessment: Your 3 Plus 1 Plan</h2>
+      
+      <p>
+        Based on your Decision Tree path from Chapter 2, now it's time to create your personalized 3 Plus 1 plan:
+      </p>
+      
+      <div className="space-y-6 mt-8">
+        <Card>
+          <CardContent className="pt-6">
+            <div className="space-y-4">
+              <label className="block">
+                <span className="font-medium">My "Safe Bet" core product will be:</span>
+                <Textarea 
+                  className="mt-1" 
+                  placeholder="Enter your safe bet product here..."
+                  value={responses.safeBet}
+                  onChange={(e) => handleChange('safeBet', e.target.value)}
+                />
+              </label>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="pt-6">
+            <div className="space-y-4">
+              <label className="block">
+                <span className="font-medium">My "Strength Aligner" core product based on my skills from Chapter 2 will be:</span>
+                <Textarea 
+                  className="mt-1" 
+                  placeholder="Enter your strength aligner product here..."
+                  value={responses.strengthAligner}
+                  onChange={(e) => handleChange('strengthAligner', e.target.value)}
+                />
+              </label>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="pt-6">
+            <div className="space-y-4">
+              <label className="block">
+                <span className="font-medium">My "Value Maximizer" core product with high perceived value will be:</span>
+                <Textarea 
+                  className="mt-1" 
+                  placeholder="Enter your value maximizer product here..."
+                  value={responses.valueMaximizer}
+                  onChange={(e) => handleChange('valueMaximizer', e.target.value)}
+                />
+              </label>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="pt-6">
+            <div className="space-y-4">
+              <label className="block">
+                <span className="font-medium">My first "Plus 1" innovation project will be:</span>
+                <Textarea 
+                  className="mt-1" 
+                  placeholder="Enter your plus one innovation project here..."
+                  value={responses.plusOne}
+                  onChange={(e) => handleChange('plusOne', e.target.value)}
+                />
+              </label>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="pt-6">
+            <div className="space-y-4">
+              <label className="block">
+                <span className="font-medium">The specific metrics I'll track for each product are:</span>
+                <Textarea 
+                  className="mt-1" 
+                  placeholder="List the metrics you'll track..."
+                  value={responses.metrics}
+                  onChange={(e) => handleChange('metrics', e.target.value)}
+                />
+              </label>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="pt-6">
+            <div className="space-y-4">
+              <label className="block">
+                <span className="font-medium">My monthly cycle implementation with my available time will look like:</span>
+                <Textarea 
+                  className="mt-1"
+                  placeholder="Week 1: 
+Weeks 2-3: 
+Week 4: 
+Monthly Review:"
+                  value={responses.monthlyCycle}
+                  onChange={(e) => handleChange('monthlyCycle', e.target.value)}
+                  rows={6}
+                />
+              </label>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="pt-6">
+            <div className="space-y-4">
+              <label className="block">
+                <span className="font-medium">My primary zero-cost marketing approaches will be:</span>
+                <Textarea 
+                  className="mt-1" 
+                  placeholder="List your marketing approaches..."
+                  value={responses.marketing}
+                  onChange={(e) => handleChange('marketing', e.target.value)}
+                />
+              </label>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="pt-6">
+            <div className="space-y-4">
+              <label className="block">
+                <span className="font-medium">The expected challenges I might face with this system are:</span>
+                <Textarea 
+                  className="mt-1" 
+                  placeholder="List potential challenges..."
+                  value={responses.challenges}
+                  onChange={(e) => handleChange('challenges', e.target.value)}
+                />
+              </label>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="pt-6">
+            <div className="space-y-4">
+              <label className="block">
+                <span className="font-medium">My strategies to overcome these challenges:</span>
+                <Textarea 
+                  className="mt-1" 
+                  placeholder="List your strategies..."
+                  value={responses.strategies}
+                  onChange={(e) => handleChange('strategies', e.target.value)}
+                />
+              </label>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="pt-6">
+            <div className="space-y-4">
+              <label className="block">
+                <span className="font-medium">My 60-day revenue goal using this system is:</span>
+                <Textarea 
+                  className="mt-1" 
+                  placeholder="Enter your revenue goal..."
+                  value={responses.revenueGoal}
+                  onChange={(e) => handleChange('revenueGoal', e.target.value)}
+                />
+              </label>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+      
+      <div className="flex justify-end mt-8">
+        <Button onClick={handleSave} className="bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600">
+          Save Progress
+        </Button>
+      </div>
+      
+      <div className="mt-6 text-center text-sm text-muted-foreground">
+        <p>
+          Complete this self-assessment before moving to the next chapter. In Chapter 4, we'll dive deeper into 
+          finding your first three winning products, with specific selection frameworks based on your Decision 
+          Tree path and detailed case studies across different niches and markets.
+        </p>
+      </div>
+    </div>
   );
 };
